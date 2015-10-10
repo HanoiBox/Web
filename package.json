@@ -1,0 +1,16 @@
+{
+  "name": "hanoibox",
+  "main": "server.js",
+  "version": "0.0.1",
+  "author": {
+    "name": "Gareth Fentimen",
+    "email": "mail@gfentimen.com"
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "latest",
+    "express-validator": "latest",
+    "mongoose": "^4.1.10",
+    "express-handlebars": "latest"
+  }
+}
