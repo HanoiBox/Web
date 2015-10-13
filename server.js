@@ -5,6 +5,9 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var app = express();
 
+var db = require('./app/db');	
+db.connect();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(validator());
@@ -18,7 +21,8 @@ app.engine('hbs', expressHbs(
 app.set('view engine', 'hbs');
 
 // ** routes ***
-var apiRoutes = require('./app/routing/apiRoutes.js')(express.Router());
+var advertApiRoutes = require('./app/routing/advertApiRoutes.js')(express.Router());
+var apiRoutes = require("./app/routing/categoryApiRoutes.js")(advertApiRoutes);
 var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes);
 app.use('/', allRoutes);
 
