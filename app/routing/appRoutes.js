@@ -3,12 +3,12 @@ module.exports = function(router) {
 
 	router.get('/', function(req, res) {
 		var data = { title: 'Hanoi Box' };
-		res.render('public/home', data);
+		res.render('home', data);
 	});
 	
 	router.get('/home', function(req, res) {
 		var data = { title: 'Hanoi Box' };
-		res.render('public/home', data);
+		res.render('home', data);
 	});
 
 	router.get('/sysadmin', function(req, res) {
