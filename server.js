@@ -15,7 +15,11 @@ app.use(validator());
 app.engine('hbs', expressHbs(
 	{ 
 		extname:'hbs', 
-		defaultLayout:'main'
+		defaultLayout:'main',
+		partialsDir: [
+			'views/sysadmin/templates',
+			'views/public/templates'
+    	]
 	}));
 
 app.set('view engine', 'hbs');
