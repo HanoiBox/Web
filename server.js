@@ -32,7 +32,13 @@ app.use('/', allRoutes);
 // static dirs
 app.use('/scripts', express.static(__dirname + '/scripts'));
 app.use('/packages', express.static(__dirname + '/jspm_packages'));
+app.use('/jspm_packages/npm', express.static(__dirname + '/jspm_packages/npm'));
 
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
 http.createServer(app).listen(port);
+
+
+// notes on jspm for production
+// jspm bundle-sfx --minify scripts/main
+// remember to include the babel runtime, which is a dependency
