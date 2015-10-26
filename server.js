@@ -29,6 +29,10 @@ var apiRoutes = require("./app/routing/categoryApiRoutes.js")(advertApiRoutes);
 var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes);
 app.use('/', allRoutes);
 
+// static dirs
+app.use('/scripts', express.static(__dirname + '/scripts'));
+app.use('/packages', express.static(__dirname + '/jspm_packages'));
+
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
 http.createServer(app).listen(port);
