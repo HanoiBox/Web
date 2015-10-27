@@ -1,5 +1,5 @@
 'use strict';
-var advertRepository = require("../repositories/advertRepository");
+var advertService = require("../services/advertService");
 var Advert = require("../models/advert").advert;
 module.exports = function (router) {
 	
@@ -8,7 +8,7 @@ module.exports = function (router) {
 	});
 	
 	router.post('/api/advert/', function (req, res) {
-		advertRepository.saveAdvert(req.body, function(err) {
+		advertService.saveAdvert(req.body, function(err) {
 			if (err)
 				res.json({ status: 500, message: err });
 			
@@ -26,12 +26,11 @@ module.exports = function (router) {
 		// sanitize input
   		var id = req.sanitize('id').toInt();
 		  
-		return advertRepository.getAdvert(id);
+		return advertService.getAdvert(id);
 	});
 	
 	router.get('/api/advert/', function (req, res, next) {
-		console.log("repo", advertRepository.findAdverts);
-  		advertRepository.findAdverts(function(result) {
+  		advertService.findAdverts(function(result) {
 			res.json(result);
 		});
 	});

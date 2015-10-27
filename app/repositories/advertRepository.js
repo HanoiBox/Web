@@ -4,54 +4,19 @@ var Category = require("../models/advert").category;
 
 var advertRepository = function() {
 	
-	function validateAdvertData(advertData, callback) {
-		if (advertData == null)
-		{
-			return callback("This advert was completely empty");
-		}
-		if (advertData.information === "")
-		{
-			return callback("This advert did not have any information to save");
-		}
-		return advertData;
-	}
-	
-	var saveAdvert = function(advertData, callback) {
-		var advert = validateAdvertData(advertData, callback);	
-		console.info("hello");
-		
-		var newAdvert = new Advert();
-		
-		if (advert.categories != null)
-		{
-			// check category numbers are ok
-			var allCategoriesPromise = new Promise( function(resolve, reject) {
-				Category.find(function(err, categories)
-				{
-					if (err)
-						reject("could not retrieve categories")
-					resolve(categories)
-				})
-			});
-			allCategoriesPromise.then(function(categories) {
-				console.info(categories);
-				var reformattedArray = categories.map(category => { return category._id });
-				console.info(reformattedArray) 
-				var allOk = advert.categories.includes(reformattedArray);
-				if (!allOk) {
-					callback("Unable to save the advert because the categories given are invalid" + advert.categories);
-				}
-				newAdvert.categories = advert.categories;
-				
-				//newAdvert._id = 1;
-				newAdvert.information = advert.information;
-				newAdvert.save();
-				console.log("saved advert");
-				callback("ok");
-				
-			}).catch(function(reason) {
-				console.log('Handle rejected promise ('+reason+') here.');
-			});
+	var saveAdvert = function(advert) {
+		try {
+			var newAdvert = new Advert();
+			newAdvert.categories = advert.categories;
+			
+			//newAdvert._id = 1;
+			newAdvert.information = advert.information;
+			newAdvert.save();
+			console.log("saved advert");
+			return true;
+		} catch(error) {
+			console.error(error);
+			return false;
 		}
 	};
 	
