@@ -7,41 +7,51 @@ var advertRepository = function() {
 	function validateAdvertData(advertData, callback) {
 		if (advertData == null)
 		{
-			callback("This advert was completely empty");
+			return callback("This advert was completely empty");
 		}
 		if (advertData.information === "")
 		{
-			callback("This advert did not have any information to save");
+			return callback("This advert did not have any information to save");
 		}
+		return advertData;
 	}
 	
 	var saveAdvert = function(advertData, callback) {
 		var advert = validateAdvertData(advertData, callback);	
+		console.info("hello");
 		
-		try
+		var newAdvert = new Advert();
+		
+		if (advert.categories != null)
 		{
-			var newAdvert = new Advert();
-			
-			if (advert.categories != null)
-			{
-				// check category numbers are ok
-				// Need babel or harmony for this - too hard to think of alternative
-				// var allOk = advert.categories.all(adCat => Category.findOne(cat => cat._id == adCat._id) != null);
-				// if (!allOk) {
-				// 	callback("Unable to save the advert because the categories given are invalid" + advertData);
-				// }
+			// check category numbers are ok
+			var allCategoriesPromise = new Promise( function(resolve, reject) {
+				Category.find(function(err, categories)
+				{
+					if (err)
+						reject("could not retrieve categories")
+					resolve(categories)
+				})
+			});
+			allCategoriesPromise.then(function(categories) {
+				console.info(categories);
+				var reformattedArray = categories.map(category => { return category._id });
+				console.info(reformattedArray) 
+				var allOk = advert.categories.includes(reformattedArray);
+				if (!allOk) {
+					callback("Unable to save the advert because the categories given are invalid" + advert.categories);
+				}
 				newAdvert.categories = advert.categories;
-			}
-			
-			//newAdvert._id = 1;
-			newAdvert.information = advert.information;
-			newAdvert.save();
-			console.log("saved advert");
-			callback();
-		}
-		catch (err)
-		{
-			callback("Problem saving advert to mongo db: " + err);	
+				
+				//newAdvert._id = 1;
+				newAdvert.information = advert.information;
+				newAdvert.save();
+				console.log("saved advert");
+				callback("ok");
+				
+			}).catch(function(reason) {
+				console.log('Handle rejected promise ('+reason+') here.');
+			});
 		}
 	};
 	
