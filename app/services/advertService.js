@@ -1,4 +1,4 @@
-var Category = require("../models/advert").category;
+var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
 
 var advertService = function() {
@@ -20,7 +20,7 @@ var advertService = function() {
 		
 		// check category numbers are ok
 		var allCategoriesPromise = new Promise( function(resolve, reject) {
-			Category.find(function(err, categories)
+			categoryRepository.find(function(err, categories)
 			{
 				if (err)
 					reject("could not retrieve categories")

@@ -23,7 +23,8 @@
   "devDependencies": {
     "jspm": "^0.16.13",
     "gulp-autoprefixer": "^2.2.0",
-    "gulp-eslint": "^1.0.0"
+    "gulp-eslint": "^1.0.0",
+    "mock-require": "latest"
   },
   "jspm": {
     "dependencies": {},
