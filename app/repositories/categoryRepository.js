@@ -37,7 +37,7 @@ var categoryRepository = function() {
 	{
 		Category.find((err, categories) => {
 			if (err)
-				return callback(err);
+				return callback({ error: err });
 			
 			return callback({ categories: categories });
 		});
@@ -70,7 +70,7 @@ var categoryRepository = function() {
 			currentcategory.save();	
 			return callback("");
 		} catch(error) {
-			return callback(error);
+			return callback(error.toString());
 		}
 	}
 	

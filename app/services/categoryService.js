@@ -62,7 +62,6 @@ var categoryService = function() {
 		});
 		
 		getcategoryPromise.then((category) => {
-			debugger;
 			categoryRepository.updateCategory(category, categoryData, (error) => {
 				if (error != "")
 					return callback({ status: 500, message: error});

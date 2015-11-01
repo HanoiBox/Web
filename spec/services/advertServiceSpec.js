@@ -1,10 +1,12 @@
 var mockRequire = require("../../node_modules/mock-require/index.js");
-mockRequire('../../app/repositories/categoryRepository', { find: function() {
+mockRequire('../../app/repositories/categoryRepository', { find: function(callback) {
 	console.log('categoryRepository.find called');
+	return callback(null);
 }});
 
-mockRequire('../../app/repositories/advertRepository', { saveAdvert: function() {
+mockRequire('../../app/repositories/advertRepository', { saveAdvert: function(callback) {
 	console.log('advertRepository.saveAdvert called');
+	return callback(null);
 }});
 var advertService = require("../../app/services/advertService.js");
 var advertRepository = require("../../app/repositories/advertRepository");
@@ -62,23 +64,15 @@ describe("When there are no categories in the advert", () => {
 	
 	it("should give an error message in the result", (done) => {
 		var result = null;
-		advertService.saveAdvert({ information : "test info", categories : {} }, (res) => {
+		advertService.saveAdvert({ information : "test info", categories : "" }, (res) => {
 			result = res;
 			done();
-		}); 
+		}); 	
 		expect(result).toBe("This advert did not have any categories, there must be at least one category given");
-	});
-	
-	it("should give an error message in the result", (done) => {
-		var result = null;
-		advertService.saveAdvert({ information : "test info", categories : [] }, (res) => {
-			result = res;
-			done();
-		}); 	expect(result).toBe("This advert did not have any categories, there must be at least one category given");
 	});
 });
 
-describe("When there is an invalid category sent", () => {
+describe("When there is an invalid category sent as a string", () => {
 	beforeEach((done) => {
 		spyOn(advertRepository, "saveAdvert");
 		spyOn(categoryRepository, "find").and.callFake((callback) => {
@@ -87,7 +81,7 @@ describe("When there is an invalid category sent", () => {
 					}]);
 		});
 		
-		advertService.saveAdvert({ information : "test info", categories : [1] }, (res) => {
+		advertService.saveAdvert({ information : "test info", categories : "1" }, (res) => {
 			result = res;
 			done();
 		}); 
@@ -111,7 +105,7 @@ describe("When there are multiple categories sent but one invalid", () => {
 					}]);
 		});
 		
-		advertService.saveAdvert({ information : "test info", categories : [1, 2] }, (res) => {
+		advertService.saveAdvert({ information : "test info", categories : "1, 2" }, (res) => {
 			result = res;
 			done();
 		}); 
@@ -138,7 +132,7 @@ describe("When there are multiple categories sent but two invalid", () => {
 					}]);
 		});
 		
-		advertService.saveAdvert({ information : "test info", categories : [1, 2, 3, 4] }, (res) => {
+		advertService.saveAdvert({ information : "test info", categories : "1, 2, 3, 4" }, (res) => {
 			result = res;
 			done();
 		}); 

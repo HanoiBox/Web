@@ -28,38 +28,42 @@ var advertService = function() {
 	
 	var getAdvert = function (id, callback)
 	{
-		advertRepository.getAdvert(id, function(advert) {
-			callback({ status : 200, message : "OK", advert: advert });	
+		advertRepository.getAdvert(id, function(result) {
+			if (result.message !== "") {
+				return callback({ status: result.status, message: result.message });
+			}
+			callback({ status : 200, message : "OK", advert: result.advert });	
 		});
 	}
 	
 	var deleteAdvert = (id, callback) => {
 		advertRepository.deleteAdvert(id, function(result) {
-			if (result.error)
-				return callback({ status : 500, message: result.error });
+			if (result.message !== "") {
+				return callback({ status : result.status, message: result.message });
+			}
 			return callback({ status : 200, message : "OK" });
 		});
 	}
 	
-	var updateAdvert = (advertData, callback) => {
+	var updateAdvert = (id, advertData, callback) => {
+		console.log(advertData);
 		var getAdvertPromise = new Promise((resolve, reject) => {
-			advertRepository.getAdvert(advertData.id, (advert) => {
-				if (advert === null)
-					reject("advert could not be found");
-				resolve(advert);
+			advertRepository.getAdvert(id, (result) => {
+				if (result.message !== "")
+					reject(result.message);
+				resolve(result.advert);
 			});
 		});
 		
 		getAdvertPromise.then((advert) => {
 			advertRepository.updateAdvert(advert, advertData, (error) => {
 				if (error)
-					return callback({ "status" : 500, "message": error});
+					return callback({ "status" : 500, "message": error });
 				return callback({ "status" : 200, "message" : "OK"});
 			});
 		}).catch((reason) => {
 			var errorMsg = 'getAdvertPromise handle rejected promise ('+reason+') here.';
-			console.error(errorMsg);
-			return callback({ "status" : 500, "message": errorMsg});
+			return callback({ "status" : 500, "message": errorMsg });
 		});
 	}
 	
@@ -71,16 +75,31 @@ var advertService = function() {
 		updateAdvert: updateAdvert
 	};
 	
+	
+	function isEmpty(obj) {
+		for(var prop in obj) {
+			if(obj.hasOwnProperty(prop))
+				return false;
+		}
+		return true;
+	}
+	
 	function validateAdvertData(advertData, callback) {
-		if (advertData === null)
+		if (isEmpty(advertData))
 		{
 			return callback({ message : "This advert was completely empty" });
 		}
-		if (advertData.information === "")
+		if (advertData.information === undefined || advertData.information === "")
 		{
 			return callback({ message : "This advert did not have any information to save" });
+		} 
+		if (advertData.categories === undefined || advertData.categories === null || advertData.categories === "null")
+		{
+			return callback({ message : "This advert did not have any categories, there must be at least one category given" });	
 		}
-		if (advertData.categories === null || !Array.isArray(advertData.categories) || advertData.categories.length === 0)
+		advertData.categories = advertData.categories.split(",");
+		for(var i=0; i<advertData.categories.length; i++) { advertData.categories[i] = parseInt(advertData.categories[i], 10); } 
+		if (!Array.isArray(advertData.categories) || advertData.categories.length === 0)
 		{
 			return callback({ message : "This advert did not have any categories, there must be at least one category given" });
 		}
@@ -103,11 +122,11 @@ var advertService = function() {
 	{
 		// get the categories
 		var getAllCategoriesPromise = new Promise((resolve, reject) => {
-			categoryRepository.find((err, categories) => {
-					if (err)
-						reject("Error occured when retrieving categories" + err);
-					if (categories !== null)
-						resolve(categories)	
+			categoryRepository.findCategories((result) => {
+					if (result.error)
+						reject("Error occured when retrieving categories" + result.error);
+					if (result.categories !== null)
+						resolve(result.categories)	
 					reject("There are no pre-existing categories")
 				});
 		});

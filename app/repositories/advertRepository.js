@@ -10,10 +10,9 @@ var advertRepository = function() {
 			newAdvert.categories = advert.categories;
 			newAdvert.information = advert.information;
 			newAdvert.save();
-			console.log("saved advert");
 			return true;
 		} catch(error) {
-			console.error(error);
+			console.error(error.toString());
 			return false;
 		}
 	};
@@ -21,50 +20,52 @@ var advertRepository = function() {
 	var findAdverts = function(callback)
 	{
 		Advert.find(function(err, adverts) {
-			
-			if (err)
-				callback(err);
-			
-			console.log("got some adverts", adverts);
-			callback(adverts);
+			if (err) {
+				return callback(err);
+			}
+			return callback(adverts);
 		});
 	};
 	
 	var getAdvert = function(id, callback)
-	{
-		Advert.findOne({ '_id': id },(advert) => {
+	{		
+		Advert.findById(id, (err, advert) => {
+			if (err !== null)
+			{
+				return callback({ status: 500, message: "DB Error: " + err }); 
+			}
 			if (advert == null || advert._id !== id)
 			{
-				callback({ Success : false, Message : "Unable to find advert: " + id });
+				return callback({ status: 404, message : "Unable to find advert: " + id});
 			}
-			callback(advert);
+			return callback({ advert : advert, message: "" });
 		});
 	}
 	
 	var deleteAdvert = function(id, callback)
 	{
 		Advert.remove({ _id : id }, (error) => {
-			if (error)
-				console.error(error);
-				return false;
-			return true;
+			if (error) {
+				return callback({ status: 500, message: "DB Error: " + error });
+			}
+			return callback({ status: 200, message: "" });
 		});
 	}
 	
 	var updateAdvert = (currentAdvert, newAdvertData, callback) => {
 		try {
-			if (newAdvertData.information !== null)
+			if (newAdvertData.information !== undefined && newAdvertData.information !== null)
 			{
 				currentAdvert.information = newAdvertData.information;	
 			}
-			if (newAdvertData.categories !== null)
+			if (newAdvertData.categories !== undefined && newAdvertData.categories !== null)
 			{
 				currentAdvert.categories = newAdvertData.categories;
 			}
-			currentAdvert.Save();	
+			currentAdvert.save();	
 			return callback("")
 		} catch(error) {
-			return callback(error);
+			return callback(error.toString());
 		}
 	}
 	
