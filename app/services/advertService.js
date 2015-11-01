@@ -1,6 +1,5 @@
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
-
 var advertService = function() {
 	
 	var saveAdvert = (advertData, callback) => {
@@ -20,6 +19,58 @@ var advertService = function() {
 		});
 	};
 	
+	var findAdverts = function(callback)
+	{
+		advertRepository.findAdverts(function(result) {
+			callback(result);
+		});
+	}
+	
+	var getAdvert = function (id, callback)
+	{
+		advertRepository.getAdvert(id, function(advert) {
+			callback({ status : 200, message : "OK", advert: advert });	
+		});
+	}
+	
+	var deleteAdvert = (id, callback) => {
+		advertRepository.deleteAdvert(id, function(result) {
+			if (result.error)
+				return callback({ status : 500, message: result.error });
+			return callback({ status : 200, message : "OK" });
+		});
+	}
+	
+	var updateAdvert = (advertData, callback) => {
+		var getAdvertPromise = new Promise((resolve, reject) => {
+			advertRepository.getAdvert(advertData.id, (advert) => {
+				if (advert === null)
+					reject("advert could not be found");
+				resolve(advert);
+			});
+		});
+		
+		getAdvertPromise.then((advert) => {
+			advertRepository.updateAdvert(advert, advertData, (error) => {
+				if (error)
+					return callback({ "status" : 500, "message": error});
+				return callback({ "status" : 200, "message" : "OK"});
+			});
+		}).catch((reason) => {
+			var errorMsg = 'getAdvertPromise handle rejected promise ('+reason+') here.';
+			console.error(errorMsg);
+			return callback({ "status" : 500, "message": errorMsg});
+		});
+	}
+	
+	return {
+		saveAdvert: saveAdvert,
+		findAdverts: findAdverts,
+		getAdvert: getAdvert,
+		deleteAdvert : deleteAdvert,
+		updateAdvert: updateAdvert
+	};
+	
 	function validateAdvertData(advertData, callback) {
 		if (advertData === null)
 		{
@@ -35,10 +86,14 @@ var advertService = function() {
 		}
 		
 		categoriesAreValid(advertData, (result) => {
-			if (result)
+			if (result.valid)
 			{
 				return callback({ message : "", advert : advertData });	
 			} else {
+				if (result.message !== undefined && result.message !== "")
+				{
+					return callback({ message : result.message });	
+				}
 				return callback({ message : "This advert had some invalid categories, please check and try again" });	
 			}
 		});
@@ -47,7 +102,7 @@ var advertService = function() {
 	function categoriesAreValid(advertData, callback)
 	{
 		// get the categories
-		 var allCategoriesPromise = new Promise((resolve, reject) => {
+		var getAllCategoriesPromise = new Promise((resolve, reject) => {
 			categoryRepository.find((err, categories) => {
 					if (err)
 						reject("Error occured when retrieving categories" + err);
@@ -58,7 +113,7 @@ var advertService = function() {
 		});
 		
 		// check category numbers are ok
-		allCategoriesPromise.then((categories) => {
+		getAllCategoriesPromise.then((categories) => {
 			var existingCategories = categories.map(category => { return category._id });
 			function isValid(advertCategoryId, index, array) {
 				function exists(existingCategoryId, index, array) {
@@ -69,35 +124,16 @@ var advertService = function() {
 			
 			if (advertData.categories.every(isValid))
 			{
-				return callback(true);
+				return callback({ "valid" : true });
 			}
-			return callback(false);
+			return callback({ "valid" : false });
 			
-		}).catch(function(reason) {
-			console.log('Handle rejected promise ('+reason+') here.');
-			return callback(false);
+		}).catch((reason) => {
+			var errorMsg = 'getAllCategoriesPromise handle rejected promise ('+reason+') here.';
+			console.error(errorMsg);
+			return callback({ "valid" : false, "message" : errorMsg });
 		});	
 	}
-	
-	var findAdverts = function(callback)
-	{
-		advertRepository.findAdverts(function(result) {
-			callback(result);
-		});
-	}
-	
-	var getAdvert = function (id, callback)
-	{
-		advertRepository.getAdvert(id, function(advert) {
-			callback(advert);	
-		});
-	}
-	
-	return {
-		saveAdvert: saveAdvert,
-		findAdverts: findAdverts,
-		getAdvert: getAdvert
-	};
 	
 }();
 

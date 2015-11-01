@@ -3,52 +3,83 @@ var Category = require("../models/advert").category;
 
 var categoryRepository = function() {
 	
-	var saveCategory = function(categoryData, callback) {
-		if (categoryData == null || categoryData.description == "")
-		{
-			callback("No category object was constructed - was it empty?");
-		}
-		
-		var category = {
-			description : categoryData.description
-		}
-		
-		try
-		{
-			//var duplicateCategory = Category.findOne(cat => cat.description == category.description);
-			// gross
-			Category.find(function(err, categories) {
-				categories.forEach(function(category) {
-					if (category.description == categoryData.description)
-						callback("Duplicate description");
-				}, this);
-				
-				var newCategory = new Category();
-				newCategory._id = 1;
-				newCategory.description = category.description;
-				newCategory.save();
-				callback();
+	var saveCategory = (categoryData, callback) => {
+		Category.find((err, categories) => {
+			categories.forEach((category) => {
+				if (category.description === categoryData.description)
+					return callback("Duplicate description");
 			});
-		}
-		catch (err)
-		{
-			callback("Problem saving advert to mongo db: " + err);	
+			
+			try {
+				var newCategory = new Category();
+				newCategory.description = categoryData.description;
+				newCategory.save();
+				return callback("");	
+			} catch (error)
+			{
+				return callback("Unable to save " + error);
+			}
+		});
+	}
+	
+	var getCategory = (id, callback) =>
+	{
+		Category.findById(id, (err, category) => {
+			if (category == null || category._id !== id || err !== null)
+			{
+				return callback({ status: 404, message : "Unable to find category: " + id + ". Mongo Error: " + err });
+			}
+			return callback({ category : category });
+		});
+	}
+	
+	var findCategories = (callback) =>
+	{
+		Category.find((err, categories) => {
+			if (err)
+				return callback(err);
+			
+			return callback({ categories: categories });
+		});
+	}
+	
+	var deleteCategory = (id, callback) =>
+	{
+		getCategory(id, (result) => {
+			if (result.message !== undefined && result.message !== "")
+			{
+				return callback(result.message);
+			}
+			
+			try {
+				var category = result.category;
+				category.remove();
+				return callback("");	
+			} catch (error) {
+				return callback(error);
+			}
+		});
+	}
+	
+	var updatecategory = (currentcategory, newcategoryData, callback) => {
+		try {
+			if (newcategoryData.description !== null)
+			{
+				currentcategory.description = newcategoryData.description;	
+			}
+			currentcategory.save();	
+			return callback("");
+		} catch(error) {
+			return callback(error);
 		}
 	}
 	
-	var findCategories = function(callback)
-	{
-		Category.find(function(err, categories) {
-			if (err)
-				callback(err);
-			
-			callback(categories);
-		});
-	};
-	
 	return {
 		saveCategory: saveCategory,
-		findCategories: findCategories
+		findCategories: findCategories,
+		getCategory: getCategory,
+		deleteCategory: deleteCategory,
+		updateCategory: updatecategory
 	};
 }();
 

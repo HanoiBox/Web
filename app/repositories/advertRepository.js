@@ -8,8 +8,6 @@ var advertRepository = function() {
 		try {
 			var newAdvert = new Advert();
 			newAdvert.categories = advert.categories;
-			
-			//newAdvert._id = 1;
 			newAdvert.information = advert.information;
 			newAdvert.save();
 			console.log("saved advert");
@@ -34,19 +32,48 @@ var advertRepository = function() {
 	
 	var getAdvert = function(id, callback)
 	{
-		Advert.findOne(function(ad) {
-			if (ad._id == id)
+		Advert.findOne({ '_id': id },(advert) => {
+			if (advert == null || advert._id !== id)
 			{
 				callback({ Success : false, Message : "Unable to find advert: " + id });
 			}
-			callback(ad);
+			callback(advert);
 		});
+	}
+	
+	var deleteAdvert = function(id, callback)
+	{
+		Advert.remove({ _id : id }, (error) => {
+			if (error)
+				console.error(error);
+				return false;
+			return true;
+		});
+	}
+	
+	var updateAdvert = (currentAdvert, newAdvertData, callback) => {
+		try {
+			if (newAdvertData.information !== null)
+			{
+				currentAdvert.information = newAdvertData.information;	
+			}
+			if (newAdvertData.categories !== null)
+			{
+				currentAdvert.categories = newAdvertData.categories;
+			}
+			currentAdvert.Save();	
+			return callback("")
+		} catch(error) {
+			return callback(error);
+		}
 	}
 	
 	return {
 		saveAdvert: saveAdvert,
 		findAdverts: findAdverts,
-		getAdvert: getAdvert
+		getAdvert: getAdvert,
+		deleteAdvert: deleteAdvert,
+		updateAdvert: updateAdvert
 	};
 	
 }();

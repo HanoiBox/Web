@@ -1,39 +1,57 @@
 'use strict';
 var advertService = require("../services/advertService");
-var Advert = require("../models/advert").advert;
 module.exports = function (router) {
 	
 	router.get('/api', function(req, res) {
 		res.json({ message: 'Welcome to the hanoibox.com api' });		
 	});
 	
-	router.post('/api/advert/', function (req, res) {
-		advertService.saveAdvert(req.body, function(err) {
-			if (err)
-				res.json({ status: 500, message: err });
-			
-			res.json({ status: 200, message: 'Advert created!' });	
+	router.route('/api/advert/')
+		.get((req, res) => {
+			advertService.findAdverts(function(result) {
+				res.json(result);
+			});
+		})
+		.post((req, res) => {
+			advertService.saveAdvert(req.body, (error) => {
+				if (error)
+					res.json({ status: 500, message: error });
+				
+				res.json({ status: 200, message: 'Advert created!' });	
+			});
 		});
-	});
 	
-	router.get('/api/advert/:id', function (req, res, next) {
-  		req.assert('id', 'Id param must be an integer').isInt();
-		
+	function getIdInRequest(req, res)
+	{
+		req.assert('advertId', 'Id param must be an integer').isInt();
+			
 		var errors = req.validationErrors();
 		if (errors)
-			res.json(errors);
+			res.json({ status: 500, message: errors });
 		
 		// sanitize input
-  		var id = req.sanitize('id').toInt();
-		  
-		return advertService.getAdvert(id);
-	});
+		return req.sanitize('advertId').toInt();
+	}
 	
-	router.get('/api/advert/', function (req, res, next) {
-  		advertService.findAdverts(function(result) {
-			res.json(result);
+	router.route('/api/advert/:advertId')
+		.get((req, res) => {
+			var id = getIdInRequest(req, res);
+			advertService.getAdvert(id, (result) => {
+				res.json(result);
+			});
+		})
+		.put((req, res) => {
+        	var id = getIdInRequest(req, res);
+			advertService.updateAdvert(id, (result) => {
+				res.json(result);
+			});
+    	})
+		.delete((req, res) => {
+			var id = getIdInRequest(req, res);
+			advertService.deleteAdvert(id, (result) => {
+				res.json(result);
+			});	
 		});
-	});
 	
 	return router;
 };
