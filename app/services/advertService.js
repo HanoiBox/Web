@@ -3,51 +3,81 @@ var advertRepository = require("../repositories/advertRepository");
 
 var advertService = function() {
 	
-	function validateAdvertData(advertData) {
-		if (advertData == null)
-		{
-			return "This advert was completely empty";
-		}
-		if (advertData.information === "")
-		{
-			return "This advert did not have any information to save";
-		}
-		return advertData;
-	}
-	
 	var saveAdvert = (advertData, callback) => {
-		var advert = validateAdvertData(advertData);
-		
-		// check category numbers are ok
-		var allCategoriesPromise = new Promise( function(resolve, reject) {
-			categoryRepository.find(function(err, categories)
+		validateAdvertData(advertData, function(advertResult) {
+			if (advertResult.message !== "")
 			{
-				if (err)
-					reject("could not retrieve categories")
-				resolve(categories)
-			})
-		});
-		
-		allCategoriesPromise.then(function(categories) {
-			console.info(categories);
-			var reformattedArray = categories.map(category => { return category._id });
-			console.info(reformattedArray) 
-			var allOk = advert.categories.includes(reformattedArray);
-			if (!allOk) {
-				callback("Unable to save the advert because the categories given are invalid" + advert.categories);
+				return callback(advertResult.message);
 			}
+			var advert = advertResult.advert;
 			
 			if (advertRepository.saveAdvert(advert))
 			{
-				callback();
+				return callback("");
 			} else {
-				callback("Unable to save the advert");
+				return callback("Unable to save the advert");
 			}
+		});
+	};
+	
+	function validateAdvertData(advertData, callback) {
+		if (advertData === null)
+		{
+			return callback({ message : "This advert was completely empty" });
+		}
+		if (advertData.information === "")
+		{
+			return callback({ message : "This advert did not have any information to save" });
+		}
+		if (advertData.categories === null || !Array.isArray(advertData.categories) || advertData.categories.length === 0)
+		{
+			return callback({ message : "This advert did not have any categories, there must be at least one category given" });
+		}
+		
+		categoriesAreValid(advertData, (result) => {
+			if (result)
+			{
+				return callback({ message : "", advert : advertData });	
+			} else {
+				return callback({ message : "This advert had some invalid categories, please check and try again" });	
+			}
+		});
+	}
+	
+	function categoriesAreValid(advertData, callback)
+	{
+		// get the categories
+		 var allCategoriesPromise = new Promise((resolve, reject) => {
+			categoryRepository.find((err, categories) => {
+					if (err)
+						reject("Error occured when retrieving categories" + err);
+					if (categories !== null)
+						resolve(categories)	
+					reject("There are no pre-existing categories")
+				});
+		});
+		
+		// check category numbers are ok
+		allCategoriesPromise.then((categories) => {
+			var existingCategories = categories.map(category => { return category._id });
+			function isValid(advertCategoryId, index, array) {
+				function exists(existingCategoryId, index, array) {
+					return existingCategoryId === advertCategoryId;
+				}
+				return existingCategories.some(exists);
+			}
+			
+			if (advertData.categories.every(isValid))
+			{
+				return callback(true);
+			}
+			return callback(false);
 			
 		}).catch(function(reason) {
 			console.log('Handle rejected promise ('+reason+') here.');
+			return callback(false);
 		});	
-	};
+	}
 	
 	var findAdverts = function(callback)
 	{
