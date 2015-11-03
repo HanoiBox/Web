@@ -18,7 +18,7 @@ var categoryRepository = function() {
 	var getCategory = (id, callback) =>
 	{
 		Category.findById(id, (err, category) => {
-			if (err !== null || err !== "")
+			if (err !== null)
 			{
 				console.error("Mongo error: " + err);
 				return callback({ status: 400, message : "Mongo error: " + err });

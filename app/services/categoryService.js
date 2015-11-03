@@ -59,27 +59,27 @@ var categoryService = function() {
 	
 	var getcategory = (id, callback) => {
 		categoryRepository.getCategory(id, (result) => {
-			if (result.message !== "")
+			if (result.message !== undefined && result.message !== "")
 			{
-				return callback({ status: 500, message : result.message });
+				return callback(result);
 			} else {
 				return callback({ status: 200, message : result.message, category : result.category });	
 			}
 		});
 	}
 	
-	var findcategories = (callback) => {
+	var findCategories = (callback) => {
 		categoryRepository.findCategories((result) => {
-			if (result.message !== "")
+			if (result.message !== undefined && result.error !== "")
 			{
-				return callback({ status: result.status, "message" : result.message });
+				return callback(result);
 			} else {
 				return callback({ status: 200, message : "OK", categories : result.categories });	
 			}
 		});
 	}
 	
-	var deletecategory = (id, callback) => {
+	var deleteCategory = (id, callback) => {
 		categoryRepository.deleteCategory(id, function(result) {
 			if (result != "" && result.message !== "")
 			{
@@ -119,9 +119,9 @@ var categoryService = function() {
 	
 	return {
 		saveCategory: saveCategory,
-		findCategories: findcategories,
+		findCategories: findCategories,
 		getCategory: getcategory,
-		deleteCategory : deletecategory,
+		deleteCategory : deleteCategory,
 		updateCategory: updatecategory
 	};
 	
