@@ -1,5 +1,5 @@
 var mockRequire = require("../../node_modules/mock-require/index.js");
-mockRequire('../../app/repositories/categoryRepository', { find: function(callback) {
+mockRequire('../../app/repositories/categoryRepository', { findCategories: function(callback) {
 	console.log('categoryRepository.find called');
 	return callback(null);
 }});
@@ -15,7 +15,6 @@ var categoryRepository = require("../../app/repositories/categoryRepository");
 describe("When there is no advert data sent", () => {
 	var result = null;
 	beforeEach((done) => {
-		//spyOn(advertRepository, "saveAdvert").and.returnValue(true);
 		spyOn(advertRepository, "saveAdvert");
 		
 		advertService.saveAdvert(null, (res) => {
@@ -75,10 +74,8 @@ describe("When there are no categories in the advert", () => {
 describe("When there is an invalid category sent as a string", () => {
 	beforeEach((done) => {
 		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "find").and.callFake((callback) => {
-			return callback("", [{
-						_id : 2
-					}]);
+		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+			return callback({ error: "", categories: [ { _id : 2 } ] });
 		});
 		
 		advertService.saveAdvert({ information : "test info", categories : "1" }, (res) => {
@@ -99,10 +96,11 @@ describe("When there is an invalid category sent as a string", () => {
 describe("When there are multiple categories sent but one invalid", () => {
 	beforeEach((done) => {
 		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "find").and.callFake((callback) => {
-			return callback("", [{
-						_id : 2
-					}]);
+		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+			return callback({
+					categories : [ 
+						{ _id : 2 }
+					]});
 		});
 		
 		advertService.saveAdvert({ information : "test info", categories : "1, 2" }, (res) => {
@@ -123,13 +121,13 @@ describe("When there are multiple categories sent but one invalid", () => {
 describe("When there are multiple categories sent but two invalid", () => {
 	beforeEach((done) => {
 		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "find").and.callFake((callback) => {
-			return callback("", [{
-						_id : 2
-					},
-					{
-						_id : 3
-					}]);
+		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+			return callback({
+					message: "", 
+					categories : [ 
+						{ _id : 2 }, 
+						{ _id : 3 }
+					]});
 		});
 		
 		advertService.saveAdvert({ information : "test info", categories : "1, 2, 3, 4" }, (res) => {
@@ -150,16 +148,16 @@ describe("When there are multiple categories sent but two invalid", () => {
 describe("When there are multiple categories sent and are valid", () => {
 	beforeEach((done) => {
 		spyOn(advertRepository, "saveAdvert").and.returnValue(true);
-		spyOn(categoryRepository, "find").and.callFake((callback) => {
-			return callback("", [{
-						_id : 2
-					},
-					{
-						_id : 3
-					}]);
+		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+			return callback({
+					message: "", 
+					categories : [ 
+						{ _id : 2 }, 
+						{ _id : 3 }
+					]});
 		});
 		
-		advertService.saveAdvert({ information : "test info", categories : [2, 3] }, (res) => {
+		advertService.saveAdvert({ information : "test info", categories : "2, 3" }, (res) => {
 			result = res;
 			done();
 		}); 

@@ -4,30 +4,28 @@ var Category = require("../models/advert").category;
 var categoryRepository = function() {
 	
 	var saveCategory = (categoryData, callback) => {
-		Category.find((err, categories) => {
-			categories.forEach((category) => {
-				if (category.description === categoryData.description)
-					return callback("Duplicate description");
-			});
-			
-			try {
-				var newCategory = new Category();
-				newCategory.description = categoryData.description;
-				newCategory.save();
-				return callback("");	
-			} catch (error)
-			{
-				return callback("Unable to save " + error);
-			}
-		});
+		try {
+			var newCategory = new Category();
+			newCategory.description = categoryData.description;
+			newCategory.save();
+			return callback("");	
+		} catch (error)
+		{
+			return callback("Unable to save " + error);
+		}
 	}
 	
 	var getCategory = (id, callback) =>
 	{
 		Category.findById(id, (err, category) => {
-			if (category == null || category._id !== id || err !== null)
+			if (err !== null || err !== "")
 			{
-				return callback({ status: 404, message : "Unable to find category: " + id + ". Mongo Error: " + err });
+				console.error("Mongo error: " + err);
+				return callback({ status: 400, message : "Mongo error: " + err });
+			}
+			if (category == null || category._id !== id)
+			{
+				return callback({ status: 404, message : "Unable to find category: " + id});
 			}
 			return callback({ category : category });
 		});
@@ -37,7 +35,7 @@ var categoryRepository = function() {
 	{
 		Category.find((err, categories) => {
 			if (err)
-				return callback({ error: err });
+				return callback({ status: 404, error: err });
 			
 			return callback({ categories: categories });
 		});
@@ -48,7 +46,7 @@ var categoryRepository = function() {
 		getCategory(id, (result) => {
 			if (result.message !== undefined && result.message !== "")
 			{
-				return callback(result.message);
+				return callback(result);
 			}
 			
 			try {
@@ -56,7 +54,7 @@ var categoryRepository = function() {
 				category.remove();
 				return callback("");	
 			} catch (error) {
-				return callback(error);
+				return callback({ status: 500, message: error });
 			}
 		});
 	}

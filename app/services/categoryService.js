@@ -1,57 +1,100 @@
 var categoryRepository = require("../repositories/categoryRepository");
 
 var categoryService = function() {
-	var validateCategoryData = (categoryData, callback) => {
-		if (categoryData == null || categoryData.description === undefined || categoryData.description === "")
+	var validateCategoryData = (categoryData) => {
+		if (categoryData == null)
 		{
-			return callback("No category object was constructed - was it empty?");
+			return "No category object could be constructed";
 		}
+		if (categoryData.description === undefined || categoryData.description === "")
+		{
+			return "No category description was given";
+		}
+		return "";
 	}
 		
-	var savecategory = (categoryData, callback) => {
-		validateCategoryData(categoryData, callback);
-		
-		var category = {
-			description : categoryData.description
+	var saveCategory = (categoryData, callback) => {
+		var validationResult = validateCategoryData(categoryData);
+		if (validationResult !== "") {
+			return callback({ status : 400, message: validationResult });
 		}
 		
-		categoryRepository.saveCategory(category, (error) => {
-			if (error == "")
-				return callback({ status: 500, "message" : error });
-			return callback({ status : 200, message: "OK" });
+		var findAllCategoryPromise = new Promise((resolve, reject) => {
+			categoryRepository.findCategories((result) => {
+				if (result.error !== undefined && result.error !== "")
+				{
+					reject({ status: result.status, message : "Handler rejected because : " + result.error });
+				} else {
+					resolve(result.categories);
+				}
+			});
 		});
+		
+		findAllCategoryPromise.then((categories) => {
+			categories.forEach((category) => {
+				if (category.description === categoryData.description)
+				{
+					callback({ status: 400, message :"Duplicate description" });
+				}
+			});
+			
+			saveCategoryToDb(categoryData, (result) => {
+				return callback(result);
+			});
+		}).catch((reason) => {
+			return callback(reason);
+		});
+	}
+	
+	var saveCategoryToDb = function (category, callback) {
+		categoryRepository.saveCategory(category, (error) => {
+			if (error !== "")
+			{
+				return callback({ status: 500, message : error });
+			} else {
+				return callback({ status : 200, message: "OK" });	
+			}
+		});	
 	}
 	
 	var getcategory = (id, callback) => {
 		categoryRepository.getCategory(id, (result) => {
-			if (result.message)
-				return callback({ status: 500, "message" : result.message });
-			return callback({ status: 200, message : result.message, category : result.category });
+			if (result.message !== "")
+			{
+				return callback({ status: 500, message : result.message });
+			} else {
+				return callback({ status: 200, message : result.message, category : result.category });	
+			}
 		});
 	}
 	
 	var findcategories = (callback) => {
 		categoryRepository.findCategories((result) => {
-			if (result.message)
+			if (result.message !== "")
 			{
 				return callback({ status: result.status, "message" : result.message });
+			} else {
+				return callback({ status: 200, message : "OK", categories : result.categories });	
 			}
-			return callback({ status: 200, message : "OK", categories : result.categories });
 		});
 	}
 	
 	var deletecategory = (id, callback) => {
-		categoryRepository.deleteCategory(id, function(error) {
-			if (error)
+		categoryRepository.deleteCategory(id, function(result) {
+			if (result != "" && result.message !== "")
 			{
-				return callback({ status : 500, message: error });	
+				return callback(result);	
+			} else {
+				return callback({ status : 200, message : "OK" });	
 			}
-			return callback({ status : 200, message : "OK" });
 		});
 	}
 	
 	var updatecategory = (id, categoryData, callback) => {
-		validateCategoryData(categoryData, callback);
+		var validationResult = validateCategoryData(categoryData);
+		if (validationResult !== "") {
+			return callback({ status : 400, message: validationResult });
+		}
 		
 		var getcategoryPromise = new Promise((resolve, reject) => {
 			categoryRepository.getCategory(id, (result) => {
@@ -75,7 +118,7 @@ var categoryService = function() {
 	}
 	
 	return {
-		saveCategory: savecategory,
+		saveCategory: saveCategory,
 		findCategories: findcategories,
 		getCategory: getcategory,
 		deleteCategory : deletecategory,

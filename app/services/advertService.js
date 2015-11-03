@@ -93,7 +93,7 @@ var advertService = function() {
 		{
 			return callback({ message : "This advert did not have any information to save" });
 		} 
-		if (advertData.categories === undefined || advertData.categories === null || advertData.categories === "null")
+		if (advertData.categories === undefined || advertData.categories === "" || advertData.categories === null || advertData.categories === "null")
 		{
 			return callback({ message : "This advert did not have any categories, there must be at least one category given" });	
 		}
