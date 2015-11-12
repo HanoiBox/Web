@@ -13,9 +13,19 @@ System.config({
   },
 
   map: {
+    "angular": "github:angular/bower-angular@1.4.7",
+    "angular-loading-bar": "github:chieffancypants/angular-loading-bar@0.8.0",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
+    "bootstrap-css-only": "npm:bootstrap-css-only@3.3.5",
     "core-js": "npm:core-js@1.2.6",
+    "font-awesome": "npm:font-awesome@4.4.0",
+    "lodash": "npm:lodash@3.10.1",
+    "restangular": "github:mgonto/restangular@1.5.1",
+    "github:chieffancypants/angular-loading-bar@0.8.0": {
+      "angular": "github:angular/bower-angular@1.4.7",
+      "css": "github:systemjs/plugin-css@0.1.19"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -27,6 +37,10 @@ System.config({
     },
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
+    },
+    "github:mgonto/restangular@1.5.1": {
+      "angular": "github:angular/bower-angular@1.4.7",
+      "lodash": "npm:lodash@3.10.1"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -40,8 +54,14 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:font-awesome@4.4.0": {
+      "css": "github:systemjs/plugin-css@0.1.19"
+    },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:lodash@3.10.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"

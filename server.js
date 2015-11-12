@@ -31,9 +31,10 @@ var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes);
 app.use('/', allRoutes);
 
 // static dirs
-app.use('/scripts', express.static(__dirname + '/scripts'));
+app.use('/lib', express.static(__dirname + '/lib'));
 app.use('/packages', express.static(__dirname + '/jspm_packages'));
-app.use('/jspm_packages/npm', express.static(__dirname + '/jspm_packages/npm'));
+app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
+app.use('/config.js', express.static(__dirname + '/config.js'));
 
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
