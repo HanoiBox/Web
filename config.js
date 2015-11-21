@@ -6,7 +6,7 @@ System.config({
       "runtime",
       "optimisation.modules.system"
     ],
-    "blacklist" : []
+    "blacklist": []
   },
   paths: {
     "github:*": "jspm_packages/github/*",
@@ -16,6 +16,7 @@ System.config({
   map: {
     "angular": "github:angular/bower-angular@1.4.8",
     "angular-loading-bar": "github:chieffancypants/angular-loading-bar@0.8.0",
+    "angular-mocks": "github:angular/bower-angular-mocks@1.4.8",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
@@ -25,6 +26,9 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "restangular": "github:mgonto/restangular@1.5.1",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "github:angular/bower-angular-mocks@1.4.8": {
+      "angular": "github:angular/bower-angular@1.4.8"
+    },
     "github:angular/bower-angular-route@1.4.8": {
       "angular": "github:angular/bower-angular@1.4.8"
     },
