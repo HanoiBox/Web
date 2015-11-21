@@ -5,7 +5,6 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 require("babel-core/register");
 var app = express();
-
 var db = require('./app/db');	
 db.connect();
 
@@ -31,8 +30,7 @@ var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes);
 app.use('/', allRoutes);
 
 // static dirs
-app.use('/lib', express.static(__dirname + '/lib'));
-app.use('/packages', express.static(__dirname + '/jspm_packages'));
+app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
 app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 app.use('/config.js', express.static(__dirname + '/config.js'));
 

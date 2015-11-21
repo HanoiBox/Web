@@ -5,7 +5,8 @@ System.config({
     "optional": [
       "runtime",
       "optimisation.modules.system"
-    ]
+    ],
+    "blacklist" : []
   },
   paths: {
     "github:*": "jspm_packages/github/*",
@@ -13,8 +14,9 @@ System.config({
   },
 
   map: {
-    "angular": "github:angular/bower-angular@1.4.7",
+    "angular": "github:angular/bower-angular@1.4.8",
     "angular-loading-bar": "github:chieffancypants/angular-loading-bar@0.8.0",
+    "angular-route": "github:angular/bower-angular-route@1.4.8",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "bootstrap-css-only": "npm:bootstrap-css-only@3.3.5",
@@ -22,8 +24,12 @@ System.config({
     "font-awesome": "npm:font-awesome@4.4.0",
     "lodash": "npm:lodash@3.10.1",
     "restangular": "github:mgonto/restangular@1.5.1",
+    "text": "github:systemjs/plugin-text@0.0.3",
+    "github:angular/bower-angular-route@1.4.8": {
+      "angular": "github:angular/bower-angular@1.4.8"
+    },
     "github:chieffancypants/angular-loading-bar@0.8.0": {
-      "angular": "github:angular/bower-angular@1.4.7",
+      "angular": "github:angular/bower-angular@1.4.8",
       "css": "github:systemjs/plugin-css@0.1.19"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -39,7 +45,7 @@ System.config({
       "util": "npm:util@0.10.3"
     },
     "github:mgonto/restangular@1.5.1": {
-      "angular": "github:angular/bower-angular@1.4.7",
+      "angular": "github:angular/bower-angular@1.4.8",
       "lodash": "npm:lodash@3.10.1"
     },
     "npm:assert@1.3.0": {
