@@ -1,14 +1,19 @@
 import angular from 'angular';
 import 'angular-route';
 
-//import repoServiceModule from 'app/services/repo.service';
+import categoryQueryModule from 'sysadmin/app/queries/getCategories';
 
 var mystuff = angular.module('categoriesControllerModule', [
-  'ngRoute'
-  //repoServiceModule.name
-]).controller('CategoriesController', function($routeParams, Repos) {
-    var categories = [ "bike", "lunch" ];
-    this.repos = categories;
+  'ngRoute',
+  categoryQueryModule.name
+]).controller('CategoriesController', function(GetCategories) {
+    var categories = GetCategories.all().then((result) => {
+      for (var category in result.categories) {
+         console.log("Category: ", element);
+      }
+    });
+    
+    this.categories = categories;
 });
 
 export default mystuff;
