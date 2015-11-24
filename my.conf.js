@@ -10,15 +10,17 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'requirejs'],
+    frameworks: ['jspm', 'jasmine', 'requirejs'],
 
-
-    // list of files / patterns to load in the browser
+    //list of files / patterns to load in the browser
     files: [
-      {pattern: 'sysadmin/app/*Spec.js', included: false},
-      {pattern: '*Spec.js', included: false},
-      {pattern: 'sysadmin/*Spec.js', included: false},
-      {pattern: 'sysadmin/**/*Spec.js', included: false}
+      'sysadmin/app/routes/index/indexControllerSpec.js',
+      'sysadmin/app/routes/index/indexController.js'
+      
+      // {pattern: '*Spec.js', included: false}
+      // {pattern: 'sysadmin/*Spec.js', included: false},
+      // {pattern: 'sysadmin/**/*Spec.js', included: false},
+      //{pattern: '**/*Spec.js', included: false}
     ],
 
 
