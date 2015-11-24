@@ -14,14 +14,18 @@ module.exports = function(config) {
 
     //list of files / patterns to load in the browser
     files: [
-      'sysadmin/app/routes/index/indexControllerSpec.js',
-      'sysadmin/app/routes/index/indexController.js'
+      // 'sysadmin/app/routes/index/indexControllerSpec.js',
+      // 'sysadmin/app/routes/index/indexController.js'
       
       // {pattern: '*Spec.js', included: false}
       // {pattern: 'sysadmin/*Spec.js', included: false},
       // {pattern: 'sysadmin/**/*Spec.js', included: false},
       //{pattern: '**/*Spec.js', included: false}
     ],
+    
+    jspm: {
+      loadFiles: ['sysadmin/app/**/*.js']
+    },
 
 
     // list of files to exclude

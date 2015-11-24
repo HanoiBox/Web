@@ -3,7 +3,7 @@
   "main": "server.js",
   "version": "0.0.1",
   "scripts": {
-    "start": "node server.js" 
+    "start": "node server.js"
   },
   "author": {
     "name": "Gareth Fentimen",
@@ -57,6 +57,7 @@
       "text": "github:systemjs/plugin-text@^0.0.3"
     },
     "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
       "core-js": "npm:core-js@^1.1.4"
     }
