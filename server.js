@@ -26,7 +26,16 @@ app.set('view engine', 'hbs');
 // ** routes ***
 var advertApiRoutes = require('./app/routing/advertApiRoutes.js')(express.Router());
 var apiRoutes = require("./app/routing/categoryApiRoutes.js")(advertApiRoutes);
-var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes, app.get('env') === 'development');
+var dev = false;
+try {
+	if (app.get('env') !== null && app.get('env') === 'development')
+	{
+		dev = true;
+	}
+} catch(err)
+{
+}
+var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes, dev);
 app.use('/', allRoutes);
 
 // static dirs
