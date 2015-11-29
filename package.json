@@ -46,7 +46,7 @@
   "jspm": {
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.7",
-      "angular-loading-bar": "github:chieffancypants/angular-loading-bar@^0.8.0",
+      "angular-loading-bar": "npm:angular-loading-bar@^0.8.0",
       "angular-mocks": "github:angular/bower-angular-mocks@^1.4.8",
       "angular-route": "github:angular/bower-angular-route@^1.4.7",
       "bootstrap-css-only": "npm:bootstrap-css-only@^3.3.5",

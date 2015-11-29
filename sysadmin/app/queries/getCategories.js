@@ -1,9 +1,9 @@
 import angular from 'angular';
 
 export default angular.module('categoryQueryModule', [
-]).factory('GetCategories', function($http) {
+]).factory('GetCategoriesFactory', function($http) {
   
-  let all = () => {
+  let allCats = () => {
     let url = "/api/category/";
     return $http.get(url);
   }
@@ -14,7 +14,7 @@ export default angular.module('categoryQueryModule', [
   }
 
   return {
-    all,
+    allCats,
     byId
   }
 });

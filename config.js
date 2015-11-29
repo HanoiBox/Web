@@ -15,7 +15,7 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.8",
-    "angular-loading-bar": "github:chieffancypants/angular-loading-bar@0.8.0",
+    "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.8",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "babel": "npm:babel-core@5.8.34",
@@ -32,10 +32,6 @@ System.config({
     },
     "github:angular/bower-angular-route@1.4.8": {
       "angular": "github:angular/bower-angular@1.4.8"
-    },
-    "github:chieffancypants/angular-loading-bar@0.8.0": {
-      "angular": "github:angular/bower-angular@1.4.8",
-      "css": "github:systemjs/plugin-css@0.1.19"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"

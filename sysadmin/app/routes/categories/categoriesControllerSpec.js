@@ -1,31 +1,38 @@
 import angular from 'angular';
 import 'angular-mocks';
 
-import repositoriesControllerModule from './categoriesController';
+import categoriesControllerModule from './categoriesController';
 
 describe('CategoriesController', function() {
-  beforeEach(angular.mock.module(repositoriesControllerModule.name));
-
-  var scope, $httpBackend;
+  var scope, $httpBackend, $controller, createController;
   
-  beforeEach(inject(function($injector, $controller) {
-    scope = $injector.get('$rootScope').$new();
+  beforeEach(angular.mock.module(categoriesControllerModule.name));
+  
+  beforeEach(inject(function($injector) {
+    scope = $injector.get('$rootScope').$new;
     $httpBackend = $injector.get('$httpBackend');
+    $controller = $injector.get('$controller');
 
-    $controller('CategoriesController as ctrl', {
-      $scope: scope
-    });
+    createController = function() {
+      return $controller('CategoriesController', {
+        $scope: scope
+      });  
+    }
+    
   }));
   
   describe('fetching all categories', function() {
     beforeEach(function() {
       $httpBackend.
-        expectGET('/api/category/').respond(200, { categories: [ { id: 1, name: 'foo' } ] });
+        when('GET', '/api/category/').respond({ categories: [ { id: 1, name: 'foo' } ] });
     });
 
     it('gets us categories', function() {
+      let controller = createController();
       $httpBackend.flush();
-      expect(scope.ctrl.categories).toEqual([{ id: 1, name: 'foo' }]);
+      $httpBackend.expectGET('/api/category/');
+      console.debug("this is the scope", controller);
+      expect(scope.ctrl).toEqual(1);
     });
   });
 });
