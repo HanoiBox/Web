@@ -1,10 +1,11 @@
 import angular from 'angular';
 import loadingBar from 'angular-loading-bar';
-import indexControllerModule from '/sysadmin/app/routes/index/indexController';
-import categoriesControllerModule from '/sysadmin/app/routes/categories/categoriesController';
-import indexTemplate from '/sysadmin/app/routes/index/index.html!text';
-import categoriesTemplate from '/sysadmin/app/routes/categories/categories.html!text';
-import createCategoryTemplate from '/sysadmin/app/routes/categories/create.html!text';
+
+import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
+import indexControllerModule from 'sysadmin/app/routes/index/indexController';
+import indexTemplate from 'sysadmin/app/routes/index/index.html!text';
+import categoriesTemplate from 'sysadmin/app/routes/categories/categories.html!text';
+import createCategoryTemplate from 'sysadmin/app/routes/categories/create.html!text';
 
 var mystuff = angular.module('appRoutesModule', [
   'ngRoute',

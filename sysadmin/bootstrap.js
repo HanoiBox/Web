@@ -1,6 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
-import routesModule from './routes';
+import routesModule from 'sysadmin/routes';
 
 export function bootstrap() {
 	// bootstrap code here

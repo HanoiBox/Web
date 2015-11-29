@@ -26,7 +26,7 @@ app.set('view engine', 'hbs');
 // ** routes ***
 var advertApiRoutes = require('./app/routing/advertApiRoutes.js')(express.Router());
 var apiRoutes = require("./app/routing/categoryApiRoutes.js")(advertApiRoutes);
-var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes);
+var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes, app.get('env') === 'development');
 app.use('/', allRoutes);
 
 // static dirs
@@ -37,8 +37,3 @@ app.use('/config.js', express.static(__dirname + '/config.js'));
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
 http.createServer(app).listen(port);
-
-
-// notes on jspm for production
-// jspm bundle-sfx --minify scripts/main
-// remember to include the babel runtime, which is a dependency

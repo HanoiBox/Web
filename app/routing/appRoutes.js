@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function(router) {
+module.exports = function(router, devEnvironment) {
 
 	router.get('/', function(req, res) {
 		var data = { title: 'Hanoi Box' };
@@ -12,7 +12,7 @@ module.exports = function(router) {
 	});
 
 	router.get('/sysadmin', function(req, res) {
-		var data = { title: 'Hanoi Box Admin' };
+		var data = { title: 'Hanoi Box Admin', dev: devEnvironment };
 		res.render('sysadmin/adminhome', data);
 	});
 

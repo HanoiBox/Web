@@ -1,2 +1,2 @@
-import {bootstrap} from './bootstrap.js';
+import {bootstrap} from 'sysadmin/bootstrap.js';
 bootstrap();
