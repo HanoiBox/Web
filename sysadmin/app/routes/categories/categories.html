@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <h4>Categories</h4>
+  
+  <div>
+    <button ng-click="create()" type="button" class="btn btn-success">Create</button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <th class="col-md-6">Identifier</div>
+    <th class="col-md-6">Description</div>
+    </thead>
+    <tbody>
+      <tr ng-repeat="category in ctrl.categories">
+      <td>{{ category._id }}</td>
+      <td>{{ category.description }}</td>
+      </tr>
+    </tbody>
+  </table>  
+</div>

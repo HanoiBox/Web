@@ -1,0 +1,1 @@
+jspm bundle-sfx sysadmin/main dist/build.js
