@@ -42,7 +42,7 @@ app.use('/', allRoutes);
 app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
 app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 app.use('/config.js', express.static(__dirname + '/config.js'));
-app.use('/views', express.static(__dirname + '/views'));
+app.use('/views/public', express.static(__dirname + '/views/public'));
 
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
