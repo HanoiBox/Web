@@ -3,7 +3,7 @@ var express = require('express');
 var validator = require('express-validator');
 var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-//require("babel-core/register");
+require("babel-core/register");
 var app = express();
 var db = require('./app/db');	
 db.connect();
