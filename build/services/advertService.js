@@ -1,8 +1,10 @@
+"use strict";
+
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
 var advertService = (function () {
 
-	var saveAdvert = (advertData, callback) => {
+	var saveAdvert = function saveAdvert(advertData, callback) {
 		validateAdvertData(advertData, function (advertResult) {
 			if (advertResult.message !== "") {
 				return callback(advertResult.message);
@@ -17,13 +19,13 @@ var advertService = (function () {
 		});
 	};
 
-	var findAdverts = function (callback) {
+	var findAdverts = function findAdverts(callback) {
 		advertRepository.findAdverts(function (result) {
 			callback(result);
 		});
 	};
 
-	var getAdvert = function (id, callback) {
+	var getAdvert = function getAdvert(id, callback) {
 		advertRepository.getAdvert(id, function (result) {
 			if (result.message !== "") {
 				return callback({ status: result.status, message: result.message });
@@ -32,7 +34,7 @@ var advertService = (function () {
 		});
 	};
 
-	var deleteAdvert = (id, callback) => {
+	var deleteAdvert = function deleteAdvert(id, callback) {
 		advertRepository.deleteAdvert(id, function (result) {
 			if (result.message !== "") {
 				return callback({ status: result.status, message: result.message });
@@ -41,21 +43,21 @@ var advertService = (function () {
 		});
 	};
 
-	var updateAdvert = (id, advertData, callback) => {
+	var updateAdvert = function updateAdvert(id, advertData, callback) {
 		console.log(advertData);
-		var getAdvertPromise = new Promise((resolve, reject) => {
-			advertRepository.getAdvert(id, result => {
+		var getAdvertPromise = new Promise(function (resolve, reject) {
+			advertRepository.getAdvert(id, function (result) {
 				if (result.message !== "") reject(result.message);
 				resolve(result.advert);
 			});
 		});
 
-		getAdvertPromise.then(advert => {
-			advertRepository.updateAdvert(advert, advertData, error => {
+		getAdvertPromise.then(function (advert) {
+			advertRepository.updateAdvert(advert, advertData, function (error) {
 				if (error) return callback({ "status": 500, "message": error });
 				return callback({ "status": 200, "message": "OK" });
 			});
-		}).catch(reason => {
+		}).catch(function (reason) {
 			var errorMsg = 'getAdvertPromise handle rejected promise (' + reason + ') here.';
 			return callback({ "status": 500, "message": errorMsg });
 		});
@@ -94,7 +96,7 @@ var advertService = (function () {
 			return callback({ message: "This advert did not have any categories, there must be at least one category given" });
 		}
 
-		categoriesAreValid(advertData, result => {
+		categoriesAreValid(advertData, function (result) {
 			if (result.valid) {
 				return callback({ message: "", advert: advertData });
 			} else {
@@ -108,8 +110,8 @@ var advertService = (function () {
 
 	function categoriesAreValid(advertData, callback) {
 		// get the categories
-		var getAllCategoriesPromise = new Promise((resolve, reject) => {
-			categoryRepository.findCategories(result => {
+		var getAllCategoriesPromise = new Promise(function (resolve, reject) {
+			categoryRepository.findCategories(function (result) {
 				if (result.error) reject("Error occured when retrieving categories" + result.error);
 				if (result.categories !== null) resolve(result.categories);
 				reject("There are no pre-existing categories");
@@ -117,8 +119,8 @@ var advertService = (function () {
 		});
 
 		// check category numbers are ok
-		getAllCategoriesPromise.then(categories => {
-			var existingCategories = categories.map(category => {
+		getAllCategoriesPromise.then(function (categories) {
+			var existingCategories = categories.map(function (category) {
 				return category._id;
 			});
 			function isValid(advertCategoryId, index, array) {
@@ -132,7 +134,7 @@ var advertService = (function () {
 				return callback({ "valid": true });
 			}
 			return callback({ "valid": false });
-		}).catch(reason => {
+		}).catch(function (reason) {
 			var errorMsg = 'getAllCategoriesPromise handle rejected promise (' + reason + ') here.';
 			console.error(errorMsg);
 			return callback({ "valid": false, "message": errorMsg });

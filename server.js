@@ -5,11 +5,12 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var appDirectory = "./build";
 var app = express();
-var dev = process.env.Developer === undefined;
+var dev = process.env.Node_env === undefined;
 if (dev)
 {
 	appDirectory = "./app";
 	require("babel-core/register");
+	require("babel-polyfill");
 }
 var db = require('./app/db');	
 db.connect();

@@ -5,7 +5,7 @@ var Category = require("../models/advert").category;
 
 var advertRepository = (function () {
 
-	var saveAdvert = function (advert) {
+	var saveAdvert = function saveAdvert(advert) {
 		try {
 			var newAdvert = new Advert();
 			newAdvert.categories = advert.categories;
@@ -18,7 +18,7 @@ var advertRepository = (function () {
 		}
 	};
 
-	var findAdverts = function (callback) {
+	var findAdverts = function findAdverts(callback) {
 		Advert.find(function (err, adverts) {
 			if (err) {
 				return callback(err);
@@ -27,8 +27,8 @@ var advertRepository = (function () {
 		});
 	};
 
-	var getAdvert = function (id, callback) {
-		Advert.findById(id, (err, advert) => {
+	var getAdvert = function getAdvert(id, callback) {
+		Advert.findById(id, function (err, advert) {
 			if (err !== null) {
 				return callback({ status: 500, message: "DB Error: " + err });
 			}
@@ -39,8 +39,8 @@ var advertRepository = (function () {
 		});
 	};
 
-	var deleteAdvert = function (id, callback) {
-		Advert.remove({ _id: id }, error => {
+	var deleteAdvert = function deleteAdvert(id, callback) {
+		Advert.remove({ _id: id }, function (error) {
 			if (error) {
 				return callback({ status: 500, message: "DB Error: " + error });
 			}
@@ -48,7 +48,7 @@ var advertRepository = (function () {
 		});
 	};
 
-	var updateAdvert = (currentAdvert, newAdvertData, callback) => {
+	var updateAdvert = function updateAdvert(currentAdvert, newAdvertData, callback) {
 		try {
 			if (newAdvertData.information !== undefined && newAdvertData.information !== null) {
 				currentAdvert.information = newAdvertData.information;

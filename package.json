@@ -3,7 +3,8 @@
   "main": "server.js",
   "version": "0.0.2",
   "scripts": {
-    "start": "set NODE_ENV=production && node server.js",
+    "start": "node --harmony server.js",
+    "startProd": "set NODE_ENV=production && node server.js",
     "build": "babel -d build app",
     "test": "test.ps1"
   },
@@ -15,6 +16,7 @@
   "dependencies": {
     "babel": "^6.1.18",
     "babel-core": "^6.1.4",
+    "babel-polyfill": "^6.2.0",
     "body-parser": "^1.14.1",
     "express": "latest",
     "express-handlebars": "latest",

@@ -19,9 +19,9 @@ function Create-Directory($scriptPath) {
 }
 
 $scriptPath = Get-ScriptDirectory
-#Clean-Directory $scriptPath
+Clean-Directory $scriptPath
 Create-Directory $scriptPath
 
 ## Must run: npm install --global babel-cli
 #cd..
-#babel -d .app/build ./app
+#babel -d app build

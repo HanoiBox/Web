@@ -7,12 +7,12 @@ module.exports = function (router) {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
-	router.route('/api/advert/').get((req, res) => {
+	router.route('/api/advert/').get(function (req, res) {
 		advertService.findAdverts(function (result) {
 			res.json(result);
 		});
-	}).post((req, res) => {
-		advertService.saveAdvert(req.body, error => {
+	}).post(function (req, res) {
+		advertService.saveAdvert(req.body, function (error) {
 			if (error) res.json({ status: 500, message: error });
 
 			res.json({ status: 200, message: 'Advert created!' });
@@ -29,19 +29,19 @@ module.exports = function (router) {
 		return req.sanitize('advertId').toInt();
 	}
 
-	router.route('/api/advert/:advertId').get((req, res) => {
+	router.route('/api/advert/:advertId').get(function (req, res) {
 		var id = getIdInRequest(req, res);
-		advertService.getAdvert(id, result => {
+		advertService.getAdvert(id, function (result) {
 			res.json(result);
 		});
-	}).put((req, res) => {
+	}).put(function (req, res) {
 		var id = getIdInRequest(req, res);
-		advertService.updateAdvert(id, result => {
+		advertService.updateAdvert(id, function (result) {
 			res.json(result);
 		});
-	}).delete((req, res) => {
+	}).delete(function (req, res) {
 		var id = getIdInRequest(req, res);
-		advertService.deleteAdvert(id, result => {
+		advertService.deleteAdvert(id, function (result) {
 			res.json(result);
 		});
 	});

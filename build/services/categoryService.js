@@ -1,7 +1,9 @@
+"use strict";
+
 var categoryRepository = require("../repositories/categoryRepository");
 
 var categoryService = (function () {
-	var validateCategoryData = categoryData => {
+	var validateCategoryData = function validateCategoryData(categoryData) {
 		if (categoryData == null) {
 			return "No category object could be constructed";
 		}
@@ -11,14 +13,14 @@ var categoryService = (function () {
 		return "";
 	};
 
-	var saveCategory = (categoryData, callback) => {
+	var saveCategory = function saveCategory(categoryData, callback) {
 		var validationResult = validateCategoryData(categoryData);
 		if (validationResult !== "") {
 			return callback({ status: 400, message: validationResult });
 		}
 
-		var findAllCategoryPromise = new Promise((resolve, reject) => {
-			categoryRepository.findCategories(result => {
+		var findAllCategoryPromise = new Promise(function (resolve, reject) {
+			categoryRepository.findCategories(function (result) {
 				if (result.error !== undefined && result.error !== "") {
 					reject({ status: result.status, message: "Handler rejected because : " + result.error });
 				} else {
@@ -27,23 +29,23 @@ var categoryService = (function () {
 			});
 		});
 
-		findAllCategoryPromise.then(categories => {
-			categories.forEach(category => {
+		findAllCategoryPromise.then(function (categories) {
+			categories.forEach(function (category) {
 				if (category.description === categoryData.description) {
 					callback({ status: 400, message: "Duplicate description" });
 				}
 			});
 
-			saveCategoryToDb(categoryData, result => {
+			saveCategoryToDb(categoryData, function (result) {
 				return callback(result);
 			});
-		}).catch(reason => {
+		}).catch(function (reason) {
 			return callback(reason);
 		});
 	};
 
-	var saveCategoryToDb = function (category, callback) {
-		categoryRepository.saveCategory(category, error => {
+	var saveCategoryToDb = function saveCategoryToDb(category, callback) {
+		categoryRepository.saveCategory(category, function (error) {
 			if (error !== "") {
 				return callback({ status: 500, message: error });
 			} else {
@@ -52,8 +54,8 @@ var categoryService = (function () {
 		});
 	};
 
-	var getcategory = (id, callback) => {
-		categoryRepository.getCategory(id, result => {
+	var getcategory = function getcategory(id, callback) {
+		categoryRepository.getCategory(id, function (result) {
 			if (result.message !== undefined && result.message !== "") {
 				return callback(result);
 			} else {
@@ -62,8 +64,8 @@ var categoryService = (function () {
 		});
 	};
 
-	var findCategories = callback => {
-		categoryRepository.findCategories(result => {
+	var findCategories = function findCategories(callback) {
+		categoryRepository.findCategories(function (result) {
 			if (result.message !== undefined && result.error !== "") {
 				return callback(result);
 			} else {
@@ -72,7 +74,7 @@ var categoryService = (function () {
 		});
 	};
 
-	var deleteCategory = (id, callback) => {
+	var deleteCategory = function deleteCategory(id, callback) {
 		categoryRepository.deleteCategory(id, function (result) {
 			if (result != "" && result.message !== "") {
 				return callback(result);
@@ -82,25 +84,25 @@ var categoryService = (function () {
 		});
 	};
 
-	var updatecategory = (id, categoryData, callback) => {
+	var updatecategory = function updatecategory(id, categoryData, callback) {
 		var validationResult = validateCategoryData(categoryData);
 		if (validationResult !== "") {
 			return callback({ status: 400, message: validationResult });
 		}
 
-		var getcategoryPromise = new Promise((resolve, reject) => {
-			categoryRepository.getCategory(id, result => {
+		var getcategoryPromise = new Promise(function (resolve, reject) {
+			categoryRepository.getCategory(id, function (result) {
 				if (result === null || result.category === null) reject("category could not be found");
 				resolve(result.category);
 			});
 		});
 
-		getcategoryPromise.then(category => {
-			categoryRepository.updateCategory(category, categoryData, error => {
+		getcategoryPromise.then(function (category) {
+			categoryRepository.updateCategory(category, categoryData, function (error) {
 				if (error != "") return callback({ status: 500, message: error });
 				return callback({ status: 200, message: "OK" });
 			});
-		}).catch(reason => {
+		}).catch(function (reason) {
 			var errorMsg = 'getcategoryPromise handle rejected promise (' + reason + ') here.';
 			console.error(errorMsg);
 			return callback({ status: 404, message: errorMsg });

@@ -4,7 +4,7 @@ var Category = require("../models/advert").category;
 
 var categoryRepository = (function () {
 
-	var saveCategory = (categoryData, callback) => {
+	var saveCategory = function saveCategory(categoryData, callback) {
 		try {
 			var newCategory = new Category();
 			newCategory.description = categoryData.description;
@@ -15,8 +15,8 @@ var categoryRepository = (function () {
 		}
 	};
 
-	var getCategory = (id, callback) => {
-		Category.findById(id, (err, category) => {
+	var getCategory = function getCategory(id, callback) {
+		Category.findById(id, function (err, category) {
 			if (err !== null) {
 				console.error("Mongo error: " + err);
 				return callback({ status: 400, message: "Mongo error: " + err });
@@ -28,16 +28,16 @@ var categoryRepository = (function () {
 		});
 	};
 
-	var findCategories = callback => {
-		Category.find((err, categories) => {
+	var findCategories = function findCategories(callback) {
+		Category.find(function (err, categories) {
 			if (err) return callback({ status: 404, error: err });
 
 			return callback({ categories: categories });
 		});
 	};
 
-	var deleteCategory = (id, callback) => {
-		getCategory(id, result => {
+	var deleteCategory = function deleteCategory(id, callback) {
+		getCategory(id, function (result) {
 			if (result.message !== undefined && result.message !== "") {
 				return callback(result);
 			}
@@ -52,7 +52,7 @@ var categoryRepository = (function () {
 		});
 	};
 
-	var updatecategory = (currentcategory, newcategoryData, callback) => {
+	var updatecategory = function updatecategory(currentcategory, newcategoryData, callback) {
 		try {
 			if (newcategoryData.description !== null) {
 				currentcategory.description = newcategoryData.description;

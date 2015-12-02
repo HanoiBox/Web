@@ -1,12 +1,12 @@
 'use strict';
 
 var categoryService = require("../services/categoryService");
-module.exports = router => {
-	router.route('/api/category/').post((req, res) => {
+module.exports = function (router) {
+	router.route('/api/category/').post(function (req, res) {
 		categoryService.saveCategory(req.body, function (result) {
 			res.json(result);
 		});
-	}).get((req, res, next) => {
+	}).get(function (req, res, next) {
 		categoryService.findCategories(function (result) {
 			res.json(result);
 		});
@@ -22,19 +22,19 @@ module.exports = router => {
 		return req.sanitize('categoryId').toInt();
 	}
 
-	router.route('/api/category/:categoryId').get((req, res) => {
+	router.route('/api/category/:categoryId').get(function (req, res) {
 		var id = getIdInRequest(req, res);
-		categoryService.getCategory(id, result => {
+		categoryService.getCategory(id, function (result) {
 			res.json(result);
 		});
-	}).put((req, res) => {
+	}).put(function (req, res) {
 		var id = getIdInRequest(req, res);
-		categoryService.updateCategory(id, req.body, result => {
+		categoryService.updateCategory(id, req.body, function (result) {
 			res.json(result);
 		});
-	}).delete((req, res) => {
+	}).delete(function (req, res) {
 		var id = getIdInRequest(req, res);
-		categoryService.deleteCategory(id, result => {
+		categoryService.deleteCategory(id, function (result) {
 			res.json(result);
 		});
 	});
