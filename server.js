@@ -3,8 +3,15 @@ var express = require('express');
 var validator = require('express-validator');
 var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-require("babel-core/register");
+var dev = false;
+var appDirectory = "./build";
 var app = express();
+if (app.get('env') !== null && app.get('env') === 'development')
+{
+	appDirectory = "./app";
+	dev = true;
+	require("babel-core/register");
+}
 var db = require('./app/db');	
 db.connect();
 
@@ -24,18 +31,9 @@ app.engine('hbs', expressHbs(
 app.set('view engine', 'hbs');
 
 // ** routes ***
-var advertApiRoutes = require('./app/routing/advertApiRoutes.js')(express.Router());
-var apiRoutes = require("./app/routing/categoryApiRoutes.js")(advertApiRoutes);
-var dev = false;
-try {
-	if (app.get('env') !== null && app.get('env') === 'development')
-	{
-		dev = true;
-	}
-} catch(err)
-{
-}
-var allRoutes = require("./app/routing/appRoutes.js")(apiRoutes, dev);
+var advertApiRoutes = require(appDirectory + '/routing/advertApiRoutes.js')(express.Router());
+var apiRoutes = require(appDirectory + '/routing/categoryApiRoutes.js')(advertApiRoutes);
+var allRoutes = require(appDirectory + '/routing/appRoutes.js')(apiRoutes, dev);
 app.use('/', allRoutes);
 
 // static dirs
