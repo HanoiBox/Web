@@ -3,13 +3,12 @@ var express = require('express');
 var validator = require('express-validator');
 var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
-var dev = false;
 var appDirectory = "./build";
 var app = express();
-if (app.get('env') !== null && app.get('env') === 'development')
+var dev = process.env.Node_env === undefined;
+if (dev)
 {
 	appDirectory = "./app";
-	dev = true;
 	require("babel-core/register");
 }
 var db = require('./app/db');	
