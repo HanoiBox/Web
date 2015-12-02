@@ -4,3 +4,14 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     eslint = require('gulp-eslint'),
     minifyCSS = require('gulp-minify-css');
+
+gulp.task('css-build', function() {
+    return gulp.src(['jspm_packages/npm/bootstrap-css-only@3.3.5/css/bootstrap.css',
+                    'jspm_packages/npm/angular-loading-bar@0.8.0/src/loading-bar.css'])
+        .pipe(concat('sysadmin.css'))
+        .pipe(minifyCSS())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(gulp.dest('sysadmin/dist/styles'));
+});
+
+// gulp css-build

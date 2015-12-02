@@ -39,11 +39,11 @@ app.use('/', allRoutes);
 // static dirs
 if (dev) {
 	app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
+	app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 } else {
 	app.use('/sysadmin/dist', express.static(__dirname + '/sysadmin/dist'));
 }
 
-app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
 
