@@ -792,7 +792,7 @@
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("2", [], function() {
-  return "<div class=\"container-fluid\">\r\n\t<form action=\"api/categories/create\">\r\n\t\t<input type=\"text\" name=\"description\" />\r\n\t\t<input type=\"submit\" value=\"create\" />\r\n\t</form>\r\n</div>";
+  return "<div class=\"container-fluid\" ng-controller=\"CreateCategoryController\">\r\n\t<form novalidate class=\"simple-form\">\r\n\t\tDescription: <input type=\"text\" ng-model=\"category.description\" />\r\n\t\t<input type=\"submit\" ng-click=\"save(category)\" value=\"Save\" class=\"btn btn-success\" />\r\n\t</form>\r\n\t\r\n\t<pre>Category = {{category | json}}</pre>\r\n\t\r\n\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n</div>";
 });
 
 _removeDefine();
@@ -808,7 +808,7 @@ _removeDefine();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("4", [], function() {
-  return "<h4>Administration Menu</h4>\r\n\r\n<div>\r\n\t<a href=\"/sysadmin/categories\">Categories Management</a>\r\n</div>\r\n\r\n<div>\r\n\t<span>hello</span>\r\n\t<input type=\"text\" value={{ctrl.foo}} />\r\n\t<span>{{ctrl.foo}}</span>\r\n</div>";
+  return "<h4>Administration Menu</h4>\r\n\r\n<div>\r\n\t<input type=\"button\" ng-click=\"toCategories()\" value=\"Categories Management\" class=\"btn btn-link\">\r\n</div>\r\n\r\n<div>\r\n\t<span>hello</span>\r\n\t<input type=\"text\" value={{ctrl.foo}} />\r\n\t<span>{{ctrl.foo}}</span>\r\n</div>";
 });
 
 _removeDefine();
@@ -822,13 +822,93 @@ $__System.register('5', ['6'], function (_export) {
       angular = _['default'];
     }],
     execute: function () {
-      _export('default', angular.module('indexControllerModule', []).controller('IndexController', function () {
+      _export('default', angular.module('indexControllerModule', []).controller('IndexController', function ($location, $scope) {
         this.foo = 2;
+
+        $scope.toCategories = function () {
+          $location.path("/categories");
+        };
       }));
     }
   };
 });
 $__System.register('7', ['6'], function (_export) {
+  'use strict';
+
+  var angular;
+  return {
+    setters: [function (_) {
+      angular = _['default'];
+    }],
+    execute: function () {
+      _export('default', angular.module('categoryCommandModule', []).factory('SaveCategoriesFactory', function ($http, $templateCache) {
+        var _this = this;
+
+        var url = "/api/category/";
+
+        this.edit = function (category, callback) {
+          $http.put(url, category, $templateCache).then(function () {
+            callback(true);
+          }, function (response) {
+            callback(false);
+          });
+        };
+
+        this.save = function (category, callback) {
+          return $http.post(url, category, $templateCache).then(function () {
+            callback(true);
+          }, function (response) {
+            callback(false);
+          });
+        };
+
+        var saveCategory = function saveCategory(category, callback) {
+          if (category.id === undefined || category.id === null) {
+            _this.save(category, function (result) {
+              callback(result);
+            });
+          } else {
+            _this.edit(category, function (result) {
+              callback(result);
+            });
+          }
+        };
+
+        return {
+          saveCategory: saveCategory
+        };
+      }));
+    }
+  };
+});
+$__System.register('8', ['6', '7', '9'], function (_export) {
+  'use strict';
+
+  var angular, categoryCommandModule;
+  return {
+    setters: [function (_) {
+      angular = _['default'];
+    }, function (_3) {
+      categoryCommandModule = _3['default'];
+    }, function (_2) {}],
+    execute: function () {
+      _export('default', angular.module('createCategoryControllerModule', ['ngRoute', categoryCommandModule.name]).controller('CreateCategoryController', function ($location, $scope, SaveCategoriesFactory) {
+
+        $scope.save = function (category) {
+          $location.path("/categories");
+          SaveCategoriesFactory.saveCategory(category, function (response) {
+            console.log("epic win? ", response);
+          });
+        };
+
+        $scope.back = function () {
+          $location.path("/categories");
+        };
+      }));
+    }
+  };
+});
+$__System.register('a', ['6'], function (_export) {
   'use strict';
 
   var angular;
@@ -857,7 +937,7 @@ $__System.register('7', ['6'], function (_export) {
     }
   };
 });
-$__System.registerDynamic("8", ["6"], false, function(__require, __exports, __module) {
+$__System.registerDynamic("b", ["6"], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
   (function() {
     "format global";
@@ -1157,26 +1237,26 @@ $__System.registerDynamic("8", ["6"], false, function(__require, __exports, __mo
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("9", ["8"], true, function(req, exports, module) {
+$__System.registerDynamic("9", ["b"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = req('8');
+  module.exports = req('b');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('a', ['6', '7', '9'], function (_export) {
+$__System.register('c', ['6', '9', 'a'], function (_export) {
   'use strict';
 
   var angular, categoryQueryModule, mystuff;
   return {
     setters: [function (_) {
       angular = _['default'];
-    }, function (_3) {
-      categoryQueryModule = _3['default'];
-    }, function (_2) {}],
+    }, function (_2) {}, function (_a) {
+      categoryQueryModule = _a['default'];
+    }],
     execute: function () {
       mystuff = angular.module('categoriesControllerModule', ['ngRoute', categoryQueryModule.name]).controller('CategoriesController', function (allCategories, $location, $scope) {
         this.categories = allCategories.data.categories;
@@ -1190,7 +1270,7 @@ $__System.register('a', ['6', '7', '9'], function (_export) {
     }
   };
 });
-$__System.registerDynamic("b", [], true, function(req, exports, module) {
+$__System.registerDynamic("d", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1399,49 +1479,51 @@ $__System.registerDynamic("b", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("c", ["b"], true, function(req, exports, module) {
+$__System.registerDynamic("e", ["d"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  req('b');
+  req('d');
   module.exports = 'angular-loading-bar';
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("d", ["c"], true, function(req, exports, module) {
+$__System.registerDynamic("f", ["e"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = req('c');
+  module.exports = req('e');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('e', ['2', '3', '4', '5', '6', 'd', 'a'], function (_export) {
+$__System.register('10', ['2', '3', '4', '5', '6', '8', 'f', 'c'], function (_export) {
     'use strict';
 
-    var createCategoryTemplate, categoriesTemplate, indexTemplate, indexControllerModule, angular, loadingBar, categoriesControllerModule, mystuff;
+    var createCategoryTemplate, categoriesTemplate, indexTemplate, indexControllerModule, angular, createCategoryControllerModule, loadingBar, categoriesControllerModule, mystuff;
     return {
-        setters: [function (_5) {
-            createCategoryTemplate = _5['default'];
+        setters: [function (_6) {
+            createCategoryTemplate = _6['default'];
+        }, function (_5) {
+            categoriesTemplate = _5['default'];
         }, function (_4) {
-            categoriesTemplate = _4['default'];
+            indexTemplate = _4['default'];
         }, function (_3) {
-            indexTemplate = _3['default'];
-        }, function (_2) {
-            indexControllerModule = _2['default'];
+            indexControllerModule = _3['default'];
         }, function (_) {
             angular = _['default'];
-        }, function (_d) {
-            loadingBar = _d['default'];
-        }, function (_a) {
-            categoriesControllerModule = _a['default'];
+        }, function (_2) {
+            createCategoryControllerModule = _2['default'];
+        }, function (_f) {
+            loadingBar = _f['default'];
+        }, function (_c) {
+            categoriesControllerModule = _c['default'];
         }],
         execute: function () {
-            mystuff = angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', indexControllerModule.name, categoriesControllerModule.name]).config(function ($routeProvider) {
+            mystuff = angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', indexControllerModule.name, categoriesControllerModule.name, createCategoryControllerModule.name]).config(function ($routeProvider) {
 
                 $routeProvider.when('/', {
                     template: indexTemplate,
@@ -1469,7 +1551,7 @@ $__System.register('e', ['2', '3', '4', '5', '6', 'd', 'a'], function (_export) 
         }
     };
 });
-$__System.registerDynamic("f", [], true, function(req, exports, module) {
+$__System.registerDynamic("11", [], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -1561,26 +1643,6 @@ $__System.registerDynamic("f", [], true, function(req, exports, module) {
   return module.exports;
 });
 
-$__System.registerDynamic("10", ["f"], true, function(req, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = req('f');
-  global.define = __define;
-  return module.exports;
-});
-
-$__System.registerDynamic("11", ["10"], true, function(req, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : req('10');
-  global.define = __define;
-  return module.exports;
-});
-
 $__System.registerDynamic("12", ["11"], true, function(req, exports, module) {
   ;
   var global = this,
@@ -1592,6 +1654,26 @@ $__System.registerDynamic("12", ["11"], true, function(req, exports, module) {
 });
 
 $__System.registerDynamic("13", ["12"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__System._nodeRequire ? process : req('12');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("14", ["13"], true, function(req, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = req('13');
+  global.define = __define;
+  return module.exports;
+});
+
+$__System.registerDynamic("15", ["14"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -5900,22 +5982,22 @@ $__System.registerDynamic("13", ["12"], true, function(req, exports, module) {
         root._ = _;
       }
     }.call(this));
-  })(req('12'));
+  })(req('14'));
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14", ["13"], true, function(req, exports, module) {
+$__System.registerDynamic("16", ["15"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = req('13');
+  module.exports = req('15');
   global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("15", [], false, function(__require, __exports, __module) {
+$__System.registerDynamic("17", [], false, function(__require, __exports, __module) {
   var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, "angular", null);
   (function() {
     "format global";
@@ -17320,20 +17402,20 @@ $__System.registerDynamic("15", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("6", ["15"], true, function(req, exports, module) {
+$__System.registerDynamic("6", ["17"], true, function(req, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = req('15');
+  module.exports = req('17');
   global.define = __define;
   return module.exports;
 });
 
-$__System.register('16', ['6', '14', 'e'], function (_export) {
+$__System.register('18', ['6', '10', '16'], function (_export) {
 	'use strict';
 
-	var angular, _, routesModule;
+	var angular, routesModule, _;
 
 	_export('bootstrap', bootstrap);
 
@@ -17351,15 +17433,15 @@ $__System.register('16', ['6', '14', 'e'], function (_export) {
 	return {
 		setters: [function (_2) {
 			angular = _2['default'];
+		}, function (_4) {
+			routesModule = _4['default'];
 		}, function (_3) {
 			_ = _3['default'];
-		}, function (_e) {
-			routesModule = _e['default'];
 		}],
 		execute: function () {}
 	};
 });
-$__System.register('1', ['16'], function (_export) {
+$__System.register('1', ['18'], function (_export) {
   'use strict';
 
   var bootstrap;

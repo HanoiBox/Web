@@ -1,6 +1,10 @@
-<div class="container-fluid">
-	<form action="api/categories/create">
-		<input type="text" name="description" />
-		<input type="submit" value="create" />
+<div class="container-fluid" ng-controller="CreateCategoryController">
+	<form novalidate class="simple-form">
+		Description: <input type="text" ng-model="category.description" />
+		<input type="submit" ng-click="save(category)" value="Save" class="btn btn-success" />
 	</form>
+	
+	<pre>Category = {{category | json}}</pre>
+	
+	<input type="button" ng-click="back()" class="btn btn-link" value="back" />
 </div>
