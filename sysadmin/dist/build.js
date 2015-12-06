@@ -792,7 +792,7 @@
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("2", [], function() {
-  return "<div class=\"container-fluid\" ng-controller=\"CreateCategoryController\">\r\n\t<form novalidate class=\"simple-form\">\r\n\t\tDescription: <input type=\"text\" ng-model=\"category.description\" />\r\n\t\t<input type=\"submit\" ng-click=\"save(category)\" value=\"Save\" class=\"btn btn-success\" />\r\n\t</form>\r\n\t\r\n\t<pre>Category = {{category | json}}</pre>\r\n\t\r\n\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n</div>";
+  return "<div class=\"container-fluid\">\r\n\t<form novalidate class=\"simple-form\">\r\n\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\tDescription: <input type=\"text\" ng-model=\"category.description\" />\r\n\t\t<input type=\"submit\" ng-click=\"save(category)\" value=\"Save\" class=\"btn btn-success\" />\r\n\t</form>\r\n\t\r\n\t<pre>Category = {{category | json}}</pre>\r\n\t\r\n\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n</div>";
 });
 
 _removeDefine();
@@ -800,7 +800,7 @@ _removeDefine();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("3", [], function() {
-  return "<div class=\"container-fluid\">\r\n  <h4>Categories</h4>\r\n  \r\n  <div>\r\n    <button ng-click=\"create()\" type=\"button\" class=\"btn btn-success\">Create</button>\r\n  </div>\r\n  <table class=\"table table-striped\">\r\n    <thead>\r\n    <th class=\"col-md-6\">Identifier</div>\r\n    <th class=\"col-md-6\">Description</div>\r\n    </thead>\r\n    <tbody>\r\n      <tr ng-repeat=\"category in ctrl.categories\">\r\n      <td>{{ category._id }}</td>\r\n      <td>{{ category.description }}</td>\r\n      </tr>\r\n    </tbody>\r\n  </table>  \r\n</div>";
+  return "<div class=\"container-fluid\">\r\n  <h4>Categories</h4>\r\n  \r\n  <div>\r\n    <button ng-click=\"create()\" type=\"button\" class=\"btn btn-success\">Create</button>\r\n  </div>\r\n  <table class=\"table table-striped\">\r\n    <thead>\r\n    <th class=\"col-md-6\">Identifier</div>\r\n    <th class=\"col-md-6\">Description</div>\r\n    </thead>\r\n    <tbody>\r\n      <tr ng-repeat=\"category in ctrl.categories\">\r\n      <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category._id }}\"/></td>\r\n      <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.description }}\"/></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>  \r\n</div>";
 });
 
 _removeDefine();
@@ -808,7 +808,7 @@ _removeDefine();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("4", [], function() {
-  return "<h4>Administration Menu</h4>\r\n\r\n<div>\r\n\t<input type=\"button\" ng-click=\"toCategories()\" value=\"Categories Management\" class=\"btn btn-link\">\r\n</div>\r\n\r\n<div>\r\n\t<span>hello</span>\r\n\t<input type=\"text\" value={{ctrl.foo}} />\r\n\t<span>{{ctrl.foo}}</span>\r\n</div>";
+  return "<div class=\"container-fluid\">\r\n\t<h4>Administration Menu</h4>\r\n\t\r\n\t<div>\r\n\t\t<input type=\"button\" ng-click=\"toCategories()\" value=\"Categories Management\" class=\"btn btn-link\">\r\n\t</div>\r\n</div>";
 });
 
 _removeDefine();
@@ -863,7 +863,7 @@ $__System.register('7', ['6'], function (_export) {
         };
 
         var saveCategory = function saveCategory(category, callback) {
-          if (category.id === undefined || category.id === null) {
+          if (category._id === undefined || category._id === null) {
             _this.save(category, function (result) {
               callback(result);
             });
@@ -881,23 +881,36 @@ $__System.register('7', ['6'], function (_export) {
     }
   };
 });
-$__System.register('8', ['6', '7', '9'], function (_export) {
+$__System.register('8', ['6', '7', '9', 'a'], function (_export) {
   'use strict';
 
-  var angular, categoryCommandModule;
+  var angular, categoryCommandModule, categoryQueryModule;
   return {
     setters: [function (_) {
       angular = _['default'];
     }, function (_3) {
       categoryCommandModule = _3['default'];
-    }, function (_2) {}],
+    }, function (_2) {}, function (_a) {
+      categoryQueryModule = _a['default'];
+    }],
     execute: function () {
-      _export('default', angular.module('createCategoryControllerModule', ['ngRoute', categoryCommandModule.name]).controller('CreateCategoryController', function ($location, $scope, SaveCategoriesFactory) {
+      _export('default', angular.module('createEditCategoryControllerModule', ['ngRoute', categoryCommandModule.name, categoryQueryModule.name]).controller('CreateEditCategoryController', function ($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams) {
+        this.id = $routeParams.id.replace(':', '');
+        this.id = parseInt(this.id);
+
+        if (this.id !== undefined && this.id !== null && !isNaN(this.id)) {
+          var existingCategory = GetCategoriesFactory.byId(this.id).then(function (result) {
+            var existingCategory = result.data.category;
+            if (existingCategory != null && result.status === 200) {
+              $scope.category = existingCategory;
+            }
+          });
+        }
 
         $scope.save = function (category) {
-          $location.path("/categories");
           SaveCategoriesFactory.saveCategory(category, function (response) {
             console.log("epic win? ", response);
+            $location.path("/categories");
           });
         };
 
@@ -925,7 +938,7 @@ $__System.register('a', ['6'], function (_export) {
         };
 
         var byId = function byId(id) {
-          var url = "/api/category/${id}";
+          var url = '/api/category/' + id;
           return $http.get(url);
         };
 
@@ -1261,6 +1274,11 @@ $__System.register('c', ['6', '9', 'a'], function (_export) {
       mystuff = angular.module('categoriesControllerModule', ['ngRoute', categoryQueryModule.name]).controller('CategoriesController', function (allCategories, $location, $scope) {
         this.categories = allCategories.data.categories;
 
+        $scope.edit = function (id) {
+          var toPath = '/categories/edit:' + id;
+          $location.path(toPath);
+        };
+
         $scope.create = function () {
           $location.path("/categories/create");
         };
@@ -1503,10 +1521,10 @@ $__System.registerDynamic("f", ["e"], true, function(req, exports, module) {
 $__System.register('10', ['2', '3', '4', '5', '6', '8', 'f', 'c'], function (_export) {
     'use strict';
 
-    var createCategoryTemplate, categoriesTemplate, indexTemplate, indexControllerModule, angular, createCategoryControllerModule, loadingBar, categoriesControllerModule, mystuff;
+    var createEditCategoryTemplate, categoriesTemplate, indexTemplate, indexControllerModule, angular, createEditCategoryControllerModule, loadingBar, categoriesControllerModule, mystuff;
     return {
         setters: [function (_6) {
-            createCategoryTemplate = _6['default'];
+            createEditCategoryTemplate = _6['default'];
         }, function (_5) {
             categoriesTemplate = _5['default'];
         }, function (_4) {
@@ -1516,14 +1534,14 @@ $__System.register('10', ['2', '3', '4', '5', '6', '8', 'f', 'c'], function (_ex
         }, function (_) {
             angular = _['default'];
         }, function (_2) {
-            createCategoryControllerModule = _2['default'];
+            createEditCategoryControllerModule = _2['default'];
         }, function (_f) {
             loadingBar = _f['default'];
         }, function (_c) {
             categoriesControllerModule = _c['default'];
         }],
         execute: function () {
-            mystuff = angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', indexControllerModule.name, categoriesControllerModule.name, createCategoryControllerModule.name]).config(function ($routeProvider) {
+            mystuff = angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', indexControllerModule.name, categoriesControllerModule.name, createEditCategoryControllerModule.name]).config(function ($routeProvider) {
 
                 $routeProvider.when('/', {
                     template: indexTemplate,
@@ -1539,8 +1557,12 @@ $__System.register('10', ['2', '3', '4', '5', '6', '8', 'f', 'c'], function (_ex
                         }
                     }
                 }).when('/categories/create', {
-                    template: createCategoryTemplate,
-                    controller: 'CreateCategoryController',
+                    template: createEditCategoryTemplate,
+                    controller: 'CreateEditCategoryController',
+                    controllerAs: 'ctrl'
+                }).when('/categories/edit:id', {
+                    template: createEditCategoryTemplate,
+                    controller: 'CreateEditCategoryController',
                     controllerAs: 'ctrl'
                 }).otherwise({
                     redirectTo: '/'
