@@ -26,7 +26,11 @@ export default angular.module('createEditCategoryControllerModule', [
    $scope.save = (category) => {
      SaveCategoriesFactory.saveCategory(category, (response) => {
        console.log("epic win? ", response);
-       $location.path("/categories");
+       if (response.success) {
+        $location.path("/categories");  
+       } else {
+        alert("unable to edit category");
+       }
      });
    }
    
