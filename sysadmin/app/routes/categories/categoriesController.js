@@ -9,6 +9,11 @@ var mystuff = angular.module('categoriesControllerModule', [
 ]).controller('CategoriesController', function(allCategories, $location, $scope) {
    this.categories = allCategories.data.categories;
    
+   $scope.edit = (id) => {
+     let toPath = `/categories/edit:${id}`;
+     $location.path(toPath);
+   }
+   
    $scope.create = () => {
      $location.path("/categories/create");
    }

@@ -1,5 +1,6 @@
-<div class="container-fluid" ng-controller="CreateCategoryController">
+<div class="container-fluid">
 	<form novalidate class="simple-form">
+		<input type="hidden" ng-model="category._id" />
 		Description: <input type="text" ng-model="category.description" />
 		<input type="submit" ng-click="save(category)" value="Save" class="btn btn-success" />
 	</form>
