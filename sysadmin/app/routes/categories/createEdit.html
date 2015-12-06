@@ -1,11 +1,47 @@
 <div class="container-fluid">
-	<form novalidate class="simple-form">
-		<input type="hidden" ng-model="category._id" />
-		Description: <input type="text" ng-model="category.description" />
-		<input type="submit" ng-click="save(category)" value="Save" class="btn btn-success" />
-	</form>
-	
-	<pre>Category = {{category | json}}</pre>
-	
-	<input type="button" ng-click="back()" class="btn btn-link" value="back" />
+	<div class="row">
+		<div class="col-md-2">
+			<fieldset>
+				<legend>menu</legend>
+				<input type="button" ng-click="back()" class="btn btn-link" value="back" />
+			</fieldset>
+		</div>
+		<div class="col-md-10">
+			<h4>Category</h4>
+			
+			<form novalidate class="form-horizontal">
+				<input type="hidden" ng-model="category._id" />
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Vietnamese Description:</label>
+					</div> 
+					<div class="col-sm-2">
+						<input type="text" ng-model="category.vietDescription"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Navigation Level: </label>
+					</div>
+					<div class="col-sm-2"> 
+						<input type="number" ng-model="category.level" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>English Description: </label>
+					</div>
+					<div class="col-sm-2">
+						<input type="text" ng-model="category.description" />
+					</div>
+				</div>
+				<button type="submit" ng-click="save(category)" class="btn btn-success">Save</button>
+			</form>
+			
+			<div style="display: none">
+				<pre>Category = {{category | json}}</pre>
+			</div>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
 </div>

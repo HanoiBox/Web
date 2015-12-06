@@ -792,7 +792,7 @@
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("2", [], function() {
-  return "<div class=\"container-fluid\">\r\n\t<form novalidate class=\"simple-form\">\r\n\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\tDescription: <input type=\"text\" ng-model=\"category.description\" />\r\n\t\t<input type=\"submit\" ng-click=\"save(category)\" value=\"Save\" class=\"btn btn-success\" />\r\n\t</form>\r\n\t\r\n\t<pre>Category = {{category | json}}</pre>\r\n\t\r\n\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n</div>";
+  return "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n\t\t\t\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<h4>Category</h4>\r\n\t\t\t\r\n\t\t\t<form novalidate class=\"form-horizontal\">\r\n\t\t\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Vietnamese Description:</label>\r\n\t\t\t\t\t</div> \r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.vietDescription\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Navigation Level: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\"> \r\n\t\t\t\t\t\t<input type=\"number\" ng-model=\"category.level\" />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>English Description: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.description\" />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<button type=\"submit\" ng-click=\"save(category)\" class=\"btn btn-success\">Save</button>\r\n\t\t\t</form>\r\n\t\t\t\r\n\t\t\t<div style=\"display: none\">\r\n\t\t\t\t<pre>Category = {{category | json}}</pre>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1\"></div>\r\n\t</div>\r\n</div>";
 });
 
 _removeDefine();
@@ -800,7 +800,7 @@ _removeDefine();
 (function() {
 var _removeDefine = $__System.get("@@amd-helpers").createDefine();
 define("3", [], function() {
-  return "<div class=\"container-fluid\">\r\n  <h4>Categories</h4>\r\n  \r\n  <div>\r\n    <button ng-click=\"create()\" type=\"button\" class=\"btn btn-success\">Create</button>\r\n  </div>\r\n  <table class=\"table table-striped\">\r\n    <thead>\r\n    <th class=\"col-md-6\">Identifier</div>\r\n    <th class=\"col-md-6\">Description</div>\r\n    </thead>\r\n    <tbody>\r\n      <tr ng-repeat=\"category in ctrl.categories\">\r\n      <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category._id }}\"/></td>\r\n      <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.description }}\"/></td>\r\n      <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"delete(category._id)\" value=\"Delete\"/></td>\r\n      </tr>\r\n    </tbody>\r\n  </table>  \r\n</div>";
+  return "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-offset-1 col-md-11 panel\">      \r\n            <button ng-click=\"create()\" type=\"button\" class=\"btn btn-success\">Create</button>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n            <label>Navigation level: </label>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-9 panel\">\r\n            <input type=\"number\" ng-model=\"level\" style=\"width: 8em;\" />\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n            <button ng-click=\"filter(level)\" type=\"button\" class=\"btn btn-primary\">Filter</button>\r\n            <button ng-click=\"reset()\" type=\"button\" class=\"btn btn-secondary\">Reset</button>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n\t\t\t\t    <input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n          </div>\r\n        </div>\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n    <div class=\"col-md-10\">\r\n      <h4>Categories</h4>            \r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n        <th>Identifier</th>\r\n        <th>Description</th>\r\n        <th>Navigation level</th>\r\n        <th>English Description</th>\r\n        </thead>\r\n        <tbody>\r\n          <tr ng-repeat=\"category in ctrl.categories\">\r\n          <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category._id }}\"/></td>\r\n          <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.vietDescription }}\"/></td>\r\n          <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.level }}\"/></td>\r\n          <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.description }}\"/></td>\r\n          <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"delete(category._id)\" value=\"Delete\"/></td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n</div>";
 });
 
 _removeDefine();
@@ -896,8 +896,11 @@ $__System.register('8', ['6', '7', '9', 'a'], function (_export) {
     }],
     execute: function () {
       _export('default', angular.module('createEditCategoryControllerModule', ['ngRoute', categoryCommandModule.name, categoryQueryModule.name]).controller('CreateEditCategoryController', function ($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams) {
-        this.id = $routeParams.id.replace(':', '');
-        this.id = parseInt(this.id);
+        this.id = null;
+        if ($routeParams.id !== undefined) {
+          this.id = $routeParams.id.replace(':', '');
+          this.id = parseInt(this.id);
+        }
 
         if (this.id !== undefined && this.id !== null && !isNaN(this.id)) {
           var existingCategory = GetCategoriesFactory.byId(this.id).then(function (result) {
@@ -1309,7 +1312,10 @@ $__System.register('d', ['6', '9', 'a', 'b'], function (_export) {
       mystuff = angular.module('categoriesControllerModule', ['ngRoute', categoryQueryModule.name, deleteCategoryCommandModule.name]).controller('CategoriesController', function (allCategories, $location, $scope, DeleteCategoryFactory) {
         var _this = this;
 
+        this.allCategories = allCategories.data.categories;
         this.categories = allCategories.data.categories;
+
+        this.level = null;
 
         $scope.edit = function (id) {
           var toPath = '/categories/edit:' + id;
@@ -1334,6 +1340,29 @@ $__System.register('d', ['6', '9', 'a', 'b'], function (_export) {
               console.error(result);
             }
           });
+        };
+
+        $scope.filter = function (level) {
+          if (level == null) {
+            _this.categories = _this.allCategories;
+          } else {
+            _this.categories = _this.categories.filter(function (cat) {
+              if (cat.level === level) {
+                return true;
+              } else {
+                return false;
+              }
+            });
+          }
+        };
+
+        $scope.reset = function () {
+          _this.level = null;
+          _this.categories = _this.allCategories;
+        };
+
+        $scope.back = function () {
+          $location.path("/");
         };
       });
 

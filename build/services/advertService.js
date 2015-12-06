@@ -44,7 +44,6 @@ var advertService = (function () {
 	};
 
 	var updateAdvert = function updateAdvert(id, advertData, callback) {
-		console.log(advertData);
 		var getAdvertPromise = new Promise(function (resolve, reject) {
 			advertRepository.getAdvert(id, function (result) {
 				if (result.message !== "") reject(result.message);

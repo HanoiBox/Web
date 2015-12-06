@@ -8,6 +8,8 @@ var categoryRepository = (function () {
 		try {
 			var newCategory = new Category();
 			newCategory.description = categoryData.description;
+			newCategory.vietDescription = categoryData.vietDescription;
+			newCategory.level = categoryData.level;
 			newCategory.save();
 			return callback("");
 		} catch (error) {
@@ -57,6 +59,8 @@ var categoryRepository = (function () {
 			if (newcategoryData.description !== null) {
 				currentcategory.description = newcategoryData.description;
 			}
+			currentcategory.vietDescription = newcategoryData.vietDescription;
+			currentcategory.level = newcategoryData.level;
 			currentcategory.save();
 			return callback("");
 		} catch (error) {

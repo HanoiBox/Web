@@ -8,7 +8,13 @@ var categoryService = (function () {
 			return "No category object could be constructed";
 		}
 		if (categoryData.description === undefined || categoryData.description === "") {
-			return "No category description was given";
+			return "No English category description was given";
+		}
+		if (categoryData.vietDescription === undefined || categoryData.vietDescription === "") {
+			return "No Vietnamese category description was given";
+		}
+		if (categoryData.level === undefined || categoryData.level === null) {
+			return "No navigation level was given";
 		}
 		return "";
 	};
