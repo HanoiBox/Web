@@ -21,7 +21,7 @@ export default angular.module('categoryCommandModule', [
   }
   
   let saveCategory = (category, callback) => {
-    if (category.id === undefined || category.id === null) {
+    if (category._id === undefined || category._id === null) {
       this.save(category, (result) => {
         callback(result);
       }); 

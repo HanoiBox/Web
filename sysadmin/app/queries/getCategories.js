@@ -9,7 +9,7 @@ export default angular.module('categoryQueryModule', [
   }
   
   let byId = (id) => {
-    let url = "/api/category/${id}";
+    let url = `/api/category/${id}`;
     return $http.get(url);
   }
 
