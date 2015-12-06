@@ -13,6 +13,7 @@
       <tr ng-repeat="category in ctrl.categories">
       <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category._id }}"/></td>
       <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.description }}"/></td>
+      <td><input type="button" class="btn btn-link" ng-click="delete(category._id)" value="Delete"/></td>
       </tr>
     </tbody>
   </table>  

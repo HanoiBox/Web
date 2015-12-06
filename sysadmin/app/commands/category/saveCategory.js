@@ -5,18 +5,19 @@ export default angular.module('categoryCommandModule', [
   let url = "/api/category/";
   
   this.edit = (category, callback) => {
-    $http.put(url, category, $templateCache).then(() => {
-      callback(true);
+    let putUrl = url + category._id;
+    $http.put(putUrl, category, $templateCache).then(() => {
+      callback({ success : true });
     }, (response) => {
-      callback(false);
+      callback({ success: false, response });
     }); 
   }
   
   this.save = (category, callback) => {
     return $http.post(url, category, $templateCache).then(() => {
-      callback(true);
+      callback({ success: true });
     }, (response) => {
-      callback(false);
+      callback({ success: false, response });
     });
   }
   
