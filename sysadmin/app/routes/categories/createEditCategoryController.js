@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-route';
 
-import categoryCommandModule from 'sysadmin/app/commands/categories/saveCategories';
+import categoryCommandModule from 'sysadmin/app/commands/category/saveCategory';
 import categoryQueryModule from 'sysadmin/app/queries/getCategories';
 
 export default angular.module('createEditCategoryControllerModule', [
