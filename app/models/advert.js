@@ -10,7 +10,9 @@ var advertSchema = new Schema({
 advertSchema.plugin(autoIncrement.plugin, 'Advert');
 
 var categorySchema = new Schema({
-	description : String
+	description : String,
+	vietDescription: String,
+	level : Number
 });
 
 categorySchema.plugin(autoIncrement.plugin, 'Category');

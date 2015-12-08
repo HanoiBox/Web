@@ -1,20 +1,46 @@
 <div class="container-fluid">
-  <h4>Categories</h4>
-  
-  <div>
-    <button ng-click="create()" type="button" class="btn btn-success">Create</button>
-  </div>
-  <table class="table table-striped">
-    <thead>
-    <th class="col-md-6">Identifier</div>
-    <th class="col-md-6">Description</div>
-    </thead>
-    <tbody>
-      <tr ng-repeat="category in ctrl.categories">
-      <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category._id }}"/></td>
-      <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.description }}"/></td>
-      <td><input type="button" class="btn btn-link" ng-click="delete(category._id)" value="Delete"/></td>
-      </tr>
-    </tbody>
-  </table>  
+  <div class="row">
+		<div class="col-md-2">
+			<fieldset>
+				<legend>menu</legend>
+        <div class="row">
+          <div class="col-md-offset-1 col-md-11 panel">      
+            <button ng-click="create()" type="button" class="btn btn-success">Create</button>
+          </div>
+          <div class="col-md-offset-1 col-md-11">
+            <label>Navigation level: </label>
+          </div>
+          <div class="col-md-offset-1 col-md-9 panel">
+            <input type="number" ng-model="level" style="width: 8em;" />
+          </div>
+          <div class="col-md-offset-1 col-md-11">
+            <button ng-click="filter(level)" type="button" class="btn btn-primary">Filter</button>
+            <button ng-click="reset()" type="button" class="btn btn-secondary">Reset</button>
+          </div>
+          <div class="col-md-offset-1 col-md-11">
+				    <input type="button" ng-click="back()" class="btn btn-link" value="back" />
+          </div>
+        </div>
+			</fieldset>
+		</div>
+    <div class="col-md-10">
+      <h4>Categories</h4>            
+      <table class="table table-striped table-hover">
+        <thead>
+        <th>Identifier</th>
+        <th>Description</th>
+        <th>Navigation level</th>
+        <th>English Description</th>
+        </thead>
+        <tbody>
+          <tr ng-repeat="category in ctrl.categories">
+          <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category._id }}"/></td>
+          <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.vietDescription }}"/></td>
+          <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.level }}"/></td>
+          <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.description }}"/></td>
+          <td><input type="button" class="btn btn-link" ng-click="delete(category._id)" value="Delete"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>

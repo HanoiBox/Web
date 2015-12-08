@@ -9,8 +9,13 @@ export default angular.module('createEditCategoryControllerModule', [
   categoryCommandModule.name,
   categoryQueryModule.name
 ]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams) {
-   this.id = $routeParams.id.replace(':', '');
-   this.id = parseInt(this.id);
+   this.id = null;
+   if ($routeParams.id !== undefined)
+   {
+    this.id = $routeParams.id.replace(':', '');
+    this.id = parseInt(this.id);  
+   }
+   
    
    if (this.id !== undefined && this.id !== null && !isNaN(this.id))
    {

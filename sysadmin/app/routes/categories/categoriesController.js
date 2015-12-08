@@ -9,7 +9,10 @@ var mystuff = angular.module('categoriesControllerModule', [
   categoryQueryModule.name,
   deleteCategoryCommandModule.name
 ]).controller('CategoriesController', function(allCategories, $location, $scope, DeleteCategoryFactory) {
+   this.allCategories = allCategories.data.categories;
    this.categories = allCategories.data.categories;
+   
+   this.level = null;
    
    $scope.edit = (id) => {
      let toPath = `/categories/edit:${id}`;
@@ -34,6 +37,29 @@ var mystuff = angular.module('categoriesControllerModule', [
          console.error(result);
        }
      });
+   }
+   
+   $scope.filter = (level) => {
+     if (level == null) {
+       this.categories = this.allCategories;
+     } else {
+       this.categories = this.categories.filter((cat) => {
+          if (cat.level === level) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+     }
+   }
+   
+   $scope.reset = () => {
+     this.level = null;
+     this.categories = this.allCategories;
+   }
+   
+   $scope.back = () => {
+     $location.path("/");
    }
 });
 
