@@ -46,6 +46,8 @@ if (dev) {
 
 app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
+var favicon = require('serve-favicon');
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
 // *** listen (start app with 'node server.js') ***
 var port = process.env.port || 8080;
