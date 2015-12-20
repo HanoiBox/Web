@@ -1,2 +1,11 @@
+<link rel='stylesheet' href='/public/dist/styles/public.min.css' type='text/css' media='all' />
 
-
+{{#if dev}}
+	<script src="../jspm_packages/system.js"></script>
+	<script src="../config.js"></script>
+	<script>
+		System.import("public/main");
+	</script>
+{{else}}
+	<script src="/public/dist/build.js"></script>
+{{/if}}

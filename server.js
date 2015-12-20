@@ -39,6 +39,7 @@ app.use('/', allRoutes);
 // static dirs
 if (dev) {
 	app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
+    app.use('/public', express.static(__dirname + '/public'));
 	app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 } else {
 	app.use('/sysadmin/dist', express.static(__dirname + '/sysadmin/dist'));

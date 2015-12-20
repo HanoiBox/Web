@@ -2,7 +2,7 @@
 module.exports = function(router, devEnvironment) {
 
 	let home = (res) => {
-		var data = { title: 'Hanoi Box' };
+	    let data = { title: 'Hanoi Box', dev: devEnvironment };
 		res.render('public/home', data);	
 	}
 
