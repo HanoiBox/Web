@@ -15,6 +15,7 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.8",
+    "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
     "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.8",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
