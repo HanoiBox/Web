@@ -2,35 +2,52 @@ import angular from 'angular';
 import 'angular-mocks';
 
 import categoryCommandModule from './saveCategory';
-import categoriesCacheFactory from 'sysadmin/app/categoriesCache';
+import categoriesCacheModule from 'sysadmin/app/categoriesCache';
 
 describe('saveNewCategory', function() {
-    let testResult;
+    let saveCategoriesFactory,
+        httpBackend,
+        templateCache,
+        testCategory;
     
-    beforeEach(function(done){
-        angular.mock.module(function($provide){
-            $provide.service('$http', function(){
-                this.post = function() {
-                    debugger;
-                    return 'OK';
-                }
-            });
-            $provide.service('categoriesCacheFactory', function(){
-                
-            });
-        });
+    beforeEach(() => {
         angular.mock.module(categoryCommandModule.name);
-        categoryCommandModule.saveCategory({
-            _id: undefined,
-            description: "Bikes"
-        }, function(result) {
-            testResult = result;
-            done();
-        });        
+        angular.mock.module(categoriesCacheModule.name, ($provide) => {
+            $provide.factory('categoriesCacheFactory', function () {
+                return {
+                        put: function (category) {
+                            },
+                        get: function (name) {
+                                return [];
+                            },
+                        info: function () {
+                                return { id: 'categories'};
+                            }
+                        };
+            });
+        }); 
+    });
+    
+    beforeEach(inject(function($httpBackend, $templateCache, SaveCategoriesFactory) {
+        saveCategoriesFactory = SaveCategoriesFactory;
+        httpBackend = $httpBackend;
+        templateCache = $templateCache;
+    }));
+    
+    beforeEach(() => {
+        testCategory = {
+            description: 'Bikes'
+        };
     });
     
     it("shouldAddNewCategoryToCache", function () {
-        expect(testResult.description).toEqual('Bikes');
+        httpBackend.whenPOST('/api/category/').respond({ status: 200 });
+                
+        saveCategoriesFactory.saveCategory(testCategory, (result) => {
+            console.log(result);
+            expect(result.category.description).toEqual('Bikes');    
+        });
+        httpBackend.flush();
     });
     
 });

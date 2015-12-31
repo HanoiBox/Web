@@ -9,6 +9,8 @@ export default angular.module('categoryCommandModule', [
   let categoriesCacheName = categoriesCacheFactory.info().id;
   
   let addCategoryToCache = (category) => {
+      
+      console.debug("retrieving from cache", categoriesCacheName);
       let categories = categoriesCacheFactory.get(categoriesCacheName);
       categories.push(category);
       categoriesCacheFactory.put(categoriesCacheName, categories);
@@ -22,6 +24,7 @@ export default angular.module('categoryCommandModule', [
   
   this.edit = (category, callback) => {
     let putUrl = url + category._id;
+    console.debug("putting", url, category, $templateCache);
     $http.put(putUrl, category, $templateCache).then(() => {
         removeCategoryFromCache(category._id);
         addCategoryToCache(category);
@@ -32,10 +35,11 @@ export default angular.module('categoryCommandModule', [
   }
   
   this.save = (category, callback) => {
-    $http.post(url, category, $templateCache).then(() => {
+    $http.post(url, category, $templateCache).then((response) => {
         addCategoryToCache(category);
         callback({ success: true, category: category });
     }, (response) => {
+        console.debug("failed post", response);
         callback({ success: false, response });
     });
   }
