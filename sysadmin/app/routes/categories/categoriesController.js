@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'angular-route';
 
-import categoryQueryModule from 'sysadmin/app/queries/getCategories';
+import categoryQueryModule from 'sysadmin/app/queries/category/getCategories';
 import deleteCategoryCommandModule from 'sysadmin/app/commands/category/deleteCategory';
 
 var mystuff = angular.module('categoriesControllerModule', [
@@ -9,8 +9,8 @@ var mystuff = angular.module('categoriesControllerModule', [
   categoryQueryModule.name,
   deleteCategoryCommandModule.name
 ]).controller('CategoriesController', function(allCategories, $location, $scope, DeleteCategoryFactory) {
-   this.allCategories = allCategories.data.categories;
-   this.categories = allCategories.data.categories;
+   this.allCategories = allCategories;
+   this.categories = allCategories;
    
    this.level = null;
    
@@ -54,7 +54,7 @@ var mystuff = angular.module('categoriesControllerModule', [
    }
    
    $scope.reset = () => {
-     this.level = null;
+     $scope.level = null;
      this.categories = this.allCategories;
    }
    

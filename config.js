@@ -16,6 +16,7 @@ System.config({
   map: {
     "angular": "github:angular/bower-angular@1.4.8",
     "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
+    "angular-cache": "npm:angular-cache@4.4.3",
     "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.8",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
@@ -49,6 +50,13 @@ System.config({
     "github:mgonto/restangular@1.5.1": {
       "angular": "github:angular/bower-angular@1.4.8",
       "lodash": "npm:lodash@3.10.1"
+    },
+    "npm:angular-cache@4.4.3": {
+      "angular": "npm:angular@1.4.8",
+      "fs": "github:jspm/nodelibs-fs@0.1.2"
+    },
+    "npm:angular@1.4.8": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"

@@ -1,23 +1,42 @@
 import angular from 'angular';
+import categoriesCacheModule from 'sysadmin/app/categoriesCache';
 
 export default angular.module('categoryCommandModule', [
-]).factory('SaveCategoriesFactory', function($http, $templateCache) {
+   categoriesCacheModule.name
+]).factory('SaveCategoriesFactory', function($http, $templateCache, categoriesCacheFactory) {
   let url = "/api/category/";
+  
+  let categoriesCacheName = categoriesCacheFactory.info().id;
+  
+  let addCategoryToCache = (category) => {
+      let categories = categoriesCacheFactory.get(categoriesCacheName);
+      categories.push(category);
+      categoriesCacheFactory.put(categoriesCacheName, categories);
+  }
+  
+  let removeCategoryFromCache = (id) => {
+      let categories = categoriesCacheFactory.get(categoriesCacheName);
+      let categoriesWithoutItem = categories.filter(cat => cat._id !== id);
+      categoriesCacheFactory.put(categoriesCacheName, categoriesWithoutItem);
+  }
   
   this.edit = (category, callback) => {
     let putUrl = url + category._id;
     $http.put(putUrl, category, $templateCache).then(() => {
-      callback({ success : true });
+        removeCategoryFromCache(category._id);
+        addCategoryToCache(category);
+        callback({ success : true });
     }, (response) => {
-      callback({ success: false, response });
+        callback({ success: false, response });
     }); 
   }
   
   this.save = (category, callback) => {
-    return $http.post(url, category, $templateCache).then(() => {
-      callback({ success: true });
+    $http.post(url, category, $templateCache).then(() => {
+        addCategoryToCache(category);
+        callback({ success: true, category: category });
     }, (response) => {
-      callback({ success: false, response });
+        callback({ success: false, response });
     });
   }
   

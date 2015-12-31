@@ -12,7 +12,8 @@ advertSchema.plugin(autoIncrement.plugin, 'Advert');
 var categorySchema = new Schema({
 	description : String,
 	vietDescription: String,
-	level : Number
+	level : Number,
+    parentCategory: { type: String, ref: 'DataType' }
 });
 
 categorySchema.plugin(autoIncrement.plugin, 'Category');

@@ -1,5 +1,5 @@
 import angular from 'angular';
-import categoryQueryModule from 'sysadmin/app/queries/getCategories';
+import categoryQueryModule from 'sysadmin/app/queries/category/getCategories';
 
 export default angular.module('indexControllerModule', [
     categoryQueryModule.name
