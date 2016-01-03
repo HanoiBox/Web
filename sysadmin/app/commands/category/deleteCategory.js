@@ -1,19 +1,25 @@
 import angular from 'angular';
+import categoriesCacheModule from 'sysadmin/app/categoriesCache';
 
 export default angular.module('deleteCategoryCommandModule', [
-]).factory('DeleteCategoryFactory', function($http, $templateCache) {
-  let url = "/api/category/";
+   categoriesCacheModule.name
+]).factory('DeleteCategoryFactory', function($http, $templateCache, categoriesCacheFactory) {
+    let url = "/api/category/",
+        categoriesCacheName = categoriesCacheFactory.info().id;
   
-  let execute = (id, callback) => {
-    let deleteUrl = url + id;
-    $http.delete(deleteUrl).then(() => {
-      callback({ success : true });
-    }, (response) => {
-      callback({ success: false, response });
-    }); 
-  }
+    let execute = (id, callback) => {
+        let deleteUrl = url + id;
+        $http.delete(deleteUrl).then(() => {
+            let categories = categoriesCacheFactory.get(categoriesCacheName);
+            categories.filter(cat => cat._id !== id);
+            categoriesCacheFactory.put(categoriesCacheName, categories);
+            callback({ success : true });
+        }, (response) => {
+            callback({ success: false, response });
+        });
+    }
 
-  return {
-    execute
-  }
+    return {
+        execute
+    }
 });

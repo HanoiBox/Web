@@ -47,6 +47,10 @@
 					</div>
 				</div>
 				<button type="submit" ng-click="save(category)" class="btn btn-success">Save</button>
+                
+                <div class="control-group error" ng-show="errors">
+                    <span class="help-inline" ng-bind="errorMessage"></span>
+                </div>
 			</form>
 			
 			<div style="display: none">

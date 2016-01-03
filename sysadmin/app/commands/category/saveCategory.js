@@ -9,8 +9,6 @@ export default angular.module('categoryCommandModule', [
   let categoriesCacheName = categoriesCacheFactory.info().id;
   
   let addCategoryToCache = (category) => {
-      
-      console.debug("retrieving from cache", categoriesCacheName);
       let categories = categoriesCacheFactory.get(categoriesCacheName);
       categories.push(category);
       categoriesCacheFactory.put(categoriesCacheName, categories);
@@ -24,11 +22,10 @@ export default angular.module('categoryCommandModule', [
   
   this.edit = (category, callback) => {
     let putUrl = url + category._id;
-    console.debug("putting", url, category, $templateCache);
     $http.put(putUrl, category, $templateCache).then(() => {
         removeCategoryFromCache(category._id);
         addCategoryToCache(category);
-        callback({ success : true });
+        callback({ success : true, category });
     }, (response) => {
         callback({ success: false, response });
     }); 
@@ -36,15 +33,19 @@ export default angular.module('categoryCommandModule', [
   
   this.save = (category, callback) => {
     $http.post(url, category, $templateCache).then((response) => {
+        var category = response.data.category;
         addCategoryToCache(category);
-        callback({ success: true, category: category });
+        callback({ success: true, category });
     }, (response) => {
-        console.debug("failed post", response);
-        callback({ success: false, response });
+        callback({ success: false, error: response.data.message });
     });
   }
   
   let saveCategory = (category, callback) => {
+    if (category === null || category === undefined) {
+        callback({ success: false, error: "no data" });
+        return;
+    }
     if (category._id === undefined || category._id === null) {
       this.save(category, (result) => {
         callback(result);

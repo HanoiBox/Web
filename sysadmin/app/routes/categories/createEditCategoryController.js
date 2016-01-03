@@ -10,6 +10,8 @@ export default angular.module('createEditCategoryControllerModule', [
   categoryQueryModule.name
 ]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams) {
     this.id = null;
+    $scope.errors = false;
+    
     if ($routeParams.id !== undefined)
     {
         this.id = $routeParams.id.replace(':', '');
@@ -18,9 +20,9 @@ export default angular.module('createEditCategoryControllerModule', [
    
     if (this.id !== undefined && this.id !== null && !isNaN(this.id))
     {
-        GetCategoriesFactory.byId(this.id).then((result) => {
-            if (result.status === 200) {
-                $scope.category = result.data.category;   
+        GetCategoriesFactory.byId(this.id).then((response) => {
+            if (response.status === 200) {
+                $scope.category = response.data.category;   
             } else {
                 // failure msg
             }
@@ -30,9 +32,12 @@ export default angular.module('createEditCategoryControllerModule', [
     $scope.save = (category) => {
       SaveCategoriesFactory.saveCategory(category, (response) => {
         if (response.success) {
-            $location.path("/categories");  
+            $scope.errors = false;
+            $location.path("/categories");
         } else {
-            alert("unable to edit category");
+            alert("unable to edit category: " + response.error);
+            $scope.errors = true;
+            this.errorMessage = response.error;
         }
       });
     }

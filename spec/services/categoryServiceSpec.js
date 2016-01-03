@@ -37,7 +37,7 @@ describe("When there is no category description method in request", () => {
 	});
 	
 	it("should give an error message in the result", () => { 
-		expect(result.message).toBe("No category description was given");
+		expect(result.message).toBe("No English category description was given");
 		expect(result.status).toBe(400);
 	});
 });
@@ -49,7 +49,10 @@ describe("When the find Categories method returns an error", () => {
 			return callback({ status: 404, error: "no categories found" });
 		});
 		
-		categoryService.saveCategory({ description: "my category" }, (res) => {
+		categoryService.saveCategory({ 
+            description: "my category", 
+            vietDescription: "xin chao",
+            level: 0 }, (res) => {
 			result = res;
 			done();
 		});
@@ -62,12 +65,22 @@ describe("When the find Categories method returns an error", () => {
 });
 
 describe("When the find Categories method returns a duplicate category", () => {
-	beforeEach((done) => {
+	var result;
+    
+    beforeEach((done) => {
 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
-			return callback({ categories: [ { _id : 1, description: "my category" } ] });
+			return callback({ 
+                categories: [{ 
+                    _id : 1, 
+                    description: "my category" 
+                }] 
+            });
 		});
 		
-		categoryService.saveCategory({ description: "my category" }, (res) => {
+		categoryService.saveCategory({ 
+            description: "my category", 
+            vietDescription: "xin chao",
+            level: 0 }, (res) => {
 			result = res;
 			done();
 		});
@@ -79,23 +92,34 @@ describe("When the find Categories method returns a duplicate category", () => {
 	});
 });
 
-describe("When there is no duplicate category", () => {
-	beforeEach((done) => {
+describe("When everything is OK", () => {
+	var result,
+        testCategory = {
+            description: "my category", 
+            vietDescription: "xin chao",
+            level: 0
+        };
+    
+    beforeEach((done) => {
 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
 			return callback({ categories: [ { _id : 1, description: "other category" } ] });
 		});
 		
 		spyOn(categoryRepository, "saveCategory").and.callFake((categoryData, callback) => {
-			return callback("");
+			return callback({ error: null, category: testCategory});
 		});
 		
-		categoryService.saveCategory({ description: "my category" }, (res) => {
-			result = res;
-			done();
-		});
+        categoryService.saveCategory(testCategory, (res) => {
+                result = res;
+                done();
+        });
 	});
 	
 	it("should call the save category to db function", () => {
-		 expect(categoryRepository.saveCategory).toHaveBeenCalled();
+        expect(categoryRepository.saveCategory).toHaveBeenCalled();
 	});
+    
+    it("should have saved the information", () => {
+        expect(result.category).toEqual(testCategory);
+    });
 });

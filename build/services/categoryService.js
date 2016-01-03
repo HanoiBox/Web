@@ -38,7 +38,7 @@ var categoryService = (function () {
 		findAllCategoryPromise.then(function (categories) {
 			categories.forEach(function (category) {
 				if (category.description === categoryData.description) {
-					callback({ status: 400, message: "Duplicate description" });
+					return callback({ status: 400, message: "Duplicate description" });
 				}
 			});
 

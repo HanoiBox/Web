@@ -25,15 +25,7 @@ var mystuff = angular.module('categoriesControllerModule', [
    
    $scope.delete = (id) => {
      DeleteCategoryFactory.execute(id, (result) => {
-       if (result.success) {
-        this.categories = this.categories.filter((cat) => {
-          if (cat._id !== id) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-       } else {
+       if (!result.success) {
          console.error(result);
        }
      });
