@@ -34,7 +34,7 @@
         <th>Parent Category</th>
         </thead>
         <tbody>
-          <tr ng-repeat="category in ctrl.categories">
+          <tr ng-repeat="category in ctrl.categories | orderBy: '_id'">
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category._id }}"/></td>
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.vietDescription }}"/></td>
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.level }}"/></td>

@@ -4,32 +4,32 @@ import 'angular-mocks';
 import categoriesControllerModule from './categoriesController';
 
 describe('CategoriesController', function() {
-  var scope, $httpBackend, $controller, createController, allCategoriesMock;
-  
-  beforeEach(angular.mock.module(categoriesControllerModule.name));
-  
-  beforeEach(function() {
-      allCategoriesMock = {
-          allCategories: [{
-              _id: 1,
-              description: 'test category'
-          }]
-      }
-  });
-  
-  beforeEach(inject(function($injector) {
-    scope = $injector.get('$rootScope').$new;
-    $httpBackend = $injector.get('$httpBackend');
-    $controller = $injector.get('$controller');
+    var scope, $httpBackend, $controller, createController, allCategoriesMock;
+
+    beforeEach(angular.mock.module(categoriesControllerModule.name));
+
+    beforeEach(function() {
+        allCategoriesMock = {
+            allCategories: [{
+                _id: 1,
+                description: 'test category'
+            }]
+        }
+    });
+
+    beforeEach(inject(function($injector) {
+        scope = $injector.get('$rootScope').$new;
+        $httpBackend = $injector.get('$httpBackend');
+        $controller = $injector.get('$controller');
+        
+        createController = function() {
+            return $controller('CategoriesController', {
+                $scope: scope,
+                allCategories : allCategoriesMock
+            });  
+        }
     
-    createController = function() {
-      return $controller('CategoriesController', {
-        $scope: scope,
-        allCategories : allCategoriesMock
-      });  
-    }
-    
-  }));
+}));
   
 //   describe('fetching all categories', function() {
 //     beforeEach(function() {

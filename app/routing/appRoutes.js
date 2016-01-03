@@ -2,21 +2,21 @@
 
 module.exports = function (router, devEnvironment) {
 
-	var home = function home(res) {
-		var data = { title: 'Hanoi Box' };
+	let home = (res) => {
+		let data = { title: 'Hanoi Box' };
 		res.render('public/home', data);
 	};
 
-	router.get('/', function (req, res) {
+	router.get('/', (req, res) => {
 		home(res);
 	});
 
-	router.get('/home', function (req, res) {
+	router.get('/home', (req, res) => {
 		home(res);
 	});
 
-	router.get('/sysadmin/', function (req, res) {
-		var data = { title: 'Hanoi Box Admin', dev: devEnvironment };
+	router.get('/sysadmin/', (req, res) => {
+		let data = { title: 'Hanoi Box Admin', dev: devEnvironment };
 		res.render('sysadmin/adminhome', data);
 	});
 

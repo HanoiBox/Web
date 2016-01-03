@@ -12,7 +12,7 @@ module.exports = function (router) {
 		});
 	});
 
-	function getIdInRequest(req, res) {
+	var getIdInRequest = function getIdInRequest(req, res) {
 		req.assert('categoryId', 'Id param must be an integer').isInt();
 
 		var errors = req.validationErrors();
@@ -20,7 +20,7 @@ module.exports = function (router) {
 
 		// sanitize input
 		return req.sanitize('categoryId').toInt();
-	}
+	};
 
 	router.route('/api/category/:categoryId').get(function (req, res) {
 		var id = getIdInRequest(req, res);
