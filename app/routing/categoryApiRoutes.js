@@ -1,13 +1,14 @@
 'use strict';
 let categoryService = require("../services/categoryService");
+let categoryQuery = require("../queries/category/getCategoryQuery");
 module.exports = (router) => {
 	router.route('/api/category/').post((req, res) => {
 		categoryService.saveCategory(req.body, (result) => {
-			res.json(result);
+			res.status(result.status).json(result);
 		});
 	}).get((req, res, next) => {
 		categoryService.findCategories((result) => {
-			res.json(result);
+			res.status(result.status).json(result);
 		});
 	});
 
@@ -15,7 +16,9 @@ module.exports = (router) => {
 		req.assert('categoryId', 'Id param must be an integer').isInt();
 
 		let errors = req.validationErrors();
-		if (errors) res.json({ status: 500, message: errors });
+		if (errors) {
+            res.status(500).json({ status: 500, message: errors });
+        }
 
 		// sanitize input
 		return req.sanitize('categoryId').toInt();
@@ -23,18 +26,18 @@ module.exports = (router) => {
 
 	router.route('/api/category/:categoryId').get( (req, res) => {
 		let id = getIdInRequest(req, res);
-		categoryService.getCategory(id, (result) => {
-			res.json(result);
+		categoryQuery.getCategory(id, (result) => {
+			res.status(result.status).json(result);
 		});
 	}).put( (req, res) => {
 		let id = getIdInRequest(req, res);
 		categoryService.updateCategory(id, req.body, (result) => {
-			res.json(result);
+			res.status(result.status).json(result);
 		});
 	}).delete( (req, res) => {
 		let id = getIdInRequest(req, res);
 		categoryService.deleteCategory(id, (result) => {
-			res.json(result);
+			res.status(result.status).json(result);
 		});
 	});
 

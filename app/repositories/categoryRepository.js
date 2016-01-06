@@ -1,15 +1,19 @@
 'use strict';
 
 var Category = require("../models/advert").category;
+var httpStatus = require("../httpStatus");
 
 var categoryRepository = (function () {
-
+    
 	var saveCategory = function saveCategory(categoryData, callback) {
 		try {
 			var newCategory = new Category();
 			newCategory.description = categoryData.description;
 			newCategory.vietDescription = categoryData.vietDescription;
 			newCategory.level = categoryData.level;
+            if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
+                newCategory.parentCategoryId = categoryData.parentCategoryId; 
+            }
 			newCategory.save();
 			return callback("");
 		} catch (error) {
@@ -21,12 +25,12 @@ var categoryRepository = (function () {
 		Category.findById(id, function (err, category) {
 			if (err !== null) {
 				console.error("Mongo error: " + err);
-				return callback({ status: 400, message: "Mongo error: " + err });
+				return callback({ status: httpStatus.BAD_REQUEST, message: "Mongo error: " + err });
 			}
 			if (category == null || category._id !== id) {
-				return callback({ status: 404, message: "Unable to find category: " + id });
+				return callback({ status: httpStatus.NOT_FOUND, message: "Unable to find category: " + id });
 			}
-			return callback({ category: category });
+            return callback({ status: httpStatus.OK, category: category });
 		});
 	};
 

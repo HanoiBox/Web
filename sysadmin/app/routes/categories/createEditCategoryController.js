@@ -8,9 +8,10 @@ export default angular.module('createEditCategoryControllerModule', [
   'ngRoute',
   categoryCommandModule.name,
   categoryQueryModule.name
-]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams) {
+]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
     this.id = null;
     $scope.errors = false;
+    $scope.data = { categories: allCategories };
     
     if ($routeParams.id !== undefined)
     {
@@ -22,7 +23,8 @@ export default angular.module('createEditCategoryControllerModule', [
     {
         GetCategoriesFactory.byId(this.id).then((response) => {
             if (response.status === 200) {
-                $scope.category = response.data.category;   
+                let category = response.data.category;
+                $scope.category = category;
             } else {
                 // failure msg
             }

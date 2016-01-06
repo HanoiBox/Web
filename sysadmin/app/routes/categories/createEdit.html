@@ -41,9 +41,13 @@
 						<label>Parent Category: </label>
 					</div>
 					<div class="col-sm-2">
-						<select ng-model="category.parentDescription">
-                            <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                        <span ng-bind="category.parentCategoryId"></span>
+						<select ng-model="category.parentCategoryId">
+                            <option ng-selected="category.parentCategoryId === option._id" ng-repeat="option in data.categories" value="{{option._id}}" title="{{option.description}}">{{option.vietDescription}}</option>
                         </select>
+                        <!--<select name="parentCategoryId" id="parentCategoryId"
+                            ng-options="category.vietDescription for category in data.availableCategories track by category._id"
+                            ng-model="category.parentCategoryId"></select>-->
 					</div>
 				</div>
 				<button type="submit" ng-click="save(category)" class="btn btn-success">Save</button>

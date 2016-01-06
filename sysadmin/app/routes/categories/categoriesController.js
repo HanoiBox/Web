@@ -8,7 +8,7 @@ var mystuff = angular.module('categoriesControllerModule', [
   'ngRoute',
   categoryQueryModule.name,
   deleteCategoryCommandModule.name
-]).controller('CategoriesController', (allCategories, $location, $scope, DeleteCategoryFactory) => {
+]).controller('CategoriesController', function(allCategories, $location, $scope, DeleteCategoryFactory) {
     this.allCategories = allCategories;
     this.categories = allCategories;
 

@@ -37,7 +37,7 @@ describe("When there is no category description method in request", () => {
 	});
 	
 	it("should give an error message in the result", () => { 
-		expect(result.message).toBe("No English category description was given");
+		expect(result.message).toBe("No Vietnamese category description was given");
 		expect(result.status).toBe(400);
 	});
 });
@@ -121,5 +121,45 @@ describe("When everything is OK", () => {
     
     it("should have saved the information", () => {
         expect(result.category).toEqual(testCategory);
+    });
+});
+
+describe("When there is a parent category", () => {
+	var result,
+        testCategory = {
+            description: "my category", 
+            vietDescription: "xin chao",
+            level: 1,
+            parentCategoryId: "11"
+        },
+        parentCategory = {
+            _id : 11,
+            description: "parent category", 
+            vietDescription: "fddfx",
+            level: 0
+        },
+        parentCategoryId = 11;
+    
+    beforeEach((done) => {
+		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+			return callback({ categories: [ parentCategory ] });
+		});
+		
+		spyOn(categoryRepository, "saveCategory").and.callFake((categoryData, callback) => {
+			return callback({ error: null, category: testCategory});
+		});
+		
+        categoryService.saveCategory(testCategory, (res) => {
+                result = res;
+                done();
+        });
+	});
+	
+	it("should call the save category to db function", () => {
+        expect(categoryRepository.saveCategory).toHaveBeenCalled();
+	});
+    
+    it("should have saved the information", () => {
+        expect(result.category.parentCategoryId).toEqual(parentCategoryId);
     });
 });

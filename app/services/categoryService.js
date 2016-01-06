@@ -1,5 +1,4 @@
 "use strict";
-
 var categoryRepository = require("../repositories/categoryRepository");
 
 var categoryService = (function () {
@@ -8,10 +7,10 @@ var categoryService = (function () {
 			return "No category object could be constructed";
 		}
 		if (categoryData.description === undefined || categoryData.description === "") {
-			return "No English category description was given";
+			return "No Vietnamese category description was given";
 		}
 		if (categoryData.vietDescription === undefined || categoryData.vietDescription === "") {
-			return "No Vietnamese category description was given";
+			return "No English category description was given";
 		}
 		if (categoryData.level === undefined || categoryData.level === null) {
 			return "No navigation level was given";
@@ -28,25 +27,41 @@ var categoryService = (function () {
 		var findAllCategoryPromise = new Promise(function (resolve, reject) {
 			categoryRepository.findCategories(function (result) {
 				if (result.error !== undefined && result.error !== "") {
-					reject({ status: result.status, message: "Handler rejected because : " + result.error });
+					reject(`Handler rejected because : ${result.error}`);
 				} else {
 					resolve(result.categories);
 				}
 			});
 		});
-
+        
 		findAllCategoryPromise.then(function (categories) {
+            let parentCategoryId = null,
+                categoryExists = false;
+                
+            console.log("categoryData: ", categoryData);
+            if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
+                parentCategoryId = parseInt(categoryData.parentCategoryId, 10);
+            }
+            
 			categories.forEach(function (category) {
-				if (category.description === categoryData.description) {
+                if (parentCategoryId !== NaN && category._id === parentCategoryId) {
+                    categoryExists = true;
+                    categoryData.parentCategoryId = parentCategoryId;
+                }
+                if (category.description === categoryData.description) {
 					return callback({ status: 400, message: "Duplicate description" });
 				}
 			});
-
+            
+            if (parentCategoryId !== null && !categoryExists) {
+                return callback({ status: 500, message: "The parent category does not exist" });
+            }
+            
 			saveCategoryToDb(categoryData, function (result) {
 				return callback(result);
 			});
-		}).catch(function (reason) {
-			return callback(reason);
+		}).catch(function (error) {
+			return callback({ status: 404, message: error });
 		});
 	};
 
@@ -56,16 +71,6 @@ var categoryService = (function () {
 				return callback({ status: 500, message: result.error });
 			} else {
 				return callback({ status: 200, message: "OK", category: result.category });
-			}
-		});
-	};
-
-	var getcategory = function getcategory(id, callback) {
-		categoryRepository.getCategory(id, (result) => {
-			if (result.message !== undefined && result.message !== "") {
-				return callback(result);
-			} else {
-				return callback({ status: 200, message: result.message, category: result.category });
 			}
 		});
 	};
@@ -114,7 +119,6 @@ var categoryService = (function () {
 			});
 		}).catch(function (reason) {
 			var errorMsg = 'getcategoryPromise handle rejected promise (' + reason + ') here.';
-			console.error(errorMsg);
 			return callback({ status: 404, message: errorMsg });
 		});
 	};
@@ -122,7 +126,6 @@ var categoryService = (function () {
 	return {
 		saveCategory: saveCategory,
 		findCategories: findCategories,
-		getCategory: getcategory,
 		deleteCategory: deleteCategory,
 		updateCategory: updatecategory
 	};

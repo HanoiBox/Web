@@ -22,12 +22,12 @@ export default angular.module('categoryCommandModule', [
   
   this.edit = (category, callback) => {
     let putUrl = url + category._id;
-    $http.put(putUrl, category, $templateCache).then(() => {
+    $http.put(putUrl, category, $templateCache).then((response) => {
         removeCategoryFromCache(category._id);
         addCategoryToCache(category);
         callback({ success : true, category });
     }, (response) => {
-        callback({ success: false, response });
+        callback({ success: false, error: response.data.message });
     }); 
   }
   

@@ -77,6 +77,25 @@ describe('save new category', function() {
     });
 });
 
+describe('when edit Existing Category with no level', function() {
+    beforeEach(inject(($httpBackend, $templateCache, SaveCategoriesFactory) => {
+        saveCategoriesFactory = SaveCategoriesFactory;
+        httpBackend = $httpBackend;
+        templateCache = $templateCache;
+        // pre populate cache with test category
+        testCategory._id = 1;
+        cache = [ testCategory ];
+    }));
+    
+    it("should not return a true success flag", function () {
+        httpBackend.whenPUT('/api/category/1').respond(400, { status: 400 });
+        saveCategoriesFactory.saveCategory(testCategory, (result) => {
+            expect(result.success).toEqual(false);
+        });
+        httpBackend.flush();
+    });
+});
+
 describe('editExistingCategory', function() {
     beforeEach(inject(($httpBackend, $templateCache, SaveCategoriesFactory) => {
         saveCategoriesFactory = SaveCategoriesFactory;
