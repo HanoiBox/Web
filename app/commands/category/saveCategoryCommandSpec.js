@@ -1,5 +1,6 @@
-var mockRequire = require("../../node_modules/mock-require/index.js");
-mockRequire('../../app/repositories/categoryRepository', {
+var mockRequire = require("../../../node_modules/mock-require/index.js");
+mockRequire.stopAll();
+mockRequire('../../repositories/categoryRepository', {
 	findCategories: function(callback) {
 		console.log('categoryRepository.find called');
 		return callback(null);
@@ -9,39 +10,24 @@ mockRequire('../../app/repositories/categoryRepository', {
 		return callback(null);
 	},
 });
-var categoryRepository = require("../../app/repositories/categoryRepository");
-var categoryService = require("../../app/services/categoryService.js");
-
-describe("When there is no category data sent at all", () => {
-	var result = null;
-	beforeEach((done) => {
-		categoryService.saveCategory(null, (res) => {
-			result = res;
-			done();
-		});
-	});
-	
-	it("should give an error message in the result", () => { 
-		expect(result.message).toBe("No category object could be constructed");
-		expect(result.status).toBe(400);
-	});
+mockRequire('./validateCategory', {
+    validate: (categoryData) => {
+        return null;
+    }
 });
-
-describe("When there is no category description method in request", () => {
-	var result = null;
-	beforeEach((done) => {
-		categoryService.saveCategory({ description: undefined }, (res) => {
-			result = res;
-			done();
-		});
-	});
-	
-	it("should give an error message in the result", () => { 
-		expect(result.message).toBe("No Vietnamese category description was given");
-		expect(result.status).toBe(400);
-	});
+mockRequire('../../httpStatus', {
+	   OK: 200,
+       CREATED: 201,
+       NOT_FOUND: 404
 });
-
+mockRequire('./dataCleaner', {
+    cleanseCategory: (data) => {
+	   return data;
+    }
+});
+var categoryValidation = require("./validateCategory");
+var categoryCommand = require("./saveCategoryCommand");
+var categoryRepository = require("../../repositories/categoryRepository");
 describe("When the find Categories method returns an error", () => {
 	var result = null;
 	beforeEach((done) => {
@@ -49,7 +35,7 @@ describe("When the find Categories method returns an error", () => {
 			return callback({ status: 404, error: "no categories found" });
 		});
 		
-		categoryService.saveCategory({ 
+		categoryCommand.saveCategory({ 
             description: "my category", 
             vietDescription: "xin chao",
             level: 0 }, (res) => {
@@ -77,7 +63,7 @@ describe("When the find Categories method returns a duplicate category", () => {
             });
 		});
 		
-		categoryService.saveCategory({ 
+		categoryCommand.saveCategory({ 
             description: "my category", 
             vietDescription: "xin chao",
             level: 0 }, (res) => {
@@ -106,10 +92,10 @@ describe("When everything is OK", () => {
 		});
 		
 		spyOn(categoryRepository, "saveCategory").and.callFake((categoryData, callback) => {
-			return callback({ error: null, category: testCategory});
+			return callback({ status: 201, category: testCategory});
 		});
 		
-        categoryService.saveCategory(testCategory, (res) => {
+        categoryCommand.saveCategory(testCategory, (res) => {
                 result = res;
                 done();
         });
@@ -121,6 +107,7 @@ describe("When everything is OK", () => {
     
     it("should have saved the information", () => {
         expect(result.category).toEqual(testCategory);
+        expect(result.status).toEqual(201);
     });
 });
 
@@ -146,10 +133,10 @@ describe("When there is a parent category", () => {
 		});
 		
 		spyOn(categoryRepository, "saveCategory").and.callFake((categoryData, callback) => {
-			return callback({ error: null, category: testCategory});
+			return callback({ status: 201, category: testCategory});
 		});
 		
-        categoryService.saveCategory(testCategory, (res) => {
+        categoryCommand.saveCategory(testCategory, (res) => {
                 result = res;
                 done();
         });
@@ -161,5 +148,6 @@ describe("When there is a parent category", () => {
     
     it("should have saved the information", () => {
         expect(result.category.parentCategoryId).toEqual(parentCategoryId);
+        expect(result.status).toEqual(201);
     });
 });

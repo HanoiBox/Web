@@ -1,9 +1,12 @@
 'use strict';
 let categoryService = require("../services/categoryService");
 let categoryQuery = require("../queries/category/getCategoryQuery");
+let categorySaveCommand = require("../commands/category/saveCategoryCommand");
+let updateCategoryCommand = require("../commands/category/updateCategoryCommand");
+
 module.exports = (router) => {
 	router.route('/api/category/').post((req, res) => {
-		categoryService.saveCategory(req.body, (result) => {
+		categorySaveCommand.saveCategory(req.body, (result) => {
 			res.status(result.status).json(result);
 		});
 	}).get((req, res, next) => {
@@ -31,7 +34,7 @@ module.exports = (router) => {
 		});
 	}).put( (req, res) => {
 		let id = getIdInRequest(req, res);
-		categoryService.updateCategory(id, req.body, (result) => {
+		updateCategoryCommand.updateCategory(id, req.body, (result) => {
 			res.status(result.status).json(result);
 		});
 	}).delete( (req, res) => {

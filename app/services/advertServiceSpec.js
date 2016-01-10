@@ -1,11 +1,9 @@
 var mockRequire = require("../../node_modules/mock-require/index.js");
 mockRequire('../../app/repositories/categoryRepository', { findCategories: function(callback) {
-	console.log('categoryRepository.find called');
 	return callback(null);
 }});
 
 mockRequire('../../app/repositories/advertRepository', { saveAdvert: function(callback) {
-	console.log('advertRepository.saveAdvert called');
 	return callback(null);
 }});
 var advertService = require("../../app/services/advertService.js");

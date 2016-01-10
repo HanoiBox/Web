@@ -5,7 +5,7 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var appDirectory = "./build";
 var app = express();
-var dev = process.env.Node_env === undefined;
+var dev = process.env.Node_env === undefined || process.env.Node_env === null;
 if (dev)
 {
 	appDirectory = "./app";

@@ -1,7 +1,12 @@
-var httpStatus = require("../../httpStatus");
+'use strict';
 var mockRequire = require("../../../node_modules/mock-require/index.js");
+mockRequire.stopAll();
+mockRequire('../../httpStatus', {
+	   OK : 200
+});
 mockRequire('../../repositories/categoryRepository', {
 	getCategory: function(id, callback) {
+        let httpStatus = { OK : 200 };
         if (id === 1) {
             return callback({ status: httpStatus.OK, category: { _id: 1 }});
         }
