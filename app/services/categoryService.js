@@ -5,11 +5,7 @@ var categoryService = (function () {
 
 	var findCategories = function findCategories(callback) {
 		categoryRepository.findCategories(function (result) {
-			if (result.message !== undefined && result.error !== "") {
-				return callback(result);
-			} else {
-				return callback({ status: 200, message: "OK", categories: result.categories });
-			}
+		  return callback(result);
 		});
 	};
 

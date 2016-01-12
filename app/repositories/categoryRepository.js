@@ -25,8 +25,8 @@ var categoryRepository = (function () {
 		}
 	};
 
-	var getCategory = function getCategory(id, callback) {
-		Category.findById(id, function (err, category) {
+	var getCategory = (id, callback) => {
+		Category.findById(id, (err, category) => {
             if (err) {
 				console.error("Mongo error: " + err);
 				return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: "Mongo error: " + err });
@@ -38,11 +38,12 @@ var categoryRepository = (function () {
 		});
 	};
 
-	var findCategories = function findCategories(callback) {
-		Category.find(function (err, categories) {
-			if (err) return callback({ status: 404, error: err });
-
-			return callback({ categories: categories });
+	var findCategories = (callback) => {
+		Category.find((error, categories) => {
+			if (error) {
+                callback({ status: httpStatus.NOT_FOUND, message: error });
+            }
+			return callback({ status: httpStatus.OK, categories: categories });
 		});
 	};
 

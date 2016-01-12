@@ -5,24 +5,21 @@ mockRequire('../../httpStatus', {
 	   OK : 200
 });
 mockRequire('../../repositories/categoryRepository', {
-	getCategory: function(id, callback) {
-        let httpStatus = { OK : 200 };
-        if (id === 1) {
-            return callback({ status: httpStatus.OK, category: { _id: 1 }});
-        }
-        if (id === 2) {
-            return callback({ status: httpStatus.OK, category: { _id: 2, description: 'child category', parentCategoryId: 3 }});
-        }
-        if (id === 3) {
-            return callback({ status: httpStatus.OK, category: { _id: 3, description: 'parent category' }});
-        }
-	},
+	getCategories: function() {},
+    findCategories: function() {},
+    getCategory: function() {}
 });
-var categoryQuery = require("./getCategoryQuery.js");
+let categoryQuery = require("./getCategoryQuery.js");
+let	result = null;
+let categoryRepository = require("../../repositories/categoryRepository");
+let httpStatus = { OK : 200 };
 
 describe("When there is category data without parent id", () => {
-	var result = null;
 	beforeEach((done) => {
+        spyOn(categoryRepository, "getCategory").and.callFake((id, callback) => {
+			return callback({ status: httpStatus.OK, category: { _id: 1 }});
+		});
+        
 		categoryQuery.getCategory(1, (res) => {
 			result = res;
 			done();
@@ -36,8 +33,16 @@ describe("When there is category data without parent id", () => {
 });
 
 describe("When there is category data with parent id", () => {
-	var result = null;
 	beforeEach((done) => {
+        let returnValues = {
+            2 : { status: httpStatus.OK, category: { _id: 2, description: 'child category', parentCategoryId: 3 }}, 
+            3: { status: httpStatus.OK, category: { _id: 3, description: 'parent category' }}
+        };
+        
+        spyOn(categoryRepository, "getCategory").and.callFake((id, callback) => {
+			return callback(returnValues[id]);
+		});
+        
 		categoryQuery.getCategory(2, (res) => {
 			result = res;
 			done();

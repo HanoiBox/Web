@@ -14,6 +14,12 @@ module.exports = (router) => {
 			res.status(result.status).json(result);
 		});
 	});
+    
+    router.route('/api/backend/category/').get((req, res, next) => {
+        categoryQuery.getBackendCategories((result) => {
+			res.status(result.status).json(result);
+		});
+    });
 
 	let getIdInRequest = (req, res) => {
 		req.assert('categoryId', 'Id param must be an integer').isInt();
