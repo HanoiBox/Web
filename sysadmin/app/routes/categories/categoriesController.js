@@ -36,15 +36,15 @@ var mystuff = angular.module('categoriesControllerModule', [
 
     $scope.filter = (level) => {
         if (level == null) {
-        this.categories = this.allCategories;
+            this.categories = this.allCategories;
         } else {
-        this.categories = this.categories.filter((cat) => {
-            if (cat.level === level) {
-            return true;
-            } else {
-            return false;
-            }
-        });
+            this.categories = this.categories.filter((cat) => {
+                if (cat.level === level) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
         }
     }
 

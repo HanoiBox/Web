@@ -37,10 +37,9 @@
           <tr ng-repeat="category in ctrl.categories | orderBy: '_id'">
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category._id }}"/></td>
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.vietDescription }}"/></td>
-          <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.level }}"/></td>
+          <td><input type="button" class="btn btn-default" value="{{ category.level }}"/></td>
           <td><input type="button" class="btn btn-link" ng-click="edit(category._id)" value="{{ category.description }}"/></td>
-          <!--<td><input type="button" class="btn btn-link" ng-click="edit(category.parentCategory._id)" value="{{ category.parentCategory.vietDescription }}"/></td>-->
-          <td><span ng-bind="category.parentCategoryId"></span></td>
+          <td><input type="button" title="{{ category.parentCategory.description }}" class="btn btn-default" value="{{ category.parentCategory.vietDescription }}"/></td>
           <td><input type="button" class="btn btn-link" ng-click="delete(category._id)" value="Delete"/></td>
           </tr>
         </tbody>

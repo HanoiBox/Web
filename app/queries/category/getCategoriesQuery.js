@@ -1,44 +1,45 @@
 'use strict';
 let categoryRepository = require("../../repositories/categoryRepository");
-let categoryQuery = require("./getCategoryQuery");
 
 var categoriesQuery = function () {
     
-    let categoriesWithParentPopulated = [];
     let parentCategories = [];
     
-    let populateParentCategories = (category) => {
-        if (category.parentCategoryId !== undefined && category.parentCategoryId !== null)
+    let getParentCategory = (childCategoryId, parentCategoryId, allCategories, callback) => {
+        if (parentCategoryId !== undefined && parentCategoryId !== null)
         {
-            let parentCategory = parentCategories.find(pCat => pCat._id === category.parentCategoryId);
+            let parentCategory = parentCategories.find(pCat => pCat._id === parentCategoryId);
             if (parentCategory !== undefined) {
-                category.parentCategory = parentCategory;
-                categoriesWithParentPopulated.push(category);
+                return callback(parentCategory);
             } else {
-                categoryQuery.getCategory(category.parentCategoryId, (result) => {
-                    category.parentCategory = result.category;
-                    parentCategories.push(result.category);
-                    categoriesWithParentPopulated.push(category);
-                });
-            }
+                parentCategory = allCategories.find(cat => cat._id === parentCategoryId);
+                return callback(parentCategory);
+            } 
+        } else {
+            return callback(null);
         }
     }
     
     return { 
-        getBackendCategories: (callback) => {
+        getCategories: (callback) => {
+            parentCategories = [];
+            
             categoryRepository.findCategories((result) => {
+                let categoriesWithParentPopulated = [];
                 
-                if (result.status === 200) {
-                    result.categories.forEach((category) => {
-                        populateParentCategories(category);
+                result.categories.forEach((category) => {
+                    let currentCategory = category;
+                    getParentCategory(category._id, category.parentCategoryId, result.categories, (parentResult) => {
+                        if (parentResult !== null) {
+                            currentCategory.parentCategory = parentResult;
+                            categoriesWithParentPopulated.push(currentCategory);
+                        } else {
+                            categoriesWithParentPopulated.push(currentCategory);
+                        }
                     });
-                    result.categories = categoriesWithParentPopulated;
-                    categoriesWithParentPopulated = [];
-                    parentCategories = [];
-                    return callback(result);
-                } else {
-                    return callback(result);
-                }
+                });
+                
+                return callback({ status: result.status, categories: categoriesWithParentPopulated });
             });
         }
     }

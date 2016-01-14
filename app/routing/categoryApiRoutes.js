@@ -1,6 +1,7 @@
 'use strict';
 let categoryService = require("../services/categoryService");
 let categoryQuery = require("../queries/category/getCategoryQuery");
+let categoriesQuery = require("../queries/category/getCategoriesQuery");
 let categorySaveCommand = require("../commands/category/saveCategoryCommand");
 let updateCategoryCommand = require("../commands/category/updateCategoryCommand");
 
@@ -10,16 +11,10 @@ module.exports = (router) => {
 			res.status(result.status).json(result);
 		});
 	}).get((req, res, next) => {
-		categoryService.findCategories((result) => {
+		categoriesQuery.getCategories((result) => {
 			res.status(result.status).json(result);
 		});
 	});
-    
-    router.route('/api/backend/category/').get((req, res, next) => {
-        categoryQuery.getBackendCategories((result) => {
-			res.status(result.status).json(result);
-		});
-    });
 
 	let getIdInRequest = (req, res) => {
 		req.assert('categoryId', 'Id param must be an integer').isInt();

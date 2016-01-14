@@ -20,7 +20,21 @@ export default angular.module('categoryCommandModule', [
       categoriesCacheFactory.put(categoriesCacheName, categoriesWithoutItem);
   }
   
+  let populateParentCategory = (category) => {
+      let categories = categoriesCacheFactory.get(categoriesCacheName);
+      category.parentCategory = categories.filter(cat => cat._id == category.parentCategoryId)[0];
+      return category;
+  }
+  
   this.edit = (category, callback) => {
+    if (category.parentCategoryId === "null")
+    {
+        category.parentCategoryId = null;
+        category.parentCategory = null;
+    } else {
+        category = populateParentCategory(category);
+    }
+    console.log("Category to put is:", category);
     let putUrl = url + category._id;
     $http.put(putUrl, category, $templateCache).then((response) => {
         removeCategoryFromCache(category._id);

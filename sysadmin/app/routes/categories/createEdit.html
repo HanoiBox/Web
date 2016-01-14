@@ -9,6 +9,13 @@
 		<div class="col-md-10">
 			<h4>Category</h4>
 			
+            <div class="alert alert-info">
+                <div class="col-sm-3">
+                    <label>Include the parent categories from level:</label>
+                </div>
+                <input type="number" ng-model="levelFilter" ng-change="levelFilterUpdate(levelFilter)" />
+                <span>Level 0 is all categories</span>
+            </div>
 			<form novalidate class="form-horizontal">
 				<input type="hidden" ng-model="category._id" />
 				<div class="form-group">
@@ -41,13 +48,10 @@
 						<label>Parent Category: </label>
 					</div>
 					<div class="col-sm-2">
-                        <span ng-bind="category.parentCategoryId"></span>
 						<select ng-model="category.parentCategoryId">
+                            <option value=null>--Remove--</option>
                             <option ng-selected="category.parentCategoryId === option._id" ng-repeat="option in data.categories" value="{{option._id}}" title="{{option.description}}">{{option.vietDescription}}</option>
                         </select>
-                        <!--<select name="parentCategoryId" id="parentCategoryId"
-                            ng-options="category.vietDescription for category in data.availableCategories track by category._id"
-                            ng-model="category.parentCategoryId"></select>-->
 					</div>
 				</div>
 				<button type="submit" ng-click="save(category)" class="btn btn-success">Save</button>
