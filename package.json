@@ -4,7 +4,7 @@
   "version": "0.0.2",
   "scripts": {
     "start": "node --harmony server.js",
-    "startProd": "set NODE_ENV=production && node --harmony server.js",
+    "startProd": "set NODE_ENV=production && node server.js",
     "build": "babel -d build app",
     "test": "test.ps1"
   },

@@ -43,6 +43,7 @@ if (dev) {
 	app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 } else {
 	app.use('/sysadmin/dist', express.static(__dirname + '/sysadmin/dist'));
+    app.use('/public/dist', express.static(__dirname + '/public/dist'));
 }
 
 app.use('/config.js', express.static(__dirname + '/config.js'));
