@@ -1,6 +1,7 @@
 'use strict';
 
 var Category = require("../models/advert").category;
+var httpStatus = require("../httpStatus");
 
 var categoryRepository = (function () {
 
@@ -10,8 +11,15 @@ var categoryRepository = (function () {
 			newCategory.description = categoryData.description;
 			newCategory.vietDescription = categoryData.vietDescription;
 			newCategory.level = categoryData.level;
-			newCategory.save();
-			return callback("");
+			if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
+				newCategory.parentCategoryId = categoryData.parentCategoryId;
+			}
+			newCategory.save(function (error) {
+				if (error) {
+					return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
+				}
+				return callback({ status: httpStatus.CREATED, category: newCategory });
+			});
 		} catch (error) {
 			return callback("Unable to save " + error);
 		}
@@ -19,22 +27,23 @@ var categoryRepository = (function () {
 
 	var getCategory = function getCategory(id, callback) {
 		Category.findById(id, function (err, category) {
-			if (err !== null) {
+			if (err) {
 				console.error("Mongo error: " + err);
-				return callback({ status: 400, message: "Mongo error: " + err });
+				return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: "Mongo error: " + err });
 			}
-			if (category == null || category._id !== id) {
-				return callback({ status: 404, message: "Unable to find category: " + id });
+			if (category === null || category._id !== id) {
+				return callback({ status: httpStatus.NOT_FOUND, message: "Unable to find category: " + id });
 			}
-			return callback({ category: category });
+			return callback({ status: httpStatus.OK, category: category });
 		});
 	};
 
 	var findCategories = function findCategories(callback) {
-		Category.find(function (err, categories) {
-			if (err) return callback({ status: 404, error: err });
-
-			return callback({ categories: categories });
+		Category.find(function (error, categories) {
+			if (error) {
+				callback({ status: httpStatus.NOT_FOUND, message: error });
+			}
+			return callback({ status: httpStatus.OK, categories: categories });
 		});
 	};
 
@@ -46,10 +55,14 @@ var categoryRepository = (function () {
 
 			try {
 				var category = result.category;
-				category.remove();
-				return callback("");
+				category.remove(function (error) {
+					if (error) {
+						return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
+					}
+					return callback("");
+				});
 			} catch (error) {
-				return callback({ status: 500, message: error });
+				return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
 			}
 		});
 	};
@@ -61,10 +74,17 @@ var categoryRepository = (function () {
 			}
 			currentcategory.vietDescription = newcategoryData.vietDescription;
 			currentcategory.level = newcategoryData.level;
-			currentcategory.save();
-			return callback("");
+			if (newcategoryData.parentCategoryId !== undefined) {
+				currentcategory.parentCategoryId = newcategoryData.parentCategoryId;
+			}
+			currentcategory.save(function (error) {
+				if (error) {
+					return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
+				}
+				return callback({ status: httpStatus.OK, category: currentcategory });
+			});
 		} catch (error) {
-			return callback(error.toString());
+			return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
 		}
 	};
 

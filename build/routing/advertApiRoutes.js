@@ -19,15 +19,17 @@ module.exports = function (router) {
 		});
 	});
 
-	function getIdInRequest(req, res) {
+	var getIdInRequest = function getIdInRequest(req, res) {
 		req.assert('advertId', 'Id param must be an integer').isInt();
 
 		var errors = req.validationErrors();
-		if (errors) res.json({ status: 500, message: errors });
+		if (errors) {
+			res.json({ status: 500, message: errors });
+		}
 
 		// sanitize input
 		return req.sanitize('advertId').toInt();
-	}
+	};
 
 	router.route('/api/advert/:advertId').get(function (req, res) {
 		var id = getIdInRequest(req, res);

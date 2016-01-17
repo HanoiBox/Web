@@ -32,11 +32,21 @@ var mystuff = angular.module('appRoutesModule', [
   }).when('/categories/create', {
       template: createEditCategoryTemplate,
       controller: 'CreateEditCategoryController',
-      controllerAs: 'ctrl'
+      controllerAs: 'ctrl',
+      resolve: {
+         allCategories: (GetCategoriesFactory) => {
+           return GetCategoriesFactory.allCats();
+         }
+      }
   }).when('/categories/edit:id', {
       template: createEditCategoryTemplate,
       controller: 'CreateEditCategoryController',
-      controllerAs: 'ctrl'
+      controllerAs: 'ctrl',
+      resolve: {
+         allCategories: (GetCategoriesFactory) => {
+           return GetCategoriesFactory.allCats();
+         }
+      }
   }).otherwise({
       redirectTo: '/'
   });

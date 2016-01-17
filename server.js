@@ -5,7 +5,7 @@ var expressHbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var appDirectory = "./build";
 var app = express();
-var dev = process.env.Node_env === undefined;
+var dev = process.env.Node_env === undefined || process.env.Node_env === null;
 if (dev)
 {
 	appDirectory = "./app";
@@ -39,6 +39,7 @@ app.use('/', allRoutes);
 // static dirs
 if (dev) {
 	app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
+    app.use('/public', express.static(__dirname + '/public'));
 	app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
 } else {
 	app.use('/sysadmin/dist', express.static(__dirname + '/sysadmin/dist'));
@@ -46,6 +47,7 @@ if (dev) {
 
 app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
+app.use('/template', express.static(__dirname + '/public/template'));
 var favicon = require('serve-favicon');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 

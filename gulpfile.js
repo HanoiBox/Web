@@ -22,7 +22,7 @@ gulp.task('css-build', function() {
 
 gulp.task('fonts-build', function() {
     return gulp.src(['jspm_packages/npm/bootstrap-css-only@3.3.5/fonts/*'])
-                .pipe(gulp.dest('public/dist/fonts'))
+                .pipe(gulp.dest('public/dist/fonts'));
 });
 
 // gulp css-build
