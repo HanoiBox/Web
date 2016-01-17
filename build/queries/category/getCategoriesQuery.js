@@ -2,6 +2,7 @@
 
 function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
+require('array.prototype.find');
 var categoryRepository = require("../../repositories/categoryRepository");
 
 var categoriesQuery = (function () {
@@ -54,7 +55,7 @@ var categoriesQuery = (function () {
                         };
                     })();
 
-                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                    if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
                 } catch (error) {
                     console.error("populating parent categories went wrong: ", error);
                 }
