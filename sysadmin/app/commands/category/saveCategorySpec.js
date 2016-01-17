@@ -8,23 +8,29 @@ let saveCategoriesFactory,
         httpBackend,
         templateCache,
         testCategory,
-        categoriesCacheFactory,
-        cache = [];
+        categoriesCacheFactory;
+
+    var cache = [];
         
 beforeEach(() => {
     testCategory = {
         description: 'Bikes',
-        parentCategory: [1]
+        parentCategoryId: "1"
     };
     
     angular.mock.module(categoryCommandModule.name);
     angular.mock.module(categoriesCacheModule.name, ($provide) => {
+        
         categoriesCacheFactory = {
             put: function (name, categories) {
+                cache = [];
                 cache = categories;
             },
             get: function (name) {
                 return cache;
+            },
+            remove: function(name) {
+                cache = [];
             },
             info: function () {
                 return { id: 'categories', size: cache.length};
@@ -89,52 +95,50 @@ describe('when edit Existing Category with no level', function() {
     
     it("should not return a true success flag", function () {
         httpBackend.whenPUT('/api/category/1').respond(400, { status: 400 });
-        saveCategoriesFactory.saveCategory(testCategory, (result) => {
+        saveCategoriesFactory.saveCategory({ _id: 1, description: "my category" }, (result) => {
             expect(result.success).toEqual(false);
         });
         httpBackend.flush();
     });
 });
 
-describe('editExistingCategory', function() {
+describe('When Editing an existing category', function() {
     beforeEach(inject(($httpBackend, $templateCache, SaveCategoriesFactory) => {
         saveCategoriesFactory = SaveCategoriesFactory;
         httpBackend = $httpBackend;
         templateCache = $templateCache;
-        // pre populate cache with test category
-        testCategory._id = 1;
-        cache = [ testCategory ];
     }));
     
-    it("shouldAddUpdatedCategoryToCache", function () {
-        httpBackend.whenPUT('/api/category/1').respond({ status: 200 });
-        testCategory.description = "Bikes 2";
-        
-        saveCategoriesFactory.saveCategory(testCategory, (result) => {
+    it("Should send updated Category to web API successfully", function () {
+        // pre populate cache with test category
+        cache = [ { _id: 1, description: "Bikes", parentCategoryId: 2 } ];
+        httpBackend.whenPUT('/api/category/1').respond({ status: 200, category: { _id: 1, description: "Bikes 2", parentCategoryId: 1 } });
+        saveCategoriesFactory.saveCategory({ _id: "1", description: "Bikes 2", parentCategoryId: 1 }, (result) => {
+            expect(result.category._id).toEqual(1);
             expect(result.category.description).toEqual('Bikes 2');
-            expect(result.category.parentCategory).toEqual([1]);
+            expect(result.category.parentCategoryId).toEqual(1);
         });
         httpBackend.flush();
     });
     
-    it("shouldHaveUpdatedTheCache", () => {
+    it("Should add updated Category to cache", () => {
         expect(categoriesCacheFactory.info().size).toEqual(1);
-        expect(categoriesCacheFactory.get()).toContain(testCategory);
+        expect(categoriesCacheFactory.get("categoriesCache")).toContain({ _id: 1, description: 'Bikes 2', parentCategoryId: 1 });
     });
 });
 
-describe('When Category Is Null', function() {
+describe('When Category is null', function() {
     beforeEach(inject(($httpBackend, $templateCache, SaveCategoriesFactory) => {
         saveCategoriesFactory = SaveCategoriesFactory;
         httpBackend = $httpBackend;
         templateCache = $templateCache;
         // pre populate cache with test category
-        cache = [testCategory];
+        cache = [{ _id: 1, description: "Bikes", parentCategoryId: 2 }];
         testCategory = null;
     }));
     
     it('should not do anything', function () {
-        saveCategoriesFactory.saveCategory(testCategory, (result) => {
+        saveCategoriesFactory.saveCategory(null, (result) => {
             expect(result.success).toBe(false);
         });
     });
@@ -142,7 +146,7 @@ describe('When Category Is Null', function() {
     it('should not update the cache', () => { 
         saveCategoriesFactory.saveCategory(testCategory, (result) => {
             expect(categoriesCacheFactory.info().size).toEqual(1);
-            expect(categoriesCacheFactory.get()).toContain({ description: 'Bikes', parentCategory: [ 1 ] });
+            expect(categoriesCacheFactory.get("categoriesCache")).toContain({ _id: 1, description: 'Bikes', parentCategoryId: 2 });
         });
     });
 });

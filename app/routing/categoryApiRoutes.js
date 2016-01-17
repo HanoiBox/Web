@@ -11,6 +11,12 @@ module.exports = (router) => {
 			res.status(result.status).json(result);
 		});
 	}).get((req, res, next) => {
+		categoryService.findCategories((result) => {
+			res.status(result.status).json(result);
+		});
+	});
+    
+    router.route('/api/backend/category/').get((req, res) => {
 		categoriesQuery.getCategories((result) => {
 			res.status(result.status).json(result);
 		});

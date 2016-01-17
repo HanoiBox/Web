@@ -5,8 +5,8 @@ import 'angular-bootstrap';
 
 // import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
 // import createEditCategoryControllerModule from 'sysadmin/app/routes/categories/createEditCategoryController';
-import indexControllerModule from 'public/app/routes/index/indexController';
-import indexTemplate from 'public/app/routes/index/index.html!text';
+import homeControllerModule from 'public/app/routes/home/homeController';
+import homeTemplate from 'public/app/routes/home/home.html!text';
 // import categoriesTemplate from 'sysadmin/app/routes/categories/categories.html!text';
 // import createEditCategoryTemplate from 'sysadmin/app/routes/categories/createEdit.html!text';
 
@@ -15,12 +15,12 @@ export default angular.module('appRoutesModule', [
   'angular-loading-bar',
   'ui.bootstrap.dropdown',
   'ui.bootstrap.tabs',
-  indexControllerModule.name
+  homeControllerModule.name
 ]).config(function($routeProvider) {
   
   $routeProvider.when('/', {
-      template: indexTemplate,
-      controller: 'IndexController',
+      template: homeTemplate,
+      controller: 'HomeController',
       controllerAs: 'ctrl',
       resolve: {
          allCategories: (GetCategoriesFactory) => {
