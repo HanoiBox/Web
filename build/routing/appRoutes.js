@@ -3,7 +3,7 @@
 module.exports = function (router, devEnvironment) {
 
 	var home = function home(res) {
-		var data = { title: 'Hanoi Box' };
+		var data = { title: 'Hanoi Box', dev: devEnvironment };
 		res.render('public/home', data);
 	};
 
