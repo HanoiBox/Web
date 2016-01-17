@@ -4,9 +4,14 @@ var mongoose = require('mongoose');
 var autoIncrement = require('mongoose-auto-increment');
 
 module.exports = {
-	connect: function connect() {
-		// Mongo db setup
-		var connection = mongoose.connect('mongodb://hbsa:vc41u0j@ds048368.mongolab.com:48368/hanoibox'); //connection string
-		autoIncrement.initialize(connection);
+	connect: function connect(devEnvironment) {
+		var connection = "";
+        if (devEnvironment) {
+            connection = mongoose.connect("mongodb://hbsa:3cyWCfIr@ds054118.mongolab.com:54118/hanoiboxtest"); // test db
+            autoIncrement.initialize(connection); 
+        } else {
+            connection = mongoose.connect("mongodb://hbsa:vc41u0j@ds048368.mongolab.com:48368/hanoibox"); // live db
+            autoIncrement.initialize(connection); 
+        }
 	}
 };
