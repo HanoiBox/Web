@@ -1,4 +1,5 @@
 'use strict';
+require('array.prototype.find');
 let categoryRepository = require("../../repositories/categoryRepository");
 
 var categoriesQuery = function () {
