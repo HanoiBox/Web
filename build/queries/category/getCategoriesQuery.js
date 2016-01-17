@@ -1,5 +1,7 @@
 'use strict';
 
+function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
 var categoryRepository = require("../../repositories/categoryRepository");
 
 var categoriesQuery = (function () {
@@ -29,21 +31,33 @@ var categoriesQuery = (function () {
             parentCategories = [];
 
             categoryRepository.findCategories(function (result) {
-                var categoriesWithParentPopulated = [];
+                try {
+                    var _ret = (function () {
+                        var categoriesWithParentPopulated = [];
 
-                result.categories.forEach(function (category) {
-                    var currentCategory = category;
-                    getParentCategory(category._id, category.parentCategoryId, result.categories, function (parentResult) {
-                        if (parentResult !== null) {
-                            currentCategory.parentCategory = parentResult;
-                            categoriesWithParentPopulated.push(currentCategory);
-                        } else {
-                            categoriesWithParentPopulated.push(currentCategory);
+                        if (result.status === 200) {
+                            result.categories.forEach(function (category) {
+                                var currentCategory = category;
+                                getParentCategory(category._id, category.parentCategoryId, result.categories, function (parentResult) {
+                                    if (parentResult !== null) {
+                                        currentCategory.parentCategory = parentResult;
+                                        categoriesWithParentPopulated.push(currentCategory);
+                                    } else {
+                                        categoriesWithParentPopulated.push(currentCategory);
+                                    }
+                                });
+                            });
                         }
-                    });
-                });
 
-                return callback({ status: result.status, categories: categoriesWithParentPopulated });
+                        return {
+                            v: callback({ status: result.status, categories: categoriesWithParentPopulated })
+                        };
+                    })();
+
+                    if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+                } catch (error) {
+                    console.error("populating parent categories went wrong: ", error);
+                }
             });
         }
     };

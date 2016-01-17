@@ -25,21 +25,28 @@ var categoriesQuery = function () {
             parentCategories = [];
             
             categoryRepository.findCategories((result) => {
-                let categoriesWithParentPopulated = [];
+                try {
+                    let categoriesWithParentPopulated = [];
                 
-                result.categories.forEach((category) => {
-                    let currentCategory = category;
-                    getParentCategory(category._id, category.parentCategoryId, result.categories, (parentResult) => {
-                        if (parentResult !== null) {
-                            currentCategory.parentCategory = parentResult;
-                            categoriesWithParentPopulated.push(currentCategory);
-                        } else {
-                            categoriesWithParentPopulated.push(currentCategory);
-                        }
-                    });
-                });
-                
-                return callback({ status: result.status, categories: categoriesWithParentPopulated });
+                    if (result.status === 200) {
+                        result.categories.forEach((category) => {
+                            let currentCategory = category;
+                            getParentCategory(category._id, category.parentCategoryId, result.categories, (parentResult) => {
+                                if (parentResult !== null) {
+                                    currentCategory.parentCategory = parentResult;
+                                    categoriesWithParentPopulated.push(currentCategory);
+                                } else {
+                                    categoriesWithParentPopulated.push(currentCategory);
+                                }
+                            });
+                        });
+                    }
+                    
+                    return callback({ status: result.status, categories: categoriesWithParentPopulated });
+                }
+                catch(error) {
+                    console.error("populating parent categories went wrong: ", error);
+                }
             });
         }
     }
