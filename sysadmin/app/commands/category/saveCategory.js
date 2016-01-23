@@ -6,24 +6,16 @@ export default angular.module('categoryCommandModule', [
 ]).factory('SaveCategoriesFactory', function($http, $templateCache, categoriesCacheFactory) {
     let url = "/api/category/";
     
-    let categoriesCacheName = categoriesCacheFactory.info().id;
-    
     let addCategoryToCache = (category) => {
-        let categories = categoriesCacheFactory.get(categoriesCacheName);
+        let categories = categoriesCacheFactory.get();
         categories.push(category);
-        categoriesCacheFactory.put(categoriesCacheName, categories);
+        categoriesCacheFactory.put(categories);
     }
     
     let removeCategoryFromCache = (id) => {
-        let categories = categoriesCacheFactory.get(categoriesCacheName);
-        categoriesCacheFactory.remove(categoriesCacheName);
-        categoriesCacheFactory.put(categoriesCacheName, categories.filter(cat => cat._id !== id));
-    }
-    
-    let populateParentCategory = (category) => {
-        let categories = categoriesCacheFactory.get(categoriesCacheName);
-        category.parentCategory = categories.filter(cat => cat._id === category.parentCategoryId)[0];
-        return category;
+        let categories = categoriesCacheFactory.get();
+        categoriesCacheFactory.removeAll();
+        categoriesCacheFactory.put(categories.filter(cat => cat._id !== id));
     }
   
     let stringToNumber = (value) => {
@@ -35,21 +27,21 @@ export default angular.module('categoryCommandModule', [
     } 
   
     this.edit = (category, callback) => {
-        if (category.parentCategoryId === "null")
+        if (category.parentCategoryId === "undefined")
         {
-            category.parentCategoryId = null;
-            category.parentCategory = null;
+            category.parentCategoryId = undefined;
+            category.parentCategory = undefined;
             category._id = stringToNumber(category._id);
         } else {
-            category.parentCategoryId = stringToNumber(category.parentCategoryId)
+            category.parentCategoryId = stringToNumber(category.parentCategoryId);
             category._id = stringToNumber(category._id);
-            category = populateParentCategory(category);
         }
         let putUrl = url + category._id;
         $http.put(putUrl, category, $templateCache).then((response) => {
             removeCategoryFromCache(category._id);
-            addCategoryToCache(response.data.category);
-            callback({ success : true, category: response.data.category });
+            let savedCategory = response.data.category;
+            addCategoryToCache(savedCategory);
+            callback({ success : true, category: savedCategory });
         }, (response) => {
             callback({ success: false, error: response.data.message });
         }); 

@@ -18,6 +18,7 @@ System.config({
     "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
     "angular-cache": "npm:angular-cache@4.4.3",
     "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
+    "angular-local-storage": "npm:angular-local-storage@0.2.2",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.8",
     "angular-route": "github:angular/bower-angular-route@1.4.8",
     "babel": "npm:babel-core@5.8.34",

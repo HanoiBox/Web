@@ -4,6 +4,9 @@ let dataCleaner = function () {
         if (Number.isNaN(value) || typeof value === 'string') {
             return parseInt(value, 10);
         }
+        else {
+            return value;
+        }
     } 
     
     return {

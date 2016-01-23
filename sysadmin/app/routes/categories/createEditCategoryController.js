@@ -12,8 +12,6 @@ export default angular.module('createEditCategoryControllerModule', [
     this.id = null;
     $scope.errors = false;
     $scope.data = { categories: allCategories };
-    $scope.levelFilter = 0;
-    
     
     if ($routeParams.id !== undefined)
     {
@@ -36,9 +34,8 @@ export default angular.module('createEditCategoryControllerModule', [
     $scope.levelFilterUpdate = (value) => {
         if (value > 0 && value < 10)
         {
-            $scope.data.categories = allCategories.filter(cat => cat.level === value);    
-        } else {
-            $scope.levelFilter = 0;
+            // I should only see categories from the level above
+            $scope.data.categories = allCategories.filter(cat => cat.level === (value - 1));    
         }
     }
     

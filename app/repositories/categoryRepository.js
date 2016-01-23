@@ -68,24 +68,16 @@ var categoryRepository = (function () {
 	};
 
 	var updatecategory = (currentcategory, newcategoryData, callback) => {
-		try {
-			if (newcategoryData.description !== null) {
-				currentcategory.description = newcategoryData.description;
-			}
-			currentcategory.vietDescription = newcategoryData.vietDescription;
-			currentcategory.level = newcategoryData.level;
-            if (newcategoryData.parentCategoryId !== undefined) {
-                currentcategory.parentCategoryId = newcategoryData.parentCategoryId;
+        currentcategory.description = newcategoryData.description;
+        currentcategory.vietDescription = newcategoryData.vietDescription;
+        currentcategory.level = newcategoryData.level;
+        currentcategory.parentCategoryId = newcategoryData.parentCategoryId;
+        currentcategory.save((error) => {
+            if (error) {
+                return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
             }
-			currentcategory.save((error) => {
-                if (error) {
-                    return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
-                }
-                return callback({ status: httpStatus.OK, category: currentcategory });
-            });
-		} catch (error) {
-			return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
-		}
+            return callback({ status: httpStatus.OK, category: currentcategory });
+        });
 	};
 
 	return {

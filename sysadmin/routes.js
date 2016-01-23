@@ -13,9 +13,15 @@ var mystuff = angular.module('appRoutesModule', [
   'angular-loading-bar',
   indexControllerModule.name,
   categoriesControllerModule.name,
-  createEditCategoryControllerModule.name
-]).config(function($routeProvider) {
-  
+  createEditCategoryControllerModule.name,
+  'LocalStorageModule'
+]).config(function($routeProvider, localStorageServiceProvider) {
+    //angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
+    console.log("setting up local storage");
+        localStorageServiceProvider
+            .setPrefix('sysadmin')
+            .setStorageType('sessionStorage');
+            
   $routeProvider.when('/', {
       template: indexTemplate,
       controller: 'IndexController',

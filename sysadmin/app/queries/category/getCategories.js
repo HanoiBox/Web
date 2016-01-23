@@ -1,27 +1,26 @@
 import angular from 'angular';
-import categoriesCacheModule from 'sysadmin/app/categoriesCache';
+import categoriesCacheModule from '../../categoriesCache';
 
 export default angular.module('categoryQueryModule', [
    categoriesCacheModule.name
 ]
 ).factory('GetCategoriesFactory', function($http, categoriesCacheFactory) {
   
-  let categoriesCacheName = categoriesCacheFactory.info().id;
-  
   let allCats = () => {
-    if (categoriesCacheFactory.info().size === 0)
+      var categories = categoriesCacheFactory.get();
+    if (categories == null || categories.length === 0)
     {
         let url = "/api/backend/category/";
         return $http.get(url).then(function successCallback(response) { 
-           categoriesCacheFactory.put(categoriesCacheName, response.data.categories);
-           return categoriesCacheFactory.get(categoriesCacheName);
+           categoriesCacheFactory.put(response.data.categories);
+           return categoriesCacheFactory.get();
         });
     }
-    return categoriesCacheFactory.get(categoriesCacheName);
+    return categoriesCacheFactory.get();
   }
   
   let byId = (id) => {
-    let categories = categoriesCacheFactory.get(categoriesCacheName);
+    let categories = categoriesCacheFactory.get();
     if (categories === null || categories === undefined)
     {
         let url = `/api/category/${id}`;
@@ -29,6 +28,7 @@ export default angular.module('categoryQueryModule', [
     }
     let category = null;
     category = categories.filter(cat => cat._id === id).pop();
+    console.log("from cache", category);
     return new Promise(function(resolve, reject) {
         resolve({ "status": 200, data: { category } });
     });
