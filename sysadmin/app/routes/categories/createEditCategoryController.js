@@ -35,7 +35,9 @@ export default angular.module('createEditCategoryControllerModule', [
         if (value > 0 && value < 10)
         {
             // I should only see categories from the level above
-            $scope.data.categories = allCategories.filter(cat => cat.level === (value - 1));    
+            $scope.data.categories = allCategories.filter(cat => cat.level === Math.abs((value - 1)));    
+        } else {
+            $scope.data.categories = allCategories;
         }
     }
     
