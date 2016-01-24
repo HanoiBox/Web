@@ -13,7 +13,7 @@ gulp.task('css-build', function() {
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('sysadmin/dist/styles'));
         
-    return gulp.src(['jspm_packages/npm/bootstrap-css-only@3.3.5/css/bootstrap.css'])
+    return gulp.src(['jspm_packages/npm/bootstrap-css-only@3.3.5/css/bootstrap.css', 'public/css/navbar.css'])
         .pipe(concat('public.css'))
         .pipe(minifyCSS())
         .pipe(rename({suffix: '.min'}))

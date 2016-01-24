@@ -1,7 +1,7 @@
 import angular from 'angular';
 import loadingBar from 'angular-loading-bar';
 import 'angular-route';
-import 'angular-bootstrap';
+import 'angular-bootstrap-dropdownandtab';
 
 // import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
 // import createEditCategoryControllerModule from 'sysadmin/app/routes/categories/createEditCategoryController';

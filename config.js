@@ -15,7 +15,7 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.8",
-    "angular-bootstrap": "github:angular-ui/bootstrap-bower@0.14.3",
+    "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@1.0.1",
     "angular-cache": "npm:angular-cache@4.4.3",
     "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
     "angular-local-storage": "npm:angular-local-storage@0.2.2",
