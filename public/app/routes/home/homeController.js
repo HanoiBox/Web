@@ -7,26 +7,27 @@ export default angular.module('HomeControllerModule', [
     categoryQueryModule.name
 ]).controller('HomeController', function($scope, allCategories, $location, $http) {
     $scope.categories = allCategories;
-    $scope.topCategories = $scope.categories.filter(cat => cat.level === 1);
-    
-    this.selectedCategory = (id) => {
-        console.log('selected category was:', id);
-    };
-    
-    this.loadSubCategories = (id) => {
-       let subCategories = $scope.categories.filter(cat => cat.parentCategoryId === id);
-       $scope.categoryTabs = $scope.categoryTabs.map(tab => tab.categories = subCategories);
-       console.log($scope.categoryTabs);
-    }
-    
-    $scope.selectSubCategories = (id) => {
-        console.log('id was:', id);
-        this.loadSubCategories(id);
-    }
-    
-    $scope.categoryTabs = $scope.topCategories.map(cat => {
-        return { id: cat._id, title: cat.description, categories: $scope.categories };
+    this.topCats = $scope.categories.filter(cat => cat.level === 0);
+    $scope.categoryTabs = this.topCats.map(topCat => {
+        let subCategories = $scope.categories.filter(cat => cat.parentCategoryId === topCat._id);
+        return { id: topCat._id, title: topCat.description, categories: subCategories };
     });
+    
+    $scope.selectCategory = (id) => {
+        let activeTab = $scope.categoryTabs.find(catTab => catTab.id === id);
+        activeTab.active = true;
+        //$scope.categoryTabs.push(activeTab);
+        //if (catTab.categories === undefined) {
+            //this.loadSubCategories(id);    
+        //}
+        //console.log("doing nothing");
+        // $scope.categoryTabs = $scope.topCategories.map(topCat => {
+        //     let subCategories = $scope.categories.filter(cat => cat.parentCategoryId === topCat._id);
+        //     return { id: topCat._id, title: topCat.description, categories: subCategories };
+        // });
+    }
+    
+    
     //  [{
     //     title: "one",
     //     active: true,
