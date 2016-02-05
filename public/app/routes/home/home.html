@@ -5,19 +5,18 @@
                 active="tab.active" disable="tab.disabled"
                 select="selectCategory(tab.id)">
             
-            <!--
-                select="selectSubCategories(tab.id)"
-                <div class="dropdown">
+            
+            <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Please select
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">                 
-                    <li ng-repeat="category in tab.categories track by _id" ng-click="selectedCategory(category._id)" title="{{category.description}}">
-                        {{category.vietDescription}}
+                    <li ng-repeat="category in tab.categories" ng-click="selectedCategory(category.id)" title="{{category.description}}">
+                        {{category.description}}
                     </li>
                 </ul>
-            </div>-->
+            </div>
             <select ng-model="categoryId">
                 <option ng-repeat="option in tab.categories" value="{{option._id}}" title="{{option.description}}">{{option.vietDescription}}</option>   
             </select>

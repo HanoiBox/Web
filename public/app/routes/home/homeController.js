@@ -26,17 +26,4 @@ export default angular.module('HomeControllerModule', [
         //     return { id: topCat._id, title: topCat.description, categories: subCategories };
         // });
     }
-    
-    
-    //  [{
-    //     title: "one",
-    //     active: true,
-    //     disabled: false,
-    //     content: "test"   
-    // }, {
-    //     title: "two",
-    //     active: true,
-    //     disabled: false,
-    //     content: "hello"   
-    // }];
 });
