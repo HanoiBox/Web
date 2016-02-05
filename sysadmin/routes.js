@@ -17,10 +17,9 @@ var mystuff = angular.module('appRoutesModule', [
   'LocalStorageModule'
 ]).config(function($routeProvider, localStorageServiceProvider) {
     //angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
-    console.log("setting up local storage");
-        localStorageServiceProvider
-            .setPrefix('sysadmin')
-            .setStorageType('sessionStorage');
+    localStorageServiceProvider
+        .setPrefix('sysadmin')
+        .setStorageType('sessionStorage');
             
   $routeProvider.when('/', {
       template: indexTemplate,

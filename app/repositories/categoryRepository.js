@@ -5,27 +5,7 @@ var httpStatus = require("../httpStatus");
 
 var categoryRepository = (function () {
     
-	var saveCategory = (categoryData, callback) => {
-		try {
-			var newCategory = new Category();
-			newCategory.description = categoryData.description;
-			newCategory.vietDescription = categoryData.vietDescription;
-			newCategory.level = categoryData.level;
-            if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
-                newCategory.parentCategoryId = categoryData.parentCategoryId; 
-            }
-			newCategory.save((error) => {
-                if (error) {
-                    return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
-                }
-                return callback({ status: httpStatus.CREATED, category: newCategory });
-            });
-		} catch (error) {
-			return callback("Unable to save " + error);
-		}
-	};
-
-	var getCategory = (id, callback) => {
+    var getCategory = (id, callback) => {
 		Category.findById(id, (err, category) => {
             if (err) {
 				console.error("Mongo error: " + err);
@@ -36,6 +16,30 @@ var categoryRepository = (function () {
 			}
             return callback({ status: httpStatus.OK, category: category });
 		});
+	};
+    
+	var saveCategory = (categoryData, callback) => {
+        var newCategory = new Category();
+        newCategory.description = categoryData.description;
+        newCategory.vietDescription = categoryData.vietDescription;
+        newCategory.level = categoryData.level;
+        if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
+            newCategory.parentCategoryId = categoryData.parentCategoryId; 
+        }
+        newCategory.save((error) => {
+            if (error) {
+                return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
+            }
+            
+            if (newCategory.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) { 
+                getCategory(newCategory.parentCategoryId, (result) => {
+                    newCategory.parentCategory = result.category;
+                    return callback({ status: httpStatus.CREATED, category: newCategory }); 
+                });
+            } else {
+                 return callback({ status: httpStatus.CREATED, category: newCategory })
+            }
+        });
 	};
 
 	var findCategories = (callback) => {
