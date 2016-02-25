@@ -10,6 +10,7 @@ var advertRepository = (function () {
 			var newAdvert = new Advert();
 			newAdvert.categories = advert.categories;
 			newAdvert.information = advert.information;
+            newAdvert.parentCategoryId = advert.parentCategoryId;
 			newAdvert.save();
 			return true;
 		} catch (error) {

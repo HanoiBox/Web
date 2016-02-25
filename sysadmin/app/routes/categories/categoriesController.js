@@ -8,7 +8,7 @@ var mystuff = angular.module('categoriesControllerModule', [
   'ngRoute',
   categoryQueryModule.name,
   deleteCategoryCommandModule.name
-]).controller('CategoriesController', function(allCategories, $location, $scope, DeleteCategoryFactory) {
+]).controller('CategoriesController', function(allCategories, $location, $scope, DeleteCategoryFactory, localStorageService) {
     this.allCategories = allCategories;
     this.categories = allCategories;
 
@@ -24,13 +24,13 @@ var mystuff = angular.module('categoriesControllerModule', [
     }
 
     $scope.delete = (id) => {
-    DeleteCategoryFactory.execute(id, (result) => {
-        if (result.success) {
-            this.allCategories = this.allCategories.filter(cat => cat._id !== id);
-            $scope.reset();
-        } else {
-            console.error(result);
-        }
+        DeleteCategoryFactory.execute(id, (result) => {
+            if (result.success) {
+                this.allCategories = this.allCategories.filter(cat => cat._id !== id);
+                $scope.reset();
+            } else {
+                console.error(result);
+            }
         });
     }
 

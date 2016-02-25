@@ -4,6 +4,8 @@ var dataCleaner = (function () {
     var guaranteeNumber = function guaranteeNumber(value) {
         if (Number.isNaN(value) || typeof value === 'string') {
             return parseInt(value, 10);
+        } else {
+            return value;
         }
     };
 

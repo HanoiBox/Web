@@ -1,16 +1,22 @@
 import angular from 'angular';
-import 'angular-cache';
+import LocalStorageModule from 'angular-local-storage';
+//import LocalStorageModule from 'angular-local-storage';
 
-export default angular.module('categoriesCacheModule', [
-    'angular-cache'
-]).config(function(CacheFactoryProvider) {
-  angular.extend(CacheFactoryProvider.defaults, { maxAge: 15 * 60 * 1000 });
-}).factory('categoriesCacheFactory', function($cacheFactory) {
-        var categoryCache;
 
-        // Check to make sure the cache doesn't already exist
-        if (!$cacheFactory.get('categories')) {
-            categoryCache = $cacheFactory('categories');
-        }
-        return categoryCache;
+export default angular.module('categoriesCacheModule', ['LocalStorageModule']).factory('categoriesCacheFactory', function(localStorageService) {
+        let categoriesCacheName = "categories";
+        
+        return {
+            put: (categories) => {
+                localStorageService.set(categoriesCacheName, categories);
+            },
+            get: () => {
+                let categories = localStorageService.get(categoriesCacheName);
+                //console.log("getting: ", categories);
+                return categories;
+            },
+            removeAll: () => {
+                localStorageService.clearAll();
+            }
+        };
   });
