@@ -33,10 +33,15 @@ export default angular.module('HomeControllerModule', [
         let firstSubCategories = $scope.categories.filter(cat => cat.parentCategoryId === topCat._id && cat.level === 1);
         let tree = firstSubCategories.map(firstCat => {
             let subCategories = $scope.categories.filter(cat => cat.parentCategoryId === firstCat._id);
-            let subCatsConvertedToSubTree = subCategories.map(subCat => {
-                let linkUrl = '/category/id=' + subCat._id;
-                return { name: subCat.description, link: linkUrl, subtree: null };
-            });
+            let subCatsConvertedToSubTree = null;
+            if (subCategories.length > 0)
+            {
+               subCatsConvertedToSubTree = subCategories.map(subCat => {
+                    let linkUrl = '/category/id=' + subCat._id;
+                    return { name: subCat.description, link: linkUrl, subtree: null };
+                });     
+            }
+             
             let topLinkUrl = '/category/id=' + firstCat._id;
             return { name: firstCat.description, link: topLinkUrl, subtree: subCatsConvertedToSubTree };
         });
