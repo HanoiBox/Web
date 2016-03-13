@@ -3,20 +3,17 @@ import loadingBar from 'angular-loading-bar';
 import 'angular-route';
 import 'angular-bootstrap-dropdownandtab';
 
-// import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
-// import createEditCategoryControllerModule from 'sysadmin/app/routes/categories/createEditCategoryController';
 import homeControllerModule from 'public/app/routes/home/homeController';
 import homeTemplate from 'public/app/routes/home/home.html!text';
-// import categoriesTemplate from 'sysadmin/app/routes/categories/categories.html!text';
-// import createEditCategoryTemplate from 'sysadmin/app/routes/categories/createEdit.html!text';
 
 export default angular.module('appRoutesModule', [
   'ngRoute',
   'angular-loading-bar',
   'ui.bootstrap.dropdown',
   'ui.bootstrap.tabs',
+  'ui.bootstrap.collapse',
   homeControllerModule.name
-]).config(function($routeProvider) {
+]).config(function($routeProvider, $locationProvider) {
   
   $routeProvider.when('/', {
       template: homeTemplate,
@@ -30,5 +27,8 @@ export default angular.module('appRoutesModule', [
   }).otherwise({
       redirectTo: '/'
   });
+  
+  // use the HTML5 History API
+  $locationProvider.html5Mode(true);
   
 });
