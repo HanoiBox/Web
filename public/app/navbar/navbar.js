@@ -11,33 +11,17 @@ export default angular.module('navbarAppModule', [
         replace: true,         // replace element with markup
         transclude: true,      // What does this transclude option do, exactly? 
         // transclude makes the contents of a directive have access to the scope outside of the directive rather than inside.
-        template: navbarTemplate,
-        compile: function(el, attrs) {
-            var element = el[0],
-                liElements = element.querySelectorAll(".navbar-nav li");
-            for (var index = 0, length = liElements.length; index < length; index++) {
-                var li = liElements[index], 
-                    link = li.querySelector("a");
-                if (link.textContent === attrs.currentTab) {
-                    if (li.classList) {
-                        li.classList.add("active");
-                    }
-                    else {
-                        li.className += ' ' + "active";
-                    }
-                }
-            }
-        }
+        template: navbarTemplate
     }
 }).directive('tree', function () {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                tree: '='
-            },
-            template: navbarUlTemplate
-        };
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            tree: '='
+        },
+        template: navbarUlTemplate
+    };
 }).directive('leaf', ['$compile', function ($compile) {
     return {
         restrict: 'E',
@@ -75,3 +59,17 @@ export default angular.module('navbarAppModule', [
         }
     };
 }]);
+
+// angular.module("public/app/navbar/template/navbar-ul.html", []).run(["$templateCache", function($templateCache) {
+//   $templateCache.put("public/app/navbar/template/navbar-ul.html",
+//     "<ul class='dropdown-menu'>\n" +
+//     "    <leaf ng-repeat='leaf in tree' leaf='leaf'></leaf>\n" +
+//     "</ul>");
+// }]);
+
+// angular.module("public/app/navbar/template/navbar-li.html", []).run(["$templateCache", function($templateCache) {
+//   $templateCache.put("public/app/navbar/template/navbar-li.html",
+//     "<li ng-class=\"{divider: leaf.name == 'divider'}\" ng-class=\"{active: currentCategoryId === topCat.id}\" >\n" +
+//     "    <a ng-click=\"{{leaf.link}}\" ng-if=\"leaf.name !== 'divider'\">{{leaf.name}}</a>\n" +
+//     "</li>");
+// }]);

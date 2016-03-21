@@ -1,18 +1,26 @@
 import angular from 'angular';
-// import categoriesCacheModule from 'sysadmin/app/categoriesCache';
+import categoriesCacheModule from 'sysadmin/app/categoriesCache';
 
-export default angular.module('categoryQueryModule', [])
-.factory('GetCategoriesFactory', function($http) {
+export default angular.module('categoryQueryModule', [
+   categoriesCacheModule.name
+])
+.factory('GetCategoriesFactory', function($http, categoriesCacheFactory) {
   
   let allCats = () => {
-        let url = "/api/category/";
-        return $http.get(url).then(function successCallback(response) {
-           return response.data.categories;
+      var categories = categoriesCacheFactory.get();
+    if (categories == null || categories.length === 0)
+    {
+        let url = "/api/backend/category/";
+        return $http.get(url).then(function successCallback(response) { 
+           categoriesCacheFactory.put(response.data.categories);
+           return categoriesCacheFactory.get();
         });
+    }
+    return categoriesCacheFactory.get();
   }
   
   let byId = (id) => {
-    let categories = null;
+    let categories = categoriesCacheFactory.get();
     if (categories === null || categories === undefined)
     {
         let url = `/api/category/${id}`;

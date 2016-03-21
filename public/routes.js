@@ -4,7 +4,10 @@ import 'angular-route';
 import 'angular-bootstrap-dropdownandtab';
 
 import homeControllerModule from 'public/app/routes/home/homeController';
-import homeTemplate from 'public/app/routes/home/home.html!text';
+import homeTemplate from 'public/app/routes/home/index.html!text';
+import categoryTemplate from 'public/app/routes/category/index.html!text';
+import categoryControllerModule from 'public/app/routes/category/categoryController';
+// import advertTemplate from 'public/app/routes/advert/index.html!text';
 
 export default angular.module('appRoutesModule', [
   'ngRoute',
@@ -12,8 +15,14 @@ export default angular.module('appRoutesModule', [
   'ui.bootstrap.dropdown',
   'ui.bootstrap.tabs',
   'ui.bootstrap.collapse',
-  homeControllerModule.name
-]).config(function($routeProvider, $locationProvider) {
+  homeControllerModule.name,
+  categoryControllerModule.name,
+  'LocalStorageModule'
+]).config(function($routeProvider, $locationProvider, localStorageServiceProvider) {
+  
+  localStorageServiceProvider
+        .setPrefix('public')
+        .setStorageType('sessionStorage');
   
   $routeProvider.when('/', {
       template: homeTemplate,
@@ -24,7 +33,28 @@ export default angular.module('appRoutesModule', [
            return GetCategoriesFactory.allCats();
          }
       }
-  }).otherwise({
+  })
+  .when('/category/:id', {
+      template: categoryTemplate,
+      controller: 'CategoryController',
+      controllerAs: 'ctrl',
+      resolve: {
+         allCategories: (GetCategoriesFactory) => {
+           return GetCategoriesFactory.allCats();
+         }
+      }
+  })
+//   .when('/advert/:id', {
+//       template: advertTemplate,
+//       controller: 'AdvertController',
+//       controllerAs: 'ctrl',
+//       resolve: {
+//          allCategories: (GetCategoriesFactory) => {
+//            return GetCategoriesFactory.allCats();
+//          }
+//       }
+//   })
+  .otherwise({
       redirectTo: '/'
   });
   

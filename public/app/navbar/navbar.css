@@ -94,3 +94,7 @@
     font-size: 18px;
     line-height: 20px;
 }
+
+.btn-group:hover>.navbar-nav {
+  display: block;
+}

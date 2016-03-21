@@ -16,8 +16,8 @@
         <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
             <div ng-repeat="topCat in topCats">
                 <ul class="nav navbar-nav">
-                    <li uib-dropdown>
-                        <a href="#" uib-dropdown-toggle>
+                    <li ng-class="{active: currentCategoryId === topCat.id}" uib-dropdown>
+                        <a href="{{topCat.link}}" uib-dropdown-toggle>
                             {{topCat.description}}
                             <b class='caret'></b>
                         </a>

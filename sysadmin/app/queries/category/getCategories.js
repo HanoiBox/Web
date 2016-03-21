@@ -3,8 +3,8 @@ import categoriesCacheModule from '../../categoriesCache';
 
 export default angular.module('categoryQueryModule', [
    categoriesCacheModule.name
-]
-).factory('GetCategoriesFactory', function($http, categoriesCacheFactory) {
+])
+.factory('GetCategoriesFactory', function($http, categoriesCacheFactory) {
   
   let allCats = () => {
       var categories = categoriesCacheFactory.get();
