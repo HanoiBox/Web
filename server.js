@@ -13,7 +13,7 @@ if (dev)
 	require("babel-polyfill");
 }
 var db = require('./app/db');	
-db.connect(dev);
+db.connect(dev, process.env);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
