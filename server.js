@@ -13,7 +13,7 @@ if (dev)
 	require("babel-polyfill");
 }
 var db = require('./app/db');	
-db.connect(dev);
+db.connect(dev, process.env);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -48,7 +48,7 @@ if (dev) {
 
 app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
-app.use('/template', express.static(__dirname + '/public/template'));
+app.use('/uib/template', express.static(__dirname + '/public/template'));
 var favicon = require('serve-favicon');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 

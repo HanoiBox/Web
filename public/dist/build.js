@@ -1,15 +1,15 @@
 !function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in p||(p[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==v.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=p[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(v.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=p[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return x[e]||(x[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},r.name);t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=p[s],v=x[s];v?l=v.exports:c&&!c.declarative?l=c.esModule:c?(d(c),v=c.module,l=v.exports):l=f(s),v&&v.importers?(v.importers.push(t),t.dependencies.push(v)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=p[e];if(t)t.declarative?c(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=f(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=p[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){if(r===e)return r;var t={};if("object"==typeof r||"function"==typeof r)if(g){var n;for(var o in r)(n=Object.getOwnPropertyDescriptor(r,o))&&h(t,o,n)}else{var a=r&&r.hasOwnProperty;for(var o in r)(!a||r.hasOwnProperty(o))&&(t[o]=r[o])}return t["default"]=r,h(t,"__useDefault",{value:!0}),t}function c(r,t){var n=p[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==v.call(t,u)&&(p[u]?c(u,t):f(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function f(e){if(D[e])return D[e];if("@node/"==e.substr(0,6))return y(e.substr(6));var r=p[e];if(!r)throw"Module "+e+" not present.";return a(e),c(e,[]),p[e]=void 0,r.declarative&&h(r.module.exports,"__esModule",{value:!0}),D[e]=r.declarative?r.module.exports:r.esModule}var p={},v=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},g=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(m){g=!1}var h;!function(){try{Object.defineProperty({},"a",{})&&(h=Object.defineProperty)}catch(e){h=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var x={},y="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,D={"@empty":{}};return function(e,n,o){return function(a){a(function(a){for(var u={_nodeRequire:y,register:r,registerDynamic:t,get:f,set:function(e,r){D[e]=r},newModule:function(e){return e}},d=0;d<n.length;d++)(function(e,r){r&&r.__esModule?D[e]=r:D[e]=s(r)})(n[d],arguments[d]);o(u);var i=f(e[0]);if(e.length>1)for(var d=1;d<e.length;d++)f(e[d]);return i.__useDefault?i["default"]:i})}}}("undefined"!=typeof self?self:global)
 
-(["1"], [], function($__System) {
+(["1","1"], [], function($__System) {
 
-!function(e){function n(e,n){for(var t=e.split(".");t.length;)n=n[t.shift()];return n}function t(n){if(Object.keys)Object.keys(e).forEach(n);else for(var t in e)f.call(e,t)&&n(t)}function r(n){t(function(t){if(-1==a.call(l,t)){try{var r=e[t]}catch(o){l.push(t)}n(t,r)}})}var o,i=$__System,f=Object.prototype.hasOwnProperty,a=Array.prototype.indexOf||function(e){for(var n=0,t=this.length;t>n;n++)if(this[n]===e)return n;return-1},l=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(t,i,f){var a=e.define;e.define=void 0,e.exports=void 0,e.module&&e.module.exports&&(e.module=void 0);var l;if(f){l={};for(var u in f)l[u]=e[u],e[u]=f[u]}return i||(o={},r(function(e,n){o[e]=n})),function(){var t;if(i)t=n(i,e);else{var f,u,s={};r(function(e,n){o[e]!==n&&"undefined"!=typeof n&&(s[e]=n,"undefined"!=typeof f?u||f===n||(u=!0):f=n)}),t=u?s:f}if(l)for(var c in l)e[c]=l[c];return e.define=a,t}}}))}("undefined"!=typeof self?self:global);
+!function(e){function n(e,n){for(var t=e.split(".");t.length;)n=n[t.shift()];return n}function t(n){if(Object.keys)Object.keys(e).forEach(n);else for(var t in e)o.call(e,t)&&n(t)}function r(n){t(function(t){if(-1==a.call(l,t)){try{var r=e[t]}catch(f){l.push(t)}n(t,r)}})}var f,i=$__System,o=Object.prototype.hasOwnProperty,a=Array.prototype.indexOf||function(e){for(var n=0,t=this.length;t>n;n++)if(this[n]===e)return n;return-1},l=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(t,i,o){var a=e.define;e.define=void 0;var l;if(o){l={};for(var c in o)l[c]=e[c],e[c]=o[c]}return i||(f={},r(function(e,n){f[e]=n})),function(){var t;if(i)t=n(i,e);else{var o,c,u={};r(function(e,n){f[e]!==n&&"undefined"!=typeof n&&(u[e]=n,"undefined"!=typeof o?c||o===n||(c=!0):o=n)}),t=c?u:o}if(l)for(var s in l)e[s]=l[s];return e.define=a,t}}}))}("undefined"!=typeof self?self:global);
 !function(){var t=$__System;if("undefined"!=typeof window&&"undefined"!=typeof document&&window.location)var s=location.protocol+"//"+location.hostname+(location.port?":"+location.port:"");t.set("@@cjs-helpers",t.newModule({getPathVars:function(t){var n,o=t.lastIndexOf("!");n=-1!=o?t.substr(0,o):t;var e=n.split("/");return e.pop(),e=e.join("/"),"file:///"==n.substr(0,8)?(n=n.substr(7),e=e.substr(7),isWindows&&(n=n.substr(1),e=e.substr(1))):s&&n.substr(0,s.length)===s&&(n=n.substr(s.length),e=e.substr(s.length)),{filename:n,dirname:e}}}))}();
-!function(e){function n(e,n){e=e.replace(l,"");var r=e.match(s),i=(r[1].split(",")[n]||"require").replace(p,""),t=c[i]||(c[i]=new RegExp(u+i+a,"g"));t.lastIndex=0;for(var o,f=[];o=t.exec(e);)f.push(o[2]||o[3]);return f}function r(e,n,i,t){if("object"==typeof e&&!(e instanceof Array))return r.apply(null,Array.prototype.splice.call(arguments,1,arguments.length-1));if("string"==typeof e&&"function"==typeof n&&(e=[e]),!(e instanceof Array)){if("string"==typeof e){var f=o.get(e);return f.__useDefault?f["default"]:f}throw new TypeError("Invalid require")}for(var l=[],u=0;u<e.length;u++)l.push(o["import"](e[u],t));Promise.all(l).then(function(e){n&&n.apply(null,e)},i)}function i(i,t,l){"string"!=typeof i&&(l=t,t=i,i=null),t instanceof Array||(l=t,t=["require","exports","module"].splice(0,l.length)),"function"!=typeof l&&(l=function(e){return function(){return e}}(l)),void 0===t[t.length-1]&&t.pop();var u,a,s;-1!=(u=f.call(t,"require"))&&(t.splice(u,1),i||(t=t.concat(n(l.toString(),u)))),-1!=(a=f.call(t,"exports"))&&t.splice(a,1),-1!=(s=f.call(t,"module"))&&t.splice(s,1);var p={name:i,deps:t,execute:function(n,i,f){for(var p=[],c=0;c<t.length;c++)p.push(n(t[c]));f.uri=f.id,f.config=function(){},-1!=s&&p.splice(s,0,f),-1!=a&&p.splice(a,0,i),-1!=u&&p.splice(u,0,function(e,i,t){return"string"==typeof e&&"function"!=typeof i?n(e):r.call(o,e,i,t,f.id)});var d=l.apply(-1==a?e:i,p);return"undefined"==typeof d&&f&&(d=f.exports),"undefined"!=typeof d?d:void 0}};if(i)d.anonDefine||d.isBundle?(d.anonDefine&&d.anonDefine.name&&o.registerDynamic(d.anonDefine.name,d.anonDefine.deps,!1,d.anonDefine.execute),d.anonDefine=null):d.anonDefine=p,d.isBundle=!0,o.registerDynamic(i,p.deps,!1,p.execute);else{if(d.anonDefine)throw new TypeError("Multiple defines for anonymous module");d.anonDefine=p}}function t(n){d.anonDefine=null,d.isBundle=!1;var r=e.module,t=e.exports,o=e.define;return e.module=void 0,e.exports=void 0,e.define=i,function(){e.define=o,e.module=r,e.exports=t}}var o=$__System,f=Array.prototype.indexOf||function(e){for(var n=0,r=this.length;r>n;n++)if(this[n]===e)return n;return-1},l=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/gm,u="(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])",a="\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)",s=/\(([^\)]*)\)/,p=/^\s+|\s+$/g,c={};i.amd={};var d={isBundle:!1,anonDefine:null};o.set("@@amd-helpers",o.newModule({createDefine:t,require:r,define:i,lastModule:d})),o.amdDefine=i,o.amdRequire=r}("undefined"!=typeof self?self:global);
+!function(e){function n(e,n){e=e.replace(l,"");var r=e.match(u),t=(r[1].split(",")[n]||"require").replace(s,""),i=p[t]||(p[t]=new RegExp(a+t+f,"g"));i.lastIndex=0;for(var o,c=[];o=i.exec(e);)c.push(o[2]||o[3]);return c}function r(e,n,t,o){if("object"==typeof e&&!(e instanceof Array))return r.apply(null,Array.prototype.splice.call(arguments,1,arguments.length-1));if("string"==typeof e&&"function"==typeof n&&(e=[e]),!(e instanceof Array)){if("string"==typeof e){var l=i.get(e);return l.__useDefault?l["default"]:l}throw new TypeError("Invalid require")}for(var a=[],f=0;f<e.length;f++)a.push(i["import"](e[f],o));Promise.all(a).then(function(e){n&&n.apply(null,e)},t)}function t(t,l,a){"string"!=typeof t&&(a=l,l=t,t=null),l instanceof Array||(a=l,l=["require","exports","module"].splice(0,a.length)),"function"!=typeof a&&(a=function(e){return function(){return e}}(a)),void 0===l[l.length-1]&&l.pop();var f,u,s;-1!=(f=o.call(l,"require"))&&(l.splice(f,1),t||(l=l.concat(n(a.toString(),f)))),-1!=(u=o.call(l,"exports"))&&l.splice(u,1),-1!=(s=o.call(l,"module"))&&l.splice(s,1);var p={name:t,deps:l,execute:function(n,t,o){for(var p=[],c=0;c<l.length;c++)p.push(n(l[c]));o.uri=o.id,o.config=function(){},-1!=s&&p.splice(s,0,o),-1!=u&&p.splice(u,0,t),-1!=f&&p.splice(f,0,function(e,t,l){return"string"==typeof e&&"function"!=typeof t?n(e):r.call(i,e,t,l,o.id)});var d=a.apply(-1==u?e:t,p);return"undefined"==typeof d&&o&&(d=o.exports),"undefined"!=typeof d?d:void 0}};if(t)c.anonDefine||c.isBundle?c.anonDefine&&c.anonDefine.name&&(c.anonDefine=null):c.anonDefine=p,c.isBundle=!0,i.registerDynamic(p.name,p.deps,!1,p.execute);else{if(c.anonDefine&&!c.anonDefine.name)throw new Error("Multiple anonymous defines in module "+t);c.anonDefine=p}}var i=$__System,o=Array.prototype.indexOf||function(e){for(var n=0,r=this.length;r>n;n++)if(this[n]===e)return n;return-1},l=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/gm,a="(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])",f="\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)",u=/\(([^\)]*)\)/,s=/^\s+|\s+$/g,p={};t.amd={};var c={isBundle:!1,anonDefine:null};i.amdDefine=t,i.amdRequire=r}("undefined"!=typeof self?self:global);
 $__System.registerDynamic("2", ["3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
   (function(process) {
     ;
@@ -4315,25 +4315,23 @@ $__System.registerDynamic("2", ["3"], true, function($__require, exports, module
       }
     }.call(this));
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("4", ["2"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('2');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("5", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
   (function() {
     'use strict';
@@ -4534,6288 +4532,889 @@ $__System.registerDynamic("5", [], true, function($__require, exports, module) {
       }];
     });
   })();
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("6", ["5"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   $__require('5');
   module.exports = 'angular-loading-bar';
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("7", ["6"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('6');
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("8", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
-  (function() {
-    angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.collapse", "ui.bootstrap.accordion", "ui.bootstrap.alert", "ui.bootstrap.buttons", "ui.bootstrap.carousel", "ui.bootstrap.dateparser", "ui.bootstrap.position", "ui.bootstrap.datepicker", "ui.bootstrap.dropdown", "ui.bootstrap.stackedMap", "ui.bootstrap.modal", "ui.bootstrap.pagination", "ui.bootstrap.tooltip", "ui.bootstrap.popover", "ui.bootstrap.progressbar", "ui.bootstrap.rating", "ui.bootstrap.tabs", "ui.bootstrap.timepicker", "ui.bootstrap.typeahead"]);
-    angular.module("ui.bootstrap.tpls", ["template/accordion/accordion-group.html", "template/accordion/accordion.html", "template/alert/alert.html", "template/carousel/carousel.html", "template/carousel/slide.html", "template/datepicker/datepicker.html", "template/datepicker/day.html", "template/datepicker/month.html", "template/datepicker/popup.html", "template/datepicker/year.html", "template/modal/backdrop.html", "template/modal/window.html", "template/pagination/pager.html", "template/pagination/pagination.html", "template/tooltip/tooltip-html-popup.html", "template/tooltip/tooltip-popup.html", "template/tooltip/tooltip-template-popup.html", "template/popover/popover-html.html", "template/popover/popover-template.html", "template/popover/popover.html", "template/progressbar/bar.html", "template/progressbar/progress.html", "template/progressbar/progressbar.html", "template/rating/rating.html", "template/tabs/tab.html", "template/tabs/tabset.html", "template/timepicker/timepicker.html", "template/typeahead/typeahead-match.html", "template/typeahead/typeahead-popup.html"]);
-    angular.module('ui.bootstrap.collapse', []).directive('uibCollapse', ['$animate', '$injector', function($animate, $injector) {
-      var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
-      return {link: function(scope, element, attrs) {
-          function expand() {
+$__System.registerDynamic("8", [], true, function($__require, exports, module) {
+  ;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  "format cjs";
+  angular.module("ui.bootstrap", ["ui.bootstrap.collapse", "ui.bootstrap.dropdown", "ui.bootstrap.position", "ui.bootstrap.tabs"]);
+  angular.module('ui.bootstrap.collapse', []).directive('uibCollapse', ['$animate', '$q', '$parse', '$injector', function($animate, $q, $parse, $injector) {
+    var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
+    return {link: function(scope, element, attrs) {
+        var expandingExpr = $parse(attrs.expanding),
+            expandedExpr = $parse(attrs.expanded),
+            collapsingExpr = $parse(attrs.collapsing),
+            collapsedExpr = $parse(attrs.collapsed);
+        if (!scope.$eval(attrs.uibCollapse)) {
+          element.addClass('in').addClass('collapse').attr('aria-expanded', true).attr('aria-hidden', false).css({height: 'auto'});
+        }
+        function expand() {
+          if (element.hasClass('collapse') && element.hasClass('in')) {
+            return;
+          }
+          $q.resolve(expandingExpr(scope)).then(function() {
             element.removeClass('collapse').addClass('collapsing').attr('aria-expanded', true).attr('aria-hidden', false);
             if ($animateCss) {
               $animateCss(element, {
                 addClass: 'in',
                 easing: 'ease',
                 to: {height: element[0].scrollHeight + 'px'}
-              }).start().finally(expandDone);
+              }).start()['finally'](expandDone);
             } else {
               $animate.addClass(element, 'in', {to: {height: element[0].scrollHeight + 'px'}}).then(expandDone);
             }
+          });
+        }
+        function expandDone() {
+          element.removeClass('collapsing').addClass('collapse').css({height: 'auto'});
+          expandedExpr(scope);
+        }
+        function collapse() {
+          if (!element.hasClass('collapse') && !element.hasClass('in')) {
+            return collapseDone();
           }
-          function expandDone() {
-            element.removeClass('collapsing').addClass('collapse').css({height: 'auto'});
-          }
-          function collapse() {
-            if (!element.hasClass('collapse') && !element.hasClass('in')) {
-              return collapseDone();
-            }
+          $q.resolve(collapsingExpr(scope)).then(function() {
             element.css({height: element[0].scrollHeight + 'px'}).removeClass('collapse').addClass('collapsing').attr('aria-expanded', false).attr('aria-hidden', true);
             if ($animateCss) {
               $animateCss(element, {
                 removeClass: 'in',
                 to: {height: '0'}
-              }).start().finally(collapseDone);
+              }).start()['finally'](collapseDone);
             } else {
               $animate.removeClass(element, 'in', {to: {height: '0'}}).then(collapseDone);
             }
-          }
-          function collapseDone() {
-            element.css({height: '0'});
-            element.removeClass('collapsing').addClass('collapse');
-          }
-          scope.$watch(attrs.uibCollapse, function(shouldCollapse) {
-            if (shouldCollapse) {
-              collapse();
-            } else {
-              expand();
-            }
-          });
-        }};
-    }]);
-    angular.module('ui.bootstrap.collapse').value('$collapseSuppressWarning', false).directive('collapse', ['$animate', '$injector', '$log', '$collapseSuppressWarning', function($animate, $injector, $log, $collapseSuppressWarning) {
-      var $animateCss = $injector.has('$animateCss') ? $injector.get('$animateCss') : null;
-      return {link: function(scope, element, attrs) {
-          if (!$collapseSuppressWarning) {
-            $log.warn('collapse is now deprecated. Use uib-collapse instead.');
-          }
-          function expand() {
-            element.removeClass('collapse').addClass('collapsing').attr('aria-expanded', true).attr('aria-hidden', false);
-            if ($animateCss) {
-              $animateCss(element, {
-                easing: 'ease',
-                to: {height: element[0].scrollHeight + 'px'}
-              }).start().done(expandDone);
-            } else {
-              $animate.animate(element, {}, {height: element[0].scrollHeight + 'px'}).then(expandDone);
-            }
-          }
-          function expandDone() {
-            element.removeClass('collapsing').addClass('collapse in').css({height: 'auto'});
-          }
-          function collapse() {
-            if (!element.hasClass('collapse') && !element.hasClass('in')) {
-              return collapseDone();
-            }
-            element.css({height: element[0].scrollHeight + 'px'}).removeClass('collapse in').addClass('collapsing').attr('aria-expanded', false).attr('aria-hidden', true);
-            if ($animateCss) {
-              $animateCss(element, {to: {height: '0'}}).start().done(collapseDone);
-            } else {
-              $animate.animate(element, {}, {height: '0'}).then(collapseDone);
-            }
-          }
-          function collapseDone() {
-            element.css({height: '0'});
-            element.removeClass('collapsing').addClass('collapse');
-          }
-          scope.$watch(attrs.collapse, function(shouldCollapse) {
-            if (shouldCollapse) {
-              collapse();
-            } else {
-              expand();
-            }
-          });
-        }};
-    }]);
-    angular.module('ui.bootstrap.accordion', ['ui.bootstrap.collapse']).constant('uibAccordionConfig', {closeOthers: true}).controller('UibAccordionController', ['$scope', '$attrs', 'uibAccordionConfig', function($scope, $attrs, accordionConfig) {
-      this.groups = [];
-      this.closeOthers = function(openGroup) {
-        var closeOthers = angular.isDefined($attrs.closeOthers) ? $scope.$eval($attrs.closeOthers) : accordionConfig.closeOthers;
-        if (closeOthers) {
-          angular.forEach(this.groups, function(group) {
-            if (group !== openGroup) {
-              group.isOpen = false;
-            }
           });
         }
-      };
-      this.addGroup = function(groupScope) {
-        var that = this;
-        this.groups.push(groupScope);
-        groupScope.$on('$destroy', function(event) {
-          that.removeGroup(groupScope);
-        });
-      };
-      this.removeGroup = function(group) {
-        var index = this.groups.indexOf(group);
-        if (index !== -1) {
-          this.groups.splice(index, 1);
+        function collapseDone() {
+          element.css({height: '0'});
+          element.removeClass('collapsing').addClass('collapse');
+          collapsedExpr(scope);
         }
-      };
-    }]).directive('uibAccordion', function() {
-      return {
-        controller: 'UibAccordionController',
-        controllerAs: 'accordion',
-        transclude: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/accordion/accordion.html';
-        }
-      };
-    }).directive('uibAccordionGroup', function() {
-      return {
-        require: '^uibAccordion',
-        transclude: true,
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/accordion/accordion-group.html';
-        },
-        scope: {
-          heading: '@',
-          isOpen: '=?',
-          isDisabled: '=?'
-        },
-        controller: function() {
-          this.setHeading = function(element) {
-            this.heading = element;
-          };
-        },
-        link: function(scope, element, attrs, accordionCtrl) {
-          accordionCtrl.addGroup(scope);
-          scope.openClass = attrs.openClass || 'panel-open';
-          scope.panelClass = attrs.panelClass;
-          scope.$watch('isOpen', function(value) {
-            element.toggleClass(scope.openClass, !!value);
-            if (value) {
-              accordionCtrl.closeOthers(scope);
-            }
-          });
-          scope.toggleOpen = function($event) {
-            if (!scope.isDisabled) {
-              if (!$event || $event.which === 32) {
-                scope.isOpen = !scope.isOpen;
-              }
-            }
-          };
-        }
-      };
-    }).directive('uibAccordionHeading', function() {
-      return {
-        transclude: true,
-        template: '',
-        replace: true,
-        require: '^uibAccordionGroup',
-        link: function(scope, element, attrs, accordionGroupCtrl, transclude) {
-          accordionGroupCtrl.setHeading(transclude(scope, angular.noop));
-        }
-      };
-    }).directive('uibAccordionTransclude', function() {
-      return {
-        require: ['?^uibAccordionGroup', '?^accordionGroup'],
-        link: function(scope, element, attrs, controller) {
-          controller = controller[0] ? controller[0] : controller[1];
-          scope.$watch(function() {
-            return controller[attrs.uibAccordionTransclude];
-          }, function(heading) {
-            if (heading) {
-              element.find('span').html('');
-              element.find('span').append(heading);
-            }
-          });
-        }
-      };
-    });
-    angular.module('ui.bootstrap.accordion').value('$accordionSuppressWarning', false).controller('AccordionController', ['$scope', '$attrs', '$controller', '$log', '$accordionSuppressWarning', function($scope, $attrs, $controller, $log, $accordionSuppressWarning) {
-      if (!$accordionSuppressWarning) {
-        $log.warn('AccordionController is now deprecated. Use UibAccordionController instead.');
-      }
-      angular.extend(this, $controller('UibAccordionController', {
-        $scope: $scope,
-        $attrs: $attrs
-      }));
-    }]).directive('accordion', ['$log', '$accordionSuppressWarning', function($log, $accordionSuppressWarning) {
-      return {
-        restrict: 'EA',
-        controller: 'AccordionController',
-        controllerAs: 'accordion',
-        transclude: true,
-        replace: false,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/accordion/accordion.html';
-        },
-        link: function() {
-          if (!$accordionSuppressWarning) {
-            $log.warn('accordion is now deprecated. Use uib-accordion instead.');
-          }
-        }
-      };
-    }]).directive('accordionGroup', ['$log', '$accordionSuppressWarning', function($log, $accordionSuppressWarning) {
-      return {
-        require: '^accordion',
-        restrict: 'EA',
-        transclude: true,
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/accordion/accordion-group.html';
-        },
-        scope: {
-          heading: '@',
-          isOpen: '=?',
-          isDisabled: '=?'
-        },
-        controller: function() {
-          this.setHeading = function(element) {
-            this.heading = element;
-          };
-        },
-        link: function(scope, element, attrs, accordionCtrl) {
-          if (!$accordionSuppressWarning) {
-            $log.warn('accordion-group is now deprecated. Use uib-accordion-group instead.');
-          }
-          accordionCtrl.addGroup(scope);
-          scope.openClass = attrs.openClass || 'panel-open';
-          scope.panelClass = attrs.panelClass;
-          scope.$watch('isOpen', function(value) {
-            element.toggleClass(scope.openClass, !!value);
-            if (value) {
-              accordionCtrl.closeOthers(scope);
-            }
-          });
-          scope.toggleOpen = function($event) {
-            if (!scope.isDisabled) {
-              if (!$event || $event.which === 32) {
-                scope.isOpen = !scope.isOpen;
-              }
-            }
-          };
-        }
-      };
-    }]).directive('accordionHeading', ['$log', '$accordionSuppressWarning', function($log, $accordionSuppressWarning) {
-      return {
-        restrict: 'EA',
-        transclude: true,
-        template: '',
-        replace: true,
-        require: '^accordionGroup',
-        link: function(scope, element, attr, accordionGroupCtrl, transclude) {
-          if (!$accordionSuppressWarning) {
-            $log.warn('accordion-heading is now deprecated. Use uib-accordion-heading instead.');
-          }
-          accordionGroupCtrl.setHeading(transclude(scope, angular.noop));
-        }
-      };
-    }]).directive('accordionTransclude', ['$log', '$accordionSuppressWarning', function($log, $accordionSuppressWarning) {
-      return {
-        require: '^accordionGroup',
-        link: function(scope, element, attr, controller) {
-          if (!$accordionSuppressWarning) {
-            $log.warn('accordion-transclude is now deprecated. Use uib-accordion-transclude instead.');
-          }
-          scope.$watch(function() {
-            return controller[attr.accordionTransclude];
-          }, function(heading) {
-            if (heading) {
-              element.find('span').html('');
-              element.find('span').append(heading);
-            }
-          });
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.alert', []).controller('UibAlertController', ['$scope', '$attrs', '$interpolate', '$timeout', function($scope, $attrs, $interpolate, $timeout) {
-      $scope.closeable = !!$attrs.close;
-      var dismissOnTimeout = angular.isDefined($attrs.dismissOnTimeout) ? $interpolate($attrs.dismissOnTimeout)($scope.$parent) : null;
-      if (dismissOnTimeout) {
-        $timeout(function() {
-          $scope.close();
-        }, parseInt(dismissOnTimeout, 10));
-      }
-    }]).directive('uibAlert', function() {
-      return {
-        controller: 'UibAlertController',
-        controllerAs: 'alert',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/alert/alert.html';
-        },
-        transclude: true,
-        replace: true,
-        scope: {
-          type: '@',
-          close: '&'
-        }
-      };
-    });
-    angular.module('ui.bootstrap.alert').value('$alertSuppressWarning', false).controller('AlertController', ['$scope', '$attrs', '$controller', '$log', '$alertSuppressWarning', function($scope, $attrs, $controller, $log, $alertSuppressWarning) {
-      if (!$alertSuppressWarning) {
-        $log.warn('AlertController is now deprecated. Use UibAlertController instead.');
-      }
-      angular.extend(this, $controller('UibAlertController', {
-        $scope: $scope,
-        $attrs: $attrs
-      }));
-    }]).directive('alert', ['$log', '$alertSuppressWarning', function($log, $alertSuppressWarning) {
-      return {
-        controller: 'AlertController',
-        controllerAs: 'alert',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/alert/alert.html';
-        },
-        transclude: true,
-        replace: true,
-        scope: {
-          type: '@',
-          close: '&'
-        },
-        link: function() {
-          if (!$alertSuppressWarning) {
-            $log.warn('alert is now deprecated. Use uib-alert instead.');
-          }
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.buttons', []).constant('uibButtonConfig', {
-      activeClass: 'active',
-      toggleEvent: 'click'
-    }).controller('UibButtonsController', ['uibButtonConfig', function(buttonConfig) {
-      this.activeClass = buttonConfig.activeClass || 'active';
-      this.toggleEvent = buttonConfig.toggleEvent || 'click';
-    }]).directive('uibBtnRadio', function() {
-      return {
-        require: ['uibBtnRadio', 'ngModel'],
-        controller: 'UibButtonsController',
-        controllerAs: 'buttons',
-        link: function(scope, element, attrs, ctrls) {
-          var buttonsCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          element.find('input').css({display: 'none'});
-          ngModelCtrl.$render = function() {
-            element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, scope.$eval(attrs.uibBtnRadio)));
-          };
-          element.on(buttonsCtrl.toggleEvent, function() {
-            if (attrs.disabled) {
-              return;
-            }
-            var isActive = element.hasClass(buttonsCtrl.activeClass);
-            if (!isActive || angular.isDefined(attrs.uncheckable)) {
-              scope.$apply(function() {
-                ngModelCtrl.$setViewValue(isActive ? null : scope.$eval(attrs.uibBtnRadio));
-                ngModelCtrl.$render();
-              });
-            }
-          });
-        }
-      };
-    }).directive('uibBtnCheckbox', function() {
-      return {
-        require: ['uibBtnCheckbox', 'ngModel'],
-        controller: 'UibButtonsController',
-        controllerAs: 'button',
-        link: function(scope, element, attrs, ctrls) {
-          var buttonsCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          element.find('input').css({display: 'none'});
-          function getTrueValue() {
-            return getCheckboxValue(attrs.btnCheckboxTrue, true);
-          }
-          function getFalseValue() {
-            return getCheckboxValue(attrs.btnCheckboxFalse, false);
-          }
-          function getCheckboxValue(attribute, defaultValue) {
-            return angular.isDefined(attribute) ? scope.$eval(attribute) : defaultValue;
-          }
-          ngModelCtrl.$render = function() {
-            element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
-          };
-          element.on(buttonsCtrl.toggleEvent, function() {
-            if (attrs.disabled) {
-              return;
-            }
-            scope.$apply(function() {
-              ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
-              ngModelCtrl.$render();
-            });
-          });
-        }
-      };
-    });
-    angular.module('ui.bootstrap.buttons').value('$buttonsSuppressWarning', false).controller('ButtonsController', ['$controller', '$log', '$buttonsSuppressWarning', function($controller, $log, $buttonsSuppressWarning) {
-      if (!$buttonsSuppressWarning) {
-        $log.warn('ButtonsController is now deprecated. Use UibButtonsController instead.');
-      }
-      angular.extend(this, $controller('UibButtonsController'));
-    }]).directive('btnRadio', ['$log', '$buttonsSuppressWarning', function($log, $buttonsSuppressWarning) {
-      return {
-        require: ['btnRadio', 'ngModel'],
-        controller: 'ButtonsController',
-        controllerAs: 'buttons',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$buttonsSuppressWarning) {
-            $log.warn('btn-radio is now deprecated. Use uib-btn-radio instead.');
-          }
-          var buttonsCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          element.find('input').css({display: 'none'});
-          ngModelCtrl.$render = function() {
-            element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, scope.$eval(attrs.btnRadio)));
-          };
-          element.bind(buttonsCtrl.toggleEvent, function() {
-            if (attrs.disabled) {
-              return;
-            }
-            var isActive = element.hasClass(buttonsCtrl.activeClass);
-            if (!isActive || angular.isDefined(attrs.uncheckable)) {
-              scope.$apply(function() {
-                ngModelCtrl.$setViewValue(isActive ? null : scope.$eval(attrs.btnRadio));
-                ngModelCtrl.$render();
-              });
-            }
-          });
-        }
-      };
-    }]).directive('btnCheckbox', ['$document', '$log', '$buttonsSuppressWarning', function($document, $log, $buttonsSuppressWarning) {
-      return {
-        require: ['btnCheckbox', 'ngModel'],
-        controller: 'ButtonsController',
-        controllerAs: 'button',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$buttonsSuppressWarning) {
-            $log.warn('btn-checkbox is now deprecated. Use uib-btn-checkbox instead.');
-          }
-          var buttonsCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          element.find('input').css({display: 'none'});
-          function getTrueValue() {
-            return getCheckboxValue(attrs.btnCheckboxTrue, true);
-          }
-          function getFalseValue() {
-            return getCheckboxValue(attrs.btnCheckboxFalse, false);
-          }
-          function getCheckboxValue(attributeValue, defaultValue) {
-            var val = scope.$eval(attributeValue);
-            return angular.isDefined(val) ? val : defaultValue;
-          }
-          ngModelCtrl.$render = function() {
-            element.toggleClass(buttonsCtrl.activeClass, angular.equals(ngModelCtrl.$modelValue, getTrueValue()));
-          };
-          element.bind(buttonsCtrl.toggleEvent, function() {
-            if (attrs.disabled) {
-              return;
-            }
-            scope.$apply(function() {
-              ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
-              ngModelCtrl.$render();
-            });
-          });
-          element.on('keypress', function(e) {
-            if (attrs.disabled || e.which !== 32 || $document[0].activeElement !== element[0]) {
-              return;
-            }
-            scope.$apply(function() {
-              ngModelCtrl.$setViewValue(element.hasClass(buttonsCtrl.activeClass) ? getFalseValue() : getTrueValue());
-              ngModelCtrl.$render();
-            });
-          });
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.carousel', []).controller('UibCarouselController', ['$scope', '$element', '$interval', '$animate', function($scope, $element, $interval, $animate) {
-      var self = this,
-          slides = self.slides = $scope.slides = [],
-          NEW_ANIMATE = angular.version.minor >= 4,
-          NO_TRANSITION = 'uib-noTransition',
-          SLIDE_DIRECTION = 'uib-slideDirection',
-          currentIndex = -1,
-          currentInterval,
-          isPlaying;
-      self.currentSlide = null;
-      var destroyed = false;
-      self.select = $scope.select = function(nextSlide, direction) {
-        var nextIndex = $scope.indexOfSlide(nextSlide);
-        if (direction === undefined) {
-          direction = nextIndex > self.getCurrentIndex() ? 'next' : 'prev';
-        }
-        if (nextSlide && nextSlide !== self.currentSlide && !$scope.$currentTransition) {
-          goNext(nextSlide, nextIndex, direction);
-        }
-      };
-      function goNext(slide, index, direction) {
-        if (destroyed) {
-          return;
-        }
-        angular.extend(slide, {
-          direction: direction,
-          active: true
-        });
-        angular.extend(self.currentSlide || {}, {
-          direction: direction,
-          active: false
-        });
-        if ($animate.enabled() && !$scope.noTransition && !$scope.$currentTransition && slide.$element && self.slides.length > 1) {
-          slide.$element.data(SLIDE_DIRECTION, slide.direction);
-          if (self.currentSlide && self.currentSlide.$element) {
-            self.currentSlide.$element.data(SLIDE_DIRECTION, slide.direction);
-          }
-          $scope.$currentTransition = true;
-          if (NEW_ANIMATE) {
-            $animate.on('addClass', slide.$element, function(element, phase) {
-              if (phase === 'close') {
-                $scope.$currentTransition = null;
-                $animate.off('addClass', element);
-              }
-            });
+        scope.$watch(attrs.uibCollapse, function(shouldCollapse) {
+          if (shouldCollapse) {
+            collapse();
           } else {
-            slide.$element.one('$animate:close', function closeFn() {
-              $scope.$currentTransition = null;
-            });
+            expand();
           }
-        }
-        self.currentSlide = slide;
-        currentIndex = index;
-        restartTimer();
+        });
+      }};
+  }]);
+  angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.position']).constant('uibDropdownConfig', {
+    appendToOpenClass: 'uib-dropdown-open',
+    openClass: 'open'
+  }).service('uibDropdownService', ['$document', '$rootScope', function($document, $rootScope) {
+    var openScope = null;
+    this.open = function(dropdownScope) {
+      if (!openScope) {
+        $document.on('click', closeDropdown);
+        $document.on('keydown', keybindFilter);
       }
-      $scope.$on('$destroy', function() {
-        destroyed = true;
-      });
-      function getSlideByIndex(index) {
-        if (angular.isUndefined(slides[index].index)) {
-          return slides[index];
+      if (openScope && openScope !== dropdownScope) {
+        openScope.isOpen = false;
+      }
+      openScope = dropdownScope;
+    };
+    this.close = function(dropdownScope) {
+      if (openScope === dropdownScope) {
+        openScope = null;
+        $document.off('click', closeDropdown);
+        $document.off('keydown', keybindFilter);
+      }
+    };
+    var closeDropdown = function(evt) {
+      if (!openScope) {
+        return;
+      }
+      if (evt && openScope.getAutoClose() === 'disabled') {
+        return;
+      }
+      if (evt && evt.which === 3) {
+        return;
+      }
+      var toggleElement = openScope.getToggleElement();
+      if (evt && toggleElement && toggleElement[0].contains(evt.target)) {
+        return;
+      }
+      var dropdownElement = openScope.getDropdownElement();
+      if (evt && openScope.getAutoClose() === 'outsideClick' && dropdownElement && dropdownElement[0].contains(evt.target)) {
+        return;
+      }
+      openScope.isOpen = false;
+      if (!$rootScope.$$phase) {
+        openScope.$apply();
+      }
+    };
+    var keybindFilter = function(evt) {
+      if (evt.which === 27) {
+        openScope.focusToggleElement();
+        closeDropdown();
+      } else if (openScope.isKeynavEnabled() && [38, 40].indexOf(evt.which) !== -1 && openScope.isOpen) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        openScope.focusDropdownEntry(evt.which);
+      }
+    };
+  }]).controller('UibDropdownController', ['$scope', '$element', '$attrs', '$parse', 'uibDropdownConfig', 'uibDropdownService', '$animate', '$uibPosition', '$document', '$compile', '$templateRequest', function($scope, $element, $attrs, $parse, dropdownConfig, uibDropdownService, $animate, $position, $document, $compile, $templateRequest) {
+    var self = this,
+        scope = $scope.$new(),
+        templateScope,
+        appendToOpenClass = dropdownConfig.appendToOpenClass,
+        openClass = dropdownConfig.openClass,
+        getIsOpen,
+        setIsOpen = angular.noop,
+        toggleInvoker = $attrs.onToggle ? $parse($attrs.onToggle) : angular.noop,
+        appendToBody = false,
+        appendTo = null,
+        keynavEnabled = false,
+        selectedOption = null,
+        body = $document.find('body');
+    $element.addClass('dropdown');
+    this.init = function() {
+      if ($attrs.isOpen) {
+        getIsOpen = $parse($attrs.isOpen);
+        setIsOpen = getIsOpen.assign;
+        $scope.$watch(getIsOpen, function(value) {
+          scope.isOpen = !!value;
+        });
+      }
+      if (angular.isDefined($attrs.dropdownAppendTo)) {
+        var appendToEl = $parse($attrs.dropdownAppendTo)(scope);
+        if (appendToEl) {
+          appendTo = angular.element(appendToEl);
         }
-        var i,
-            len = slides.length;
-        for (i = 0; i < slides.length; ++i) {
-          if (slides[i].index == index) {
-            return slides[i];
+      }
+      appendToBody = angular.isDefined($attrs.dropdownAppendToBody);
+      keynavEnabled = angular.isDefined($attrs.keyboardNav);
+      if (appendToBody && !appendTo) {
+        appendTo = body;
+      }
+      if (appendTo && self.dropdownMenu) {
+        appendTo.append(self.dropdownMenu);
+        $element.on('$destroy', function handleDestroyEvent() {
+          self.dropdownMenu.remove();
+        });
+      }
+    };
+    this.toggle = function(open) {
+      return scope.isOpen = arguments.length ? !!open : !scope.isOpen;
+    };
+    this.isOpen = function() {
+      return scope.isOpen;
+    };
+    scope.getToggleElement = function() {
+      return self.toggleElement;
+    };
+    scope.getAutoClose = function() {
+      return $attrs.autoClose || 'always';
+    };
+    scope.getElement = function() {
+      return $element;
+    };
+    scope.isKeynavEnabled = function() {
+      return keynavEnabled;
+    };
+    scope.focusDropdownEntry = function(keyCode) {
+      var elems = self.dropdownMenu ? angular.element(self.dropdownMenu).find('a') : $element.find('ul').eq(0).find('a');
+      switch (keyCode) {
+        case 40:
+          {
+            if (!angular.isNumber(self.selectedOption)) {
+              self.selectedOption = 0;
+            } else {
+              self.selectedOption = self.selectedOption === elems.length - 1 ? self.selectedOption : self.selectedOption + 1;
+            }
+            break;
           }
-        }
+        case 38:
+          {
+            if (!angular.isNumber(self.selectedOption)) {
+              self.selectedOption = elems.length - 1;
+            } else {
+              self.selectedOption = self.selectedOption === 0 ? 0 : self.selectedOption - 1;
+            }
+            break;
+          }
       }
-      self.getCurrentIndex = function() {
-        if (self.currentSlide && angular.isDefined(self.currentSlide.index)) {
-          return +self.currentSlide.index;
-        }
-        return currentIndex;
-      };
-      $scope.indexOfSlide = function(slide) {
-        return angular.isDefined(slide.index) ? +slide.index : slides.indexOf(slide);
-      };
-      $scope.next = function() {
-        var newIndex = (self.getCurrentIndex() + 1) % slides.length;
-        if (newIndex === 0 && $scope.noWrap()) {
-          $scope.pause();
-          return;
-        }
-        return self.select(getSlideByIndex(newIndex), 'next');
-      };
-      $scope.prev = function() {
-        var newIndex = self.getCurrentIndex() - 1 < 0 ? slides.length - 1 : self.getCurrentIndex() - 1;
-        if ($scope.noWrap() && newIndex === slides.length - 1) {
-          $scope.pause();
-          return;
-        }
-        return self.select(getSlideByIndex(newIndex), 'prev');
-      };
-      $scope.isActive = function(slide) {
-        return self.currentSlide === slide;
-      };
-      $scope.$watch('interval', restartTimer);
-      $scope.$watchCollection('slides', resetTransition);
-      $scope.$on('$destroy', resetTimer);
-      function restartTimer() {
-        resetTimer();
-        var interval = +$scope.interval;
-        if (!isNaN(interval) && interval > 0) {
-          currentInterval = $interval(timerFn, interval);
-        }
+      elems[self.selectedOption].focus();
+    };
+    scope.getDropdownElement = function() {
+      return self.dropdownMenu;
+    };
+    scope.focusToggleElement = function() {
+      if (self.toggleElement) {
+        self.toggleElement[0].focus();
       }
-      function resetTimer() {
-        if (currentInterval) {
-          $interval.cancel(currentInterval);
-          currentInterval = null;
-        }
-      }
-      function timerFn() {
-        var interval = +$scope.interval;
-        if (isPlaying && !isNaN(interval) && interval > 0 && slides.length) {
-          $scope.next();
+    };
+    scope.$watch('isOpen', function(isOpen, wasOpen) {
+      if (appendTo && self.dropdownMenu) {
+        var pos = $position.positionElements($element, self.dropdownMenu, 'bottom-left', true),
+            css,
+            rightalign;
+        css = {
+          top: pos.top + 'px',
+          display: isOpen ? 'block' : 'none'
+        };
+        rightalign = self.dropdownMenu.hasClass('dropdown-menu-right');
+        if (!rightalign) {
+          css.left = pos.left + 'px';
+          css.right = 'auto';
         } else {
-          $scope.pause();
+          css.left = 'auto';
+          css.right = window.innerWidth - (pos.left + $element.prop('offsetWidth')) + 'px';
         }
-      }
-      function resetTransition(slides) {
-        if (!slides.length) {
-          $scope.$currentTransition = null;
-        }
-      }
-      $scope.play = function() {
-        if (!isPlaying) {
-          isPlaying = true;
-          restartTimer();
-        }
-      };
-      $scope.pause = function() {
-        if (!$scope.noPause) {
-          isPlaying = false;
-          resetTimer();
-        }
-      };
-      self.addSlide = function(slide, element) {
-        slide.$element = element;
-        slides.push(slide);
-        if (slides.length === 1 || slide.active) {
-          self.select(slides[slides.length - 1]);
-          if (slides.length === 1) {
-            $scope.play();
-          }
-        } else {
-          slide.active = false;
-        }
-      };
-      self.removeSlide = function(slide) {
-        if (angular.isDefined(slide.index)) {
-          slides.sort(function(a, b) {
-            return +a.index > +b.index;
-          });
-        }
-        var index = slides.indexOf(slide);
-        slides.splice(index, 1);
-        if (slides.length > 0 && slide.active) {
-          if (index >= slides.length) {
-            self.select(slides[index - 1]);
+        if (!appendToBody) {
+          var appendOffset = $position.offset(appendTo);
+          css.top = pos.top - appendOffset.top + 'px';
+          if (!rightalign) {
+            css.left = pos.left - appendOffset.left + 'px';
           } else {
-            self.select(slides[index]);
+            css.right = window.innerWidth - (pos.left - appendOffset.left + $element.prop('offsetWidth')) + 'px';
           }
-        } else if (currentIndex > index) {
-          currentIndex--;
         }
-        if (slides.length === 0) {
-          self.currentSlide = null;
-        }
-      };
-      $scope.$watch('noTransition', function(noTransition) {
-        $element.data(NO_TRANSITION, noTransition);
-      });
-    }]).directive('uibCarousel', [function() {
-      return {
-        transclude: true,
-        replace: true,
-        controller: 'UibCarouselController',
-        controllerAs: 'carousel',
-        require: 'carousel',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/carousel/carousel.html';
-        },
-        scope: {
-          interval: '=',
-          noTransition: '=',
-          noPause: '=',
-          noWrap: '&'
-        }
-      };
-    }]).directive('uibSlide', function() {
-      return {
-        require: '^uibCarousel',
-        restrict: 'EA',
-        transclude: true,
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/carousel/slide.html';
-        },
-        scope: {
-          active: '=?',
-          actual: '=?',
-          index: '=?'
-        },
-        link: function(scope, element, attrs, carouselCtrl) {
-          carouselCtrl.addSlide(scope, element);
-          scope.$on('$destroy', function() {
-            carouselCtrl.removeSlide(scope);
-          });
-          scope.$watch('active', function(active) {
-            if (active) {
-              carouselCtrl.select(scope);
-            }
-          });
-        }
-      };
-    }).animation('.item', ['$injector', '$animate', function($injector, $animate) {
-      var NO_TRANSITION = 'uib-noTransition',
-          SLIDE_DIRECTION = 'uib-slideDirection',
-          $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
+        self.dropdownMenu.css(css);
       }
-      function removeClass(element, className, callback) {
-        element.removeClass(className);
-        if (callback) {
-          callback();
-        }
+      var openContainer = appendTo ? appendTo : $element;
+      var hasOpenClass = openContainer.hasClass(appendTo ? appendToOpenClass : openClass);
+      if (hasOpenClass === !isOpen) {
+        $animate[isOpen ? 'addClass' : 'removeClass'](openContainer, appendTo ? appendToOpenClass : openClass).then(function() {
+          if (angular.isDefined(isOpen) && isOpen !== wasOpen) {
+            toggleInvoker($scope, {open: !!isOpen});
+          }
+        });
       }
-      return {
-        beforeAddClass: function(element, className, done) {
-          if (className == 'active' && element.parent() && element.parent().parent() && !element.parent().parent().data(NO_TRANSITION)) {
-            var stopped = false;
-            var direction = element.data(SLIDE_DIRECTION);
-            var directionClass = direction == 'next' ? 'left' : 'right';
-            var removeClassFn = removeClass.bind(this, element, directionClass + ' ' + direction, done);
-            element.addClass(direction);
-            if ($animateCss) {
-              $animateCss(element, {addClass: directionClass}).start().done(removeClassFn);
-            } else {
-              $animate.addClass(element, directionClass).then(function() {
-                if (!stopped) {
-                  removeClassFn();
-                }
-                done();
-              });
-            }
-            return function() {
-              stopped = true;
-            };
-          }
-          done();
-        },
-        beforeRemoveClass: function(element, className, done) {
-          if (className === 'active' && element.parent() && element.parent().parent() && !element.parent().parent().data(NO_TRANSITION)) {
-            var stopped = false;
-            var direction = element.data(SLIDE_DIRECTION);
-            var directionClass = direction == 'next' ? 'left' : 'right';
-            var removeClassFn = removeClass.bind(this, element, directionClass, done);
-            if ($animateCss) {
-              $animateCss(element, {addClass: directionClass}).start().done(removeClassFn);
-            } else {
-              $animate.addClass(element, directionClass).then(function() {
-                if (!stopped) {
-                  removeClassFn();
-                }
-                done();
-              });
-            }
-            return function() {
-              stopped = true;
-            };
-          }
-          done();
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.carousel').value('$carouselSuppressWarning', false).controller('CarouselController', ['$scope', '$element', '$controller', '$log', '$carouselSuppressWarning', function($scope, $element, $controller, $log, $carouselSuppressWarning) {
-      if (!$carouselSuppressWarning) {
-        $log.warn('CarouselController is now deprecated. Use UibCarouselController instead.');
-      }
-      angular.extend(this, $controller('UibCarouselController', {
-        $scope: $scope,
-        $element: $element
-      }));
-    }]).directive('carousel', ['$log', '$carouselSuppressWarning', function($log, $carouselSuppressWarning) {
-      return {
-        transclude: true,
-        replace: true,
-        controller: 'CarouselController',
-        controllerAs: 'carousel',
-        require: 'carousel',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/carousel/carousel.html';
-        },
-        scope: {
-          interval: '=',
-          noTransition: '=',
-          noPause: '=',
-          noWrap: '&'
-        },
-        link: function() {
-          if (!$carouselSuppressWarning) {
-            $log.warn('carousel is now deprecated. Use uib-carousel instead.');
-          }
-        }
-      };
-    }]).directive('slide', ['$log', '$carouselSuppressWarning', function($log, $carouselSuppressWarning) {
-      return {
-        require: '^carousel',
-        transclude: true,
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/carousel/slide.html';
-        },
-        scope: {
-          active: '=?',
-          actual: '=?',
-          index: '=?'
-        },
-        link: function(scope, element, attrs, carouselCtrl) {
-          if (!$carouselSuppressWarning) {
-            $log.warn('slide is now deprecated. Use uib-slide instead.');
-          }
-          carouselCtrl.addSlide(scope, element);
-          scope.$on('$destroy', function() {
-            carouselCtrl.removeSlide(scope);
-          });
-          scope.$watch('active', function(active) {
-            if (active) {
-              carouselCtrl.select(scope);
-            }
+      if (isOpen) {
+        if (self.dropdownMenuTemplateUrl) {
+          $templateRequest(self.dropdownMenuTemplateUrl).then(function(tplContent) {
+            templateScope = scope.$new();
+            $compile(tplContent.trim())(templateScope, function(dropdownElement) {
+              var newEl = dropdownElement;
+              self.dropdownMenu.replaceWith(newEl);
+              self.dropdownMenu = newEl;
+            });
           });
         }
-      };
-    }]);
-    angular.module('ui.bootstrap.dateparser', []).service('uibDateParser', ['$log', '$locale', 'orderByFilter', function($log, $locale, orderByFilter) {
-      var SPECIAL_CHARACTERS_REGEXP = /[\\\^\$\*\+\?\|\[\]\(\)\.\{\}]/g;
-      var localeId;
-      var formatCodeToRegex;
-      this.init = function() {
-        localeId = $locale.id;
-        this.parsers = {};
-        formatCodeToRegex = {
-          'yyyy': {
-            regex: '\\d{4}',
-            apply: function(value) {
-              this.year = +value;
-            }
-          },
-          'yy': {
-            regex: '\\d{2}',
-            apply: function(value) {
-              this.year = +value + 2000;
-            }
-          },
-          'y': {
-            regex: '\\d{1,4}',
-            apply: function(value) {
-              this.year = +value;
-            }
-          },
-          'MMMM': {
-            regex: $locale.DATETIME_FORMATS.MONTH.join('|'),
-            apply: function(value) {
-              this.month = $locale.DATETIME_FORMATS.MONTH.indexOf(value);
-            }
-          },
-          'MMM': {
-            regex: $locale.DATETIME_FORMATS.SHORTMONTH.join('|'),
-            apply: function(value) {
-              this.month = $locale.DATETIME_FORMATS.SHORTMONTH.indexOf(value);
-            }
-          },
-          'MM': {
-            regex: '0[1-9]|1[0-2]',
-            apply: function(value) {
-              this.month = value - 1;
-            }
-          },
-          'M': {
-            regex: '[1-9]|1[0-2]',
-            apply: function(value) {
-              this.month = value - 1;
-            }
-          },
-          'dd': {
-            regex: '[0-2][0-9]{1}|3[0-1]{1}',
-            apply: function(value) {
-              this.date = +value;
-            }
-          },
-          'd': {
-            regex: '[1-2]?[0-9]{1}|3[0-1]{1}',
-            apply: function(value) {
-              this.date = +value;
-            }
-          },
-          'EEEE': {regex: $locale.DATETIME_FORMATS.DAY.join('|')},
-          'EEE': {regex: $locale.DATETIME_FORMATS.SHORTDAY.join('|')},
-          'HH': {
-            regex: '(?:0|1)[0-9]|2[0-3]',
-            apply: function(value) {
-              this.hours = +value;
-            }
-          },
-          'hh': {
-            regex: '0[0-9]|1[0-2]',
-            apply: function(value) {
-              this.hours = +value;
-            }
-          },
-          'H': {
-            regex: '1?[0-9]|2[0-3]',
-            apply: function(value) {
-              this.hours = +value;
-            }
-          },
-          'h': {
-            regex: '[0-9]|1[0-2]',
-            apply: function(value) {
-              this.hours = +value;
-            }
-          },
-          'mm': {
-            regex: '[0-5][0-9]',
-            apply: function(value) {
-              this.minutes = +value;
-            }
-          },
-          'm': {
-            regex: '[0-9]|[1-5][0-9]',
-            apply: function(value) {
-              this.minutes = +value;
-            }
-          },
-          'sss': {
-            regex: '[0-9][0-9][0-9]',
-            apply: function(value) {
-              this.milliseconds = +value;
-            }
-          },
-          'ss': {
-            regex: '[0-5][0-9]',
-            apply: function(value) {
-              this.seconds = +value;
-            }
-          },
-          's': {
-            regex: '[0-9]|[1-5][0-9]',
-            apply: function(value) {
-              this.seconds = +value;
-            }
-          },
-          'a': {
-            regex: $locale.DATETIME_FORMATS.AMPMS.join('|'),
-            apply: function(value) {
-              if (this.hours === 12) {
-                this.hours = 0;
-              }
-              if (value === 'PM') {
-                this.hours += 12;
-              }
-            }
+        scope.focusToggleElement();
+        uibDropdownService.open(scope);
+      } else {
+        if (self.dropdownMenuTemplateUrl) {
+          if (templateScope) {
+            templateScope.$destroy();
+          }
+          var newEl = angular.element('<ul class="dropdown-menu"></ul>');
+          self.dropdownMenu.replaceWith(newEl);
+          self.dropdownMenu = newEl;
+        }
+        uibDropdownService.close(scope);
+        self.selectedOption = null;
+      }
+      if (angular.isFunction(setIsOpen)) {
+        setIsOpen($scope, isOpen);
+      }
+    });
+    $scope.$on('$locationChangeSuccess', function() {
+      if (scope.getAutoClose() !== 'disabled') {
+        scope.isOpen = false;
+      }
+    });
+  }]).directive('uibDropdown', function() {
+    return {
+      controller: 'UibDropdownController',
+      link: function(scope, element, attrs, dropdownCtrl) {
+        dropdownCtrl.init();
+      }
+    };
+  }).directive('uibDropdownMenu', function() {
+    return {
+      restrict: 'A',
+      require: '?^uibDropdown',
+      link: function(scope, element, attrs, dropdownCtrl) {
+        if (!dropdownCtrl || angular.isDefined(attrs.dropdownNested)) {
+          return;
+        }
+        element.addClass('dropdown-menu');
+        var tplUrl = attrs.templateUrl;
+        if (tplUrl) {
+          dropdownCtrl.dropdownMenuTemplateUrl = tplUrl;
+        }
+        if (!dropdownCtrl.dropdownMenu) {
+          dropdownCtrl.dropdownMenu = element;
+        }
+      }
+    };
+  }).directive('uibDropdownToggle', function() {
+    return {
+      require: '?^uibDropdown',
+      link: function(scope, element, attrs, dropdownCtrl) {
+        if (!dropdownCtrl) {
+          return;
+        }
+        element.addClass('dropdown-toggle');
+        dropdownCtrl.toggleElement = element;
+        var toggleDropdown = function(event) {
+          event.preventDefault();
+          if (!element.hasClass('disabled') && !attrs.disabled) {
+            scope.$apply(function() {
+              dropdownCtrl.toggle();
+            });
           }
         };
-      };
-      this.init();
-      function createParser(format) {
-        var map = [],
-            regex = format.split('');
-        angular.forEach(formatCodeToRegex, function(data, code) {
-          var index = format.indexOf(code);
-          if (index > -1) {
-            format = format.split('');
-            regex[index] = '(' + data.regex + ')';
-            format[index] = '$';
-            for (var i = index + 1,
-                n = index + code.length; i < n; i++) {
-              regex[i] = '';
-              format[i] = '$';
-            }
-            format = format.join('');
-            map.push({
-              index: index,
-              apply: data.apply
-            });
-          }
+        element.bind('mouseenter', toggleDropdown);
+        element.attr({
+          'aria-haspopup': true,
+          'aria-expanded': false
         });
-        return {
-          regex: new RegExp('^' + regex.join('') + '$'),
-          map: orderByFilter(map, 'index')
-        };
+        scope.$watch(dropdownCtrl.isOpen, function(isOpen) {
+          element.attr('aria-expanded', !!isOpen);
+        });
+        scope.$on('$destroy', function() {
+          element.unbind('click', toggleDropdown);
+        });
       }
-      this.parse = function(input, format, baseDate) {
-        if (!angular.isString(input) || !format) {
-          return input;
+    };
+  });
+  angular.module('ui.bootstrap.position', []).factory('$uibPosition', ['$document', '$window', function($document, $window) {
+    var SCROLLBAR_WIDTH;
+    var OVERFLOW_REGEX = {
+      normal: /(auto|scroll)/,
+      hidden: /(auto|scroll|hidden)/
+    };
+    var PLACEMENT_REGEX = {
+      auto: /\s?auto?\s?/i,
+      primary: /^(top|bottom|left|right)$/,
+      secondary: /^(top|bottom|left|right|center)$/,
+      vertical: /^(top|bottom)$/
+    };
+    return {
+      getRawNode: function(elem) {
+        return elem.nodeName ? elem : elem[0] || elem;
+      },
+      parseStyle: function(value) {
+        value = parseFloat(value);
+        return isFinite(value) ? value : 0;
+      },
+      offsetParent: function(elem) {
+        elem = this.getRawNode(elem);
+        var offsetParent = elem.offsetParent || $document[0].documentElement;
+        function isStaticPositioned(el) {
+          return ($window.getComputedStyle(el).position || 'static') === 'static';
         }
-        format = $locale.DATETIME_FORMATS[format] || format;
-        format = format.replace(SPECIAL_CHARACTERS_REGEXP, '\\$&');
-        if ($locale.id !== localeId) {
-          this.init();
-        }
-        if (!this.parsers[format]) {
-          this.parsers[format] = createParser(format);
-        }
-        var parser = this.parsers[format],
-            regex = parser.regex,
-            map = parser.map,
-            results = input.match(regex);
-        if (results && results.length) {
-          var fields,
-              dt;
-          if (angular.isDate(baseDate) && !isNaN(baseDate.getTime())) {
-            fields = {
-              year: baseDate.getFullYear(),
-              month: baseDate.getMonth(),
-              date: baseDate.getDate(),
-              hours: baseDate.getHours(),
-              minutes: baseDate.getMinutes(),
-              seconds: baseDate.getSeconds(),
-              milliseconds: baseDate.getMilliseconds()
-            };
-          } else {
-            if (baseDate) {
-              $log.warn('dateparser:', 'baseDate is not a valid date');
-            }
-            fields = {
-              year: 1900,
-              month: 0,
-              date: 1,
-              hours: 0,
-              minutes: 0,
-              seconds: 0,
-              milliseconds: 0
-            };
-          }
-          for (var i = 1,
-              n = results.length; i < n; i++) {
-            var mapper = map[i - 1];
-            if (mapper.apply) {
-              mapper.apply.call(fields, results[i]);
-            }
-          }
-          if (isValid(fields.year, fields.month, fields.date)) {
-            if (angular.isDate(baseDate) && !isNaN(baseDate.getTime())) {
-              dt = new Date(baseDate);
-              dt.setFullYear(fields.year, fields.month, fields.date, fields.hours, fields.minutes, fields.seconds, fields.milliseconds || 0);
-            } else {
-              dt = new Date(fields.year, fields.month, fields.date, fields.hours, fields.minutes, fields.seconds, fields.milliseconds || 0);
-            }
-          }
-          return dt;
-        }
-      };
-      function isValid(year, month, date) {
-        if (date < 1) {
-          return false;
-        }
-        if (month === 1 && date > 28) {
-          return date === 29 && ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0);
-        }
-        if (month === 3 || month === 5 || month === 8 || month === 10) {
-          return date < 31;
-        }
-        return true;
-      }
-    }]);
-    angular.module('ui.bootstrap.dateparser').value('$dateParserSuppressWarning', false).service('dateParser', ['$log', '$dateParserSuppressWarning', 'uibDateParser', function($log, $dateParserSuppressWarning, uibDateParser) {
-      if (!$dateParserSuppressWarning) {
-        $log.warn('dateParser is now deprecated. Use uibDateParser instead.');
-      }
-      angular.extend(this, uibDateParser);
-    }]);
-    angular.module('ui.bootstrap.position', []).factory('$uibPosition', ['$document', '$window', function($document, $window) {
-      function getStyle(el, cssprop) {
-        if (el.currentStyle) {
-          return el.currentStyle[cssprop];
-        } else if ($window.getComputedStyle) {
-          return $window.getComputedStyle(el)[cssprop];
-        }
-        return el.style[cssprop];
-      }
-      function isStaticPositioned(element) {
-        return (getStyle(element, 'position') || 'static') === 'static';
-      }
-      var parentOffsetEl = function(element) {
-        var docDomEl = $document[0];
-        var offsetParent = element.offsetParent || docDomEl;
-        while (offsetParent && offsetParent !== docDomEl && isStaticPositioned(offsetParent)) {
+        while (offsetParent && offsetParent !== $document[0].documentElement && isStaticPositioned(offsetParent)) {
           offsetParent = offsetParent.offsetParent;
         }
-        return offsetParent || docDomEl;
-      };
-      return {
-        position: function(element) {
-          var elBCR = this.offset(element);
-          var offsetParentBCR = {
-            top: 0,
-            left: 0
-          };
-          var offsetParentEl = parentOffsetEl(element[0]);
-          if (offsetParentEl != $document[0]) {
-            offsetParentBCR = this.offset(angular.element(offsetParentEl));
-            offsetParentBCR.top += offsetParentEl.clientTop - offsetParentEl.scrollTop;
-            offsetParentBCR.left += offsetParentEl.clientLeft - offsetParentEl.scrollLeft;
-          }
-          var boundingClientRect = element[0].getBoundingClientRect();
-          return {
-            width: boundingClientRect.width || element.prop('offsetWidth'),
-            height: boundingClientRect.height || element.prop('offsetHeight'),
-            top: elBCR.top - offsetParentBCR.top,
-            left: elBCR.left - offsetParentBCR.left
-          };
-        },
-        offset: function(element) {
-          var boundingClientRect = element[0].getBoundingClientRect();
-          return {
-            width: boundingClientRect.width || element.prop('offsetWidth'),
-            height: boundingClientRect.height || element.prop('offsetHeight'),
-            top: boundingClientRect.top + ($window.pageYOffset || $document[0].documentElement.scrollTop),
-            left: boundingClientRect.left + ($window.pageXOffset || $document[0].documentElement.scrollLeft)
-          };
-        },
-        positionElements: function(hostEl, targetEl, positionStr, appendToBody) {
-          var positionStrParts = positionStr.split('-');
-          var pos0 = positionStrParts[0],
-              pos1 = positionStrParts[1] || 'center';
-          var hostElPos,
-              targetElWidth,
-              targetElHeight,
-              targetElPos;
-          hostElPos = appendToBody ? this.offset(hostEl) : this.position(hostEl);
-          targetElWidth = targetEl.prop('offsetWidth');
-          targetElHeight = targetEl.prop('offsetHeight');
-          var shiftWidth = {
-            center: function() {
-              return hostElPos.left + hostElPos.width / 2 - targetElWidth / 2;
-            },
-            left: function() {
-              return hostElPos.left;
-            },
-            right: function() {
-              return hostElPos.left + hostElPos.width;
-            }
-          };
-          var shiftHeight = {
-            center: function() {
-              return hostElPos.top + hostElPos.height / 2 - targetElHeight / 2;
-            },
-            top: function() {
-              return hostElPos.top;
-            },
-            bottom: function() {
-              return hostElPos.top + hostElPos.height;
-            }
-          };
-          switch (pos0) {
-            case 'right':
-              targetElPos = {
-                top: shiftHeight[pos1](),
-                left: shiftWidth[pos0]()
-              };
-              break;
-            case 'left':
-              targetElPos = {
-                top: shiftHeight[pos1](),
-                left: hostElPos.left - targetElWidth
-              };
-              break;
-            case 'bottom':
-              targetElPos = {
-                top: shiftHeight[pos0](),
-                left: shiftWidth[pos1]()
-              };
-              break;
-            default:
-              targetElPos = {
-                top: hostElPos.top - targetElHeight,
-                left: shiftWidth[pos1]()
-              };
-              break;
-          }
-          return targetElPos;
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.position').value('$positionSuppressWarning', false).service('$position', ['$log', '$positionSuppressWarning', '$uibPosition', function($log, $positionSuppressWarning, $uibPosition) {
-      if (!$positionSuppressWarning) {
-        $log.warn('$position is now deprecated. Use $uibPosition instead.');
-      }
-      angular.extend(this, $uibPosition);
-    }]);
-    angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootstrap.position']).value('$datepickerSuppressError', false).constant('uibDatepickerConfig', {
-      formatDay: 'dd',
-      formatMonth: 'MMMM',
-      formatYear: 'yyyy',
-      formatDayHeader: 'EEE',
-      formatDayTitle: 'MMMM yyyy',
-      formatMonthTitle: 'yyyy',
-      datepickerMode: 'day',
-      minMode: 'day',
-      maxMode: 'year',
-      showWeeks: true,
-      startingDay: 0,
-      yearRange: 20,
-      minDate: null,
-      maxDate: null,
-      shortcutPropagation: false
-    }).controller('UibDatepickerController', ['$scope', '$attrs', '$parse', '$interpolate', '$log', 'dateFilter', 'uibDatepickerConfig', '$datepickerSuppressError', function($scope, $attrs, $parse, $interpolate, $log, dateFilter, datepickerConfig, $datepickerSuppressError) {
-      var self = this,
-          ngModelCtrl = {$setViewValue: angular.noop};
-      this.modes = ['day', 'month', 'year'];
-      angular.forEach(['formatDay', 'formatMonth', 'formatYear', 'formatDayHeader', 'formatDayTitle', 'formatMonthTitle', 'showWeeks', 'startingDay', 'yearRange', 'shortcutPropagation'], function(key, index) {
-        self[key] = angular.isDefined($attrs[key]) ? (index < 6 ? $interpolate($attrs[key])($scope.$parent) : $scope.$parent.$eval($attrs[key])) : datepickerConfig[key];
-      });
-      angular.forEach(['minDate', 'maxDate'], function(key) {
-        if ($attrs[key]) {
-          $scope.$parent.$watch($parse($attrs[key]), function(value) {
-            self[key] = value ? new Date(value) : null;
-            self.refreshView();
-          });
-        } else {
-          self[key] = datepickerConfig[key] ? new Date(datepickerConfig[key]) : null;
-        }
-      });
-      angular.forEach(['minMode', 'maxMode'], function(key) {
-        if ($attrs[key]) {
-          $scope.$parent.$watch($parse($attrs[key]), function(value) {
-            self[key] = angular.isDefined(value) ? value : $attrs[key];
-            $scope[key] = self[key];
-            if ((key == 'minMode' && self.modes.indexOf($scope.datepickerMode) < self.modes.indexOf(self[key])) || (key == 'maxMode' && self.modes.indexOf($scope.datepickerMode) > self.modes.indexOf(self[key]))) {
-              $scope.datepickerMode = self[key];
-            }
-          });
-        } else {
-          self[key] = datepickerConfig[key] || null;
-          $scope[key] = self[key];
-        }
-      });
-      $scope.datepickerMode = $scope.datepickerMode || datepickerConfig.datepickerMode;
-      $scope.uniqueId = 'datepicker-' + $scope.$id + '-' + Math.floor(Math.random() * 10000);
-      if (angular.isDefined($attrs.initDate)) {
-        this.activeDate = $scope.$parent.$eval($attrs.initDate) || new Date();
-        $scope.$parent.$watch($attrs.initDate, function(initDate) {
-          if (initDate && (ngModelCtrl.$isEmpty(ngModelCtrl.$modelValue) || ngModelCtrl.$invalid)) {
-            self.activeDate = initDate;
-            self.refreshView();
-          }
-        });
-      } else {
-        this.activeDate = new Date();
-      }
-      $scope.isActive = function(dateObject) {
-        if (self.compare(dateObject.date, self.activeDate) === 0) {
-          $scope.activeDateId = dateObject.uid;
-          return true;
-        }
-        return false;
-      };
-      this.init = function(ngModelCtrl_) {
-        ngModelCtrl = ngModelCtrl_;
-        ngModelCtrl.$render = function() {
-          self.render();
-        };
-      };
-      this.render = function() {
-        if (ngModelCtrl.$viewValue) {
-          var date = new Date(ngModelCtrl.$viewValue),
-              isValid = !isNaN(date);
-          if (isValid) {
-            this.activeDate = date;
-          } else if (!$datepickerSuppressError) {
-            $log.error('Datepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
-          }
-        }
-        this.refreshView();
-      };
-      this.refreshView = function() {
-        if (this.element) {
-          this._refreshView();
-          var date = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : null;
-          ngModelCtrl.$setValidity('dateDisabled', !date || (this.element && !this.isDisabled(date)));
-        }
-      };
-      this.createDateObject = function(date, format) {
-        var model = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : null;
-        return {
-          date: date,
-          label: dateFilter(date, format),
-          selected: model && this.compare(date, model) === 0,
-          disabled: this.isDisabled(date),
-          current: this.compare(date, new Date()) === 0,
-          customClass: this.customClass(date)
-        };
-      };
-      this.isDisabled = function(date) {
-        return ((this.minDate && this.compare(date, this.minDate) < 0) || (this.maxDate && this.compare(date, this.maxDate) > 0) || ($attrs.dateDisabled && $scope.dateDisabled({
-          date: date,
-          mode: $scope.datepickerMode
-        })));
-      };
-      this.customClass = function(date) {
-        return $scope.customClass({
-          date: date,
-          mode: $scope.datepickerMode
-        });
-      };
-      this.split = function(arr, size) {
-        var arrays = [];
-        while (arr.length > 0) {
-          arrays.push(arr.splice(0, size));
-        }
-        return arrays;
-      };
-      $scope.select = function(date) {
-        if ($scope.datepickerMode === self.minMode) {
-          var dt = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : new Date(0, 0, 0, 0, 0, 0, 0);
-          dt.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-          ngModelCtrl.$setViewValue(dt);
-          ngModelCtrl.$render();
-        } else {
-          self.activeDate = date;
-          $scope.datepickerMode = self.modes[self.modes.indexOf($scope.datepickerMode) - 1];
-        }
-      };
-      $scope.move = function(direction) {
-        var year = self.activeDate.getFullYear() + direction * (self.step.years || 0),
-            month = self.activeDate.getMonth() + direction * (self.step.months || 0);
-        self.activeDate.setFullYear(year, month, 1);
-        self.refreshView();
-      };
-      $scope.toggleMode = function(direction) {
-        direction = direction || 1;
-        if (($scope.datepickerMode === self.maxMode && direction === 1) || ($scope.datepickerMode === self.minMode && direction === -1)) {
-          return;
-        }
-        $scope.datepickerMode = self.modes[self.modes.indexOf($scope.datepickerMode) + direction];
-      };
-      $scope.keys = {
-        13: 'enter',
-        32: 'space',
-        33: 'pageup',
-        34: 'pagedown',
-        35: 'end',
-        36: 'home',
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-      };
-      var focusElement = function() {
-        self.element[0].focus();
-      };
-      $scope.$on('uib:datepicker.focus', focusElement);
-      $scope.keydown = function(evt) {
-        var key = $scope.keys[evt.which];
-        if (!key || evt.shiftKey || evt.altKey) {
-          return;
-        }
-        evt.preventDefault();
-        if (!self.shortcutPropagation) {
-          evt.stopPropagation();
-        }
-        if (key === 'enter' || key === 'space') {
-          if (self.isDisabled(self.activeDate)) {
-            return;
-          }
-          $scope.select(self.activeDate);
-        } else if (evt.ctrlKey && (key === 'up' || key === 'down')) {
-          $scope.toggleMode(key === 'up' ? 1 : -1);
-        } else {
-          self.handleKeyDown(key, evt);
-          self.refreshView();
-        }
-      };
-    }]).controller('UibDaypickerController', ['$scope', '$element', 'dateFilter', function(scope, $element, dateFilter) {
-      var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-      this.step = {months: 1};
-      this.element = $element;
-      function getDaysInMonth(year, month) {
-        return ((month === 1) && (year % 4 === 0) && ((year % 100 !== 0) || (year % 400 === 0))) ? 29 : DAYS_IN_MONTH[month];
-      }
-      this.init = function(ctrl) {
-        angular.extend(ctrl, this);
-        scope.showWeeks = ctrl.showWeeks;
-        ctrl.refreshView();
-      };
-      this.getDates = function(startDate, n) {
-        var dates = new Array(n),
-            current = new Date(startDate),
-            i = 0,
-            date;
-        while (i < n) {
-          date = new Date(current);
-          dates[i++] = date;
-          current.setDate(current.getDate() + 1);
-        }
-        return dates;
-      };
-      this._refreshView = function() {
-        var year = this.activeDate.getFullYear(),
-            month = this.activeDate.getMonth(),
-            firstDayOfMonth = new Date(this.activeDate);
-        firstDayOfMonth.setFullYear(year, month, 1);
-        var difference = this.startingDay - firstDayOfMonth.getDay(),
-            numDisplayedFromPreviousMonth = (difference > 0) ? 7 - difference : -difference,
-            firstDate = new Date(firstDayOfMonth);
-        if (numDisplayedFromPreviousMonth > 0) {
-          firstDate.setDate(-numDisplayedFromPreviousMonth + 1);
-        }
-        var days = this.getDates(firstDate, 42);
-        for (var i = 0; i < 42; i++) {
-          days[i] = angular.extend(this.createDateObject(days[i], this.formatDay), {
-            secondary: days[i].getMonth() !== month,
-            uid: scope.uniqueId + '-' + i
-          });
-        }
-        scope.labels = new Array(7);
-        for (var j = 0; j < 7; j++) {
-          scope.labels[j] = {
-            abbr: dateFilter(days[j].date, this.formatDayHeader),
-            full: dateFilter(days[j].date, 'EEEE')
-          };
-        }
-        scope.title = dateFilter(this.activeDate, this.formatDayTitle);
-        scope.rows = this.split(days, 7);
-        if (scope.showWeeks) {
-          scope.weekNumbers = [];
-          var thursdayIndex = (4 + 7 - this.startingDay) % 7,
-              numWeeks = scope.rows.length;
-          for (var curWeek = 0; curWeek < numWeeks; curWeek++) {
-            scope.weekNumbers.push(getISO8601WeekNumber(scope.rows[curWeek][thursdayIndex].date));
-          }
-        }
-      };
-      this.compare = function(date1, date2) {
-        return (new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()));
-      };
-      function getISO8601WeekNumber(date) {
-        var checkDate = new Date(date);
-        checkDate.setDate(checkDate.getDate() + 4 - (checkDate.getDay() || 7));
-        var time = checkDate.getTime();
-        checkDate.setMonth(0);
-        checkDate.setDate(1);
-        return Math.floor(Math.round((time - checkDate) / 86400000) / 7) + 1;
-      }
-      this.handleKeyDown = function(key, evt) {
-        var date = this.activeDate.getDate();
-        if (key === 'left') {
-          date = date - 1;
-        } else if (key === 'up') {
-          date = date - 7;
-        } else if (key === 'right') {
-          date = date + 1;
-        } else if (key === 'down') {
-          date = date + 7;
-        } else if (key === 'pageup' || key === 'pagedown') {
-          var month = this.activeDate.getMonth() + (key === 'pageup' ? -1 : 1);
-          this.activeDate.setMonth(month, 1);
-          date = Math.min(getDaysInMonth(this.activeDate.getFullYear(), this.activeDate.getMonth()), date);
-        } else if (key === 'home') {
-          date = 1;
-        } else if (key === 'end') {
-          date = getDaysInMonth(this.activeDate.getFullYear(), this.activeDate.getMonth());
-        }
-        this.activeDate.setDate(date);
-      };
-    }]).controller('UibMonthpickerController', ['$scope', '$element', 'dateFilter', function(scope, $element, dateFilter) {
-      this.step = {years: 1};
-      this.element = $element;
-      this.init = function(ctrl) {
-        angular.extend(ctrl, this);
-        ctrl.refreshView();
-      };
-      this._refreshView = function() {
-        var months = new Array(12),
-            year = this.activeDate.getFullYear(),
-            date;
-        for (var i = 0; i < 12; i++) {
-          date = new Date(this.activeDate);
-          date.setFullYear(year, i, 1);
-          months[i] = angular.extend(this.createDateObject(date, this.formatMonth), {uid: scope.uniqueId + '-' + i});
-        }
-        scope.title = dateFilter(this.activeDate, this.formatMonthTitle);
-        scope.rows = this.split(months, 3);
-      };
-      this.compare = function(date1, date2) {
-        return new Date(date1.getFullYear(), date1.getMonth()) - new Date(date2.getFullYear(), date2.getMonth());
-      };
-      this.handleKeyDown = function(key, evt) {
-        var date = this.activeDate.getMonth();
-        if (key === 'left') {
-          date = date - 1;
-        } else if (key === 'up') {
-          date = date - 3;
-        } else if (key === 'right') {
-          date = date + 1;
-        } else if (key === 'down') {
-          date = date + 3;
-        } else if (key === 'pageup' || key === 'pagedown') {
-          var year = this.activeDate.getFullYear() + (key === 'pageup' ? -1 : 1);
-          this.activeDate.setFullYear(year);
-        } else if (key === 'home') {
-          date = 0;
-        } else if (key === 'end') {
-          date = 11;
-        }
-        this.activeDate.setMonth(date);
-      };
-    }]).controller('UibYearpickerController', ['$scope', '$element', 'dateFilter', function(scope, $element, dateFilter) {
-      var range;
-      this.element = $element;
-      function getStartingYear(year) {
-        return parseInt((year - 1) / range, 10) * range + 1;
-      }
-      this.yearpickerInit = function() {
-        range = this.yearRange;
-        this.step = {years: range};
-      };
-      this._refreshView = function() {
-        var years = new Array(range),
-            date;
-        for (var i = 0,
-            start = getStartingYear(this.activeDate.getFullYear()); i < range; i++) {
-          date = new Date(this.activeDate);
-          date.setFullYear(start + i, 0, 1);
-          years[i] = angular.extend(this.createDateObject(date, this.formatYear), {uid: scope.uniqueId + '-' + i});
-        }
-        scope.title = [years[0].label, years[range - 1].label].join(' - ');
-        scope.rows = this.split(years, 5);
-      };
-      this.compare = function(date1, date2) {
-        return date1.getFullYear() - date2.getFullYear();
-      };
-      this.handleKeyDown = function(key, evt) {
-        var date = this.activeDate.getFullYear();
-        if (key === 'left') {
-          date = date - 1;
-        } else if (key === 'up') {
-          date = date - 5;
-        } else if (key === 'right') {
-          date = date + 1;
-        } else if (key === 'down') {
-          date = date + 5;
-        } else if (key === 'pageup' || key === 'pagedown') {
-          date += (key === 'pageup' ? -1 : 1) * this.step.years;
-        } else if (key === 'home') {
-          date = getStartingYear(this.activeDate.getFullYear());
-        } else if (key === 'end') {
-          date = getStartingYear(this.activeDate.getFullYear()) + range - 1;
-        }
-        this.activeDate.setFullYear(date);
-      };
-    }]).directive('uibDatepicker', function() {
-      return {
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/datepicker.html';
-        },
-        scope: {
-          datepickerMode: '=?',
-          dateDisabled: '&',
-          customClass: '&',
-          shortcutPropagation: '&?'
-        },
-        require: ['uibDatepicker', '^ngModel'],
-        controller: 'UibDatepickerController',
-        controllerAs: 'datepicker',
-        link: function(scope, element, attrs, ctrls) {
-          var datepickerCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          datepickerCtrl.init(ngModelCtrl);
-        }
-      };
-    }).directive('uibDaypicker', function() {
-      return {
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/day.html';
-        },
-        require: ['^?uibDatepicker', 'uibDaypicker', '^?datepicker'],
-        controller: 'UibDaypickerController',
-        link: function(scope, element, attrs, ctrls) {
-          var datepickerCtrl = ctrls[0] || ctrls[2],
-              daypickerCtrl = ctrls[1];
-          daypickerCtrl.init(datepickerCtrl);
-        }
-      };
-    }).directive('uibMonthpicker', function() {
-      return {
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/month.html';
-        },
-        require: ['^?uibDatepicker', 'uibMonthpicker', '^?datepicker'],
-        controller: 'UibMonthpickerController',
-        link: function(scope, element, attrs, ctrls) {
-          var datepickerCtrl = ctrls[0] || ctrls[2],
-              monthpickerCtrl = ctrls[1];
-          monthpickerCtrl.init(datepickerCtrl);
-        }
-      };
-    }).directive('uibYearpicker', function() {
-      return {
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/year.html';
-        },
-        require: ['^?uibDatepicker', 'uibYearpicker', '^?datepicker'],
-        controller: 'UibYearpickerController',
-        link: function(scope, element, attrs, ctrls) {
-          var ctrl = ctrls[0] || ctrls[2];
-          angular.extend(ctrl, ctrls[1]);
-          ctrl.yearpickerInit();
-          ctrl.refreshView();
-        }
-      };
-    }).constant('uibDatepickerPopupConfig', {
-      datepickerPopup: 'yyyy-MM-dd',
-      datepickerPopupTemplateUrl: 'template/datepicker/popup.html',
-      datepickerTemplateUrl: 'template/datepicker/datepicker.html',
-      html5Types: {
-        date: 'yyyy-MM-dd',
-        'datetime-local': 'yyyy-MM-ddTHH:mm:ss.sss',
-        'month': 'yyyy-MM'
+        return offsetParent || $document[0].documentElement;
       },
-      currentText: 'Today',
-      clearText: 'Clear',
-      closeText: 'Done',
-      closeOnDateSelection: true,
-      appendToBody: false,
-      showButtonBar: true,
-      onOpenFocus: true
-    }).controller('UibDatepickerPopupController', ['$scope', '$element', '$attrs', '$compile', '$parse', '$document', '$rootScope', '$uibPosition', 'dateFilter', 'uibDateParser', 'uibDatepickerPopupConfig', '$timeout', function(scope, element, attrs, $compile, $parse, $document, $rootScope, $position, dateFilter, dateParser, datepickerPopupConfig, $timeout) {
-      var self = this;
-      var cache = {},
-          isHtml5DateInput = false;
-      var dateFormat,
-          closeOnDateSelection,
-          appendToBody,
-          onOpenFocus,
-          datepickerPopupTemplateUrl,
-          datepickerTemplateUrl,
-          popupEl,
-          datepickerEl,
-          ngModel,
-          $popup;
-      scope.watchData = {};
-      this.init = function(_ngModel_) {
-        ngModel = _ngModel_;
-        closeOnDateSelection = angular.isDefined(attrs.closeOnDateSelection) ? scope.$parent.$eval(attrs.closeOnDateSelection) : datepickerPopupConfig.closeOnDateSelection;
-        appendToBody = angular.isDefined(attrs.datepickerAppendToBody) ? scope.$parent.$eval(attrs.datepickerAppendToBody) : datepickerPopupConfig.appendToBody;
-        onOpenFocus = angular.isDefined(attrs.onOpenFocus) ? scope.$parent.$eval(attrs.onOpenFocus) : datepickerPopupConfig.onOpenFocus;
-        datepickerPopupTemplateUrl = angular.isDefined(attrs.datepickerPopupTemplateUrl) ? attrs.datepickerPopupTemplateUrl : datepickerPopupConfig.datepickerPopupTemplateUrl;
-        datepickerTemplateUrl = angular.isDefined(attrs.datepickerTemplateUrl) ? attrs.datepickerTemplateUrl : datepickerPopupConfig.datepickerTemplateUrl;
-        scope.showButtonBar = angular.isDefined(attrs.showButtonBar) ? scope.$parent.$eval(attrs.showButtonBar) : datepickerPopupConfig.showButtonBar;
-        if (datepickerPopupConfig.html5Types[attrs.type]) {
-          dateFormat = datepickerPopupConfig.html5Types[attrs.type];
-          isHtml5DateInput = true;
-        } else {
-          dateFormat = attrs.datepickerPopup || attrs.uibDatepickerPopup || datepickerPopupConfig.datepickerPopup;
-          attrs.$observe('uibDatepickerPopup', function(value, oldValue) {
-            var newDateFormat = value || datepickerPopupConfig.datepickerPopup;
-            if (newDateFormat !== dateFormat) {
-              dateFormat = newDateFormat;
-              ngModel.$modelValue = null;
-              if (!dateFormat) {
-                throw new Error('uibDatepickerPopup must have a date format specified.');
-              }
-            }
-          });
+      scrollbarWidth: function() {
+        if (angular.isUndefined(SCROLLBAR_WIDTH)) {
+          var scrollElem = angular.element('<div class="uib-position-scrollbar-measure"></div>');
+          $document.find('body').append(scrollElem);
+          SCROLLBAR_WIDTH = scrollElem[0].offsetWidth - scrollElem[0].clientWidth;
+          SCROLLBAR_WIDTH = isFinite(SCROLLBAR_WIDTH) ? SCROLLBAR_WIDTH : 0;
+          scrollElem.remove();
         }
-        if (!dateFormat) {
-          throw new Error('uibDatepickerPopup must have a date format specified.');
+        return SCROLLBAR_WIDTH;
+      },
+      isScrollable: function(elem, includeHidden) {
+        elem = this.getRawNode(elem);
+        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal;
+        var elemStyle = $window.getComputedStyle(elem);
+        return overflowRegex.test(elemStyle.overflow + elemStyle.overflowY + elemStyle.overflowX);
+      },
+      scrollParent: function(elem, includeHidden) {
+        elem = this.getRawNode(elem);
+        var overflowRegex = includeHidden ? OVERFLOW_REGEX.hidden : OVERFLOW_REGEX.normal;
+        var documentEl = $document[0].documentElement;
+        var elemStyle = $window.getComputedStyle(elem);
+        var excludeStatic = elemStyle.position === 'absolute';
+        var scrollParent = elem.parentElement || documentEl;
+        if (scrollParent === documentEl || elemStyle.position === 'fixed') {
+          return documentEl;
         }
-        if (isHtml5DateInput && attrs.datepickerPopup) {
-          throw new Error('HTML5 date input types do not support custom formats.');
-        }
-        popupEl = angular.element('<div uib-datepicker-popup-wrap><div uib-datepicker></div></div>');
-        popupEl.attr({
-          'ng-model': 'date',
-          'ng-change': 'dateSelection(date)',
-          'template-url': datepickerPopupTemplateUrl
-        });
-        datepickerEl = angular.element(popupEl.children()[0]);
-        datepickerEl.attr('template-url', datepickerTemplateUrl);
-        if (isHtml5DateInput) {
-          if (attrs.type === 'month') {
-            datepickerEl.attr('datepicker-mode', '"month"');
-            datepickerEl.attr('min-mode', 'month');
+        while (scrollParent.parentElement && scrollParent !== documentEl) {
+          var spStyle = $window.getComputedStyle(scrollParent);
+          if (excludeStatic && spStyle.position !== 'static') {
+            excludeStatic = false;
           }
-        }
-        if (attrs.datepickerOptions) {
-          var options = scope.$parent.$eval(attrs.datepickerOptions);
-          if (options && options.initDate) {
-            scope.initDate = options.initDate;
-            datepickerEl.attr('init-date', 'initDate');
-            delete options.initDate;
+          if (!excludeStatic && overflowRegex.test(spStyle.overflow + spStyle.overflowY + spStyle.overflowX)) {
+            break;
           }
-          angular.forEach(options, function(value, option) {
-            datepickerEl.attr(cameltoDash(option), value);
-          });
+          scrollParent = scrollParent.parentElement;
         }
-        angular.forEach(['minMode', 'maxMode', 'minDate', 'maxDate', 'datepickerMode', 'initDate', 'shortcutPropagation'], function(key) {
-          if (attrs[key]) {
-            var getAttribute = $parse(attrs[key]);
-            scope.$parent.$watch(getAttribute, function(value) {
-              scope.watchData[key] = value;
-              if (key === 'minDate' || key === 'maxDate') {
-                cache[key] = new Date(value);
-              }
-            });
-            datepickerEl.attr(cameltoDash(key), 'watchData.' + key);
-            if (key === 'datepickerMode') {
-              var setAttribute = getAttribute.assign;
-              scope.$watch('watchData.' + key, function(value, oldvalue) {
-                if (angular.isFunction(setAttribute) && value !== oldvalue) {
-                  setAttribute(scope.$parent, value);
-                }
-              });
-            }
-          }
-        });
-        if (attrs.dateDisabled) {
-          datepickerEl.attr('date-disabled', 'dateDisabled({ date: date, mode: mode })');
+        return scrollParent;
+      },
+      position: function(elem, includeMagins) {
+        elem = this.getRawNode(elem);
+        var elemOffset = this.offset(elem);
+        if (includeMagins) {
+          var elemStyle = $window.getComputedStyle(elem);
+          elemOffset.top -= this.parseStyle(elemStyle.marginTop);
+          elemOffset.left -= this.parseStyle(elemStyle.marginLeft);
         }
-        if (attrs.showWeeks) {
-          datepickerEl.attr('show-weeks', attrs.showWeeks);
-        }
-        if (attrs.customClass) {
-          datepickerEl.attr('custom-class', 'customClass({ date: date, mode: mode })');
-        }
-        if (!isHtml5DateInput) {
-          ngModel.$$parserName = 'date';
-          ngModel.$validators.date = validator;
-          ngModel.$parsers.unshift(parseDate);
-          ngModel.$formatters.push(function(value) {
-            scope.date = value;
-            return ngModel.$isEmpty(value) ? value : dateFilter(value, dateFormat);
-          });
-        } else {
-          ngModel.$formatters.push(function(value) {
-            scope.date = value;
-            return value;
-          });
-        }
-        ngModel.$viewChangeListeners.push(function() {
-          scope.date = dateParser.parse(ngModel.$viewValue, dateFormat, scope.date);
-        });
-        element.bind('keydown', inputKeydownBind);
-        $popup = $compile(popupEl)(scope);
-        popupEl.remove();
-        if (appendToBody) {
-          $document.find('body').append($popup);
-        } else {
-          element.after($popup);
-        }
-        scope.$on('$destroy', function() {
-          if (scope.isOpen === true) {
-            if (!$rootScope.$$phase) {
-              scope.$apply(function() {
-                scope.isOpen = false;
-              });
-            }
-          }
-          $popup.remove();
-          element.unbind('keydown', inputKeydownBind);
-          $document.unbind('click', documentClickBind);
-        });
-      };
-      scope.getText = function(key) {
-        return scope[key + 'Text'] || datepickerPopupConfig[key + 'Text'];
-      };
-      scope.isDisabled = function(date) {
-        if (date === 'today') {
-          date = new Date();
-        }
-        return ((scope.watchData.minDate && scope.compare(date, cache.minDate) < 0) || (scope.watchData.maxDate && scope.compare(date, cache.maxDate) > 0));
-      };
-      scope.compare = function(date1, date2) {
-        return (new Date(date1.getFullYear(), date1.getMonth(), date1.getDate()) - new Date(date2.getFullYear(), date2.getMonth(), date2.getDate()));
-      };
-      scope.dateSelection = function(dt) {
-        if (angular.isDefined(dt)) {
-          scope.date = dt;
-        }
-        var date = scope.date ? dateFilter(scope.date, dateFormat) : null;
-        element.val(date);
-        ngModel.$setViewValue(date);
-        if (closeOnDateSelection) {
-          scope.isOpen = false;
-          element[0].focus();
-        }
-      };
-      scope.keydown = function(evt) {
-        if (evt.which === 27) {
-          scope.isOpen = false;
-          element[0].focus();
-        }
-      };
-      scope.select = function(date) {
-        if (date === 'today') {
-          var today = new Date();
-          if (angular.isDate(scope.date)) {
-            date = new Date(scope.date);
-            date.setFullYear(today.getFullYear(), today.getMonth(), today.getDate());
-          } else {
-            date = new Date(today.setHours(0, 0, 0, 0));
-          }
-        }
-        scope.dateSelection(date);
-      };
-      scope.close = function() {
-        scope.isOpen = false;
-        element[0].focus();
-      };
-      scope.$watch('isOpen', function(value) {
-        if (value) {
-          scope.position = appendToBody ? $position.offset(element) : $position.position(element);
-          scope.position.top = scope.position.top + element.prop('offsetHeight');
-          $timeout(function() {
-            if (onOpenFocus) {
-              scope.$broadcast('uib:datepicker.focus');
-            }
-            $document.bind('click', documentClickBind);
-          }, 0, false);
-        } else {
-          $document.unbind('click', documentClickBind);
-        }
-      });
-      function cameltoDash(string) {
-        return string.replace(/([A-Z])/g, function($1) {
-          return '-' + $1.toLowerCase();
-        });
-      }
-      function parseDate(viewValue) {
-        if (angular.isNumber(viewValue)) {
-          viewValue = new Date(viewValue);
-        }
-        if (!viewValue) {
-          return null;
-        } else if (angular.isDate(viewValue) && !isNaN(viewValue)) {
-          return viewValue;
-        } else if (angular.isString(viewValue)) {
-          var date = dateParser.parse(viewValue, dateFormat, scope.date);
-          if (isNaN(date)) {
-            return undefined;
-          } else {
-            return date;
-          }
-        } else {
-          return undefined;
-        }
-      }
-      function validator(modelValue, viewValue) {
-        var value = modelValue || viewValue;
-        if (!attrs.ngRequired && !value) {
-          return true;
-        }
-        if (angular.isNumber(value)) {
-          value = new Date(value);
-        }
-        if (!value) {
-          return true;
-        } else if (angular.isDate(value) && !isNaN(value)) {
-          return true;
-        } else if (angular.isString(value)) {
-          var date = dateParser.parse(value, dateFormat);
-          return !isNaN(date);
-        } else {
-          return false;
-        }
-      }
-      function documentClickBind(event) {
-        var popup = $popup[0];
-        var dpContainsTarget = element[0].contains(event.target);
-        var popupContainsTarget = popup.contains !== undefined && popup.contains(event.target);
-        if (scope.isOpen && !(dpContainsTarget || popupContainsTarget)) {
-          scope.$apply(function() {
-            scope.isOpen = false;
-          });
-        }
-      }
-      function inputKeydownBind(evt) {
-        if (evt.which === 27 && scope.isOpen) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          scope.$apply(function() {
-            scope.isOpen = false;
-          });
-          element[0].focus();
-        } else if (evt.which === 40 && !scope.isOpen) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          scope.$apply(function() {
-            scope.isOpen = true;
-          });
-        }
-      }
-    }]).directive('uibDatepickerPopup', function() {
-      return {
-        require: ['ngModel', 'uibDatepickerPopup'],
-        controller: 'UibDatepickerPopupController',
-        scope: {
-          isOpen: '=?',
-          currentText: '@',
-          clearText: '@',
-          closeText: '@',
-          dateDisabled: '&',
-          customClass: '&'
-        },
-        link: function(scope, element, attrs, ctrls) {
-          var ngModel = ctrls[0],
-              ctrl = ctrls[1];
-          ctrl.init(ngModel);
-        }
-      };
-    }).directive('uibDatepickerPopupWrap', function() {
-      return {
-        replace: true,
-        transclude: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/popup.html';
-        }
-      };
-    });
-    angular.module('ui.bootstrap.datepicker').value('$datepickerSuppressWarning', false).controller('DatepickerController', ['$scope', '$attrs', '$parse', '$interpolate', '$log', 'dateFilter', 'uibDatepickerConfig', '$datepickerSuppressError', '$datepickerSuppressWarning', function($scope, $attrs, $parse, $interpolate, $log, dateFilter, datepickerConfig, $datepickerSuppressError, $datepickerSuppressWarning) {
-      if (!$datepickerSuppressWarning) {
-        $log.warn('DatepickerController is now deprecated. Use UibDatepickerController instead.');
-      }
-      var self = this,
-          ngModelCtrl = {$setViewValue: angular.noop};
-      this.modes = ['day', 'month', 'year'];
-      angular.forEach(['formatDay', 'formatMonth', 'formatYear', 'formatDayHeader', 'formatDayTitle', 'formatMonthTitle', 'showWeeks', 'startingDay', 'yearRange', 'shortcutPropagation'], function(key, index) {
-        self[key] = angular.isDefined($attrs[key]) ? (index < 6 ? $interpolate($attrs[key])($scope.$parent) : $scope.$parent.$eval($attrs[key])) : datepickerConfig[key];
-      });
-      angular.forEach(['minDate', 'maxDate'], function(key) {
-        if ($attrs[key]) {
-          $scope.$parent.$watch($parse($attrs[key]), function(value) {
-            self[key] = value ? new Date(value) : null;
-            self.refreshView();
-          });
-        } else {
-          self[key] = datepickerConfig[key] ? new Date(datepickerConfig[key]) : null;
-        }
-      });
-      angular.forEach(['minMode', 'maxMode'], function(key) {
-        if ($attrs[key]) {
-          $scope.$parent.$watch($parse($attrs[key]), function(value) {
-            self[key] = angular.isDefined(value) ? value : $attrs[key];
-            $scope[key] = self[key];
-            if ((key == 'minMode' && self.modes.indexOf($scope.datepickerMode) < self.modes.indexOf(self[key])) || (key == 'maxMode' && self.modes.indexOf($scope.datepickerMode) > self.modes.indexOf(self[key]))) {
-              $scope.datepickerMode = self[key];
-            }
-          });
-        } else {
-          self[key] = datepickerConfig[key] || null;
-          $scope[key] = self[key];
-        }
-      });
-      $scope.datepickerMode = $scope.datepickerMode || datepickerConfig.datepickerMode;
-      $scope.uniqueId = 'datepicker-' + $scope.$id + '-' + Math.floor(Math.random() * 10000);
-      if (angular.isDefined($attrs.initDate)) {
-        this.activeDate = $scope.$parent.$eval($attrs.initDate) || new Date();
-        $scope.$parent.$watch($attrs.initDate, function(initDate) {
-          if (initDate && (ngModelCtrl.$isEmpty(ngModelCtrl.$modelValue) || ngModelCtrl.$invalid)) {
-            self.activeDate = initDate;
-            self.refreshView();
-          }
-        });
-      } else {
-        this.activeDate = new Date();
-      }
-      $scope.isActive = function(dateObject) {
-        if (self.compare(dateObject.date, self.activeDate) === 0) {
-          $scope.activeDateId = dateObject.uid;
-          return true;
-        }
-        return false;
-      };
-      this.init = function(ngModelCtrl_) {
-        ngModelCtrl = ngModelCtrl_;
-        ngModelCtrl.$render = function() {
-          self.render();
+        var parent = this.offsetParent(elem);
+        var parentOffset = {
+          top: 0,
+          left: 0
         };
-      };
-      this.render = function() {
-        if (ngModelCtrl.$viewValue) {
-          var date = new Date(ngModelCtrl.$viewValue),
-              isValid = !isNaN(date);
-          if (isValid) {
-            this.activeDate = date;
-          } else if (!$datepickerSuppressError) {
-            $log.error('Datepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
-          }
+        if (parent !== $document[0].documentElement) {
+          parentOffset = this.offset(parent);
+          parentOffset.top += parent.clientTop - parent.scrollTop;
+          parentOffset.left += parent.clientLeft - parent.scrollLeft;
         }
-        this.refreshView();
-      };
-      this.refreshView = function() {
-        if (this.element) {
-          this._refreshView();
-          var date = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : null;
-          ngModelCtrl.$setValidity('dateDisabled', !date || (this.element && !this.isDisabled(date)));
-        }
-      };
-      this.createDateObject = function(date, format) {
-        var model = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : null;
         return {
-          date: date,
-          label: dateFilter(date, format),
-          selected: model && this.compare(date, model) === 0,
-          disabled: this.isDisabled(date),
-          current: this.compare(date, new Date()) === 0,
-          customClass: this.customClass(date)
+          width: Math.round(angular.isNumber(elemOffset.width) ? elemOffset.width : elem.offsetWidth),
+          height: Math.round(angular.isNumber(elemOffset.height) ? elemOffset.height : elem.offsetHeight),
+          top: Math.round(elemOffset.top - parentOffset.top),
+          left: Math.round(elemOffset.left - parentOffset.left)
         };
-      };
-      this.isDisabled = function(date) {
-        return ((this.minDate && this.compare(date, this.minDate) < 0) || (this.maxDate && this.compare(date, this.maxDate) > 0) || ($attrs.dateDisabled && $scope.dateDisabled({
-          date: date,
-          mode: $scope.datepickerMode
-        })));
-      };
-      this.customClass = function(date) {
-        return $scope.customClass({
-          date: date,
-          mode: $scope.datepickerMode
-        });
-      };
-      this.split = function(arr, size) {
-        var arrays = [];
-        while (arr.length > 0) {
-          arrays.push(arr.splice(0, size));
+      },
+      offset: function(elem) {
+        elem = this.getRawNode(elem);
+        var elemBCR = elem.getBoundingClientRect();
+        return {
+          width: Math.round(angular.isNumber(elemBCR.width) ? elemBCR.width : elem.offsetWidth),
+          height: Math.round(angular.isNumber(elemBCR.height) ? elemBCR.height : elem.offsetHeight),
+          top: Math.round(elemBCR.top + ($window.pageYOffset || $document[0].documentElement.scrollTop)),
+          left: Math.round(elemBCR.left + ($window.pageXOffset || $document[0].documentElement.scrollLeft))
+        };
+      },
+      viewportOffset: function(elem, useDocument, includePadding) {
+        elem = this.getRawNode(elem);
+        includePadding = includePadding !== false ? true : false;
+        var elemBCR = elem.getBoundingClientRect();
+        var offsetBCR = {
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
+        };
+        var offsetParent = useDocument ? $document[0].documentElement : this.scrollParent(elem);
+        var offsetParentBCR = offsetParent.getBoundingClientRect();
+        offsetBCR.top = offsetParentBCR.top + offsetParent.clientTop;
+        offsetBCR.left = offsetParentBCR.left + offsetParent.clientLeft;
+        if (offsetParent === $document[0].documentElement) {
+          offsetBCR.top += $window.pageYOffset;
+          offsetBCR.left += $window.pageXOffset;
         }
-        return arrays;
-      };
-      this.fixTimeZone = function(date) {
-        var hours = date.getHours();
-        date.setHours(hours === 23 ? hours + 2 : 0);
-      };
-      $scope.select = function(date) {
-        if ($scope.datepickerMode === self.minMode) {
-          var dt = ngModelCtrl.$viewValue ? new Date(ngModelCtrl.$viewValue) : new Date(0, 0, 0, 0, 0, 0, 0);
-          dt.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
-          ngModelCtrl.$setViewValue(dt);
-          ngModelCtrl.$render();
+        offsetBCR.bottom = offsetBCR.top + offsetParent.clientHeight;
+        offsetBCR.right = offsetBCR.left + offsetParent.clientWidth;
+        if (includePadding) {
+          var offsetParentStyle = $window.getComputedStyle(offsetParent);
+          offsetBCR.top += this.parseStyle(offsetParentStyle.paddingTop);
+          offsetBCR.bottom -= this.parseStyle(offsetParentStyle.paddingBottom);
+          offsetBCR.left += this.parseStyle(offsetParentStyle.paddingLeft);
+          offsetBCR.right -= this.parseStyle(offsetParentStyle.paddingRight);
+        }
+        return {
+          top: Math.round(elemBCR.top - offsetBCR.top),
+          bottom: Math.round(offsetBCR.bottom - elemBCR.bottom),
+          left: Math.round(elemBCR.left - offsetBCR.left),
+          right: Math.round(offsetBCR.right - elemBCR.right)
+        };
+      },
+      parsePlacement: function(placement) {
+        var autoPlace = PLACEMENT_REGEX.auto.test(placement);
+        if (autoPlace) {
+          placement = placement.replace(PLACEMENT_REGEX.auto, '');
+        }
+        placement = placement.split('-');
+        placement[0] = placement[0] || 'top';
+        if (!PLACEMENT_REGEX.primary.test(placement[0])) {
+          placement[0] = 'top';
+        }
+        placement[1] = placement[1] || 'center';
+        if (!PLACEMENT_REGEX.secondary.test(placement[1])) {
+          placement[1] = 'center';
+        }
+        if (autoPlace) {
+          placement[2] = true;
         } else {
-          self.activeDate = date;
-          $scope.datepickerMode = self.modes[self.modes.indexOf($scope.datepickerMode) - 1];
+          placement[2] = false;
         }
-      };
-      $scope.move = function(direction) {
-        var year = self.activeDate.getFullYear() + direction * (self.step.years || 0),
-            month = self.activeDate.getMonth() + direction * (self.step.months || 0);
-        self.activeDate.setFullYear(year, month, 1);
-        self.refreshView();
-      };
-      $scope.toggleMode = function(direction) {
-        direction = direction || 1;
-        if (($scope.datepickerMode === self.maxMode && direction === 1) || ($scope.datepickerMode === self.minMode && direction === -1)) {
-          return;
-        }
-        $scope.datepickerMode = self.modes[self.modes.indexOf($scope.datepickerMode) + direction];
-      };
-      $scope.keys = {
-        13: 'enter',
-        32: 'space',
-        33: 'pageup',
-        34: 'pagedown',
-        35: 'end',
-        36: 'home',
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-      };
-      var focusElement = function() {
-        self.element[0].focus();
-      };
-      $scope.$on('uib:datepicker.focus', focusElement);
-      $scope.keydown = function(evt) {
-        var key = $scope.keys[evt.which];
-        if (!key || evt.shiftKey || evt.altKey) {
-          return;
-        }
-        evt.preventDefault();
-        if (!self.shortcutPropagation) {
-          evt.stopPropagation();
-        }
-        if (key === 'enter' || key === 'space') {
-          if (self.isDisabled(self.activeDate)) {
-            return;
-          }
-          $scope.select(self.activeDate);
-        } else if (evt.ctrlKey && (key === 'up' || key === 'down')) {
-          $scope.toggleMode(key === 'up' ? 1 : -1);
-        } else {
-          self.handleKeyDown(key, evt);
-          self.refreshView();
-        }
-      };
-    }]).directive('datepicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/datepicker.html';
-        },
-        scope: {
-          datepickerMode: '=?',
-          dateDisabled: '&',
-          customClass: '&',
-          shortcutPropagation: '&?'
-        },
-        require: ['datepicker', '^ngModel'],
-        controller: 'DatepickerController',
-        controllerAs: 'datepicker',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('datepicker is now deprecated. Use uib-datepicker instead.');
-          }
-          var datepickerCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          datepickerCtrl.init(ngModelCtrl);
-        }
-      };
-    }]).directive('daypicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        replace: true,
-        templateUrl: 'template/datepicker/day.html',
-        require: ['^datepicker', 'daypicker'],
-        controller: 'UibDaypickerController',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('daypicker is now deprecated. Use uib-daypicker instead.');
-          }
-          var datepickerCtrl = ctrls[0],
-              daypickerCtrl = ctrls[1];
-          daypickerCtrl.init(datepickerCtrl);
-        }
-      };
-    }]).directive('monthpicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        replace: true,
-        templateUrl: 'template/datepicker/month.html',
-        require: ['^datepicker', 'monthpicker'],
-        controller: 'UibMonthpickerController',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('monthpicker is now deprecated. Use uib-monthpicker instead.');
-          }
-          var datepickerCtrl = ctrls[0],
-              monthpickerCtrl = ctrls[1];
-          monthpickerCtrl.init(datepickerCtrl);
-        }
-      };
-    }]).directive('yearpicker', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        replace: true,
-        templateUrl: 'template/datepicker/year.html',
-        require: ['^datepicker', 'yearpicker'],
-        controller: 'UibYearpickerController',
-        link: function(scope, element, attrs, ctrls) {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('yearpicker is now deprecated. Use uib-yearpicker instead.');
-          }
-          var ctrl = ctrls[0];
-          angular.extend(ctrl, ctrls[1]);
-          ctrl.yearpickerInit();
-          ctrl.refreshView();
-        }
-      };
-    }]).directive('datepickerPopup', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        require: ['ngModel', 'datepickerPopup'],
-        controller: 'UibDatepickerPopupController',
-        scope: {
-          isOpen: '=?',
-          currentText: '@',
-          clearText: '@',
-          closeText: '@',
-          dateDisabled: '&',
-          customClass: '&'
-        },
-        link: function(scope, element, attrs, ctrls) {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('datepicker-popup is now deprecated. Use uib-datepicker-popup instead.');
-          }
-          var ngModel = ctrls[0],
-              ctrl = ctrls[1];
-          ctrl.init(ngModel);
-        }
-      };
-    }]).directive('datepickerPopupWrap', ['$log', '$datepickerSuppressWarning', function($log, $datepickerSuppressWarning) {
-      return {
-        replace: true,
-        transclude: true,
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/datepicker/popup.html';
-        },
-        link: function() {
-          if (!$datepickerSuppressWarning) {
-            $log.warn('datepicker-popup-wrap is now deprecated. Use uib-datepicker-popup-wrap instead.');
-          }
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.dropdown', ['ui.bootstrap.position']).constant('uibDropdownConfig', {openClass: 'open'}).service('uibDropdownService', ['$document', '$rootScope', function($document, $rootScope) {
-      var openScope = null;
-      this.open = function(dropdownScope) {
-        if (!openScope) {
-          $document.bind('click', closeDropdown);
-          $document.bind('keydown', keybindFilter);
-        }
-        if (openScope && openScope !== dropdownScope) {
-          openScope.isOpen = false;
-        }
-        openScope = dropdownScope;
-      };
-      this.close = function(dropdownScope) {
-        if (openScope === dropdownScope) {
-          openScope = null;
-          $document.unbind('click', closeDropdown);
-          $document.unbind('keydown', keybindFilter);
-        }
-      };
-      var closeDropdown = function(evt) {
-        if (!openScope) {
-          return;
-        }
-        if (evt && openScope.getAutoClose() === 'disabled') {
-          return;
-        }
-        var toggleElement = openScope.getToggleElement();
-        if (evt && toggleElement && toggleElement[0].contains(evt.target)) {
-          return;
-        }
-        var dropdownElement = openScope.getDropdownElement();
-        if (evt && openScope.getAutoClose() === 'outsideClick' && dropdownElement && dropdownElement[0].contains(evt.target)) {
-          return;
-        }
-        openScope.isOpen = false;
-        if (!$rootScope.$$phase) {
-          openScope.$apply();
-        }
-      };
-      var keybindFilter = function(evt) {
-        if (evt.which === 27) {
-          openScope.focusToggleElement();
-          closeDropdown();
-        } else if (openScope.isKeynavEnabled() && /(38|40)/.test(evt.which) && openScope.isOpen) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          openScope.focusDropdownEntry(evt.which);
-        }
-      };
-    }]).controller('UibDropdownController', ['$scope', '$element', '$attrs', '$parse', 'uibDropdownConfig', 'uibDropdownService', '$animate', '$uibPosition', '$document', '$compile', '$templateRequest', function($scope, $element, $attrs, $parse, dropdownConfig, uibDropdownService, $animate, $position, $document, $compile, $templateRequest) {
-      var self = this,
-          scope = $scope.$new(),
-          templateScope,
-          openClass = dropdownConfig.openClass,
-          getIsOpen,
-          setIsOpen = angular.noop,
-          toggleInvoker = $attrs.onToggle ? $parse($attrs.onToggle) : angular.noop,
-          appendToBody = false,
-          keynavEnabled = false,
-          selectedOption = null;
-      $element.addClass('dropdown');
-      this.init = function() {
-        if ($attrs.isOpen) {
-          getIsOpen = $parse($attrs.isOpen);
-          setIsOpen = getIsOpen.assign;
-          $scope.$watch(getIsOpen, function(value) {
-            scope.isOpen = !!value;
-          });
-        }
-        appendToBody = angular.isDefined($attrs.dropdownAppendToBody);
-        keynavEnabled = angular.isDefined($attrs.uibKeyboardNav);
-        if (appendToBody && self.dropdownMenu) {
-          $document.find('body').append(self.dropdownMenu);
-          $element.on('$destroy', function handleDestroyEvent() {
-            self.dropdownMenu.remove();
-          });
-        }
-      };
-      this.toggle = function(open) {
-        return scope.isOpen = arguments.length ? !!open : !scope.isOpen;
-      };
-      this.isOpen = function() {
-        return scope.isOpen;
-      };
-      scope.getToggleElement = function() {
-        return self.toggleElement;
-      };
-      scope.getAutoClose = function() {
-        return $attrs.autoClose || 'always';
-      };
-      scope.getElement = function() {
-        return $element;
-      };
-      scope.isKeynavEnabled = function() {
-        return keynavEnabled;
-      };
-      scope.focusDropdownEntry = function(keyCode) {
-        var elems = self.dropdownMenu ? (angular.element(self.dropdownMenu).find('a')) : (angular.element($element).find('ul').eq(0).find('a'));
-        switch (keyCode) {
-          case (40):
-            {
-              if (!angular.isNumber(self.selectedOption)) {
-                self.selectedOption = 0;
-              } else {
-                self.selectedOption = (self.selectedOption === elems.length - 1 ? self.selectedOption : self.selectedOption + 1);
-              }
-              break;
-            }
-          case (38):
-            {
-              if (!angular.isNumber(self.selectedOption)) {
-                self.selectedOption = elems.length - 1;
-              } else {
-                self.selectedOption = self.selectedOption === 0 ? 0 : self.selectedOption - 1;
-              }
-              break;
-            }
-        }
-        elems[self.selectedOption].focus();
-      };
-      scope.getDropdownElement = function() {
-        return self.dropdownMenu;
-      };
-      scope.focusToggleElement = function() {
-        if (self.toggleElement) {
-          self.toggleElement[0].focus();
-        }
-      };
-      scope.$watch('isOpen', function(isOpen, wasOpen) {
-        if (appendToBody && self.dropdownMenu) {
-          var pos = $position.positionElements($element, self.dropdownMenu, 'bottom-left', true);
-          var css = {
-            top: pos.top + 'px',
-            display: isOpen ? 'block' : 'none'
+        return placement;
+      },
+      positionElements: function(hostElem, targetElem, placement, appendToBody) {
+        hostElem = this.getRawNode(hostElem);
+        targetElem = this.getRawNode(targetElem);
+        var targetWidth = angular.isDefined(targetElem.offsetWidth) ? targetElem.offsetWidth : targetElem.prop('offsetWidth');
+        var targetHeight = angular.isDefined(targetElem.offsetHeight) ? targetElem.offsetHeight : targetElem.prop('offsetHeight');
+        placement = this.parsePlacement(placement);
+        var hostElemPos = appendToBody ? this.offset(hostElem) : this.position(hostElem);
+        var targetElemPos = {
+          top: 0,
+          left: 0,
+          placement: ''
+        };
+        if (placement[2]) {
+          var viewportOffset = this.viewportOffset(hostElem);
+          var targetElemStyle = $window.getComputedStyle(targetElem);
+          var adjustedSize = {
+            width: targetWidth + Math.round(Math.abs(this.parseStyle(targetElemStyle.marginLeft) + this.parseStyle(targetElemStyle.marginRight))),
+            height: targetHeight + Math.round(Math.abs(this.parseStyle(targetElemStyle.marginTop) + this.parseStyle(targetElemStyle.marginBottom)))
           };
-          var rightalign = self.dropdownMenu.hasClass('dropdown-menu-right');
-          if (!rightalign) {
-            css.left = pos.left + 'px';
-            css.right = 'auto';
-          } else {
-            css.left = 'auto';
-            css.right = (window.innerWidth - (pos.left + $element.prop('offsetWidth'))) + 'px';
-          }
-          self.dropdownMenu.css(css);
-        }
-        $animate[isOpen ? 'addClass' : 'removeClass']($element, openClass).then(function() {
-          if (angular.isDefined(isOpen) && isOpen !== wasOpen) {
-            toggleInvoker($scope, {open: !!isOpen});
-          }
-        });
-        if (isOpen) {
-          if (self.dropdownMenuTemplateUrl) {
-            $templateRequest(self.dropdownMenuTemplateUrl).then(function(tplContent) {
-              templateScope = scope.$new();
-              $compile(tplContent.trim())(templateScope, function(dropdownElement) {
-                var newEl = dropdownElement;
-                self.dropdownMenu.replaceWith(newEl);
-                self.dropdownMenu = newEl;
-              });
-            });
-          }
-          scope.focusToggleElement();
-          uibDropdownService.open(scope);
-        } else {
-          if (self.dropdownMenuTemplateUrl) {
-            if (templateScope) {
-              templateScope.$destroy();
-            }
-            var newEl = angular.element('<ul class="dropdown-menu"></ul>');
-            self.dropdownMenu.replaceWith(newEl);
-            self.dropdownMenu = newEl;
-          }
-          uibDropdownService.close(scope);
-          self.selectedOption = null;
-        }
-        if (angular.isFunction(setIsOpen)) {
-          setIsOpen($scope, isOpen);
-        }
-      });
-      $scope.$on('$locationChangeSuccess', function() {
-        if (scope.getAutoClose() !== 'disabled') {
-          scope.isOpen = false;
-        }
-      });
-      var offDestroy = $scope.$on('$destroy', function() {
-        scope.$destroy();
-      });
-      scope.$on('$destroy', offDestroy);
-    }]).directive('uibDropdown', function() {
-      return {
-        controller: 'UibDropdownController',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          dropdownCtrl.init();
-        }
-      };
-    }).directive('uibDropdownMenu', function() {
-      return {
-        restrict: 'AC',
-        require: '?^uibDropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!dropdownCtrl || angular.isDefined(attrs.dropdownNested)) {
-            return;
-          }
-          element.addClass('dropdown-menu');
-          var tplUrl = attrs.templateUrl;
-          if (tplUrl) {
-            dropdownCtrl.dropdownMenuTemplateUrl = tplUrl;
-          }
-          if (!dropdownCtrl.dropdownMenu) {
-            dropdownCtrl.dropdownMenu = element;
-          }
-        }
-      };
-    }).directive('uibKeyboardNav', function() {
-      return {
-        restrict: 'A',
-        require: '?^uibDropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          element.bind('keydown', function(e) {
-            if ([38, 40].indexOf(e.which) !== -1) {
-              e.preventDefault();
-              e.stopPropagation();
-              var elems = dropdownCtrl.dropdownMenu.find('a');
-              switch (e.which) {
-                case (40):
-                  {
-                    if (!angular.isNumber(dropdownCtrl.selectedOption)) {
-                      dropdownCtrl.selectedOption = 0;
-                    } else {
-                      dropdownCtrl.selectedOption = dropdownCtrl.selectedOption === elems.length - 1 ? dropdownCtrl.selectedOption : dropdownCtrl.selectedOption + 1;
-                    }
-                    break;
-                  }
-                case (38):
-                  {
-                    if (!angular.isNumber(dropdownCtrl.selectedOption)) {
-                      dropdownCtrl.selectedOption = elems.length - 1;
-                    } else {
-                      dropdownCtrl.selectedOption = dropdownCtrl.selectedOption === 0 ? 0 : dropdownCtrl.selectedOption - 1;
-                    }
-                    break;
-                  }
+          placement[0] = placement[0] === 'top' && adjustedSize.height > viewportOffset.top && adjustedSize.height <= viewportOffset.bottom ? 'bottom' : placement[0] === 'bottom' && adjustedSize.height > viewportOffset.bottom && adjustedSize.height <= viewportOffset.top ? 'top' : placement[0] === 'left' && adjustedSize.width > viewportOffset.left && adjustedSize.width <= viewportOffset.right ? 'right' : placement[0] === 'right' && adjustedSize.width > viewportOffset.right && adjustedSize.width <= viewportOffset.left ? 'left' : placement[0];
+          placement[1] = placement[1] === 'top' && adjustedSize.height - hostElemPos.height > viewportOffset.bottom && adjustedSize.height - hostElemPos.height <= viewportOffset.top ? 'bottom' : placement[1] === 'bottom' && adjustedSize.height - hostElemPos.height > viewportOffset.top && adjustedSize.height - hostElemPos.height <= viewportOffset.bottom ? 'top' : placement[1] === 'left' && adjustedSize.width - hostElemPos.width > viewportOffset.right && adjustedSize.width - hostElemPos.width <= viewportOffset.left ? 'right' : placement[1] === 'right' && adjustedSize.width - hostElemPos.width > viewportOffset.left && adjustedSize.width - hostElemPos.width <= viewportOffset.right ? 'left' : placement[1];
+          if (placement[1] === 'center') {
+            if (PLACEMENT_REGEX.vertical.test(placement[0])) {
+              var xOverflow = hostElemPos.width / 2 - targetWidth / 2;
+              if (viewportOffset.left + xOverflow < 0 && adjustedSize.width - hostElemPos.width <= viewportOffset.right) {
+                placement[1] = 'left';
+              } else if (viewportOffset.right + xOverflow < 0 && adjustedSize.width - hostElemPos.width <= viewportOffset.left) {
+                placement[1] = 'right';
               }
-              elems[dropdownCtrl.selectedOption].focus();
-            }
-          });
-        }
-      };
-    }).directive('uibDropdownToggle', function() {
-      return {
-        require: '?^uibDropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!dropdownCtrl) {
-            return;
-          }
-          element.addClass('dropdown-toggle');
-          dropdownCtrl.toggleElement = element;
-          var toggleDropdown = function(event) {
-            event.preventDefault();
-            if (!element.hasClass('disabled') && !attrs.disabled) {
-              scope.$apply(function() {
-                dropdownCtrl.toggle();
-              });
-            }
-          };
-          element.bind('click', toggleDropdown);
-          element.attr({
-            'aria-haspopup': true,
-            'aria-expanded': false
-          });
-          scope.$watch(dropdownCtrl.isOpen, function(isOpen) {
-            element.attr('aria-expanded', !!isOpen);
-          });
-          scope.$on('$destroy', function() {
-            element.unbind('click', toggleDropdown);
-          });
-        }
-      };
-    });
-    angular.module('ui.bootstrap.dropdown').value('$dropdownSuppressWarning', false).service('dropdownService', ['$log', '$dropdownSuppressWarning', 'uibDropdownService', function($log, $dropdownSuppressWarning, uibDropdownService) {
-      if (!$dropdownSuppressWarning) {
-        $log.warn('dropdownService is now deprecated. Use uibDropdownService instead.');
-      }
-      angular.extend(this, uibDropdownService);
-    }]).controller('DropdownController', ['$scope', '$element', '$attrs', '$parse', 'uibDropdownConfig', 'uibDropdownService', '$animate', '$uibPosition', '$document', '$compile', '$templateRequest', '$log', '$dropdownSuppressWarning', function($scope, $element, $attrs, $parse, dropdownConfig, uibDropdownService, $animate, $position, $document, $compile, $templateRequest, $log, $dropdownSuppressWarning) {
-      if (!$dropdownSuppressWarning) {
-        $log.warn('DropdownController is now deprecated. Use UibDropdownController instead.');
-      }
-      var self = this,
-          scope = $scope.$new(),
-          templateScope,
-          openClass = dropdownConfig.openClass,
-          getIsOpen,
-          setIsOpen = angular.noop,
-          toggleInvoker = $attrs.onToggle ? $parse($attrs.onToggle) : angular.noop,
-          appendToBody = false,
-          keynavEnabled = false,
-          selectedOption = null;
-      $element.addClass('dropdown');
-      this.init = function() {
-        if ($attrs.isOpen) {
-          getIsOpen = $parse($attrs.isOpen);
-          setIsOpen = getIsOpen.assign;
-          $scope.$watch(getIsOpen, function(value) {
-            scope.isOpen = !!value;
-          });
-        }
-        appendToBody = angular.isDefined($attrs.dropdownAppendToBody);
-        keynavEnabled = angular.isDefined($attrs.uibKeyboardNav);
-        if (appendToBody && self.dropdownMenu) {
-          $document.find('body').append(self.dropdownMenu);
-          $element.on('$destroy', function handleDestroyEvent() {
-            self.dropdownMenu.remove();
-          });
-        }
-      };
-      this.toggle = function(open) {
-        return scope.isOpen = arguments.length ? !!open : !scope.isOpen;
-      };
-      this.isOpen = function() {
-        return scope.isOpen;
-      };
-      scope.getToggleElement = function() {
-        return self.toggleElement;
-      };
-      scope.getAutoClose = function() {
-        return $attrs.autoClose || 'always';
-      };
-      scope.getElement = function() {
-        return $element;
-      };
-      scope.isKeynavEnabled = function() {
-        return keynavEnabled;
-      };
-      scope.focusDropdownEntry = function(keyCode) {
-        var elems = self.dropdownMenu ? (angular.element(self.dropdownMenu).find('a')) : (angular.element($element).find('ul').eq(0).find('a'));
-        switch (keyCode) {
-          case (40):
-            {
-              if (!angular.isNumber(self.selectedOption)) {
-                self.selectedOption = 0;
-              } else {
-                self.selectedOption = (self.selectedOption === elems.length - 1 ? self.selectedOption : self.selectedOption + 1);
-              }
-              break;
-            }
-          case (38):
-            {
-              if (!angular.isNumber(self.selectedOption)) {
-                self.selectedOption = elems.length - 1;
-              } else {
-                self.selectedOption = self.selectedOption === 0 ? 0 : self.selectedOption - 1;
-              }
-              break;
-            }
-        }
-        elems[self.selectedOption].focus();
-      };
-      scope.getDropdownElement = function() {
-        return self.dropdownMenu;
-      };
-      scope.focusToggleElement = function() {
-        if (self.toggleElement) {
-          self.toggleElement[0].focus();
-        }
-      };
-      scope.$watch('isOpen', function(isOpen, wasOpen) {
-        if (appendToBody && self.dropdownMenu) {
-          var pos = $position.positionElements($element, self.dropdownMenu, 'bottom-left', true);
-          var css = {
-            top: pos.top + 'px',
-            display: isOpen ? 'block' : 'none'
-          };
-          var rightalign = self.dropdownMenu.hasClass('dropdown-menu-right');
-          if (!rightalign) {
-            css.left = pos.left + 'px';
-            css.right = 'auto';
-          } else {
-            css.left = 'auto';
-            css.right = (window.innerWidth - (pos.left + $element.prop('offsetWidth'))) + 'px';
-          }
-          self.dropdownMenu.css(css);
-        }
-        $animate[isOpen ? 'addClass' : 'removeClass']($element, openClass).then(function() {
-          if (angular.isDefined(isOpen) && isOpen !== wasOpen) {
-            toggleInvoker($scope, {open: !!isOpen});
-          }
-        });
-        if (isOpen) {
-          if (self.dropdownMenuTemplateUrl) {
-            $templateRequest(self.dropdownMenuTemplateUrl).then(function(tplContent) {
-              templateScope = scope.$new();
-              $compile(tplContent.trim())(templateScope, function(dropdownElement) {
-                var newEl = dropdownElement;
-                self.dropdownMenu.replaceWith(newEl);
-                self.dropdownMenu = newEl;
-              });
-            });
-          }
-          scope.focusToggleElement();
-          uibDropdownService.open(scope);
-        } else {
-          if (self.dropdownMenuTemplateUrl) {
-            if (templateScope) {
-              templateScope.$destroy();
-            }
-            var newEl = angular.element('<ul class="dropdown-menu"></ul>');
-            self.dropdownMenu.replaceWith(newEl);
-            self.dropdownMenu = newEl;
-          }
-          uibDropdownService.close(scope);
-          self.selectedOption = null;
-        }
-        if (angular.isFunction(setIsOpen)) {
-          setIsOpen($scope, isOpen);
-        }
-      });
-      $scope.$on('$locationChangeSuccess', function() {
-        if (scope.getAutoClose() !== 'disabled') {
-          scope.isOpen = false;
-        }
-      });
-      var offDestroy = $scope.$on('$destroy', function() {
-        scope.$destroy();
-      });
-      scope.$on('$destroy', offDestroy);
-    }]).directive('dropdown', ['$log', '$dropdownSuppressWarning', function($log, $dropdownSuppressWarning) {
-      return {
-        controller: 'DropdownController',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!$dropdownSuppressWarning) {
-            $log.warn('dropdown is now deprecated. Use uib-dropdown instead.');
-          }
-          dropdownCtrl.init();
-        }
-      };
-    }]).directive('dropdownMenu', ['$log', '$dropdownSuppressWarning', function($log, $dropdownSuppressWarning) {
-      return {
-        restrict: 'AC',
-        require: '?^dropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!dropdownCtrl || angular.isDefined(attrs.dropdownNested)) {
-            return;
-          }
-          if (!$dropdownSuppressWarning) {
-            $log.warn('dropdown-menu is now deprecated. Use uib-dropdown-menu instead.');
-          }
-          element.addClass('dropdown-menu');
-          var tplUrl = attrs.templateUrl;
-          if (tplUrl) {
-            dropdownCtrl.dropdownMenuTemplateUrl = tplUrl;
-          }
-          if (!dropdownCtrl.dropdownMenu) {
-            dropdownCtrl.dropdownMenu = element;
-          }
-        }
-      };
-    }]).directive('keyboardNav', ['$log', '$dropdownSuppressWarning', function($log, $dropdownSuppressWarning) {
-      return {
-        restrict: 'A',
-        require: '?^dropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!$dropdownSuppressWarning) {
-            $log.warn('keyboard-nav is now deprecated. Use uib-keyboard-nav instead.');
-          }
-          element.bind('keydown', function(e) {
-            if ([38, 40].indexOf(e.which) !== -1) {
-              e.preventDefault();
-              e.stopPropagation();
-              var elems = dropdownCtrl.dropdownMenu.find('a');
-              switch (e.which) {
-                case (40):
-                  {
-                    if (!angular.isNumber(dropdownCtrl.selectedOption)) {
-                      dropdownCtrl.selectedOption = 0;
-                    } else {
-                      dropdownCtrl.selectedOption = dropdownCtrl.selectedOption === elems.length - 1 ? dropdownCtrl.selectedOption : dropdownCtrl.selectedOption + 1;
-                    }
-                    break;
-                  }
-                case (38):
-                  {
-                    if (!angular.isNumber(dropdownCtrl.selectedOption)) {
-                      dropdownCtrl.selectedOption = elems.length - 1;
-                    } else {
-                      dropdownCtrl.selectedOption = dropdownCtrl.selectedOption === 0 ? 0 : dropdownCtrl.selectedOption - 1;
-                    }
-                    break;
-                  }
-              }
-              elems[dropdownCtrl.selectedOption].focus();
-            }
-          });
-        }
-      };
-    }]).directive('dropdownToggle', ['$log', '$dropdownSuppressWarning', function($log, $dropdownSuppressWarning) {
-      return {
-        require: '?^dropdown',
-        link: function(scope, element, attrs, dropdownCtrl) {
-          if (!$dropdownSuppressWarning) {
-            $log.warn('dropdown-toggle is now deprecated. Use uib-dropdown-toggle instead.');
-          }
-          if (!dropdownCtrl) {
-            return;
-          }
-          element.addClass('dropdown-toggle');
-          dropdownCtrl.toggleElement = element;
-          var toggleDropdown = function(event) {
-            event.preventDefault();
-            if (!element.hasClass('disabled') && !attrs.disabled) {
-              scope.$apply(function() {
-                dropdownCtrl.toggle();
-              });
-            }
-          };
-          element.bind('click', toggleDropdown);
-          element.attr({
-            'aria-haspopup': true,
-            'aria-expanded': false
-          });
-          scope.$watch(dropdownCtrl.isOpen, function(isOpen) {
-            element.attr('aria-expanded', !!isOpen);
-          });
-          scope.$on('$destroy', function() {
-            element.unbind('click', toggleDropdown);
-          });
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.stackedMap', []).factory('$$stackedMap', function() {
-      return {createNew: function() {
-          var stack = [];
-          return {
-            add: function(key, value) {
-              stack.push({
-                key: key,
-                value: value
-              });
-            },
-            get: function(key) {
-              for (var i = 0; i < stack.length; i++) {
-                if (key == stack[i].key) {
-                  return stack[i];
-                }
-              }
-            },
-            keys: function() {
-              var keys = [];
-              for (var i = 0; i < stack.length; i++) {
-                keys.push(stack[i].key);
-              }
-              return keys;
-            },
-            top: function() {
-              return stack[stack.length - 1];
-            },
-            remove: function(key) {
-              var idx = -1;
-              for (var i = 0; i < stack.length; i++) {
-                if (key == stack[i].key) {
-                  idx = i;
-                  break;
-                }
-              }
-              return stack.splice(idx, 1)[0];
-            },
-            removeTop: function() {
-              return stack.splice(stack.length - 1, 1)[0];
-            },
-            length: function() {
-              return stack.length;
-            }
-          };
-        }};
-    });
-    angular.module('ui.bootstrap.modal', ['ui.bootstrap.stackedMap']).factory('$$multiMap', function() {
-      return {createNew: function() {
-          var map = {};
-          return {
-            entries: function() {
-              return Object.keys(map).map(function(key) {
-                return {
-                  key: key,
-                  value: map[key]
-                };
-              });
-            },
-            get: function(key) {
-              return map[key];
-            },
-            hasKey: function(key) {
-              return !!map[key];
-            },
-            keys: function() {
-              return Object.keys(map);
-            },
-            put: function(key, value) {
-              if (!map[key]) {
-                map[key] = [];
-              }
-              map[key].push(value);
-            },
-            remove: function(key, value) {
-              var values = map[key];
-              if (!values) {
-                return;
-              }
-              var idx = values.indexOf(value);
-              if (idx !== -1) {
-                values.splice(idx, 1);
-              }
-              if (!values.length) {
-                delete map[key];
-              }
-            }
-          };
-        }};
-    }).directive('uibModalBackdrop', ['$animate', '$injector', '$uibModalStack', function($animate, $injector, $modalStack) {
-      var $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
-      }
-      return {
-        replace: true,
-        templateUrl: 'template/modal/backdrop.html',
-        compile: function(tElement, tAttrs) {
-          tElement.addClass(tAttrs.backdropClass);
-          return linkFn;
-        }
-      };
-      function linkFn(scope, element, attrs) {
-        element.addClass('modal-backdrop');
-        if (attrs.modalInClass) {
-          if ($animateCss) {
-            $animateCss(element, {addClass: attrs.modalInClass}).start();
-          } else {
-            $animate.addClass(element, attrs.modalInClass);
-          }
-          scope.$on($modalStack.NOW_CLOSING_EVENT, function(e, setIsAsync) {
-            var done = setIsAsync();
-            if ($animateCss) {
-              $animateCss(element, {removeClass: attrs.modalInClass}).start().then(done);
             } else {
-              $animate.removeClass(element, attrs.modalInClass).then(done);
-            }
-          });
-        }
-      }
-    }]).directive('uibModalWindow', ['$uibModalStack', '$q', '$animate', '$injector', function($modalStack, $q, $animate, $injector) {
-      var $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
-      }
-      return {
-        scope: {index: '@'},
-        replace: true,
-        transclude: true,
-        templateUrl: function(tElement, tAttrs) {
-          return tAttrs.templateUrl || 'template/modal/window.html';
-        },
-        link: function(scope, element, attrs) {
-          element.addClass(attrs.windowClass || '');
-          element.addClass(attrs.windowTopClass || '');
-          scope.size = attrs.size;
-          scope.close = function(evt) {
-            var modal = $modalStack.getTop();
-            if (modal && modal.value.backdrop && modal.value.backdrop !== 'static' && (evt.target === evt.currentTarget)) {
-              evt.preventDefault();
-              evt.stopPropagation();
-              $modalStack.dismiss(modal.key, 'backdrop click');
-            }
-          };
-          element.on('click', scope.close);
-          scope.$isRendered = true;
-          var modalRenderDeferObj = $q.defer();
-          attrs.$observe('modalRender', function(value) {
-            if (value == 'true') {
-              modalRenderDeferObj.resolve();
-            }
-          });
-          modalRenderDeferObj.promise.then(function() {
-            var animationPromise = null;
-            if (attrs.modalInClass) {
-              if ($animateCss) {
-                animationPromise = $animateCss(element, {addClass: attrs.modalInClass}).start();
-              } else {
-                animationPromise = $animate.addClass(element, attrs.modalInClass);
+              var yOverflow = hostElemPos.height / 2 - adjustedSize.height / 2;
+              if (viewportOffset.top + yOverflow < 0 && adjustedSize.height - hostElemPos.height <= viewportOffset.bottom) {
+                placement[1] = 'top';
+              } else if (viewportOffset.bottom + yOverflow < 0 && adjustedSize.height - hostElemPos.height <= viewportOffset.top) {
+                placement[1] = 'bottom';
               }
-              scope.$on($modalStack.NOW_CLOSING_EVENT, function(e, setIsAsync) {
-                var done = setIsAsync();
-                if ($animateCss) {
-                  $animateCss(element, {removeClass: attrs.modalInClass}).start().then(done);
-                } else {
-                  $animate.removeClass(element, attrs.modalInClass).then(done);
-                }
-              });
             }
-            $q.when(animationPromise).then(function() {
-              var inputWithAutofocus = element[0].querySelector('[autofocus]');
-              if (inputWithAutofocus) {
-                inputWithAutofocus.focus();
-              } else {
-                element[0].focus();
-              }
-            });
-            var modal = $modalStack.getTop();
-            if (modal) {
-              $modalStack.modalRendered(modal.key);
+          }
+        }
+        switch (placement[0]) {
+          case 'top':
+            targetElemPos.top = hostElemPos.top - targetHeight;
+            break;
+          case 'bottom':
+            targetElemPos.top = hostElemPos.top + hostElemPos.height;
+            break;
+          case 'left':
+            targetElemPos.left = hostElemPos.left - targetWidth;
+            break;
+          case 'right':
+            targetElemPos.left = hostElemPos.left + hostElemPos.width;
+            break;
+        }
+        switch (placement[1]) {
+          case 'top':
+            targetElemPos.top = hostElemPos.top;
+            break;
+          case 'bottom':
+            targetElemPos.top = hostElemPos.top + hostElemPos.height - targetHeight;
+            break;
+          case 'left':
+            targetElemPos.left = hostElemPos.left;
+            break;
+          case 'right':
+            targetElemPos.left = hostElemPos.left + hostElemPos.width - targetWidth;
+            break;
+          case 'center':
+            if (PLACEMENT_REGEX.vertical.test(placement[0])) {
+              targetElemPos.left = hostElemPos.left + hostElemPos.width / 2 - targetWidth / 2;
+            } else {
+              targetElemPos.top = hostElemPos.top + hostElemPos.height / 2 - targetHeight / 2;
             }
-          });
+            break;
         }
-      };
-    }]).directive('uibModalAnimationClass', function() {
-      return {compile: function(tElement, tAttrs) {
-          if (tAttrs.modalAnimation) {
-            tElement.addClass(tAttrs.uibModalAnimationClass);
-          }
-        }};
-    }).directive('uibModalTransclude', function() {
-      return {link: function($scope, $element, $attrs, controller, $transclude) {
-          $transclude($scope.$parent, function(clone) {
-            $element.empty();
-            $element.append(clone);
-          });
-        }};
-    }).factory('$uibModalStack', ['$animate', '$timeout', '$document', '$compile', '$rootScope', '$q', '$injector', '$$multiMap', '$$stackedMap', function($animate, $timeout, $document, $compile, $rootScope, $q, $injector, $$multiMap, $$stackedMap) {
-      var $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
-      }
-      var OPENED_MODAL_CLASS = 'modal-open';
-      var backdropDomEl,
-          backdropScope;
-      var openedWindows = $$stackedMap.createNew();
-      var openedClasses = $$multiMap.createNew();
-      var $modalStack = {NOW_CLOSING_EVENT: 'modal.stack.now-closing'};
-      var focusableElementList;
-      var focusIndex = 0;
-      var tababbleSelector = 'a[href], area[href], input:not([disabled]), ' + 'button:not([disabled]),select:not([disabled]), textarea:not([disabled]), ' + 'iframe, object, embed, *[tabindex], *[contenteditable=true]';
-      function backdropIndex() {
-        var topBackdropIndex = -1;
-        var opened = openedWindows.keys();
-        for (var i = 0; i < opened.length; i++) {
-          if (openedWindows.get(opened[i]).value.backdrop) {
-            topBackdropIndex = i;
-          }
+        targetElemPos.top = Math.round(targetElemPos.top);
+        targetElemPos.left = Math.round(targetElemPos.left);
+        targetElemPos.placement = placement[1] === 'center' ? placement[0] : placement[0] + '-' + placement[1];
+        return targetElemPos;
+      },
+      positionArrow: function(elem, placement) {
+        elem = this.getRawNode(elem);
+        var innerElem = elem.querySelector('.tooltip-inner, .popover-inner');
+        if (!innerElem) {
+          return;
         }
-        return topBackdropIndex;
-      }
-      $rootScope.$watch(backdropIndex, function(newBackdropIndex) {
-        if (backdropScope) {
-          backdropScope.index = newBackdropIndex;
+        var isTooltip = angular.element(innerElem).hasClass('tooltip-inner');
+        var arrowElem = isTooltip ? elem.querySelector('.tooltip-arrow') : elem.querySelector('.arrow');
+        if (!arrowElem) {
+          return;
         }
-      });
-      function removeModalWindow(modalInstance, elementToReceiveFocus) {
-        var body = $document.find('body').eq(0);
-        var modalWindow = openedWindows.get(modalInstance).value;
-        openedWindows.remove(modalInstance);
-        removeAfterAnimate(modalWindow.modalDomEl, modalWindow.modalScope, function() {
-          var modalBodyClass = modalWindow.openedClass || OPENED_MODAL_CLASS;
-          openedClasses.remove(modalBodyClass, modalInstance);
-          body.toggleClass(modalBodyClass, openedClasses.hasKey(modalBodyClass));
-          toggleTopWindowClass(true);
-        });
-        checkRemoveBackdrop();
-        if (elementToReceiveFocus && elementToReceiveFocus.focus) {
-          elementToReceiveFocus.focus();
-        } else {
-          body.focus();
-        }
-      }
-      function toggleTopWindowClass(toggleSwitch) {
-        var modalWindow;
-        if (openedWindows.length() > 0) {
-          modalWindow = openedWindows.top().value;
-          modalWindow.modalDomEl.toggleClass(modalWindow.windowTopClass || '', toggleSwitch);
-        }
-      }
-      function checkRemoveBackdrop() {
-        if (backdropDomEl && backdropIndex() == -1) {
-          var backdropScopeRef = backdropScope;
-          removeAfterAnimate(backdropDomEl, backdropScope, function() {
-            backdropScopeRef = null;
-          });
-          backdropDomEl = undefined;
-          backdropScope = undefined;
-        }
-      }
-      function removeAfterAnimate(domEl, scope, done) {
-        var asyncDeferred;
-        var asyncPromise = null;
-        var setIsAsync = function() {
-          if (!asyncDeferred) {
-            asyncDeferred = $q.defer();
-            asyncPromise = asyncDeferred.promise;
-          }
-          return function asyncDone() {
-            asyncDeferred.resolve();
-          };
+        var arrowCss = {
+          top: '',
+          bottom: '',
+          left: '',
+          right: ''
         };
-        scope.$broadcast($modalStack.NOW_CLOSING_EVENT, setIsAsync);
-        return $q.when(asyncPromise).then(afterAnimating);
-        function afterAnimating() {
-          if (afterAnimating.done) {
-            return;
-          }
-          afterAnimating.done = true;
-          if ($animateCss) {
-            $animateCss(domEl, {event: 'leave'}).start().then(function() {
-              domEl.remove();
-            });
-          } else {
-            $animate.leave(domEl);
-          }
-          scope.$destroy();
-          if (done) {
-            done();
-          }
+        placement = this.parsePlacement(placement);
+        if (placement[1] === 'center') {
+          angular.element(arrowElem).css(arrowCss);
+          return;
+        }
+        var borderProp = 'border-' + placement[0] + '-width';
+        var borderWidth = $window.getComputedStyle(arrowElem)[borderProp];
+        var borderRadiusProp = 'border-';
+        if (PLACEMENT_REGEX.vertical.test(placement[0])) {
+          borderRadiusProp += placement[0] + '-' + placement[1];
+        } else {
+          borderRadiusProp += placement[1] + '-' + placement[0];
+        }
+        borderRadiusProp += '-radius';
+        var borderRadius = $window.getComputedStyle(isTooltip ? innerElem : elem)[borderRadiusProp];
+        switch (placement[0]) {
+          case 'top':
+            arrowCss.bottom = isTooltip ? '0' : '-' + borderWidth;
+            break;
+          case 'bottom':
+            arrowCss.top = isTooltip ? '0' : '-' + borderWidth;
+            break;
+          case 'left':
+            arrowCss.right = isTooltip ? '0' : '-' + borderWidth;
+            break;
+          case 'right':
+            arrowCss.left = isTooltip ? '0' : '-' + borderWidth;
+            break;
+        }
+        arrowCss[placement[1]] = borderRadius;
+        angular.element(arrowElem).css(arrowCss);
+      }
+    };
+  }]);
+  angular.module('ui.bootstrap.tabs', []).controller('UibTabsetController', ['$scope', function($scope) {
+    var ctrl = this,
+        oldIndex;
+    ctrl.tabs = [];
+    ctrl.select = function(index) {
+      if (!destroyed) {
+        var previousIndex = findTabIndex(oldIndex);
+        var previousSelected = ctrl.tabs[previousIndex];
+        if (previousSelected) {
+          previousSelected.tab.onDeselect();
+          previousSelected.tab.active = false;
+        }
+        var selected = ctrl.tabs[index];
+        if (selected) {
+          selected.tab.onSelect();
+          selected.tab.active = true;
+          ctrl.active = selected.index;
+          oldIndex = selected.index;
+        } else if (!selected && angular.isNumber(oldIndex)) {
+          ctrl.active = null;
+          oldIndex = null;
         }
       }
-      $document.bind('keydown', function(evt) {
-        if (evt.isDefaultPrevented()) {
-          return evt;
+    };
+    ctrl.addTab = function addTab(tab) {
+      ctrl.tabs.push({
+        tab: tab,
+        index: tab.index
+      });
+      ctrl.tabs.sort(function(t1, t2) {
+        if (t1.index > t2.index) {
+          return 1;
         }
-        var modal = openedWindows.top();
-        if (modal && modal.value.keyboard) {
-          switch (evt.which) {
-            case 27:
-              {
-                evt.preventDefault();
-                $rootScope.$apply(function() {
-                  $modalStack.dismiss(modal.key, 'escape key press');
-                });
+        if (t1.index < t2.index) {
+          return -1;
+        }
+        return 0;
+      });
+      if (tab.index === ctrl.active || !angular.isNumber(ctrl.active) && ctrl.tabs.length === 1) {
+        var newActiveIndex = findTabIndex(tab.index);
+        ctrl.select(newActiveIndex);
+      }
+    };
+    ctrl.removeTab = function removeTab(tab) {
+      var index = findTabIndex(tab.index);
+      if (tab.index === ctrl.active) {
+        var newActiveTabIndex = index === ctrl.tabs.length - 1 ? index - 1 : index + 1 % ctrl.tabs.length;
+        ctrl.select(newActiveTabIndex);
+      }
+      ctrl.tabs.splice(index, 1);
+    };
+    $scope.$watch('tabset.active', function(val) {
+      if (angular.isNumber(val) && val !== oldIndex) {
+        ctrl.select(findTabIndex(val));
+      }
+    });
+    var destroyed;
+    $scope.$on('$destroy', function() {
+      destroyed = true;
+    });
+    function findTabIndex(index) {
+      for (var i = 0; i < ctrl.tabs.length; i++) {
+        if (ctrl.tabs[i].index === index) {
+          return i;
+        }
+      }
+    }
+  }]).directive('uibTabset', function() {
+    return {
+      transclude: true,
+      replace: true,
+      scope: {},
+      bindToController: {
+        active: '=?',
+        type: '@'
+      },
+      controller: 'UibTabsetController',
+      controllerAs: 'tabset',
+      templateUrl: function(element, attrs) {
+        return attrs.templateUrl || 'uib/template/tabs/tabset.html';
+      },
+      link: function(scope, element, attrs) {
+        scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
+        scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
+        if (angular.isUndefined(attrs.active)) {
+          scope.active = 0;
+        }
+      }
+    };
+  }).directive('uibTab', ['$parse', function($parse) {
+    return {
+      require: '^uibTabset',
+      replace: true,
+      templateUrl: function(element, attrs) {
+        return attrs.templateUrl || 'uib/template/tabs/tab.html';
+      },
+      transclude: true,
+      scope: {
+        heading: '@',
+        index: '=?',
+        classes: '@?',
+        onSelect: '&select',
+        onDeselect: '&deselect'
+      },
+      controller: function() {},
+      controllerAs: 'tab',
+      link: function(scope, elm, attrs, tabsetCtrl, transclude) {
+        scope.disabled = false;
+        if (attrs.disable) {
+          scope.$parent.$watch($parse(attrs.disable), function(value) {
+            scope.disabled = !!value;
+          });
+        }
+        if (angular.isUndefined(attrs.index)) {
+          if (tabsetCtrl.tabs && tabsetCtrl.tabs.length) {
+            scope.index = Math.max.apply(null, tabsetCtrl.tabs.map(function(t) {
+              return t.index;
+            })) + 1;
+          } else {
+            scope.index = 0;
+          }
+        }
+        if (angular.isUndefined(attrs.classes)) {
+          scope.classes = '';
+        }
+        scope.select = function() {
+          if (!scope.disabled) {
+            var index;
+            for (var i = 0; i < tabsetCtrl.tabs.length; i++) {
+              if (tabsetCtrl.tabs[i].tab === scope) {
+                index = i;
                 break;
               }
-            case 9:
-              {
-                $modalStack.loadFocusElementList(modal);
-                var focusChanged = false;
-                if (evt.shiftKey) {
-                  if ($modalStack.isFocusInFirstItem(evt)) {
-                    focusChanged = $modalStack.focusLastFocusableElement();
-                  }
-                } else {
-                  if ($modalStack.isFocusInLastItem(evt)) {
-                    focusChanged = $modalStack.focusFirstFocusableElement();
-                  }
-                }
-                if (focusChanged) {
-                  evt.preventDefault();
-                  evt.stopPropagation();
-                }
-                break;
-              }
-          }
-        }
-      });
-      $modalStack.open = function(modalInstance, modal) {
-        var modalOpener = $document[0].activeElement,
-            modalBodyClass = modal.openedClass || OPENED_MODAL_CLASS;
-        toggleTopWindowClass(false);
-        openedWindows.add(modalInstance, {
-          deferred: modal.deferred,
-          renderDeferred: modal.renderDeferred,
-          modalScope: modal.scope,
-          backdrop: modal.backdrop,
-          keyboard: modal.keyboard,
-          openedClass: modal.openedClass,
-          windowTopClass: modal.windowTopClass
-        });
-        openedClasses.put(modalBodyClass, modalInstance);
-        var body = $document.find('body').eq(0),
-            currBackdropIndex = backdropIndex();
-        if (currBackdropIndex >= 0 && !backdropDomEl) {
-          backdropScope = $rootScope.$new(true);
-          backdropScope.index = currBackdropIndex;
-          var angularBackgroundDomEl = angular.element('<div uib-modal-backdrop="modal-backdrop"></div>');
-          angularBackgroundDomEl.attr('backdrop-class', modal.backdropClass);
-          if (modal.animation) {
-            angularBackgroundDomEl.attr('modal-animation', 'true');
-          }
-          backdropDomEl = $compile(angularBackgroundDomEl)(backdropScope);
-          body.append(backdropDomEl);
-        }
-        var angularDomEl = angular.element('<div uib-modal-window="modal-window"></div>');
-        angularDomEl.attr({
-          'template-url': modal.windowTemplateUrl,
-          'window-class': modal.windowClass,
-          'window-top-class': modal.windowTopClass,
-          'size': modal.size,
-          'index': openedWindows.length() - 1,
-          'animate': 'animate'
-        }).html(modal.content);
-        if (modal.animation) {
-          angularDomEl.attr('modal-animation', 'true');
-        }
-        var modalDomEl = $compile(angularDomEl)(modal.scope);
-        openedWindows.top().value.modalDomEl = modalDomEl;
-        openedWindows.top().value.modalOpener = modalOpener;
-        body.append(modalDomEl);
-        body.addClass(modalBodyClass);
-        $modalStack.clearFocusListCache();
-      };
-      function broadcastClosing(modalWindow, resultOrReason, closing) {
-        return !modalWindow.value.modalScope.$broadcast('modal.closing', resultOrReason, closing).defaultPrevented;
-      }
-      $modalStack.close = function(modalInstance, result) {
-        var modalWindow = openedWindows.get(modalInstance);
-        if (modalWindow && broadcastClosing(modalWindow, result, true)) {
-          modalWindow.value.modalScope.$$uibDestructionScheduled = true;
-          modalWindow.value.deferred.resolve(result);
-          removeModalWindow(modalInstance, modalWindow.value.modalOpener);
-          return true;
-        }
-        return !modalWindow;
-      };
-      $modalStack.dismiss = function(modalInstance, reason) {
-        var modalWindow = openedWindows.get(modalInstance);
-        if (modalWindow && broadcastClosing(modalWindow, reason, false)) {
-          modalWindow.value.modalScope.$$uibDestructionScheduled = true;
-          modalWindow.value.deferred.reject(reason);
-          removeModalWindow(modalInstance, modalWindow.value.modalOpener);
-          return true;
-        }
-        return !modalWindow;
-      };
-      $modalStack.dismissAll = function(reason) {
-        var topModal = this.getTop();
-        while (topModal && this.dismiss(topModal.key, reason)) {
-          topModal = this.getTop();
-        }
-      };
-      $modalStack.getTop = function() {
-        return openedWindows.top();
-      };
-      $modalStack.modalRendered = function(modalInstance) {
-        var modalWindow = openedWindows.get(modalInstance);
-        if (modalWindow) {
-          modalWindow.value.renderDeferred.resolve();
-        }
-      };
-      $modalStack.focusFirstFocusableElement = function() {
-        if (focusableElementList.length > 0) {
-          focusableElementList[0].focus();
-          return true;
-        }
-        return false;
-      };
-      $modalStack.focusLastFocusableElement = function() {
-        if (focusableElementList.length > 0) {
-          focusableElementList[focusableElementList.length - 1].focus();
-          return true;
-        }
-        return false;
-      };
-      $modalStack.isFocusInFirstItem = function(evt) {
-        if (focusableElementList.length > 0) {
-          return (evt.target || evt.srcElement) == focusableElementList[0];
-        }
-        return false;
-      };
-      $modalStack.isFocusInLastItem = function(evt) {
-        if (focusableElementList.length > 0) {
-          return (evt.target || evt.srcElement) == focusableElementList[focusableElementList.length - 1];
-        }
-        return false;
-      };
-      $modalStack.clearFocusListCache = function() {
-        focusableElementList = [];
-        focusIndex = 0;
-      };
-      $modalStack.loadFocusElementList = function(modalWindow) {
-        if (focusableElementList === undefined || !focusableElementList.length) {
-          if (modalWindow) {
-            var modalDomE1 = modalWindow.value.modalDomEl;
-            if (modalDomE1 && modalDomE1.length) {
-              focusableElementList = modalDomE1[0].querySelectorAll(tababbleSelector);
             }
-          }
-        }
-      };
-      return $modalStack;
-    }]).provider('$uibModal', function() {
-      var $modalProvider = {
-        options: {
-          animation: true,
-          backdrop: true,
-          keyboard: true
-        },
-        $get: ['$injector', '$rootScope', '$q', '$templateRequest', '$controller', '$uibModalStack', '$modalSuppressWarning', '$log', function($injector, $rootScope, $q, $templateRequest, $controller, $modalStack, $modalSuppressWarning, $log) {
-          var $modal = {};
-          function getTemplatePromise(options) {
-            return options.template ? $q.when(options.template) : $templateRequest(angular.isFunction(options.templateUrl) ? (options.templateUrl)() : options.templateUrl);
-          }
-          function getResolvePromises(resolves) {
-            var promisesArr = [];
-            angular.forEach(resolves, function(value) {
-              if (angular.isFunction(value) || angular.isArray(value)) {
-                promisesArr.push($q.when($injector.invoke(value)));
-              } else if (angular.isString(value)) {
-                promisesArr.push($q.when($injector.get(value)));
-              } else {
-                promisesArr.push($q.when(value));
-              }
-            });
-            return promisesArr;
-          }
-          var promiseChain = null;
-          $modal.getPromiseChain = function() {
-            return promiseChain;
-          };
-          $modal.open = function(modalOptions) {
-            var modalResultDeferred = $q.defer();
-            var modalOpenedDeferred = $q.defer();
-            var modalRenderDeferred = $q.defer();
-            var modalInstance = {
-              result: modalResultDeferred.promise,
-              opened: modalOpenedDeferred.promise,
-              rendered: modalRenderDeferred.promise,
-              close: function(result) {
-                return $modalStack.close(modalInstance, result);
-              },
-              dismiss: function(reason) {
-                return $modalStack.dismiss(modalInstance, reason);
-              }
-            };
-            modalOptions = angular.extend({}, $modalProvider.options, modalOptions);
-            modalOptions.resolve = modalOptions.resolve || {};
-            if (!modalOptions.template && !modalOptions.templateUrl) {
-              throw new Error('One of template or templateUrl options is required.');
-            }
-            var templateAndResolvePromise = $q.all([getTemplatePromise(modalOptions)].concat(getResolvePromises(modalOptions.resolve)));
-            function resolveWithTemplate() {
-              return templateAndResolvePromise;
-            }
-            var samePromise;
-            samePromise = promiseChain = $q.all([promiseChain]).then(resolveWithTemplate, resolveWithTemplate).then(function resolveSuccess(tplAndVars) {
-              var modalScope = (modalOptions.scope || $rootScope).$new();
-              modalScope.$close = modalInstance.close;
-              modalScope.$dismiss = modalInstance.dismiss;
-              modalScope.$on('$destroy', function() {
-                if (!modalScope.$$uibDestructionScheduled) {
-                  modalScope.$dismiss('$uibUnscheduledDestruction');
-                }
-              });
-              var ctrlInstance,
-                  ctrlLocals = {};
-              var resolveIter = 1;
-              if (modalOptions.controller) {
-                ctrlLocals.$scope = modalScope;
-                ctrlLocals.$uibModalInstance = modalInstance;
-                Object.defineProperty(ctrlLocals, '$modalInstance', {get: function() {
-                    if (!$modalSuppressWarning) {
-                      $log.warn('$modalInstance is now deprecated. Use $uibModalInstance instead.');
-                    }
-                    return modalInstance;
-                  }});
-                angular.forEach(modalOptions.resolve, function(value, key) {
-                  ctrlLocals[key] = tplAndVars[resolveIter++];
-                });
-                ctrlInstance = $controller(modalOptions.controller, ctrlLocals);
-                if (modalOptions.controllerAs) {
-                  if (modalOptions.bindToController) {
-                    angular.extend(ctrlInstance, modalScope);
-                  }
-                  modalScope[modalOptions.controllerAs] = ctrlInstance;
-                }
-              }
-              $modalStack.open(modalInstance, {
-                scope: modalScope,
-                deferred: modalResultDeferred,
-                renderDeferred: modalRenderDeferred,
-                content: tplAndVars[0],
-                animation: modalOptions.animation,
-                backdrop: modalOptions.backdrop,
-                keyboard: modalOptions.keyboard,
-                backdropClass: modalOptions.backdropClass,
-                windowTopClass: modalOptions.windowTopClass,
-                windowClass: modalOptions.windowClass,
-                windowTemplateUrl: modalOptions.windowTemplateUrl,
-                size: modalOptions.size,
-                openedClass: modalOptions.openedClass
-              });
-              modalOpenedDeferred.resolve(true);
-            }, function resolveError(reason) {
-              modalOpenedDeferred.reject(reason);
-              modalResultDeferred.reject(reason);
-            }).finally(function() {
-              if (promiseChain === samePromise) {
-                promiseChain = null;
-              }
-            });
-            return modalInstance;
-          };
-          return $modal;
-        }]
-      };
-      return $modalProvider;
-    });
-    angular.module('ui.bootstrap.modal').value('$modalSuppressWarning', false).directive('modalBackdrop', ['$animate', '$injector', '$modalStack', '$log', '$modalSuppressWarning', function($animate, $injector, $modalStack, $log, $modalSuppressWarning) {
-      var $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
-      }
-      return {
-        replace: true,
-        templateUrl: 'template/modal/backdrop.html',
-        compile: function(tElement, tAttrs) {
-          tElement.addClass(tAttrs.backdropClass);
-          return linkFn;
-        }
-      };
-      function linkFn(scope, element, attrs) {
-        if (!$modalSuppressWarning) {
-          $log.warn('modal-backdrop is now deprecated. Use uib-modal-backdrop instead.');
-        }
-        element.addClass('modal-backdrop');
-        if (attrs.modalInClass) {
-          if ($animateCss) {
-            $animateCss(element, {addClass: attrs.modalInClass}).start();
-          } else {
-            $animate.addClass(element, attrs.modalInClass);
-          }
-          scope.$on($modalStack.NOW_CLOSING_EVENT, function(e, setIsAsync) {
-            var done = setIsAsync();
-            if ($animateCss) {
-              $animateCss(element, {removeClass: attrs.modalInClass}).start().then(done);
-            } else {
-              $animate.removeClass(element, attrs.modalInClass).then(done);
-            }
-          });
-        }
-      }
-    }]).directive('modalWindow', ['$modalStack', '$q', '$animate', '$injector', '$log', '$modalSuppressWarning', function($modalStack, $q, $animate, $injector, $log, $modalSuppressWarning) {
-      var $animateCss = null;
-      if ($injector.has('$animateCss')) {
-        $animateCss = $injector.get('$animateCss');
-      }
-      return {
-        scope: {index: '@'},
-        replace: true,
-        transclude: true,
-        templateUrl: function(tElement, tAttrs) {
-          return tAttrs.templateUrl || 'template/modal/window.html';
-        },
-        link: function(scope, element, attrs) {
-          if (!$modalSuppressWarning) {
-            $log.warn('modal-window is now deprecated. Use uib-modal-window instead.');
-          }
-          element.addClass(attrs.windowClass || '');
-          element.addClass(attrs.windowTopClass || '');
-          scope.size = attrs.size;
-          scope.close = function(evt) {
-            var modal = $modalStack.getTop();
-            if (modal && modal.value.backdrop && modal.value.backdrop !== 'static' && (evt.target === evt.currentTarget)) {
-              evt.preventDefault();
-              evt.stopPropagation();
-              $modalStack.dismiss(modal.key, 'backdrop click');
-            }
-          };
-          element.on('click', scope.close);
-          scope.$isRendered = true;
-          var modalRenderDeferObj = $q.defer();
-          attrs.$observe('modalRender', function(value) {
-            if (value == 'true') {
-              modalRenderDeferObj.resolve();
-            }
-          });
-          modalRenderDeferObj.promise.then(function() {
-            var animationPromise = null;
-            if (attrs.modalInClass) {
-              if ($animateCss) {
-                animationPromise = $animateCss(element, {addClass: attrs.modalInClass}).start();
-              } else {
-                animationPromise = $animate.addClass(element, attrs.modalInClass);
-              }
-              scope.$on($modalStack.NOW_CLOSING_EVENT, function(e, setIsAsync) {
-                var done = setIsAsync();
-                if ($animateCss) {
-                  $animateCss(element, {removeClass: attrs.modalInClass}).start().then(done);
-                } else {
-                  $animate.removeClass(element, attrs.modalInClass).then(done);
-                }
-              });
-            }
-            $q.when(animationPromise).then(function() {
-              var inputWithAutofocus = element[0].querySelector('[autofocus]');
-              if (inputWithAutofocus) {
-                inputWithAutofocus.focus();
-              } else {
-                element[0].focus();
-              }
-            });
-            var modal = $modalStack.getTop();
-            if (modal) {
-              $modalStack.modalRendered(modal.key);
-            }
-          });
-        }
-      };
-    }]).directive('modalAnimationClass', ['$log', '$modalSuppressWarning', function($log, $modalSuppressWarning) {
-      return {compile: function(tElement, tAttrs) {
-          if (!$modalSuppressWarning) {
-            $log.warn('modal-animation-class is now deprecated. Use uib-modal-animation-class instead.');
-          }
-          if (tAttrs.modalAnimation) {
-            tElement.addClass(tAttrs.modalAnimationClass);
-          }
-        }};
-    }]).directive('modalTransclude', ['$log', '$modalSuppressWarning', function($log, $modalSuppressWarning) {
-      return {link: function($scope, $element, $attrs, controller, $transclude) {
-          if (!$modalSuppressWarning) {
-            $log.warn('modal-transclude is now deprecated. Use uib-modal-transclude instead.');
-          }
-          $transclude($scope.$parent, function(clone) {
-            $element.empty();
-            $element.append(clone);
-          });
-        }};
-    }]).service('$modalStack', ['$animate', '$timeout', '$document', '$compile', '$rootScope', '$q', '$injector', '$$multiMap', '$$stackedMap', '$uibModalStack', '$log', '$modalSuppressWarning', function($animate, $timeout, $document, $compile, $rootScope, $q, $injector, $$multiMap, $$stackedMap, $uibModalStack, $log, $modalSuppressWarning) {
-      if (!$modalSuppressWarning) {
-        $log.warn('$modalStack is now deprecated. Use $uibModalStack instead.');
-      }
-      angular.extend(this, $uibModalStack);
-    }]).provider('$modal', ['$uibModalProvider', function($uibModalProvider) {
-      angular.extend(this, $uibModalProvider);
-      this.$get = ['$injector', '$log', '$modalSuppressWarning', function($injector, $log, $modalSuppressWarning) {
-        if (!$modalSuppressWarning) {
-          $log.warn('$modal is now deprecated. Use $uibModal instead.');
-        }
-        return $injector.invoke($uibModalProvider.$get);
-      }];
-    }]);
-    angular.module('ui.bootstrap.pagination', []).controller('UibPaginationController', ['$scope', '$attrs', '$parse', function($scope, $attrs, $parse) {
-      var self = this,
-          ngModelCtrl = {$setViewValue: angular.noop},
-          setNumPages = $attrs.numPages ? $parse($attrs.numPages).assign : angular.noop;
-      this.init = function(ngModelCtrl_, config) {
-        ngModelCtrl = ngModelCtrl_;
-        this.config = config;
-        ngModelCtrl.$render = function() {
-          self.render();
-        };
-        if ($attrs.itemsPerPage) {
-          $scope.$parent.$watch($parse($attrs.itemsPerPage), function(value) {
-            self.itemsPerPage = parseInt(value, 10);
-            $scope.totalPages = self.calculateTotalPages();
-          });
-        } else {
-          this.itemsPerPage = config.itemsPerPage;
-        }
-        $scope.$watch('totalItems', function() {
-          $scope.totalPages = self.calculateTotalPages();
-        });
-        $scope.$watch('totalPages', function(value) {
-          setNumPages($scope.$parent, value);
-          if ($scope.page > value) {
-            $scope.selectPage(value);
-          } else {
-            ngModelCtrl.$render();
-          }
-        });
-      };
-      this.calculateTotalPages = function() {
-        var totalPages = this.itemsPerPage < 1 ? 1 : Math.ceil($scope.totalItems / this.itemsPerPage);
-        return Math.max(totalPages || 0, 1);
-      };
-      this.render = function() {
-        $scope.page = parseInt(ngModelCtrl.$viewValue, 10) || 1;
-      };
-      $scope.selectPage = function(page, evt) {
-        if (evt) {
-          evt.preventDefault();
-        }
-        var clickAllowed = !$scope.ngDisabled || !evt;
-        if (clickAllowed && $scope.page !== page && page > 0 && page <= $scope.totalPages) {
-          if (evt && evt.target) {
-            evt.target.blur();
-          }
-          ngModelCtrl.$setViewValue(page);
-          ngModelCtrl.$render();
-        }
-      };
-      $scope.getText = function(key) {
-        return $scope[key + 'Text'] || self.config[key + 'Text'];
-      };
-      $scope.noPrevious = function() {
-        return $scope.page === 1;
-      };
-      $scope.noNext = function() {
-        return $scope.page === $scope.totalPages;
-      };
-    }]).constant('uibPaginationConfig', {
-      itemsPerPage: 10,
-      boundaryLinks: false,
-      directionLinks: true,
-      firstText: 'First',
-      previousText: 'Previous',
-      nextText: 'Next',
-      lastText: 'Last',
-      rotate: true
-    }).directive('uibPagination', ['$parse', 'uibPaginationConfig', function($parse, paginationConfig) {
-      return {
-        restrict: 'EA',
-        scope: {
-          totalItems: '=',
-          firstText: '@',
-          previousText: '@',
-          nextText: '@',
-          lastText: '@',
-          ngDisabled: '='
-        },
-        require: ['uibPagination', '?ngModel'],
-        controller: 'UibPaginationController',
-        controllerAs: 'pagination',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/pagination/pagination.html';
-        },
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          var paginationCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl) {
-            return;
-          }
-          var maxSize = angular.isDefined(attrs.maxSize) ? scope.$parent.$eval(attrs.maxSize) : paginationConfig.maxSize,
-              rotate = angular.isDefined(attrs.rotate) ? scope.$parent.$eval(attrs.rotate) : paginationConfig.rotate;
-          scope.boundaryLinks = angular.isDefined(attrs.boundaryLinks) ? scope.$parent.$eval(attrs.boundaryLinks) : paginationConfig.boundaryLinks;
-          scope.directionLinks = angular.isDefined(attrs.directionLinks) ? scope.$parent.$eval(attrs.directionLinks) : paginationConfig.directionLinks;
-          paginationCtrl.init(ngModelCtrl, paginationConfig);
-          if (attrs.maxSize) {
-            scope.$parent.$watch($parse(attrs.maxSize), function(value) {
-              maxSize = parseInt(value, 10);
-              paginationCtrl.render();
-            });
-          }
-          function makePage(number, text, isActive) {
-            return {
-              number: number,
-              text: text,
-              active: isActive
-            };
-          }
-          function getPages(currentPage, totalPages) {
-            var pages = [];
-            var startPage = 1,
-                endPage = totalPages;
-            var isMaxSized = angular.isDefined(maxSize) && maxSize < totalPages;
-            if (isMaxSized) {
-              if (rotate) {
-                startPage = Math.max(currentPage - Math.floor(maxSize / 2), 1);
-                endPage = startPage + maxSize - 1;
-                if (endPage > totalPages) {
-                  endPage = totalPages;
-                  startPage = endPage - maxSize + 1;
-                }
-              } else {
-                startPage = ((Math.ceil(currentPage / maxSize) - 1) * maxSize) + 1;
-                endPage = Math.min(startPage + maxSize - 1, totalPages);
-              }
-            }
-            for (var number = startPage; number <= endPage; number++) {
-              var page = makePage(number, number, number === currentPage);
-              pages.push(page);
-            }
-            if (isMaxSized && !rotate) {
-              if (startPage > 1) {
-                var previousPageSet = makePage(startPage - 1, '...', false);
-                pages.unshift(previousPageSet);
-              }
-              if (endPage < totalPages) {
-                var nextPageSet = makePage(endPage + 1, '...', false);
-                pages.push(nextPageSet);
-              }
-            }
-            return pages;
-          }
-          var originalRender = paginationCtrl.render;
-          paginationCtrl.render = function() {
-            originalRender();
-            if (scope.page > 0 && scope.page <= scope.totalPages) {
-              scope.pages = getPages(scope.page, scope.totalPages);
-            }
-          };
-        }
-      };
-    }]).constant('uibPagerConfig', {
-      itemsPerPage: 10,
-      previousText: '« Previous',
-      nextText: 'Next »',
-      align: true
-    }).directive('uibPager', ['uibPagerConfig', function(pagerConfig) {
-      return {
-        restrict: 'EA',
-        scope: {
-          totalItems: '=',
-          previousText: '@',
-          nextText: '@',
-          ngDisabled: '='
-        },
-        require: ['uibPager', '?ngModel'],
-        controller: 'UibPaginationController',
-        controllerAs: 'pagination',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/pagination/pager.html';
-        },
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          var paginationCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl) {
-            return;
-          }
-          scope.align = angular.isDefined(attrs.align) ? scope.$parent.$eval(attrs.align) : pagerConfig.align;
-          paginationCtrl.init(ngModelCtrl, pagerConfig);
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.pagination').value('$paginationSuppressWarning', false).controller('PaginationController', ['$scope', '$attrs', '$parse', '$log', '$paginationSuppressWarning', function($scope, $attrs, $parse, $log, $paginationSuppressWarning) {
-      if (!$paginationSuppressWarning) {
-        $log.warn('PaginationController is now deprecated. Use UibPaginationController instead.');
-      }
-      var self = this,
-          ngModelCtrl = {$setViewValue: angular.noop},
-          setNumPages = $attrs.numPages ? $parse($attrs.numPages).assign : angular.noop;
-      this.init = function(ngModelCtrl_, config) {
-        ngModelCtrl = ngModelCtrl_;
-        this.config = config;
-        ngModelCtrl.$render = function() {
-          self.render();
-        };
-        if ($attrs.itemsPerPage) {
-          $scope.$parent.$watch($parse($attrs.itemsPerPage), function(value) {
-            self.itemsPerPage = parseInt(value, 10);
-            $scope.totalPages = self.calculateTotalPages();
-          });
-        } else {
-          this.itemsPerPage = config.itemsPerPage;
-        }
-        $scope.$watch('totalItems', function() {
-          $scope.totalPages = self.calculateTotalPages();
-        });
-        $scope.$watch('totalPages', function(value) {
-          setNumPages($scope.$parent, value);
-          if ($scope.page > value) {
-            $scope.selectPage(value);
-          } else {
-            ngModelCtrl.$render();
-          }
-        });
-      };
-      this.calculateTotalPages = function() {
-        var totalPages = this.itemsPerPage < 1 ? 1 : Math.ceil($scope.totalItems / this.itemsPerPage);
-        return Math.max(totalPages || 0, 1);
-      };
-      this.render = function() {
-        $scope.page = parseInt(ngModelCtrl.$viewValue, 10) || 1;
-      };
-      $scope.selectPage = function(page, evt) {
-        if (evt) {
-          evt.preventDefault();
-        }
-        var clickAllowed = !$scope.ngDisabled || !evt;
-        if (clickAllowed && $scope.page !== page && page > 0 && page <= $scope.totalPages) {
-          if (evt && evt.target) {
-            evt.target.blur();
-          }
-          ngModelCtrl.$setViewValue(page);
-          ngModelCtrl.$render();
-        }
-      };
-      $scope.getText = function(key) {
-        return $scope[key + 'Text'] || self.config[key + 'Text'];
-      };
-      $scope.noPrevious = function() {
-        return $scope.page === 1;
-      };
-      $scope.noNext = function() {
-        return $scope.page === $scope.totalPages;
-      };
-    }]).directive('pagination', ['$parse', 'uibPaginationConfig', '$log', '$paginationSuppressWarning', function($parse, paginationConfig, $log, $paginationSuppressWarning) {
-      return {
-        restrict: 'EA',
-        scope: {
-          totalItems: '=',
-          firstText: '@',
-          previousText: '@',
-          nextText: '@',
-          lastText: '@',
-          ngDisabled: '='
-        },
-        require: ['pagination', '?ngModel'],
-        controller: 'PaginationController',
-        controllerAs: 'pagination',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/pagination/pagination.html';
-        },
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          if (!$paginationSuppressWarning) {
-            $log.warn('pagination is now deprecated. Use uib-pagination instead.');
-          }
-          var paginationCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl) {
-            return;
-          }
-          var maxSize = angular.isDefined(attrs.maxSize) ? scope.$parent.$eval(attrs.maxSize) : paginationConfig.maxSize,
-              rotate = angular.isDefined(attrs.rotate) ? scope.$parent.$eval(attrs.rotate) : paginationConfig.rotate;
-          scope.boundaryLinks = angular.isDefined(attrs.boundaryLinks) ? scope.$parent.$eval(attrs.boundaryLinks) : paginationConfig.boundaryLinks;
-          scope.directionLinks = angular.isDefined(attrs.directionLinks) ? scope.$parent.$eval(attrs.directionLinks) : paginationConfig.directionLinks;
-          paginationCtrl.init(ngModelCtrl, paginationConfig);
-          if (attrs.maxSize) {
-            scope.$parent.$watch($parse(attrs.maxSize), function(value) {
-              maxSize = parseInt(value, 10);
-              paginationCtrl.render();
-            });
-          }
-          function makePage(number, text, isActive) {
-            return {
-              number: number,
-              text: text,
-              active: isActive
-            };
-          }
-          function getPages(currentPage, totalPages) {
-            var pages = [];
-            var startPage = 1,
-                endPage = totalPages;
-            var isMaxSized = angular.isDefined(maxSize) && maxSize < totalPages;
-            if (isMaxSized) {
-              if (rotate) {
-                startPage = Math.max(currentPage - Math.floor(maxSize / 2), 1);
-                endPage = startPage + maxSize - 1;
-                if (endPage > totalPages) {
-                  endPage = totalPages;
-                  startPage = endPage - maxSize + 1;
-                }
-              } else {
-                startPage = ((Math.ceil(currentPage / maxSize) - 1) * maxSize) + 1;
-                endPage = Math.min(startPage + maxSize - 1, totalPages);
-              }
-            }
-            for (var number = startPage; number <= endPage; number++) {
-              var page = makePage(number, number, number === currentPage);
-              pages.push(page);
-            }
-            if (isMaxSized && !rotate) {
-              if (startPage > 1) {
-                var previousPageSet = makePage(startPage - 1, '...', false);
-                pages.unshift(previousPageSet);
-              }
-              if (endPage < totalPages) {
-                var nextPageSet = makePage(endPage + 1, '...', false);
-                pages.push(nextPageSet);
-              }
-            }
-            return pages;
-          }
-          var originalRender = paginationCtrl.render;
-          paginationCtrl.render = function() {
-            originalRender();
-            if (scope.page > 0 && scope.page <= scope.totalPages) {
-              scope.pages = getPages(scope.page, scope.totalPages);
-            }
-          };
-        }
-      };
-    }]).directive('pager', ['uibPagerConfig', '$log', '$paginationSuppressWarning', function(pagerConfig, $log, $paginationSuppressWarning) {
-      return {
-        restrict: 'EA',
-        scope: {
-          totalItems: '=',
-          previousText: '@',
-          nextText: '@',
-          ngDisabled: '='
-        },
-        require: ['pager', '?ngModel'],
-        controller: 'PaginationController',
-        controllerAs: 'pagination',
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/pagination/pager.html';
-        },
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          if (!$paginationSuppressWarning) {
-            $log.warn('pager is now deprecated. Use uib-pager instead.');
-          }
-          var paginationCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl) {
-            return;
-          }
-          scope.align = angular.isDefined(attrs.align) ? scope.$parent.$eval(attrs.align) : pagerConfig.align;
-          paginationCtrl.init(ngModelCtrl, pagerConfig);
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.stackedMap']).provider('$uibTooltip', function() {
-      var defaultOptions = {
-        placement: 'top',
-        animation: true,
-        popupDelay: 0,
-        popupCloseDelay: 0,
-        useContentExp: false
-      };
-      var triggerMap = {
-        'mouseenter': 'mouseleave',
-        'click': 'click',
-        'focus': 'blur',
-        'none': ''
-      };
-      var globalOptions = {};
-      this.options = function(value) {
-        angular.extend(globalOptions, value);
-      };
-      this.setTriggers = function setTriggers(triggers) {
-        angular.extend(triggerMap, triggers);
-      };
-      function snake_case(name) {
-        var regexp = /[A-Z]/g;
-        var separator = '-';
-        return name.replace(regexp, function(letter, pos) {
-          return (pos ? separator : '') + letter.toLowerCase();
-        });
-      }
-      this.$get = ['$window', '$compile', '$timeout', '$document', '$uibPosition', '$interpolate', '$rootScope', '$parse', '$$stackedMap', function($window, $compile, $timeout, $document, $position, $interpolate, $rootScope, $parse, $$stackedMap) {
-        var openedTooltips = $$stackedMap.createNew();
-        $document.on('keypress', function(e) {
-          if (e.which === 27) {
-            var last = openedTooltips.top();
-            if (last) {
-              last.value.close();
-              openedTooltips.removeTop();
-              last = null;
-            }
-          }
-        });
-        return function $tooltip(ttType, prefix, defaultTriggerShow, options) {
-          options = angular.extend({}, defaultOptions, globalOptions, options);
-          function getTriggers(trigger) {
-            var show = (trigger || options.trigger || defaultTriggerShow).split(' ');
-            var hide = show.map(function(trigger) {
-              return triggerMap[trigger] || trigger;
-            });
-            return {
-              show: show,
-              hide: hide
-            };
-          }
-          var directiveName = snake_case(ttType);
-          var startSym = $interpolate.startSymbol();
-          var endSym = $interpolate.endSymbol();
-          var template = '<div ' + directiveName + '-popup ' + 'title="' + startSym + 'title' + endSym + '" ' + (options.useContentExp ? 'content-exp="contentExp()" ' : 'content="' + startSym + 'content' + endSym + '" ') + 'placement="' + startSym + 'placement' + endSym + '" ' + 'popup-class="' + startSym + 'popupClass' + endSym + '" ' + 'animation="animation" ' + 'is-open="isOpen"' + 'origin-scope="origScope" ' + 'style="visibility: hidden; display: block; top: -9999px; left: -9999px;"' + '>' + '</div>';
-          return {compile: function(tElem, tAttrs) {
-              var tooltipLinker = $compile(template);
-              return function link(scope, element, attrs, tooltipCtrl) {
-                var tooltip;
-                var tooltipLinkedScope;
-                var transitionTimeout;
-                var showTimeout;
-                var hideTimeout;
-                var positionTimeout;
-                var appendToBody = angular.isDefined(options.appendToBody) ? options.appendToBody : false;
-                var triggers = getTriggers(undefined);
-                var hasEnableExp = angular.isDefined(attrs[prefix + 'Enable']);
-                var ttScope = scope.$new(true);
-                var repositionScheduled = false;
-                var isOpenParse = angular.isDefined(attrs[prefix + 'IsOpen']) ? $parse(attrs[prefix + 'IsOpen']) : false;
-                var contentParse = options.useContentExp ? $parse(attrs[ttType]) : false;
-                var observers = [];
-                var positionTooltip = function() {
-                  if (!tooltip || !tooltip.html()) {
-                    return;
-                  }
-                  if (!positionTimeout) {
-                    positionTimeout = $timeout(function() {
-                      tooltip.css({
-                        top: 0,
-                        left: 0
-                      });
-                      var ttCss = $position.positionElements(element, tooltip, ttScope.placement, appendToBody);
-                      ttCss.top += 'px';
-                      ttCss.left += 'px';
-                      ttCss.visibility = 'visible';
-                      tooltip.css(ttCss);
-                      positionTimeout = null;
-                    }, 0, false);
-                  }
-                };
-                ttScope.origScope = scope;
-                ttScope.isOpen = false;
-                openedTooltips.add(ttScope, {close: hide});
-                function toggleTooltipBind() {
-                  if (!ttScope.isOpen) {
-                    showTooltipBind();
-                  } else {
-                    hideTooltipBind();
-                  }
-                }
-                function showTooltipBind() {
-                  if (hasEnableExp && !scope.$eval(attrs[prefix + 'Enable'])) {
-                    return;
-                  }
-                  cancelHide();
-                  prepareTooltip();
-                  if (ttScope.popupDelay) {
-                    if (!showTimeout) {
-                      showTimeout = $timeout(show, ttScope.popupDelay, false);
-                    }
-                  } else {
-                    show();
-                  }
-                }
-                function hideTooltipBind() {
-                  cancelShow();
-                  if (ttScope.popupCloseDelay) {
-                    if (!hideTimeout) {
-                      hideTimeout = $timeout(hide, ttScope.popupCloseDelay, false);
-                    }
-                  } else {
-                    hide();
-                  }
-                }
-                function show() {
-                  cancelShow();
-                  cancelHide();
-                  if (!ttScope.content) {
-                    return angular.noop;
-                  }
-                  createTooltip();
-                  ttScope.$evalAsync(function() {
-                    ttScope.isOpen = true;
-                    assignIsOpen(true);
-                    positionTooltip();
-                  });
-                }
-                function cancelShow() {
-                  if (showTimeout) {
-                    $timeout.cancel(showTimeout);
-                    showTimeout = null;
-                  }
-                  if (positionTimeout) {
-                    $timeout.cancel(positionTimeout);
-                    positionTimeout = null;
-                  }
-                }
-                function hide() {
-                  cancelShow();
-                  cancelHide();
-                  if (!ttScope) {
-                    return;
-                  }
-                  ttScope.$evalAsync(function() {
-                    ttScope.isOpen = false;
-                    assignIsOpen(false);
-                    if (ttScope.animation) {
-                      if (!transitionTimeout) {
-                        transitionTimeout = $timeout(removeTooltip, 150, false);
-                      }
-                    } else {
-                      removeTooltip();
-                    }
-                  });
-                }
-                function cancelHide() {
-                  if (hideTimeout) {
-                    $timeout.cancel(hideTimeout);
-                    hideTimeout = null;
-                  }
-                  if (transitionTimeout) {
-                    $timeout.cancel(transitionTimeout);
-                    transitionTimeout = null;
-                  }
-                }
-                function createTooltip() {
-                  if (tooltip) {
-                    return;
-                  }
-                  tooltipLinkedScope = ttScope.$new();
-                  tooltip = tooltipLinker(tooltipLinkedScope, function(tooltip) {
-                    if (appendToBody) {
-                      $document.find('body').append(tooltip);
-                    } else {
-                      element.after(tooltip);
-                    }
-                  });
-                  prepObservers();
-                }
-                function removeTooltip() {
-                  unregisterObservers();
-                  transitionTimeout = null;
-                  if (tooltip) {
-                    tooltip.remove();
-                    tooltip = null;
-                  }
-                  if (tooltipLinkedScope) {
-                    tooltipLinkedScope.$destroy();
-                    tooltipLinkedScope = null;
-                  }
-                }
-                function prepareTooltip() {
-                  ttScope.title = attrs[prefix + 'Title'];
-                  if (contentParse) {
-                    ttScope.content = contentParse(scope);
-                  } else {
-                    ttScope.content = attrs[ttType];
-                  }
-                  ttScope.popupClass = attrs[prefix + 'Class'];
-                  ttScope.placement = angular.isDefined(attrs[prefix + 'Placement']) ? attrs[prefix + 'Placement'] : options.placement;
-                  var delay = parseInt(attrs[prefix + 'PopupDelay'], 10);
-                  var closeDelay = parseInt(attrs[prefix + 'PopupCloseDelay'], 10);
-                  ttScope.popupDelay = !isNaN(delay) ? delay : options.popupDelay;
-                  ttScope.popupCloseDelay = !isNaN(closeDelay) ? closeDelay : options.popupCloseDelay;
-                }
-                function assignIsOpen(isOpen) {
-                  if (isOpenParse && angular.isFunction(isOpenParse.assign)) {
-                    isOpenParse.assign(scope, isOpen);
-                  }
-                }
-                ttScope.contentExp = function() {
-                  return ttScope.content;
-                };
-                attrs.$observe('disabled', function(val) {
-                  if (val) {
-                    cancelShow();
-                  }
-                  if (val && ttScope.isOpen) {
-                    hide();
-                  }
-                });
-                if (isOpenParse) {
-                  scope.$watch(isOpenParse, function(val) {
-                    if (ttScope && !val === ttScope.isOpen) {
-                      toggleTooltipBind();
-                    }
-                  });
-                }
-                function prepObservers() {
-                  observers.length = 0;
-                  if (contentParse) {
-                    observers.push(scope.$watch(contentParse, function(val) {
-                      ttScope.content = val;
-                      if (!val && ttScope.isOpen) {
-                        hide();
-                      }
-                    }));
-                    observers.push(tooltipLinkedScope.$watch(function() {
-                      if (!repositionScheduled) {
-                        repositionScheduled = true;
-                        tooltipLinkedScope.$$postDigest(function() {
-                          repositionScheduled = false;
-                          if (ttScope && ttScope.isOpen) {
-                            positionTooltip();
-                          }
-                        });
-                      }
-                    }));
-                  } else {
-                    observers.push(attrs.$observe(ttType, function(val) {
-                      ttScope.content = val;
-                      if (!val && ttScope.isOpen) {
-                        hide();
-                      } else {
-                        positionTooltip();
-                      }
-                    }));
-                  }
-                  observers.push(attrs.$observe(prefix + 'Title', function(val) {
-                    ttScope.title = val;
-                    if (ttScope.isOpen) {
-                      positionTooltip();
-                    }
-                  }));
-                  observers.push(attrs.$observe(prefix + 'Placement', function(val) {
-                    ttScope.placement = val ? val : options.placement;
-                    if (ttScope.isOpen) {
-                      positionTooltip();
-                    }
-                  }));
-                }
-                function unregisterObservers() {
-                  if (observers.length) {
-                    angular.forEach(observers, function(observer) {
-                      observer();
-                    });
-                    observers.length = 0;
-                  }
-                }
-                var unregisterTriggers = function() {
-                  triggers.show.forEach(function(trigger) {
-                    element.unbind(trigger, showTooltipBind);
-                  });
-                  triggers.hide.forEach(function(trigger) {
-                    trigger.split(' ').forEach(function(hideTrigger) {
-                      element[0].removeEventListener(hideTrigger, hideTooltipBind);
-                    });
-                  });
-                };
-                function prepTriggers() {
-                  var val = attrs[prefix + 'Trigger'];
-                  unregisterTriggers();
-                  triggers = getTriggers(val);
-                  if (triggers.show !== 'none') {
-                    triggers.show.forEach(function(trigger, idx) {
-                      if (trigger === triggers.hide[idx]) {
-                        element[0].addEventListener(trigger, toggleTooltipBind);
-                      } else if (trigger) {
-                        element[0].addEventListener(trigger, showTooltipBind);
-                        triggers.hide[idx].split(' ').forEach(function(trigger) {
-                          element[0].addEventListener(trigger, hideTooltipBind);
-                        });
-                      }
-                      element.on('keypress', function(e) {
-                        if (e.which === 27) {
-                          hideTooltipBind();
-                        }
-                      });
-                    });
-                  }
-                }
-                prepTriggers();
-                var animation = scope.$eval(attrs[prefix + 'Animation']);
-                ttScope.animation = angular.isDefined(animation) ? !!animation : options.animation;
-                var appendToBodyVal = scope.$eval(attrs[prefix + 'AppendToBody']);
-                appendToBody = angular.isDefined(appendToBodyVal) ? appendToBodyVal : appendToBody;
-                if (appendToBody) {
-                  scope.$on('$locationChangeSuccess', function closeTooltipOnLocationChangeSuccess() {
-                    if (ttScope.isOpen) {
-                      hide();
-                    }
-                  });
-                }
-                scope.$on('$destroy', function onDestroyTooltip() {
-                  cancelShow();
-                  cancelHide();
-                  unregisterTriggers();
-                  removeTooltip();
-                  openedTooltips.remove(ttScope);
-                  ttScope = null;
-                });
-              };
-            }};
-        };
-      }];
-    }).directive('uibTooltipTemplateTransclude', ['$animate', '$sce', '$compile', '$templateRequest', function($animate, $sce, $compile, $templateRequest) {
-      return {link: function(scope, elem, attrs) {
-          var origScope = scope.$eval(attrs.tooltipTemplateTranscludeScope);
-          var changeCounter = 0,
-              currentScope,
-              previousElement,
-              currentElement;
-          var cleanupLastIncludeContent = function() {
-            if (previousElement) {
-              previousElement.remove();
-              previousElement = null;
-            }
-            if (currentScope) {
-              currentScope.$destroy();
-              currentScope = null;
-            }
-            if (currentElement) {
-              $animate.leave(currentElement).then(function() {
-                previousElement = null;
-              });
-              previousElement = currentElement;
-              currentElement = null;
-            }
-          };
-          scope.$watch($sce.parseAsResourceUrl(attrs.uibTooltipTemplateTransclude), function(src) {
-            var thisChangeId = ++changeCounter;
-            if (src) {
-              $templateRequest(src, true).then(function(response) {
-                if (thisChangeId !== changeCounter) {
-                  return;
-                }
-                var newScope = origScope.$new();
-                var template = response;
-                var clone = $compile(template)(newScope, function(clone) {
-                  cleanupLastIncludeContent();
-                  $animate.enter(clone, elem);
-                });
-                currentScope = newScope;
-                currentElement = clone;
-                currentScope.$emit('$includeContentLoaded', src);
-              }, function() {
-                if (thisChangeId === changeCounter) {
-                  cleanupLastIncludeContent();
-                  scope.$emit('$includeContentError', src);
-                }
-              });
-              scope.$emit('$includeContentRequested', src);
-            } else {
-              cleanupLastIncludeContent();
-            }
-          });
-          scope.$on('$destroy', cleanupLastIncludeContent);
-        }};
-    }]).directive('uibTooltipClasses', function() {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          if (scope.placement) {
-            element.addClass(scope.placement);
-          }
-          if (scope.popupClass) {
-            element.addClass(scope.popupClass);
-          }
-          if (scope.animation()) {
-            element.addClass(attrs.tooltipAnimationClass);
-          }
-        }
-      };
-    }).directive('uibTooltipPopup', function() {
-      return {
-        replace: true,
-        scope: {
-          content: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-popup.html',
-        link: function(scope, element) {
-          element.addClass('tooltip');
-        }
-      };
-    }).directive('uibTooltip', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibTooltip', 'tooltip', 'mouseenter');
-    }]).directive('uibTooltipTemplatePopup', function() {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&',
-          originScope: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-template-popup.html',
-        link: function(scope, element) {
-          element.addClass('tooltip');
-        }
-      };
-    }).directive('uibTooltipTemplate', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibTooltipTemplate', 'tooltip', 'mouseenter', {useContentExp: true});
-    }]).directive('uibTooltipHtmlPopup', function() {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-html-popup.html',
-        link: function(scope, element) {
-          element.addClass('tooltip');
-        }
-      };
-    }).directive('uibTooltipHtml', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibTooltipHtml', 'tooltip', 'mouseenter', {useContentExp: true});
-    }]);
-    angular.module('ui.bootstrap.tooltip').value('$tooltipSuppressWarning', false).provider('$tooltip', ['$uibTooltipProvider', function($uibTooltipProvider) {
-      angular.extend(this, $uibTooltipProvider);
-      this.$get = ['$log', '$tooltipSuppressWarning', '$injector', function($log, $tooltipSuppressWarning, $injector) {
-        if (!$tooltipSuppressWarning) {
-          $log.warn('$tooltip is now deprecated. Use $uibTooltip instead.');
-        }
-        return $injector.invoke($uibTooltipProvider.$get);
-      }];
-    }]).directive('tooltipTemplateTransclude', ['$animate', '$sce', '$compile', '$templateRequest', '$log', '$tooltipSuppressWarning', function($animate, $sce, $compile, $templateRequest, $log, $tooltipSuppressWarning) {
-      return {link: function(scope, elem, attrs) {
-          if (!$tooltipSuppressWarning) {
-            $log.warn('tooltip-template-transclude is now deprecated. Use uib-tooltip-template-transclude instead.');
-          }
-          var origScope = scope.$eval(attrs.tooltipTemplateTranscludeScope);
-          var changeCounter = 0,
-              currentScope,
-              previousElement,
-              currentElement;
-          var cleanupLastIncludeContent = function() {
-            if (previousElement) {
-              previousElement.remove();
-              previousElement = null;
-            }
-            if (currentScope) {
-              currentScope.$destroy();
-              currentScope = null;
-            }
-            if (currentElement) {
-              $animate.leave(currentElement).then(function() {
-                previousElement = null;
-              });
-              previousElement = currentElement;
-              currentElement = null;
-            }
-          };
-          scope.$watch($sce.parseAsResourceUrl(attrs.tooltipTemplateTransclude), function(src) {
-            var thisChangeId = ++changeCounter;
-            if (src) {
-              $templateRequest(src, true).then(function(response) {
-                if (thisChangeId !== changeCounter) {
-                  return;
-                }
-                var newScope = origScope.$new();
-                var template = response;
-                var clone = $compile(template)(newScope, function(clone) {
-                  cleanupLastIncludeContent();
-                  $animate.enter(clone, elem);
-                });
-                currentScope = newScope;
-                currentElement = clone;
-                currentScope.$emit('$includeContentLoaded', src);
-              }, function() {
-                if (thisChangeId === changeCounter) {
-                  cleanupLastIncludeContent();
-                  scope.$emit('$includeContentError', src);
-                }
-              });
-              scope.$emit('$includeContentRequested', src);
-            } else {
-              cleanupLastIncludeContent();
-            }
-          });
-          scope.$on('$destroy', cleanupLastIncludeContent);
-        }};
-    }]).directive('tooltipClasses', ['$log', '$tooltipSuppressWarning', function($log, $tooltipSuppressWarning) {
-      return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          if (!$tooltipSuppressWarning) {
-            $log.warn('tooltip-classes is now deprecated. Use uib-tooltip-classes instead.');
-          }
-          if (scope.placement) {
-            element.addClass(scope.placement);
-          }
-          if (scope.popupClass) {
-            element.addClass(scope.popupClass);
-          }
-          if (scope.animation()) {
-            element.addClass(attrs.tooltipAnimationClass);
-          }
-        }
-      };
-    }]).directive('tooltipPopup', ['$log', '$tooltipSuppressWarning', function($log, $tooltipSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          content: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-popup.html',
-        link: function(scope, element) {
-          if (!$tooltipSuppressWarning) {
-            $log.warn('tooltip-popup is now deprecated. Use uib-tooltip-popup instead.');
-          }
-          element.addClass('tooltip');
-        }
-      };
-    }]).directive('tooltip', ['$tooltip', function($tooltip) {
-      return $tooltip('tooltip', 'tooltip', 'mouseenter');
-    }]).directive('tooltipTemplatePopup', ['$log', '$tooltipSuppressWarning', function($log, $tooltipSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&',
-          originScope: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-template-popup.html',
-        link: function(scope, element) {
-          if (!$tooltipSuppressWarning) {
-            $log.warn('tooltip-template-popup is now deprecated. Use uib-tooltip-template-popup instead.');
-          }
-          element.addClass('tooltip');
-        }
-      };
-    }]).directive('tooltipTemplate', ['$tooltip', function($tooltip) {
-      return $tooltip('tooltipTemplate', 'tooltip', 'mouseenter', {useContentExp: true});
-    }]).directive('tooltipHtmlPopup', ['$log', '$tooltipSuppressWarning', function($log, $tooltipSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/tooltip/tooltip-html-popup.html',
-        link: function(scope, element) {
-          if (!$tooltipSuppressWarning) {
-            $log.warn('tooltip-html-popup is now deprecated. Use uib-tooltip-html-popup instead.');
-          }
-          element.addClass('tooltip');
-        }
-      };
-    }]).directive('tooltipHtml', ['$tooltip', function($tooltip) {
-      return $tooltip('tooltipHtml', 'tooltip', 'mouseenter', {useContentExp: true});
-    }]);
-    angular.module('ui.bootstrap.popover', ['ui.bootstrap.tooltip']).directive('uibPopoverTemplatePopup', function() {
-      return {
-        replace: true,
-        scope: {
-          title: '@',
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&',
-          originScope: '&'
-        },
-        templateUrl: 'template/popover/popover-template.html',
-        link: function(scope, element) {
-          element.addClass('popover');
-        }
-      };
-    }).directive('uibPopoverTemplate', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibPopoverTemplate', 'popover', 'click', {useContentExp: true});
-    }]).directive('uibPopoverHtmlPopup', function() {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          title: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/popover/popover-html.html',
-        link: function(scope, element) {
-          element.addClass('popover');
-        }
-      };
-    }).directive('uibPopoverHtml', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibPopoverHtml', 'popover', 'click', {useContentExp: true});
-    }]).directive('uibPopoverPopup', function() {
-      return {
-        replace: true,
-        scope: {
-          title: '@',
-          content: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/popover/popover.html',
-        link: function(scope, element) {
-          element.addClass('popover');
-        }
-      };
-    }).directive('uibPopover', ['$uibTooltip', function($uibTooltip) {
-      return $uibTooltip('uibPopover', 'popover', 'click');
-    }]);
-    angular.module('ui.bootstrap.popover').value('$popoverSuppressWarning', false).directive('popoverTemplatePopup', ['$log', '$popoverSuppressWarning', function($log, $popoverSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          title: '@',
-          contentExp: '&',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&',
-          originScope: '&'
-        },
-        templateUrl: 'template/popover/popover-template.html',
-        link: function(scope, element) {
-          if (!$popoverSuppressWarning) {
-            $log.warn('popover-template-popup is now deprecated. Use uib-popover-template-popup instead.');
-          }
-          element.addClass('popover');
-        }
-      };
-    }]).directive('popoverTemplate', ['$tooltip', function($tooltip) {
-      return $tooltip('popoverTemplate', 'popover', 'click', {useContentExp: true});
-    }]).directive('popoverHtmlPopup', ['$log', '$popoverSuppressWarning', function($log, $popoverSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          contentExp: '&',
-          title: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/popover/popover-html.html',
-        link: function(scope, element) {
-          if (!$popoverSuppressWarning) {
-            $log.warn('popover-html-popup is now deprecated. Use uib-popover-html-popup instead.');
-          }
-          element.addClass('popover');
-        }
-      };
-    }]).directive('popoverHtml', ['$tooltip', function($tooltip) {
-      return $tooltip('popoverHtml', 'popover', 'click', {useContentExp: true});
-    }]).directive('popoverPopup', ['$log', '$popoverSuppressWarning', function($log, $popoverSuppressWarning) {
-      return {
-        replace: true,
-        scope: {
-          title: '@',
-          content: '@',
-          placement: '@',
-          popupClass: '@',
-          animation: '&',
-          isOpen: '&'
-        },
-        templateUrl: 'template/popover/popover.html',
-        link: function(scope, element) {
-          if (!$popoverSuppressWarning) {
-            $log.warn('popover-popup is now deprecated. Use uib-popover-popup instead.');
-          }
-          element.addClass('popover');
-        }
-      };
-    }]).directive('popover', ['$tooltip', function($tooltip) {
-      return $tooltip('popover', 'popover', 'click');
-    }]);
-    angular.module('ui.bootstrap.progressbar', []).constant('uibProgressConfig', {
-      animate: true,
-      max: 100
-    }).controller('UibProgressController', ['$scope', '$attrs', 'uibProgressConfig', function($scope, $attrs, progressConfig) {
-      var self = this,
-          animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
-      this.bars = [];
-      $scope.max = angular.isDefined($scope.max) ? $scope.max : progressConfig.max;
-      this.addBar = function(bar, element, attrs) {
-        if (!animate) {
-          element.css({'transition': 'none'});
-        }
-        this.bars.push(bar);
-        bar.max = $scope.max;
-        bar.title = attrs && angular.isDefined(attrs.title) ? attrs.title : 'progressbar';
-        bar.$watch('value', function(value) {
-          bar.recalculatePercentage();
-        });
-        bar.recalculatePercentage = function() {
-          var totalPercentage = self.bars.reduce(function(total, bar) {
-            bar.percent = +(100 * bar.value / bar.max).toFixed(2);
-            return total + bar.percent;
-          }, 0);
-          if (totalPercentage > 100) {
-            bar.percent -= totalPercentage - 100;
+            tabsetCtrl.select(index);
           }
         };
-        bar.$on('$destroy', function() {
-          element = null;
-          self.removeBar(bar);
+        tabsetCtrl.addTab(scope);
+        scope.$on('$destroy', function() {
+          tabsetCtrl.removeTab(scope);
         });
-      };
-      this.removeBar = function(bar) {
-        this.bars.splice(this.bars.indexOf(bar), 1);
-        this.bars.forEach(function(bar) {
-          bar.recalculatePercentage();
-        });
-      };
-      $scope.$watch('max', function(max) {
-        self.bars.forEach(function(bar) {
-          bar.max = $scope.max;
-          bar.recalculatePercentage();
-        });
-      });
-    }]).directive('uibProgress', function() {
-      return {
-        replace: true,
-        transclude: true,
-        controller: 'UibProgressController',
-        require: 'uibProgress',
-        scope: {max: '=?'},
-        templateUrl: 'template/progressbar/progress.html'
-      };
-    }).directive('uibBar', function() {
-      return {
-        replace: true,
-        transclude: true,
-        require: '^uibProgress',
-        scope: {
-          value: '=',
-          type: '@'
-        },
-        templateUrl: 'template/progressbar/bar.html',
-        link: function(scope, element, attrs, progressCtrl) {
-          progressCtrl.addBar(scope, element, attrs);
-        }
-      };
-    }).directive('uibProgressbar', function() {
-      return {
-        replace: true,
-        transclude: true,
-        controller: 'UibProgressController',
-        scope: {
-          value: '=',
-          max: '=?',
-          type: '@'
-        },
-        templateUrl: 'template/progressbar/progressbar.html',
-        link: function(scope, element, attrs, progressCtrl) {
-          progressCtrl.addBar(scope, angular.element(element.children()[0]), {title: attrs.title});
-        }
-      };
-    });
-    angular.module('ui.bootstrap.progressbar').value('$progressSuppressWarning', false).controller('ProgressController', ['$scope', '$attrs', 'uibProgressConfig', '$log', '$progressSuppressWarning', function($scope, $attrs, progressConfig, $log, $progressSuppressWarning) {
-      if (!$progressSuppressWarning) {
-        $log.warn('ProgressController is now deprecated. Use UibProgressController instead.');
+        scope.$transcludeFn = transclude;
       }
-      var self = this,
-          animate = angular.isDefined($attrs.animate) ? $scope.$parent.$eval($attrs.animate) : progressConfig.animate;
-      this.bars = [];
-      $scope.max = angular.isDefined($scope.max) ? $scope.max : progressConfig.max;
-      this.addBar = function(bar, element, attrs) {
-        if (!animate) {
-          element.css({'transition': 'none'});
-        }
-        this.bars.push(bar);
-        bar.max = $scope.max;
-        bar.title = attrs && angular.isDefined(attrs.title) ? attrs.title : 'progressbar';
-        bar.$watch('value', function(value) {
-          bar.recalculatePercentage();
-        });
-        bar.recalculatePercentage = function() {
-          bar.percent = +(100 * bar.value / bar.max).toFixed(2);
-          var totalPercentage = self.bars.reduce(function(total, bar) {
-            return total + bar.percent;
-          }, 0);
-          if (totalPercentage > 100) {
-            bar.percent -= totalPercentage - 100;
-          }
-        };
-        bar.$on('$destroy', function() {
-          element = null;
-          self.removeBar(bar);
-        });
-      };
-      this.removeBar = function(bar) {
-        this.bars.splice(this.bars.indexOf(bar), 1);
-      };
-      $scope.$watch('max', function(max) {
-        self.bars.forEach(function(bar) {
-          bar.max = $scope.max;
-          bar.recalculatePercentage();
-        });
-      });
-    }]).directive('progress', ['$log', '$progressSuppressWarning', function($log, $progressSuppressWarning) {
-      return {
-        replace: true,
-        transclude: true,
-        controller: 'ProgressController',
-        require: 'progress',
-        scope: {
-          max: '=?',
-          title: '@?'
-        },
-        templateUrl: 'template/progressbar/progress.html',
-        link: function() {
-          if (!$progressSuppressWarning) {
-            $log.warn('progress is now deprecated. Use uib-progress instead.');
-          }
-        }
-      };
-    }]).directive('bar', ['$log', '$progressSuppressWarning', function($log, $progressSuppressWarning) {
-      return {
-        replace: true,
-        transclude: true,
-        require: '^progress',
-        scope: {
-          value: '=',
-          type: '@'
-        },
-        templateUrl: 'template/progressbar/bar.html',
-        link: function(scope, element, attrs, progressCtrl) {
-          if (!$progressSuppressWarning) {
-            $log.warn('bar is now deprecated. Use uib-bar instead.');
-          }
-          progressCtrl.addBar(scope, element);
-        }
-      };
-    }]).directive('progressbar', ['$log', '$progressSuppressWarning', function($log, $progressSuppressWarning) {
-      return {
-        replace: true,
-        transclude: true,
-        controller: 'ProgressController',
-        scope: {
-          value: '=',
-          max: '=?',
-          type: '@'
-        },
-        templateUrl: 'template/progressbar/progressbar.html',
-        link: function(scope, element, attrs, progressCtrl) {
-          if (!$progressSuppressWarning) {
-            $log.warn('progressbar is now deprecated. Use uib-progressbar instead.');
-          }
-          progressCtrl.addBar(scope, angular.element(element.children()[0]), {title: attrs.title});
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.rating', []).constant('uibRatingConfig', {
-      max: 5,
-      stateOn: null,
-      stateOff: null,
-      titles: ['one', 'two', 'three', 'four', 'five']
-    }).controller('UibRatingController', ['$scope', '$attrs', 'uibRatingConfig', function($scope, $attrs, ratingConfig) {
-      var ngModelCtrl = {$setViewValue: angular.noop};
-      this.init = function(ngModelCtrl_) {
-        ngModelCtrl = ngModelCtrl_;
-        ngModelCtrl.$render = this.render;
-        ngModelCtrl.$formatters.push(function(value) {
-          if (angular.isNumber(value) && value << 0 !== value) {
-            value = Math.round(value);
-          }
-          return value;
-        });
-        this.stateOn = angular.isDefined($attrs.stateOn) ? $scope.$parent.$eval($attrs.stateOn) : ratingConfig.stateOn;
-        this.stateOff = angular.isDefined($attrs.stateOff) ? $scope.$parent.$eval($attrs.stateOff) : ratingConfig.stateOff;
-        var tmpTitles = angular.isDefined($attrs.titles) ? $scope.$parent.$eval($attrs.titles) : ratingConfig.titles;
-        this.titles = angular.isArray(tmpTitles) && tmpTitles.length > 0 ? tmpTitles : ratingConfig.titles;
-        var ratingStates = angular.isDefined($attrs.ratingStates) ? $scope.$parent.$eval($attrs.ratingStates) : new Array(angular.isDefined($attrs.max) ? $scope.$parent.$eval($attrs.max) : ratingConfig.max);
-        $scope.range = this.buildTemplateObjects(ratingStates);
-      };
-      this.buildTemplateObjects = function(states) {
-        for (var i = 0,
-            n = states.length; i < n; i++) {
-          states[i] = angular.extend({index: i}, {
-            stateOn: this.stateOn,
-            stateOff: this.stateOff,
-            title: this.getTitle(i)
-          }, states[i]);
-        }
-        return states;
-      };
-      this.getTitle = function(index) {
-        if (index >= this.titles.length) {
-          return index + 1;
-        } else {
-          return this.titles[index];
-        }
-      };
-      $scope.rate = function(value) {
-        if (!$scope.readonly && value >= 0 && value <= $scope.range.length) {
-          ngModelCtrl.$setViewValue(ngModelCtrl.$viewValue === value ? 0 : value);
-          ngModelCtrl.$render();
-        }
-      };
-      $scope.enter = function(value) {
-        if (!$scope.readonly) {
-          $scope.value = value;
-        }
-        $scope.onHover({value: value});
-      };
-      $scope.reset = function() {
-        $scope.value = ngModelCtrl.$viewValue;
-        $scope.onLeave();
-      };
-      $scope.onKeydown = function(evt) {
-        if (/(37|38|39|40)/.test(evt.which)) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          $scope.rate($scope.value + (evt.which === 38 || evt.which === 39 ? 1 : -1));
-        }
-      };
-      this.render = function() {
-        $scope.value = ngModelCtrl.$viewValue;
-      };
-    }]).directive('uibRating', function() {
-      return {
-        require: ['uibRating', 'ngModel'],
-        scope: {
-          readonly: '=?',
-          onHover: '&',
-          onLeave: '&'
-        },
-        controller: 'UibRatingController',
-        templateUrl: 'template/rating/rating.html',
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          var ratingCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          ratingCtrl.init(ngModelCtrl);
-        }
-      };
-    });
-    angular.module('ui.bootstrap.rating').value('$ratingSuppressWarning', false).controller('RatingController', ['$scope', '$attrs', '$controller', '$log', '$ratingSuppressWarning', function($scope, $attrs, $controller, $log, $ratingSuppressWarning) {
-      if (!$ratingSuppressWarning) {
-        $log.warn('RatingController is now deprecated. Use UibRatingController instead.');
-      }
-      angular.extend(this, $controller('UibRatingController', {
-        $scope: $scope,
-        $attrs: $attrs
-      }));
-    }]).directive('rating', ['$log', '$ratingSuppressWarning', function($log, $ratingSuppressWarning) {
-      return {
-        require: ['rating', 'ngModel'],
-        scope: {
-          readonly: '=?',
-          onHover: '&',
-          onLeave: '&'
-        },
-        controller: 'RatingController',
-        templateUrl: 'template/rating/rating.html',
-        replace: true,
-        link: function(scope, element, attrs, ctrls) {
-          if (!$ratingSuppressWarning) {
-            $log.warn('rating is now deprecated. Use uib-rating instead.');
-          }
-          var ratingCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          ratingCtrl.init(ngModelCtrl);
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.tabs', []).controller('UibTabsetController', ['$scope', function($scope) {
-      var ctrl = this,
-          tabs = ctrl.tabs = $scope.tabs = [];
-      ctrl.select = function(selectedTab) {
-        angular.forEach(tabs, function(tab) {
-          if (tab.active && tab !== selectedTab) {
-            tab.active = false;
-            tab.onDeselect();
-            selectedTab.selectCalled = false;
-          }
-        });
-        selectedTab.active = true;
-        if (!selectedTab.selectCalled) {
-          selectedTab.onSelect();
-          selectedTab.selectCalled = true;
-        }
-      };
-      ctrl.addTab = function addTab(tab) {
-        tabs.push(tab);
-        if (tabs.length === 1 && tab.active !== false) {
-          tab.active = true;
-        } else if (tab.active) {
-          ctrl.select(tab);
-        } else {
-          tab.active = false;
-        }
-      };
-      ctrl.removeTab = function removeTab(tab) {
-        var index = tabs.indexOf(tab);
-        if (tab.active && tabs.length > 1 && !destroyed) {
-          var newActiveIndex = index == tabs.length - 1 ? index - 1 : index + 1;
-          ctrl.select(tabs[newActiveIndex]);
-        }
-        tabs.splice(index, 1);
-      };
-      var destroyed;
-      $scope.$on('$destroy', function() {
-        destroyed = true;
-      });
-    }]).directive('uibTabset', function() {
-      return {
-        restrict: 'EA',
-        transclude: true,
-        replace: true,
-        scope: {type: '@'},
-        controller: 'UibTabsetController',
-        templateUrl: 'template/tabs/tabset.html',
-        link: function(scope, element, attrs) {
-          scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
-          scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
-        }
-      };
-    }).directive('uibTab', ['$parse', function($parse) {
-      return {
-        require: '^uibTabset',
-        restrict: 'EA',
-        replace: true,
-        templateUrl: 'template/tabs/tab.html',
-        transclude: true,
-        scope: {
-          active: '=?',
-          heading: '@',
-          onSelect: '&select',
-          onDeselect: '&deselect'
-        },
-        controller: function() {},
-        link: function(scope, elm, attrs, tabsetCtrl, transclude) {
-          scope.$watch('active', function(active) {
-            if (active) {
-              tabsetCtrl.select(scope);
-            }
-          });
-          scope.disabled = false;
-          if (attrs.disable) {
-            scope.$parent.$watch($parse(attrs.disable), function(value) {
-              scope.disabled = !!value;
-            });
-          }
-          scope.select = function() {
-            if (!scope.disabled) {
-              scope.active = true;
-            }
-          };
-          tabsetCtrl.addTab(scope);
-          scope.$on('$destroy', function() {
-            tabsetCtrl.removeTab(scope);
-          });
-          scope.$transcludeFn = transclude;
-        }
-      };
-    }]).directive('uibTabHeadingTransclude', function() {
-      return {
-        restrict: 'A',
-        require: ['?^uibTab', '?^tab'],
-        link: function(scope, elm) {
-          scope.$watch('headingElement', function updateHeadingElement(heading) {
-            if (heading) {
-              elm.html('');
-              elm.append(heading);
-            }
-          });
-        }
-      };
-    }).directive('uibTabContentTransclude', function() {
-      return {
-        restrict: 'A',
-        require: ['?^uibTabset', '?^tabset'],
-        link: function(scope, elm, attrs) {
-          var tab = scope.$eval(attrs.uibTabContentTransclude);
-          tab.$transcludeFn(tab.$parent, function(contents) {
-            angular.forEach(contents, function(node) {
-              if (isTabHeading(node)) {
-                tab.headingElement = node;
-              } else {
-                elm.append(node);
-              }
-            });
-          });
-        }
-      };
-      function isTabHeading(node) {
-        return node.tagName && (node.hasAttribute('tab-heading') || node.hasAttribute('data-tab-heading') || node.hasAttribute('x-tab-heading') || node.hasAttribute('uib-tab-heading') || node.hasAttribute('data-uib-tab-heading') || node.hasAttribute('x-uib-tab-heading') || node.tagName.toLowerCase() === 'tab-heading' || node.tagName.toLowerCase() === 'data-tab-heading' || node.tagName.toLowerCase() === 'x-tab-heading' || node.tagName.toLowerCase() === 'uib-tab-heading' || node.tagName.toLowerCase() === 'data-uib-tab-heading' || node.tagName.toLowerCase() === 'x-uib-tab-heading');
-      }
-    });
-    angular.module('ui.bootstrap.tabs').value('$tabsSuppressWarning', false).controller('TabsetController', ['$scope', '$controller', '$log', '$tabsSuppressWarning', function($scope, $controller, $log, $tabsSuppressWarning) {
-      if (!$tabsSuppressWarning) {
-        $log.warn('TabsetController is now deprecated. Use UibTabsetController instead.');
-      }
-      angular.extend(this, $controller('UibTabsetController', {$scope: $scope}));
-    }]).directive('tabset', ['$log', '$tabsSuppressWarning', function($log, $tabsSuppressWarning) {
-      return {
-        restrict: 'EA',
-        transclude: true,
-        replace: true,
-        scope: {type: '@'},
-        controller: 'TabsetController',
-        templateUrl: 'template/tabs/tabset.html',
-        link: function(scope, element, attrs) {
-          if (!$tabsSuppressWarning) {
-            $log.warn('tabset is now deprecated. Use uib-tabset instead.');
-          }
-          scope.vertical = angular.isDefined(attrs.vertical) ? scope.$parent.$eval(attrs.vertical) : false;
-          scope.justified = angular.isDefined(attrs.justified) ? scope.$parent.$eval(attrs.justified) : false;
-        }
-      };
-    }]).directive('tab', ['$parse', '$log', '$tabsSuppressWarning', function($parse, $log, $tabsSuppressWarning) {
-      return {
-        require: '^tabset',
-        restrict: 'EA',
-        replace: true,
-        templateUrl: 'template/tabs/tab.html',
-        transclude: true,
-        scope: {
-          active: '=?',
-          heading: '@',
-          onSelect: '&select',
-          onDeselect: '&deselect'
-        },
-        controller: function() {},
-        link: function(scope, elm, attrs, tabsetCtrl, transclude) {
-          if (!$tabsSuppressWarning) {
-            $log.warn('tab is now deprecated. Use uib-tab instead.');
-          }
-          scope.$watch('active', function(active) {
-            if (active) {
-              tabsetCtrl.select(scope);
-            }
-          });
-          scope.disabled = false;
-          if (attrs.disable) {
-            scope.$parent.$watch($parse(attrs.disable), function(value) {
-              scope.disabled = !!value;
-            });
-          }
-          scope.select = function() {
-            if (!scope.disabled) {
-              scope.active = true;
-            }
-          };
-          tabsetCtrl.addTab(scope);
-          scope.$on('$destroy', function() {
-            tabsetCtrl.removeTab(scope);
-          });
-          scope.$transcludeFn = transclude;
-        }
-      };
-    }]).directive('tabHeadingTransclude', ['$log', '$tabsSuppressWarning', function($log, $tabsSuppressWarning) {
-      return {
-        restrict: 'A',
-        require: '^tab',
-        link: function(scope, elm) {
-          if (!$tabsSuppressWarning) {
-            $log.warn('tab-heading-transclude is now deprecated. Use uib-tab-heading-transclude instead.');
-          }
-          scope.$watch('headingElement', function updateHeadingElement(heading) {
-            if (heading) {
-              elm.html('');
-              elm.append(heading);
-            }
-          });
-        }
-      };
-    }]).directive('tabContentTransclude', ['$log', '$tabsSuppressWarning', function($log, $tabsSuppressWarning) {
-      return {
-        restrict: 'A',
-        require: '^tabset',
-        link: function(scope, elm, attrs) {
-          if (!$tabsSuppressWarning) {
-            $log.warn('tab-content-transclude is now deprecated. Use uib-tab-content-transclude instead.');
-          }
-          var tab = scope.$eval(attrs.tabContentTransclude);
-          tab.$transcludeFn(tab.$parent, function(contents) {
-            angular.forEach(contents, function(node) {
-              if (isTabHeading(node)) {
-                tab.headingElement = node;
-              } else {
-                elm.append(node);
-              }
-            });
-          });
-        }
-      };
-      function isTabHeading(node) {
-        return node.tagName && (node.hasAttribute('tab-heading') || node.hasAttribute('data-tab-heading') || node.hasAttribute('x-tab-heading') || node.tagName.toLowerCase() === 'tab-heading' || node.tagName.toLowerCase() === 'data-tab-heading' || node.tagName.toLowerCase() === 'x-tab-heading');
-      }
-    }]);
-    angular.module('ui.bootstrap.timepicker', []).constant('uibTimepickerConfig', {
-      hourStep: 1,
-      minuteStep: 1,
-      showMeridian: true,
-      meridians: null,
-      readonlyInput: false,
-      mousewheel: true,
-      arrowkeys: true,
-      showSpinners: true
-    }).controller('UibTimepickerController', ['$scope', '$element', '$attrs', '$parse', '$log', '$locale', 'uibTimepickerConfig', function($scope, $element, $attrs, $parse, $log, $locale, timepickerConfig) {
-      var selected = new Date(),
-          ngModelCtrl = {$setViewValue: angular.noop},
-          meridians = angular.isDefined($attrs.meridians) ? $scope.$parent.$eval($attrs.meridians) : timepickerConfig.meridians || $locale.DATETIME_FORMATS.AMPMS;
-      $scope.tabindex = angular.isDefined($attrs.tabindex) ? $attrs.tabindex : 0;
-      $element.removeAttr('tabindex');
-      this.init = function(ngModelCtrl_, inputs) {
-        ngModelCtrl = ngModelCtrl_;
-        ngModelCtrl.$render = this.render;
-        ngModelCtrl.$formatters.unshift(function(modelValue) {
-          return modelValue ? new Date(modelValue) : null;
-        });
-        var hoursInputEl = inputs.eq(0),
-            minutesInputEl = inputs.eq(1);
-        var mousewheel = angular.isDefined($attrs.mousewheel) ? $scope.$parent.$eval($attrs.mousewheel) : timepickerConfig.mousewheel;
-        if (mousewheel) {
-          this.setupMousewheelEvents(hoursInputEl, minutesInputEl);
-        }
-        var arrowkeys = angular.isDefined($attrs.arrowkeys) ? $scope.$parent.$eval($attrs.arrowkeys) : timepickerConfig.arrowkeys;
-        if (arrowkeys) {
-          this.setupArrowkeyEvents(hoursInputEl, minutesInputEl);
-        }
-        $scope.readonlyInput = angular.isDefined($attrs.readonlyInput) ? $scope.$parent.$eval($attrs.readonlyInput) : timepickerConfig.readonlyInput;
-        this.setupInputEvents(hoursInputEl, minutesInputEl);
-      };
-      var hourStep = timepickerConfig.hourStep;
-      if ($attrs.hourStep) {
-        $scope.$parent.$watch($parse($attrs.hourStep), function(value) {
-          hourStep = parseInt(value, 10);
-        });
-      }
-      var minuteStep = timepickerConfig.minuteStep;
-      if ($attrs.minuteStep) {
-        $scope.$parent.$watch($parse($attrs.minuteStep), function(value) {
-          minuteStep = parseInt(value, 10);
-        });
-      }
-      var min;
-      $scope.$parent.$watch($parse($attrs.min), function(value) {
-        var dt = new Date(value);
-        min = isNaN(dt) ? undefined : dt;
-      });
-      var max;
-      $scope.$parent.$watch($parse($attrs.max), function(value) {
-        var dt = new Date(value);
-        max = isNaN(dt) ? undefined : dt;
-      });
-      $scope.noIncrementHours = function() {
-        var incrementedSelected = addMinutes(selected, hourStep * 60);
-        return incrementedSelected > max || (incrementedSelected < selected && incrementedSelected < min);
-      };
-      $scope.noDecrementHours = function() {
-        var decrementedSelected = addMinutes(selected, -hourStep * 60);
-        return decrementedSelected < min || (decrementedSelected > selected && decrementedSelected > max);
-      };
-      $scope.noIncrementMinutes = function() {
-        var incrementedSelected = addMinutes(selected, minuteStep);
-        return incrementedSelected > max || (incrementedSelected < selected && incrementedSelected < min);
-      };
-      $scope.noDecrementMinutes = function() {
-        var decrementedSelected = addMinutes(selected, -minuteStep);
-        return decrementedSelected < min || (decrementedSelected > selected && decrementedSelected > max);
-      };
-      $scope.noToggleMeridian = function() {
-        if (selected.getHours() < 13) {
-          return addMinutes(selected, 12 * 60) > max;
-        } else {
-          return addMinutes(selected, -12 * 60) < min;
-        }
-      };
-      $scope.showMeridian = timepickerConfig.showMeridian;
-      if ($attrs.showMeridian) {
-        $scope.$parent.$watch($parse($attrs.showMeridian), function(value) {
-          $scope.showMeridian = !!value;
-          if (ngModelCtrl.$error.time) {
-            var hours = getHoursFromTemplate(),
-                minutes = getMinutesFromTemplate();
-            if (angular.isDefined(hours) && angular.isDefined(minutes)) {
-              selected.setHours(hours);
-              refresh();
-            }
-          } else {
-            updateTemplate();
+    };
+  }]).directive('uibTabHeadingTransclude', function() {
+    return {
+      restrict: 'A',
+      require: '^uibTab',
+      link: function(scope, elm) {
+        scope.$watch('headingElement', function updateHeadingElement(heading) {
+          if (heading) {
+            elm.html('');
+            elm.append(heading);
           }
         });
       }
-      function getHoursFromTemplate() {
-        var hours = parseInt($scope.hours, 10);
-        var valid = $scope.showMeridian ? (hours > 0 && hours < 13) : (hours >= 0 && hours < 24);
-        if (!valid) {
-          return undefined;
-        }
-        if ($scope.showMeridian) {
-          if (hours === 12) {
-            hours = 0;
-          }
-          if ($scope.meridian === meridians[1]) {
-            hours = hours + 12;
-          }
-        }
-        return hours;
-      }
-      function getMinutesFromTemplate() {
-        var minutes = parseInt($scope.minutes, 10);
-        return (minutes >= 0 && minutes < 60) ? minutes : undefined;
-      }
-      function pad(value) {
-        return (angular.isDefined(value) && value.toString().length < 2) ? '0' + value : value.toString();
-      }
-      this.setupMousewheelEvents = function(hoursInputEl, minutesInputEl) {
-        var isScrollingUp = function(e) {
-          if (e.originalEvent) {
-            e = e.originalEvent;
-          }
-          var delta = (e.wheelDelta) ? e.wheelDelta : -e.deltaY;
-          return (e.detail || delta > 0);
-        };
-        hoursInputEl.bind('mousewheel wheel', function(e) {
-          $scope.$apply(isScrollingUp(e) ? $scope.incrementHours() : $scope.decrementHours());
-          e.preventDefault();
-        });
-        minutesInputEl.bind('mousewheel wheel', function(e) {
-          $scope.$apply(isScrollingUp(e) ? $scope.incrementMinutes() : $scope.decrementMinutes());
-          e.preventDefault();
-        });
-      };
-      this.setupArrowkeyEvents = function(hoursInputEl, minutesInputEl) {
-        hoursInputEl.bind('keydown', function(e) {
-          if (e.which === 38) {
-            e.preventDefault();
-            $scope.incrementHours();
-            $scope.$apply();
-          } else if (e.which === 40) {
-            e.preventDefault();
-            $scope.decrementHours();
-            $scope.$apply();
-          }
-        });
-        minutesInputEl.bind('keydown', function(e) {
-          if (e.which === 38) {
-            e.preventDefault();
-            $scope.incrementMinutes();
-            $scope.$apply();
-          } else if (e.which === 40) {
-            e.preventDefault();
-            $scope.decrementMinutes();
-            $scope.$apply();
-          }
-        });
-      };
-      this.setupInputEvents = function(hoursInputEl, minutesInputEl) {
-        if ($scope.readonlyInput) {
-          $scope.updateHours = angular.noop;
-          $scope.updateMinutes = angular.noop;
-          return;
-        }
-        var invalidate = function(invalidHours, invalidMinutes) {
-          ngModelCtrl.$setViewValue(null);
-          ngModelCtrl.$setValidity('time', false);
-          if (angular.isDefined(invalidHours)) {
-            $scope.invalidHours = invalidHours;
-          }
-          if (angular.isDefined(invalidMinutes)) {
-            $scope.invalidMinutes = invalidMinutes;
-          }
-        };
-        $scope.updateHours = function() {
-          var hours = getHoursFromTemplate(),
-              minutes = getMinutesFromTemplate();
-          if (angular.isDefined(hours) && angular.isDefined(minutes)) {
-            selected.setHours(hours);
-            if (selected < min || selected > max) {
-              invalidate(true);
+    };
+  }).directive('uibTabContentTransclude', function() {
+    return {
+      restrict: 'A',
+      require: '^uibTabset',
+      link: function(scope, elm, attrs) {
+        var tab = scope.$eval(attrs.uibTabContentTransclude).tab;
+        tab.$transcludeFn(tab.$parent, function(contents) {
+          angular.forEach(contents, function(node) {
+            if (isTabHeading(node)) {
+              tab.headingElement = node;
             } else {
-              refresh('h');
+              elm.append(node);
             }
-          } else {
-            invalidate(true);
-          }
-        };
-        hoursInputEl.bind('blur', function(e) {
-          if (!$scope.invalidHours && $scope.hours < 10) {
-            $scope.$apply(function() {
-              $scope.hours = pad($scope.hours);
-            });
-          }
+          });
         });
-        $scope.updateMinutes = function() {
-          var minutes = getMinutesFromTemplate(),
-              hours = getHoursFromTemplate();
-          if (angular.isDefined(minutes) && angular.isDefined(hours)) {
-            selected.setMinutes(minutes);
-            if (selected < min || selected > max) {
-              invalidate(undefined, true);
-            } else {
-              refresh('m');
-            }
-          } else {
-            invalidate(undefined, true);
-          }
-        };
-        minutesInputEl.bind('blur', function(e) {
-          if (!$scope.invalidMinutes && $scope.minutes < 10) {
-            $scope.$apply(function() {
-              $scope.minutes = pad($scope.minutes);
-            });
-          }
-        });
-      };
-      this.render = function() {
-        var date = ngModelCtrl.$viewValue;
-        if (isNaN(date)) {
-          ngModelCtrl.$setValidity('time', false);
-          $log.error('Timepicker directive: "ng-model" value must be a Date object, a number of milliseconds since 01.01.1970 or a string representing an RFC2822 or ISO 8601 date.');
-        } else {
-          if (date) {
-            selected = date;
-          }
-          if (selected < min || selected > max) {
-            ngModelCtrl.$setValidity('time', false);
-            $scope.invalidHours = true;
-            $scope.invalidMinutes = true;
-          } else {
-            makeValid();
-          }
-          updateTemplate();
-        }
-      };
-      function refresh(keyboardChange) {
-        makeValid();
-        ngModelCtrl.$setViewValue(new Date(selected));
-        updateTemplate(keyboardChange);
       }
-      function makeValid() {
-        ngModelCtrl.$setValidity('time', true);
-        $scope.invalidHours = false;
-        $scope.invalidMinutes = false;
-      }
-      function updateTemplate(keyboardChange) {
-        var hours = selected.getHours(),
-            minutes = selected.getMinutes();
-        if ($scope.showMeridian) {
-          hours = (hours === 0 || hours === 12) ? 12 : hours % 12;
-        }
-        $scope.hours = keyboardChange === 'h' ? hours : pad(hours);
-        if (keyboardChange !== 'm') {
-          $scope.minutes = pad(minutes);
-        }
-        $scope.meridian = selected.getHours() < 12 ? meridians[0] : meridians[1];
-      }
-      function addMinutes(date, minutes) {
-        var dt = new Date(date.getTime() + minutes * 60000);
-        var newDate = new Date(date);
-        newDate.setHours(dt.getHours(), dt.getMinutes());
-        return newDate;
-      }
-      function addMinutesToSelected(minutes) {
-        selected = addMinutes(selected, minutes);
-        refresh();
-      }
-      $scope.showSpinners = angular.isDefined($attrs.showSpinners) ? $scope.$parent.$eval($attrs.showSpinners) : timepickerConfig.showSpinners;
-      $scope.incrementHours = function() {
-        if (!$scope.noIncrementHours()) {
-          addMinutesToSelected(hourStep * 60);
-        }
-      };
-      $scope.decrementHours = function() {
-        if (!$scope.noDecrementHours()) {
-          addMinutesToSelected(-hourStep * 60);
-        }
-      };
-      $scope.incrementMinutes = function() {
-        if (!$scope.noIncrementMinutes()) {
-          addMinutesToSelected(minuteStep);
-        }
-      };
-      $scope.decrementMinutes = function() {
-        if (!$scope.noDecrementMinutes()) {
-          addMinutesToSelected(-minuteStep);
-        }
-      };
-      $scope.toggleMeridian = function() {
-        if (!$scope.noToggleMeridian()) {
-          addMinutesToSelected(12 * 60 * (selected.getHours() < 12 ? 1 : -1));
-        }
-      };
-    }]).directive('uibTimepicker', function() {
-      return {
-        restrict: 'EA',
-        require: ['uibTimepicker', '?^ngModel'],
-        controller: 'UibTimepickerController',
-        controllerAs: 'timepicker',
-        replace: true,
-        scope: {},
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/timepicker/timepicker.html';
-        },
-        link: function(scope, element, attrs, ctrls) {
-          var timepickerCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (ngModelCtrl) {
-            timepickerCtrl.init(ngModelCtrl, element.find('input'));
-          }
-        }
-      };
-    });
-    angular.module('ui.bootstrap.timepicker').value('$timepickerSuppressWarning', false).controller('TimepickerController', ['$scope', '$element', '$attrs', '$controller', '$log', '$timepickerSuppressWarning', function($scope, $element, $attrs, $controller, $log, $timepickerSuppressWarning) {
-      if (!$timepickerSuppressWarning) {
-        $log.warn('TimepickerController is now deprecated. Use UibTimepickerController instead.');
-      }
-      angular.extend(this, $controller('UibTimepickerController', {
-        $scope: $scope,
-        $element: $element,
-        $attrs: $attrs
-      }));
-    }]).directive('timepicker', ['$log', '$timepickerSuppressWarning', function($log, $timepickerSuppressWarning) {
-      return {
-        restrict: 'EA',
-        require: ['timepicker', '?^ngModel'],
-        controller: 'TimepickerController',
-        controllerAs: 'timepicker',
-        replace: true,
-        scope: {},
-        templateUrl: function(element, attrs) {
-          return attrs.templateUrl || 'template/timepicker/timepicker.html';
-        },
-        link: function(scope, element, attrs, ctrls) {
-          if (!$timepickerSuppressWarning) {
-            $log.warn('timepicker is now deprecated. Use uib-timepicker instead.');
-          }
-          var timepickerCtrl = ctrls[0],
-              ngModelCtrl = ctrls[1];
-          if (ngModelCtrl) {
-            timepickerCtrl.init(ngModelCtrl, element.find('input'));
-          }
-        }
-      };
-    }]);
-    angular.module('ui.bootstrap.typeahead', ['ui.bootstrap.position']).factory('uibTypeaheadParser', ['$parse', function($parse) {
-      var TYPEAHEAD_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w\d]*))\s+in\s+([\s\S]+?)$/;
-      return {parse: function(input) {
-          var match = input.match(TYPEAHEAD_REGEXP);
-          if (!match) {
-            throw new Error('Expected typeahead specification in form of "_modelValue_ (as _label_)? for _item_ in _collection_"' + ' but got "' + input + '".');
-          }
-          return {
-            itemName: match[3],
-            source: $parse(match[4]),
-            viewMapper: $parse(match[2] || match[1]),
-            modelMapper: $parse(match[1])
-          };
-        }};
-    }]).controller('UibTypeaheadController', ['$scope', '$element', '$attrs', '$compile', '$parse', '$q', '$timeout', '$document', '$window', '$rootScope', '$uibPosition', 'uibTypeaheadParser', function(originalScope, element, attrs, $compile, $parse, $q, $timeout, $document, $window, $rootScope, $position, typeaheadParser) {
-      var HOT_KEYS = [9, 13, 27, 38, 40];
-      var eventDebounceTime = 200;
-      var modelCtrl,
-          ngModelOptions;
-      var minLength = originalScope.$eval(attrs.typeaheadMinLength);
-      if (!minLength && minLength !== 0) {
-        minLength = 1;
-      }
-      var waitTime = originalScope.$eval(attrs.typeaheadWaitMs) || 0;
-      var isEditable = originalScope.$eval(attrs.typeaheadEditable) !== false;
-      var isLoadingSetter = $parse(attrs.typeaheadLoading).assign || angular.noop;
-      var onSelectCallback = $parse(attrs.typeaheadOnSelect);
-      var isSelectOnBlur = angular.isDefined(attrs.typeaheadSelectOnBlur) ? originalScope.$eval(attrs.typeaheadSelectOnBlur) : false;
-      var isNoResultsSetter = $parse(attrs.typeaheadNoResults).assign || angular.noop;
-      var inputFormatter = attrs.typeaheadInputFormatter ? $parse(attrs.typeaheadInputFormatter) : undefined;
-      var appendToBody = attrs.typeaheadAppendToBody ? originalScope.$eval(attrs.typeaheadAppendToBody) : false;
-      var appendToElementId = attrs.typeaheadAppendToElementId || false;
-      var focusFirst = originalScope.$eval(attrs.typeaheadFocusFirst) !== false;
-      var selectOnExact = attrs.typeaheadSelectOnExact ? originalScope.$eval(attrs.typeaheadSelectOnExact) : false;
-      var parsedModel = $parse(attrs.ngModel);
-      var invokeModelSetter = $parse(attrs.ngModel + '($$$p)');
-      var $setModelValue = function(scope, newValue) {
-        if (angular.isFunction(parsedModel(originalScope)) && ngModelOptions && ngModelOptions.$options && ngModelOptions.$options.getterSetter) {
-          return invokeModelSetter(scope, {$$$p: newValue});
-        } else {
-          return parsedModel.assign(scope, newValue);
-        }
-      };
-      var parserResult = typeaheadParser.parse(attrs.uibTypeahead);
-      var hasFocus;
-      var selected;
-      var scope = originalScope.$new();
-      var offDestroy = originalScope.$on('$destroy', function() {
-        scope.$destroy();
-      });
-      scope.$on('$destroy', offDestroy);
-      var popupId = 'typeahead-' + scope.$id + '-' + Math.floor(Math.random() * 10000);
-      element.attr({
-        'aria-autocomplete': 'list',
-        'aria-expanded': false,
-        'aria-owns': popupId
-      });
-      var popUpEl = angular.element('<div uib-typeahead-popup></div>');
-      popUpEl.attr({
-        id: popupId,
-        matches: 'matches',
-        active: 'activeIdx',
-        select: 'select(activeIdx)',
-        'move-in-progress': 'moveInProgress',
-        query: 'query',
-        position: 'position'
-      });
-      if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
-        popUpEl.attr('template-url', attrs.typeaheadTemplateUrl);
-      }
-      if (angular.isDefined(attrs.typeaheadPopupTemplateUrl)) {
-        popUpEl.attr('popup-template-url', attrs.typeaheadPopupTemplateUrl);
-      }
-      var resetMatches = function() {
-        scope.matches = [];
-        scope.activeIdx = -1;
-        element.attr('aria-expanded', false);
-      };
-      var getMatchId = function(index) {
-        return popupId + '-option-' + index;
-      };
-      scope.$watch('activeIdx', function(index) {
-        if (index < 0) {
-          element.removeAttr('aria-activedescendant');
-        } else {
-          element.attr('aria-activedescendant', getMatchId(index));
-        }
-      });
-      var inputIsExactMatch = function(inputValue, index) {
-        if (scope.matches.length > index && inputValue) {
-          return inputValue.toUpperCase() === scope.matches[index].label.toUpperCase();
-        }
-        return false;
-      };
-      var getMatchesAsync = function(inputValue) {
-        var locals = {$viewValue: inputValue};
-        isLoadingSetter(originalScope, true);
-        isNoResultsSetter(originalScope, false);
-        $q.when(parserResult.source(originalScope, locals)).then(function(matches) {
-          var onCurrentRequest = (inputValue === modelCtrl.$viewValue);
-          if (onCurrentRequest && hasFocus) {
-            if (matches && matches.length > 0) {
-              scope.activeIdx = focusFirst ? 0 : -1;
-              isNoResultsSetter(originalScope, false);
-              scope.matches.length = 0;
-              for (var i = 0; i < matches.length; i++) {
-                locals[parserResult.itemName] = matches[i];
-                scope.matches.push({
-                  id: getMatchId(i),
-                  label: parserResult.viewMapper(scope, locals),
-                  model: matches[i]
-                });
-              }
-              scope.query = inputValue;
-              recalculatePosition();
-              element.attr('aria-expanded', true);
-              if (selectOnExact && scope.matches.length === 1 && inputIsExactMatch(inputValue, 0)) {
-                scope.select(0);
-              }
-            } else {
-              resetMatches();
-              isNoResultsSetter(originalScope, true);
-            }
-          }
-          if (onCurrentRequest) {
-            isLoadingSetter(originalScope, false);
-          }
-        }, function() {
-          resetMatches();
-          isLoadingSetter(originalScope, false);
-          isNoResultsSetter(originalScope, true);
-        });
-      };
-      if (appendToBody) {
-        angular.element($window).bind('resize', fireRecalculating);
-        $document.find('body').bind('scroll', fireRecalculating);
-      }
-      var timeoutEventPromise;
-      scope.moveInProgress = false;
-      function fireRecalculating() {
-        if (!scope.moveInProgress) {
-          scope.moveInProgress = true;
-          scope.$digest();
-        }
-        if (timeoutEventPromise) {
-          $timeout.cancel(timeoutEventPromise);
-        }
-        timeoutEventPromise = $timeout(function() {
-          if (scope.matches.length) {
-            recalculatePosition();
-          }
-          scope.moveInProgress = false;
-        }, eventDebounceTime);
-      }
-      function recalculatePosition() {
-        scope.position = appendToBody ? $position.offset(element) : $position.position(element);
-        scope.position.top += element.prop('offsetHeight');
-      }
-      scope.query = undefined;
-      var timeoutPromise;
-      var scheduleSearchWithTimeout = function(inputValue) {
-        timeoutPromise = $timeout(function() {
-          getMatchesAsync(inputValue);
-        }, waitTime);
-      };
-      var cancelPreviousTimeout = function() {
-        if (timeoutPromise) {
-          $timeout.cancel(timeoutPromise);
-        }
-      };
-      resetMatches();
-      scope.select = function(activeIdx) {
-        var locals = {};
-        var model,
-            item;
-        selected = true;
-        locals[parserResult.itemName] = item = scope.matches[activeIdx].model;
-        model = parserResult.modelMapper(originalScope, locals);
-        $setModelValue(originalScope, model);
-        modelCtrl.$setValidity('editable', true);
-        modelCtrl.$setValidity('parse', true);
-        onSelectCallback(originalScope, {
-          $item: item,
-          $model: model,
-          $label: parserResult.viewMapper(originalScope, locals)
-        });
-        resetMatches();
-        if (scope.$eval(attrs.typeaheadFocusOnSelect) !== false) {
-          $timeout(function() {
-            element[0].focus();
-          }, 0, false);
-        }
-      };
-      element.bind('keydown', function(evt) {
-        if (scope.matches.length === 0 || HOT_KEYS.indexOf(evt.which) === -1) {
-          return;
-        }
-        if (scope.activeIdx === -1 && (evt.which === 9 || evt.which === 13)) {
-          resetMatches();
-          scope.$digest();
-          return;
-        }
-        evt.preventDefault();
-        if (evt.which === 40) {
-          scope.activeIdx = (scope.activeIdx + 1) % scope.matches.length;
-          scope.$digest();
-        } else if (evt.which === 38) {
-          scope.activeIdx = (scope.activeIdx > 0 ? scope.activeIdx : scope.matches.length) - 1;
-          scope.$digest();
-        } else if (evt.which === 13 || evt.which === 9) {
-          scope.$apply(function() {
-            scope.select(scope.activeIdx);
-          });
-        } else if (evt.which === 27) {
-          evt.stopPropagation();
-          resetMatches();
-          scope.$digest();
-        }
-      });
-      element.bind('blur', function() {
-        if (isSelectOnBlur && scope.matches.length && scope.activeIdx !== -1 && !selected) {
-          selected = true;
-          scope.$apply(function() {
-            scope.select(scope.activeIdx);
-          });
-        }
-        hasFocus = false;
-        selected = false;
-      });
-      var dismissClickHandler = function(evt) {
-        if (element[0] !== evt.target && evt.which !== 3 && scope.matches.length !== 0) {
-          resetMatches();
-          if (!$rootScope.$$phase) {
-            scope.$digest();
-          }
-        }
-      };
-      $document.bind('click', dismissClickHandler);
-      originalScope.$on('$destroy', function() {
-        $document.unbind('click', dismissClickHandler);
-        if (appendToBody || appendToElementId) {
-          $popup.remove();
-        }
-        if (appendToBody) {
-          angular.element($window).unbind('resize', fireRecalculating);
-          $document.find('body').unbind('scroll', fireRecalculating);
-        }
-        popUpEl.remove();
-      });
-      var $popup = $compile(popUpEl)(scope);
-      if (appendToBody) {
-        $document.find('body').append($popup);
-      } else if (appendToElementId !== false) {
-        angular.element($document[0].getElementById(appendToElementId)).append($popup);
-      } else {
-        element.after($popup);
-      }
-      this.init = function(_modelCtrl, _ngModelOptions) {
-        modelCtrl = _modelCtrl;
-        ngModelOptions = _ngModelOptions;
-        modelCtrl.$parsers.unshift(function(inputValue) {
-          hasFocus = true;
-          if (minLength === 0 || inputValue && inputValue.length >= minLength) {
-            if (waitTime > 0) {
-              cancelPreviousTimeout();
-              scheduleSearchWithTimeout(inputValue);
-            } else {
-              getMatchesAsync(inputValue);
-            }
-          } else {
-            isLoadingSetter(originalScope, false);
-            cancelPreviousTimeout();
-            resetMatches();
-          }
-          if (isEditable) {
-            return inputValue;
-          } else {
-            if (!inputValue) {
-              modelCtrl.$setValidity('editable', true);
-              return null;
-            } else {
-              modelCtrl.$setValidity('editable', false);
-              return undefined;
-            }
-          }
-        });
-        modelCtrl.$formatters.push(function(modelValue) {
-          var candidateViewValue,
-              emptyViewValue;
-          var locals = {};
-          if (!isEditable) {
-            modelCtrl.$setValidity('editable', true);
-          }
-          if (inputFormatter) {
-            locals.$model = modelValue;
-            return inputFormatter(originalScope, locals);
-          } else {
-            locals[parserResult.itemName] = modelValue;
-            candidateViewValue = parserResult.viewMapper(originalScope, locals);
-            locals[parserResult.itemName] = undefined;
-            emptyViewValue = parserResult.viewMapper(originalScope, locals);
-            return candidateViewValue !== emptyViewValue ? candidateViewValue : modelValue;
-          }
-        });
-      };
-    }]).directive('uibTypeahead', function() {
-      return {
-        controller: 'UibTypeaheadController',
-        require: ['ngModel', '^?ngModelOptions', 'uibTypeahead'],
-        link: function(originalScope, element, attrs, ctrls) {
-          ctrls[2].init(ctrls[0], ctrls[1]);
-        }
-      };
-    }).directive('uibTypeaheadPopup', function() {
-      return {
-        scope: {
-          matches: '=',
-          query: '=',
-          active: '=',
-          position: '&',
-          moveInProgress: '=',
-          select: '&'
-        },
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.popupTemplateUrl || 'template/typeahead/typeahead-popup.html';
-        },
-        link: function(scope, element, attrs) {
-          scope.templateUrl = attrs.templateUrl;
-          scope.isOpen = function() {
-            return scope.matches.length > 0;
-          };
-          scope.isActive = function(matchIdx) {
-            return scope.active == matchIdx;
-          };
-          scope.selectActive = function(matchIdx) {
-            scope.active = matchIdx;
-          };
-          scope.selectMatch = function(activeIdx) {
-            scope.select({activeIdx: activeIdx});
-          };
-        }
-      };
-    }).directive('uibTypeaheadMatch', ['$templateRequest', '$compile', '$parse', function($templateRequest, $compile, $parse) {
-      return {
-        scope: {
-          index: '=',
-          match: '=',
-          query: '='
-        },
-        link: function(scope, element, attrs) {
-          var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';
-          $templateRequest(tplUrl).then(function(tplContent) {
-            $compile(tplContent.trim())(scope, function(clonedElement) {
-              element.replaceWith(clonedElement);
-            });
-          });
-        }
-      };
-    }]).filter('uibTypeaheadHighlight', ['$sce', '$injector', '$log', function($sce, $injector, $log) {
-      var isSanitizePresent;
-      isSanitizePresent = $injector.has('$sanitize');
-      function escapeRegexp(queryToEscape) {
-        return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
-      }
-      function containsHtml(matchItem) {
-        return /<.*>/g.test(matchItem);
-      }
-      return function(matchItem, query) {
-        if (!isSanitizePresent && containsHtml(matchItem)) {
-          $log.warn('Unsafe use of typeahead please use ngSanitize');
-        }
-        matchItem = query ? ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem;
-        if (!isSanitizePresent) {
-          matchItem = $sce.trustAsHtml(matchItem);
-        }
-        return matchItem;
-      };
-    }]);
-    angular.module('ui.bootstrap.typeahead').value('$typeaheadSuppressWarning', false).service('typeaheadParser', ['$parse', 'uibTypeaheadParser', '$log', '$typeaheadSuppressWarning', function($parse, uibTypeaheadParser, $log, $typeaheadSuppressWarning) {
-      if (!$typeaheadSuppressWarning) {
-        $log.warn('typeaheadParser is now deprecated. Use uibTypeaheadParser instead.');
-      }
-      return uibTypeaheadParser;
-    }]).directive('typeahead', ['$compile', '$parse', '$q', '$timeout', '$document', '$window', '$rootScope', '$uibPosition', 'typeaheadParser', '$log', '$typeaheadSuppressWarning', function($compile, $parse, $q, $timeout, $document, $window, $rootScope, $position, typeaheadParser, $log, $typeaheadSuppressWarning) {
-      var HOT_KEYS = [9, 13, 27, 38, 40];
-      var eventDebounceTime = 200;
-      return {
-        require: ['ngModel', '^?ngModelOptions'],
-        link: function(originalScope, element, attrs, ctrls) {
-          if (!$typeaheadSuppressWarning) {
-            $log.warn('typeahead is now deprecated. Use uib-typeahead instead.');
-          }
-          var modelCtrl = ctrls[0];
-          var ngModelOptions = ctrls[1];
-          var minLength = originalScope.$eval(attrs.typeaheadMinLength);
-          if (!minLength && minLength !== 0) {
-            minLength = 1;
-          }
-          var waitTime = originalScope.$eval(attrs.typeaheadWaitMs) || 0;
-          var isEditable = originalScope.$eval(attrs.typeaheadEditable) !== false;
-          var isLoadingSetter = $parse(attrs.typeaheadLoading).assign || angular.noop;
-          var onSelectCallback = $parse(attrs.typeaheadOnSelect);
-          var isSelectOnBlur = angular.isDefined(attrs.typeaheadSelectOnBlur) ? originalScope.$eval(attrs.typeaheadSelectOnBlur) : false;
-          var isNoResultsSetter = $parse(attrs.typeaheadNoResults).assign || angular.noop;
-          var inputFormatter = attrs.typeaheadInputFormatter ? $parse(attrs.typeaheadInputFormatter) : undefined;
-          var appendToBody = attrs.typeaheadAppendToBody ? originalScope.$eval(attrs.typeaheadAppendToBody) : false;
-          var appendToElementId = attrs.typeaheadAppendToElementId || false;
-          var focusFirst = originalScope.$eval(attrs.typeaheadFocusFirst) !== false;
-          var selectOnExact = attrs.typeaheadSelectOnExact ? originalScope.$eval(attrs.typeaheadSelectOnExact) : false;
-          var parsedModel = $parse(attrs.ngModel);
-          var invokeModelSetter = $parse(attrs.ngModel + '($$$p)');
-          var $setModelValue = function(scope, newValue) {
-            if (angular.isFunction(parsedModel(originalScope)) && ngModelOptions && ngModelOptions.$options && ngModelOptions.$options.getterSetter) {
-              return invokeModelSetter(scope, {$$$p: newValue});
-            } else {
-              return parsedModel.assign(scope, newValue);
-            }
-          };
-          var parserResult = typeaheadParser.parse(attrs.typeahead);
-          var hasFocus;
-          var selected;
-          var scope = originalScope.$new();
-          var offDestroy = originalScope.$on('$destroy', function() {
-            scope.$destroy();
-          });
-          scope.$on('$destroy', offDestroy);
-          var popupId = 'typeahead-' + scope.$id + '-' + Math.floor(Math.random() * 10000);
-          element.attr({
-            'aria-autocomplete': 'list',
-            'aria-expanded': false,
-            'aria-owns': popupId
-          });
-          var popUpEl = angular.element('<div typeahead-popup></div>');
-          popUpEl.attr({
-            id: popupId,
-            matches: 'matches',
-            active: 'activeIdx',
-            select: 'select(activeIdx)',
-            'move-in-progress': 'moveInProgress',
-            query: 'query',
-            position: 'position'
-          });
-          if (angular.isDefined(attrs.typeaheadTemplateUrl)) {
-            popUpEl.attr('template-url', attrs.typeaheadTemplateUrl);
-          }
-          if (angular.isDefined(attrs.typeaheadPopupTemplateUrl)) {
-            popUpEl.attr('popup-template-url', attrs.typeaheadPopupTemplateUrl);
-          }
-          var resetMatches = function() {
-            scope.matches = [];
-            scope.activeIdx = -1;
-            element.attr('aria-expanded', false);
-          };
-          var getMatchId = function(index) {
-            return popupId + '-option-' + index;
-          };
-          scope.$watch('activeIdx', function(index) {
-            if (index < 0) {
-              element.removeAttr('aria-activedescendant');
-            } else {
-              element.attr('aria-activedescendant', getMatchId(index));
-            }
-          });
-          var inputIsExactMatch = function(inputValue, index) {
-            if (scope.matches.length > index && inputValue) {
-              return inputValue.toUpperCase() === scope.matches[index].label.toUpperCase();
-            }
-            return false;
-          };
-          var getMatchesAsync = function(inputValue) {
-            var locals = {$viewValue: inputValue};
-            isLoadingSetter(originalScope, true);
-            isNoResultsSetter(originalScope, false);
-            $q.when(parserResult.source(originalScope, locals)).then(function(matches) {
-              var onCurrentRequest = (inputValue === modelCtrl.$viewValue);
-              if (onCurrentRequest && hasFocus) {
-                if (matches && matches.length > 0) {
-                  scope.activeIdx = focusFirst ? 0 : -1;
-                  isNoResultsSetter(originalScope, false);
-                  scope.matches.length = 0;
-                  for (var i = 0; i < matches.length; i++) {
-                    locals[parserResult.itemName] = matches[i];
-                    scope.matches.push({
-                      id: getMatchId(i),
-                      label: parserResult.viewMapper(scope, locals),
-                      model: matches[i]
-                    });
-                  }
-                  scope.query = inputValue;
-                  recalculatePosition();
-                  element.attr('aria-expanded', true);
-                  if (selectOnExact && scope.matches.length === 1 && inputIsExactMatch(inputValue, 0)) {
-                    scope.select(0);
-                  }
-                } else {
-                  resetMatches();
-                  isNoResultsSetter(originalScope, true);
-                }
-              }
-              if (onCurrentRequest) {
-                isLoadingSetter(originalScope, false);
-              }
-            }, function() {
-              resetMatches();
-              isLoadingSetter(originalScope, false);
-              isNoResultsSetter(originalScope, true);
-            });
-          };
-          if (appendToBody) {
-            angular.element($window).bind('resize', fireRecalculating);
-            $document.find('body').bind('scroll', fireRecalculating);
-          }
-          var timeoutEventPromise;
-          scope.moveInProgress = false;
-          function fireRecalculating() {
-            if (!scope.moveInProgress) {
-              scope.moveInProgress = true;
-              scope.$digest();
-            }
-            if (timeoutEventPromise) {
-              $timeout.cancel(timeoutEventPromise);
-            }
-            timeoutEventPromise = $timeout(function() {
-              if (scope.matches.length) {
-                recalculatePosition();
-              }
-              scope.moveInProgress = false;
-            }, eventDebounceTime);
-          }
-          function recalculatePosition() {
-            scope.position = appendToBody ? $position.offset(element) : $position.position(element);
-            scope.position.top += element.prop('offsetHeight');
-          }
-          resetMatches();
-          scope.query = undefined;
-          var timeoutPromise;
-          var scheduleSearchWithTimeout = function(inputValue) {
-            timeoutPromise = $timeout(function() {
-              getMatchesAsync(inputValue);
-            }, waitTime);
-          };
-          var cancelPreviousTimeout = function() {
-            if (timeoutPromise) {
-              $timeout.cancel(timeoutPromise);
-            }
-          };
-          modelCtrl.$parsers.unshift(function(inputValue) {
-            hasFocus = true;
-            if (minLength === 0 || inputValue && inputValue.length >= minLength) {
-              if (waitTime > 0) {
-                cancelPreviousTimeout();
-                scheduleSearchWithTimeout(inputValue);
-              } else {
-                getMatchesAsync(inputValue);
-              }
-            } else {
-              isLoadingSetter(originalScope, false);
-              cancelPreviousTimeout();
-              resetMatches();
-            }
-            if (isEditable) {
-              return inputValue;
-            } else {
-              if (!inputValue) {
-                modelCtrl.$setValidity('editable', true);
-                return null;
-              } else {
-                modelCtrl.$setValidity('editable', false);
-                return undefined;
-              }
-            }
-          });
-          modelCtrl.$formatters.push(function(modelValue) {
-            var candidateViewValue,
-                emptyViewValue;
-            var locals = {};
-            if (!isEditable) {
-              modelCtrl.$setValidity('editable', true);
-            }
-            if (inputFormatter) {
-              locals.$model = modelValue;
-              return inputFormatter(originalScope, locals);
-            } else {
-              locals[parserResult.itemName] = modelValue;
-              candidateViewValue = parserResult.viewMapper(originalScope, locals);
-              locals[parserResult.itemName] = undefined;
-              emptyViewValue = parserResult.viewMapper(originalScope, locals);
-              return candidateViewValue !== emptyViewValue ? candidateViewValue : modelValue;
-            }
-          });
-          scope.select = function(activeIdx) {
-            var locals = {};
-            var model,
-                item;
-            selected = true;
-            locals[parserResult.itemName] = item = scope.matches[activeIdx].model;
-            model = parserResult.modelMapper(originalScope, locals);
-            $setModelValue(originalScope, model);
-            modelCtrl.$setValidity('editable', true);
-            modelCtrl.$setValidity('parse', true);
-            onSelectCallback(originalScope, {
-              $item: item,
-              $model: model,
-              $label: parserResult.viewMapper(originalScope, locals)
-            });
-            resetMatches();
-            if (scope.$eval(attrs.typeaheadFocusOnSelect) !== false) {
-              $timeout(function() {
-                element[0].focus();
-              }, 0, false);
-            }
-          };
-          element.bind('keydown', function(evt) {
-            if (scope.matches.length === 0 || HOT_KEYS.indexOf(evt.which) === -1) {
-              return;
-            }
-            if (scope.activeIdx === -1 && (evt.which === 9 || evt.which === 13)) {
-              resetMatches();
-              scope.$digest();
-              return;
-            }
-            evt.preventDefault();
-            if (evt.which === 40) {
-              scope.activeIdx = (scope.activeIdx + 1) % scope.matches.length;
-              scope.$digest();
-            } else if (evt.which === 38) {
-              scope.activeIdx = (scope.activeIdx > 0 ? scope.activeIdx : scope.matches.length) - 1;
-              scope.$digest();
-            } else if (evt.which === 13 || evt.which === 9) {
-              scope.$apply(function() {
-                scope.select(scope.activeIdx);
-              });
-            } else if (evt.which === 27) {
-              evt.stopPropagation();
-              resetMatches();
-              scope.$digest();
-            }
-          });
-          element.bind('blur', function() {
-            if (isSelectOnBlur && scope.matches.length && scope.activeIdx !== -1 && !selected) {
-              selected = true;
-              scope.$apply(function() {
-                scope.select(scope.activeIdx);
-              });
-            }
-            hasFocus = false;
-            selected = false;
-          });
-          var dismissClickHandler = function(evt) {
-            if (element[0] !== evt.target && evt.which !== 3 && scope.matches.length !== 0) {
-              resetMatches();
-              if (!$rootScope.$$phase) {
-                scope.$digest();
-              }
-            }
-          };
-          $document.bind('click', dismissClickHandler);
-          originalScope.$on('$destroy', function() {
-            $document.unbind('click', dismissClickHandler);
-            if (appendToBody || appendToElementId) {
-              $popup.remove();
-            }
-            if (appendToBody) {
-              angular.element($window).unbind('resize', fireRecalculating);
-              $document.find('body').unbind('scroll', fireRecalculating);
-            }
-            popUpEl.remove();
-          });
-          var $popup = $compile(popUpEl)(scope);
-          if (appendToBody) {
-            $document.find('body').append($popup);
-          } else if (appendToElementId !== false) {
-            angular.element($document[0].getElementById(appendToElementId)).append($popup);
-          } else {
-            element.after($popup);
-          }
-        }
-      };
-    }]).directive('typeaheadPopup', ['$typeaheadSuppressWarning', '$log', function($typeaheadSuppressWarning, $log) {
-      return {
-        scope: {
-          matches: '=',
-          query: '=',
-          active: '=',
-          position: '&',
-          moveInProgress: '=',
-          select: '&'
-        },
-        replace: true,
-        templateUrl: function(element, attrs) {
-          return attrs.popupTemplateUrl || 'template/typeahead/typeahead-popup.html';
-        },
-        link: function(scope, element, attrs) {
-          if (!$typeaheadSuppressWarning) {
-            $log.warn('typeahead-popup is now deprecated. Use uib-typeahead-popup instead.');
-          }
-          scope.templateUrl = attrs.templateUrl;
-          scope.isOpen = function() {
-            return scope.matches.length > 0;
-          };
-          scope.isActive = function(matchIdx) {
-            return scope.active == matchIdx;
-          };
-          scope.selectActive = function(matchIdx) {
-            scope.active = matchIdx;
-          };
-          scope.selectMatch = function(activeIdx) {
-            scope.select({activeIdx: activeIdx});
-          };
-        }
-      };
-    }]).directive('typeaheadMatch', ['$templateRequest', '$compile', '$parse', '$typeaheadSuppressWarning', '$log', function($templateRequest, $compile, $parse, $typeaheadSuppressWarning, $log) {
-      return {
-        restrict: 'EA',
-        scope: {
-          index: '=',
-          match: '=',
-          query: '='
-        },
-        link: function(scope, element, attrs) {
-          if (!$typeaheadSuppressWarning) {
-            $log.warn('typeahead-match is now deprecated. Use uib-typeahead-match instead.');
-          }
-          var tplUrl = $parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';
-          $templateRequest(tplUrl).then(function(tplContent) {
-            $compile(tplContent.trim())(scope, function(clonedElement) {
-              element.replaceWith(clonedElement);
-            });
-          });
-        }
-      };
-    }]).filter('typeaheadHighlight', ['$sce', '$injector', '$log', '$typeaheadSuppressWarning', function($sce, $injector, $log, $typeaheadSuppressWarning) {
-      var isSanitizePresent;
-      isSanitizePresent = $injector.has('$sanitize');
-      function escapeRegexp(queryToEscape) {
-        return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
-      }
-      function containsHtml(matchItem) {
-        return /<.*>/g.test(matchItem);
-      }
-      return function(matchItem, query) {
-        if (!$typeaheadSuppressWarning) {
-          $log.warn('typeaheadHighlight is now deprecated. Use uibTypeaheadHighlight instead.');
-        }
-        if (!isSanitizePresent && containsHtml(matchItem)) {
-          $log.warn('Unsafe use of typeahead please use ngSanitize');
-        }
-        matchItem = query ? ('' + matchItem).replace(new RegExp(escapeRegexp(query), 'gi'), '<strong>$&</strong>') : matchItem;
-        if (!isSanitizePresent) {
-          matchItem = $sce.trustAsHtml(matchItem);
-        }
-        return matchItem;
-      };
-    }]);
-    angular.module("template/accordion/accordion-group.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/accordion/accordion-group.html", "<div class=\"panel {{panelClass || 'panel-default'}}\">\n" + "  <div class=\"panel-heading\" ng-keypress=\"toggleOpen($event)\">\n" + "    <h4 class=\"panel-title\">\n" + "      <a href tabindex=\"0\" class=\"accordion-toggle\" ng-click=\"toggleOpen()\" uib-accordion-transclude=\"heading\"><span ng-class=\"{'text-muted': isDisabled}\">{{heading}}</span></a>\n" + "    </h4>\n" + "  </div>\n" + "  <div class=\"panel-collapse collapse\" uib-collapse=\"!isOpen\">\n" + "	  <div class=\"panel-body\" ng-transclude></div>\n" + "  </div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/accordion/accordion.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/accordion/accordion.html", "<div class=\"panel-group\" ng-transclude></div>");
-    }]);
-    angular.module("template/alert/alert.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/alert/alert.html", "<div class=\"alert\" ng-class=\"['alert-' + (type || 'warning'), closeable ? 'alert-dismissible' : null]\" role=\"alert\">\n" + "    <button ng-show=\"closeable\" type=\"button\" class=\"close\" ng-click=\"close({$event: $event})\">\n" + "        <span aria-hidden=\"true\">&times;</span>\n" + "        <span class=\"sr-only\">Close</span>\n" + "    </button>\n" + "    <div ng-transclude></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/carousel/carousel.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/carousel/carousel.html", "<div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\" ng-swipe-right=\"prev()\" ng-swipe-left=\"next()\">\n" + "  <div class=\"carousel-inner\" ng-transclude></div>\n" + "  <a role=\"button\" href class=\"left carousel-control\" ng-click=\"prev()\" ng-show=\"slides.length > 1\">\n" + "    <span aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-left\"></span>\n" + "    <span class=\"sr-only\">previous</span>\n" + "  </a>\n" + "  <a role=\"button\" href class=\"right carousel-control\" ng-click=\"next()\" ng-show=\"slides.length > 1\">\n" + "    <span aria-hidden=\"true\" class=\"glyphicon glyphicon-chevron-right\"></span>\n" + "    <span class=\"sr-only\">next</span>\n" + "  </a>\n" + "  <ol class=\"carousel-indicators\" ng-show=\"slides.length > 1\">\n" + "    <li ng-repeat=\"slide in slides | orderBy:indexOfSlide track by $index\" ng-class=\"{ active: isActive(slide) }\" ng-click=\"select(slide)\">\n" + "      <span class=\"sr-only\">slide {{ $index + 1 }} of {{ slides.length }}<span ng-if=\"isActive(slide)\">, currently active</span></span>\n" + "    </li>\n" + "  </ol>\n" + "</div>");
-    }]);
-    angular.module("template/carousel/slide.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/carousel/slide.html", "<div ng-class=\"{\n" + "    'active': active\n" + "  }\" class=\"item text-center\" ng-transclude></div>\n" + "");
-    }]);
-    angular.module("template/datepicker/datepicker.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/datepicker/datepicker.html", "<div ng-switch=\"datepickerMode\" role=\"application\" ng-keydown=\"keydown($event)\">\n" + "  <uib-daypicker ng-switch-when=\"day\" tabindex=\"0\"></uib-daypicker>\n" + "  <uib-monthpicker ng-switch-when=\"month\" tabindex=\"0\"></uib-monthpicker>\n" + "  <uib-yearpicker ng-switch-when=\"year\" tabindex=\"0\"></uib-yearpicker>\n" + "</div>");
-    }]);
-    angular.module("template/datepicker/day.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/datepicker/day.html", "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th colspan=\"{{::5 + showWeeks}}\"><button id=\"{{::uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "    <tr>\n" + "      <th ng-if=\"showWeeks\" class=\"text-center\"></th>\n" + "      <th ng-repeat=\"label in ::labels track by $index\" class=\"text-center\"><small aria-label=\"{{::label.full}}\">{{::label.abbr}}</small></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-if=\"showWeeks\" class=\"text-center h6\"><em>{{ weekNumbers[$index] }}</em></td>\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{::dt.uid}}\" ng-class=\"::dt.customClass\">\n" + "        <button type=\"button\" style=\"min-width:100%;\" class=\"btn btn-default btn-sm\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"::{'text-muted': dt.secondary, 'text-info': dt.current}\">{{::dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");
-    }]);
-    angular.module("template/datepicker/month.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/datepicker/month.html", "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th><button id=\"{{::uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{::dt.uid}}\" ng-class=\"::dt.customClass\">\n" + "        <button type=\"button\" style=\"min-width:100%;\" class=\"btn btn-default\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"::{'text-info': dt.current}\">{{::dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");
-    }]);
-    angular.module("template/datepicker/popup.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/datepicker/popup.html", "<ul class=\"dropdown-menu\" dropdown-nested ng-if=\"isOpen\" style=\"display: block\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" ng-keydown=\"keydown($event)\" ng-click=\"$event.stopPropagation()\">\n" + "	<li ng-transclude></li>\n" + "	<li ng-if=\"showButtonBar\" style=\"padding:10px 9px 2px\">\n" + "		<span class=\"btn-group pull-left\">\n" + "			<button type=\"button\" class=\"btn btn-sm btn-info\" ng-click=\"select('today')\" ng-disabled=\"isDisabled('today')\">{{ getText('current') }}</button>\n" + "			<button type=\"button\" class=\"btn btn-sm btn-danger\" ng-click=\"select(null)\">{{ getText('clear') }}</button>\n" + "		</span>\n" + "		<button type=\"button\" class=\"btn btn-sm btn-success pull-right\" ng-click=\"close()\">{{ getText('close') }}</button>\n" + "	</li>\n" + "</ul>\n" + "");
-    }]);
-    angular.module("template/datepicker/year.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/datepicker/year.html", "<table role=\"grid\" aria-labelledby=\"{{::uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th colspan=\"3\"><button id=\"{{::uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" ng-disabled=\"datepickerMode === maxMode\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{::dt.uid}}\" ng-class=\"::dt.customClass\">\n" + "        <button type=\"button\" style=\"min-width:100%;\" class=\"btn btn-default\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"::{'text-info': dt.current}\">{{::dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");
-    }]);
-    angular.module("template/modal/backdrop.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/modal/backdrop.html", "<div uib-modal-animation-class=\"fade\"\n" + "     modal-in-class=\"in\"\n" + "     ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\"\n" + "></div>\n" + "");
-    }]);
-    angular.module("template/modal/window.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/modal/window.html", "<div modal-render=\"{{$isRendered}}\" tabindex=\"-1\" role=\"dialog\" class=\"modal\"\n" + "    uib-modal-animation-class=\"fade\"\n" + "    modal-in-class=\"in\"\n" + "    ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\">\n" + "    <div class=\"modal-dialog\" ng-class=\"size ? 'modal-' + size : ''\"><div class=\"modal-content\" uib-modal-transclude></div></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/pagination/pager.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/pagination/pager.html", "<ul class=\"pager\">\n" + "  <li ng-class=\"{disabled: noPrevious()||ngDisabled, previous: align}\"><a href ng-click=\"selectPage(page - 1, $event)\">{{::getText('previous')}}</a></li>\n" + "  <li ng-class=\"{disabled: noNext()||ngDisabled, next: align}\"><a href ng-click=\"selectPage(page + 1, $event)\">{{::getText('next')}}</a></li>\n" + "</ul>\n" + "");
-    }]);
-    angular.module("template/pagination/pagination.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/pagination/pagination.html", "<ul class=\"pagination\">\n" + "  <li ng-if=\"::boundaryLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\" class=\"pagination-first\"><a href ng-click=\"selectPage(1, $event)\">{{::getText('first')}}</a></li>\n" + "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noPrevious()||ngDisabled}\" class=\"pagination-prev\"><a href ng-click=\"selectPage(page - 1, $event)\">{{::getText('previous')}}</a></li>\n" + "  <li ng-repeat=\"page in pages track by $index\" ng-class=\"{active: page.active,disabled: ngDisabled&&!page.active}\" class=\"pagination-page\"><a href ng-click=\"selectPage(page.number, $event)\">{{page.text}}</a></li>\n" + "  <li ng-if=\"::directionLinks\" ng-class=\"{disabled: noNext()||ngDisabled}\" class=\"pagination-next\"><a href ng-click=\"selectPage(page + 1, $event)\">{{::getText('next')}}</a></li>\n" + "  <li ng-if=\"::boundaryLinks\" ng-class=\"{disabled: noNext()||ngDisabled}\" class=\"pagination-last\"><a href ng-click=\"selectPage(totalPages, $event)\">{{::getText('last')}}</a></li>\n" + "</ul>\n" + "");
-    }]);
-    angular.module("template/tooltip/tooltip-html-popup.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/tooltip/tooltip-html-popup.html", "<div\n" + "  tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"tooltip-arrow\"></div>\n" + "  <div class=\"tooltip-inner\" ng-bind-html=\"contentExp()\"></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/tooltip/tooltip-popup.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/tooltip/tooltip-popup.html", "<div\n" + "  tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"tooltip-arrow\"></div>\n" + "  <div class=\"tooltip-inner\" ng-bind=\"content\"></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/tooltip/tooltip-template-popup.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/tooltip/tooltip-template-popup.html", "<div\n" + "  tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"tooltip-arrow\"></div>\n" + "  <div class=\"tooltip-inner\"\n" + "    uib-tooltip-template-transclude=\"contentExp()\"\n" + "    tooltip-template-transclude-scope=\"originScope()\"></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/popover/popover-html.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/popover/popover-html.html", "<div tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"arrow\"></div>\n" + "\n" + "  <div class=\"popover-inner\">\n" + "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-if=\"title\"></h3>\n" + "      <div class=\"popover-content\" ng-bind-html=\"contentExp()\"></div>\n" + "  </div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/popover/popover-template.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/popover/popover-template.html", "<div tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"arrow\"></div>\n" + "\n" + "  <div class=\"popover-inner\">\n" + "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-if=\"title\"></h3>\n" + "      <div class=\"popover-content\"\n" + "        uib-tooltip-template-transclude=\"contentExp()\"\n" + "        tooltip-template-transclude-scope=\"originScope()\"></div>\n" + "  </div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/popover/popover.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/popover/popover.html", "<div tooltip-animation-class=\"fade\"\n" + "  uib-tooltip-classes\n" + "  ng-class=\"{ in: isOpen() }\">\n" + "  <div class=\"arrow\"></div>\n" + "\n" + "  <div class=\"popover-inner\">\n" + "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-if=\"title\"></h3>\n" + "      <div class=\"popover-content\" ng-bind=\"content\"></div>\n" + "  </div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/progressbar/bar.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/progressbar/bar.html", "<div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: (percent < 100 ? percent : 100) + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" aria-labelledby=\"{{::title}}\" style=\"min-width: 0;\" ng-transclude></div>\n" + "");
-    }]);
-    angular.module("template/progressbar/progress.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/progressbar/progress.html", "<div class=\"progress\" ng-transclude aria-labelledby=\"{{::title}}\"></div>");
-    }]);
-    angular.module("template/progressbar/progressbar.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/progressbar/progressbar.html", "<div class=\"progress\">\n" + "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: (percent < 100 ? percent : 100) + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" aria-labelledby=\"{{::title}}\" style=\"min-width: 0;\" ng-transclude></div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/rating/rating.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/rating/rating.html", "<span ng-mouseleave=\"reset()\" ng-keydown=\"onKeydown($event)\" tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"{{range.length}}\" aria-valuenow=\"{{value}}\">\n" + "    <span ng-repeat-start=\"r in range track by $index\" class=\"sr-only\">({{ $index < value ? '*' : ' ' }})</span>\n" + "    <i ng-repeat-end ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" class=\"glyphicon\" ng-class=\"$index < value && (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')\" ng-attr-title=\"{{r.title}}\" aria-valuetext=\"{{r.title}}\"></i>\n" + "</span>\n" + "");
-    }]);
-    angular.module("template/tabs/tab.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/tabs/tab.html", "<li ng-class=\"{active: active, disabled: disabled}\">\n" + "  <a href ng-click=\"select()\" uib-tab-heading-transclude>{{heading}}</a>\n" + "</li>\n" + "");
-    }]);
-    angular.module("template/tabs/tabset.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/tabs/tabset.html", "<div>\n" + "  <ul class=\"nav nav-{{type || 'tabs'}}\" ng-class=\"{'nav-stacked': vertical, 'nav-justified': justified}\" ng-transclude></ul>\n" + "  <div class=\"tab-content\">\n" + "    <div class=\"tab-pane\" \n" + "         ng-repeat=\"tab in tabs\" \n" + "         ng-class=\"{active: tab.active}\"\n" + "         uib-tab-content-transclude=\"tab\">\n" + "    </div>\n" + "  </div>\n" + "</div>\n" + "");
-    }]);
-    angular.module("template/timepicker/timepicker.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/timepicker/timepicker.html", "<table>\n" + "  <tbody>\n" + "    <tr class=\"text-center\" ng-show=\"::showSpinners\">\n" + "      <td><a ng-click=\"incrementHours()\" ng-class=\"{disabled: noIncrementHours()}\" class=\"btn btn-link\" ng-disabled=\"noIncrementHours()\" tabindex=\"{{::tabindex}}\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" + "      <td>&nbsp;</td>\n" + "      <td><a ng-click=\"incrementMinutes()\" ng-class=\"{disabled: noIncrementMinutes()}\" class=\"btn btn-link\" ng-disabled=\"noIncrementMinutes()\" tabindex=\"{{::tabindex}}\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" + "      <td ng-show=\"showMeridian\"></td>\n" + "    </tr>\n" + "    <tr>\n" + "      <td class=\"form-group\" ng-class=\"{'has-error': invalidHours}\">\n" + "        <input style=\"width:50px;\" type=\"text\" ng-model=\"hours\" ng-change=\"updateHours()\" class=\"form-control text-center\" ng-readonly=\"::readonlyInput\" maxlength=\"2\" tabindex=\"{{::tabindex}}\">\n" + "      </td>\n" + "      <td>:</td>\n" + "      <td class=\"form-group\" ng-class=\"{'has-error': invalidMinutes}\">\n" + "        <input style=\"width:50px;\" type=\"text\" ng-model=\"minutes\" ng-change=\"updateMinutes()\" class=\"form-control text-center\" ng-readonly=\"::readonlyInput\" maxlength=\"2\" tabindex=\"{{::tabindex}}\">\n" + "      </td>\n" + "      <td ng-show=\"showMeridian\"><button type=\"button\" ng-class=\"{disabled: noToggleMeridian()}\" class=\"btn btn-default text-center\" ng-click=\"toggleMeridian()\" ng-disabled=\"noToggleMeridian()\" tabindex=\"{{::tabindex}}\">{{meridian}}</button></td>\n" + "    </tr>\n" + "    <tr class=\"text-center\" ng-show=\"::showSpinners\">\n" + "      <td><a ng-click=\"decrementHours()\" ng-class=\"{disabled: noDecrementHours()}\" class=\"btn btn-link\" ng-disabled=\"noDecrementHours()\" tabindex=\"{{::tabindex}}\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" + "      <td>&nbsp;</td>\n" + "      <td><a ng-click=\"decrementMinutes()\" ng-class=\"{disabled: noDecrementMinutes()}\" class=\"btn btn-link\" ng-disabled=\"noDecrementMinutes()\" tabindex=\"{{::tabindex}}\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" + "      <td ng-show=\"showMeridian\"></td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");
-    }]);
-    angular.module("template/typeahead/typeahead-match.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/typeahead/typeahead-match.html", "<a href tabindex=\"-1\" ng-bind-html=\"match.label | uibTypeaheadHighlight:query\"></a>\n" + "");
-    }]);
-    angular.module("template/typeahead/typeahead-popup.html", []).run(["$templateCache", function($templateCache) {
-      $templateCache.put("template/typeahead/typeahead-popup.html", "<ul class=\"dropdown-menu\" ng-show=\"isOpen() && !moveInProgress\" ng-style=\"{top: position().top+'px', left: position().left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" + "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{::match.id}}\">\n" + "        <div uib-typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" + "    </li>\n" + "</ul>\n" + "");
-    }]);
-    !angular.$$csp() && angular.element(document).find('head').prepend('<style type="text/css">.ng-animate.item:not(.left):not(.right){-webkit-transition:0s ease-in-out left;transition:0s ease-in-out left}</style>');
-  })();
-  return _retrieveGlobal();
+    };
+    function isTabHeading(node) {
+      return node.tagName && (node.hasAttribute('uib-tab-heading') || node.hasAttribute('data-uib-tab-heading') || node.hasAttribute('x-uib-tab-heading') || node.tagName.toLowerCase() === 'uib-tab-heading' || node.tagName.toLowerCase() === 'data-uib-tab-heading' || node.tagName.toLowerCase() === 'x-uib-tab-heading');
+    }
+  });
+  angular.module('ui.bootstrap.position').run(function() {
+    !angular.$$csp().noInlineStyle && !angular.$$uibPositionCss && angular.element(document).find('head').prepend('<style type="text/css">.uib-position-measure{display:block !important;visibility:hidden !important;position:absolute !important;top:-9999px !important;left:-9999px !important;}.uib-position-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll;}</style>');
+    angular.$$uibPositionCss = true;
+  });
+  return module.exports;
 });
 
 $__System.registerDynamic("9", ["8"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('8');
-  module.exports = 'ui.bootstrap';
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('8');
   return module.exports;
 });
 
-$__System.registerDynamic("a", ["9"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('9');
-  global.define = __define;
-  return module.exports;
+$__System.register('a', ['b', 'f', 'c', 'd', 'e'], function (_export) {
+    'use strict';
+
+    var angular, categoryQueryModule, categoryCommandModule, navbarAppModule;
+    return {
+        setters: [function (_b) {
+            angular = _b['default'];
+        }, function (_f) {}, function (_c) {
+            categoryQueryModule = _c['default'];
+        }, function (_d) {
+            categoryCommandModule = _d['default'];
+        }, function (_e) {
+            navbarAppModule = _e['default'];
+        }],
+        execute: function () {
+            _export('default', angular.module('HomeControllerModule', [categoryQueryModule.name, categoryCommandModule.name, navbarAppModule.name]).controller('HomeController', function ($scope, allCategories, $location, $http, GenerateCategoryTree) {
+                $scope.topCats = GenerateCategoryTree.generate(allCategories, null);
+            }));
+        }
+    };
+});
+(function() {
+var define = $__System.amdDefine;
+define("10", [], function() {
+  return "<bootstrap-navbar></bootstrap-navbar>\r\n\r\n<div class=\"container\">\r\nHere we could have a favourites bar\r\n</div>\r\n<!--<div class=\"container\">\r\n    <uib-tabset>\r\n        <uib-tab ng-repeat=\"tab in categoryTabs\" \r\n                heading=\"{{tab.title}}\" id=\"{{tab.id}}\"\r\n                active=\"tab.active\" disable=\"tab.disabled\"\r\n                select=\"selectCategory(tab.id)\">\r\n            \r\n            \r\n            <div class=\"dropdown\">\r\n                <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n                    Please select\r\n                    <span class=\"caret\"></span>\r\n                </button>\r\n                <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">                 \r\n                    <li ng-repeat=\"category in tab.categories\" ng-click=\"selectedCategory(category.id)\" title=\"{{category.description}}\">\r\n                        {{category.description}}\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n            <select ng-model=\"categoryId\">\r\n                <option ng-repeat=\"option in tab.categories\" value=\"{{option._id}}\" title=\"{{option.description}}\">{{option.vietDescription}}</option>   \r\n            </select>\r\n                        \r\n            \r\n        </uib-tab>\r\n    </uib-tabset>\r\n</div>-->";
 });
 
-$__System.registerDynamic("b", ["c"], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+})();
+(function() {
+var define = $__System.amdDefine;
+define("11", [], function() {
+  return "<bootstrap-navbar></bootstrap-navbar>\r\n\r\n<div class=\"container\">\r\n    <!--This is where the adverts go\r\n    may wnat to do a directive eventually-->\r\n    CATEGORY specific adverts for {{category.vietDescription}} or {{category.description}}\r\n</div>";
+});
+
+})();
+$__System.registerDynamic("12", ["b"], false, function($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
   (function() {
     "format global";
     "deps angular";
@@ -10879,9 +5478,17 @@ $__System.registerDynamic("b", ["c"], false, function(__require, __exports, __mo
                 routes: routes,
                 reload: function() {
                   forceReload = true;
+                  var fakeLocationEvent = {
+                    defaultPrevented: false,
+                    preventDefault: function fakePreventDefault() {
+                      this.defaultPrevented = true;
+                      forceReload = false;
+                    }
+                  };
                   $rootScope.$evalAsync(function() {
-                    prepareRoute();
-                    commitRoute();
+                    prepareRoute(fakeLocationEvent);
+                    if (!fakeLocationEvent.defaultPrevented)
+                      commitRoute();
                   });
                 },
                 updateParams: function(newParams) {
@@ -11105,6 +5712,7 @@ $__System.registerDynamic("b", ["c"], false, function(__require, __exports, __mo
               $element.data('$ngControllerController', controller);
               $element.children().data('$ngControllerController', controller);
             }
+            scope[current.resolveAs || '$resolve'] = locals;
             link(scope);
           }
         };
@@ -11114,33 +5722,31 @@ $__System.registerDynamic("b", ["c"], false, function(__require, __exports, __mo
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("d", ["b"], true, function($__require, exports, module) {
+$__System.registerDynamic("f", ["12"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('b');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('12');
   return module.exports;
 });
 
-$__System.registerDynamic("e", [], true, function($__require, exports, module) {
+$__System.registerDynamic("13", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("f", ["10", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("14", ["15", "16"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = $__require('10'),
-      defined = $__require('11');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var toInteger = $__require('15'),
+      defined = $__require('16');
   module.exports = function(TO_STRING) {
     return function(that, pos) {
       var s = String(defined(that)),
@@ -11154,18 +5760,17 @@ $__System.registerDynamic("f", ["10", "11"], true, function($__require, exports,
       return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("12", ["f", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("17", ["14", "18"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $at = $__require('f')(true);
-  $__require('13')(String, 'String', function(iterated) {
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var $at = $__require('14')(true);
+  $__require('18')(String, 'String', function(iterated) {
     this._t = String(iterated);
     this._i = 0;
   }, function() {
@@ -11184,113 +5789,106 @@ $__System.registerDynamic("12", ["f", "13"], true, function($__require, exports,
       done: false
     };
   });
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("14", [], true, function($__require, exports, module) {
+$__System.registerDynamic("19", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function() {};
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("15", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1a", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(done, value) {
     return {
       value: value,
       done: !!done
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("16", ["17"], true, function($__require, exports, module) {
+$__System.registerDynamic("1b", ["1c"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = $__require('17');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var cof = $__require('1c');
   module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
     return cof(it) == 'String' ? it.split('') : Object(it);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("11", [], true, function($__require, exports, module) {
+$__System.registerDynamic("16", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     if (it == undefined)
       throw TypeError("Can't call method on  " + it);
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("18", ["16", "11"], true, function($__require, exports, module) {
+$__System.registerDynamic("1d", ["1b", "16"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var IObject = $__require('16'),
-      defined = $__require('11');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var IObject = $__require('1b'),
+      defined = $__require('16');
   module.exports = function(it) {
     return IObject(defined(it));
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("19", ["1a", "1b", "1c", "1d", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("1e", ["1f", "20", "21", "22", "23"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('1a'),
-      descriptor = $__require('1b'),
-      setToStringTag = $__require('1c'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var $ = $__require('1f'),
+      descriptor = $__require('20'),
+      setToStringTag = $__require('21'),
       IteratorPrototype = {};
-  $__require('1d')(IteratorPrototype, $__require('1e')('iterator'), function() {
+  $__require('22')(IteratorPrototype, $__require('23')('iterator'), function() {
     return this;
   });
   module.exports = function(Constructor, NAME, next) {
     Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
     setToStringTag(Constructor, NAME + ' Iterator');
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("13", ["1f", "20", "21", "1d", "22", "23", "19", "1c", "1a", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("18", ["24", "25", "26", "22", "27", "28", "1e", "21", "1f", "23"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var LIBRARY = $__require('1f'),
-      $export = $__require('20'),
-      redefine = $__require('21'),
-      hide = $__require('1d'),
-      has = $__require('22'),
-      Iterators = $__require('23'),
-      $iterCreate = $__require('19'),
-      setToStringTag = $__require('1c'),
-      getProto = $__require('1a').getProto,
-      ITERATOR = $__require('1e')('iterator'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var LIBRARY = $__require('24'),
+      $export = $__require('25'),
+      redefine = $__require('26'),
+      hide = $__require('22'),
+      has = $__require('27'),
+      Iterators = $__require('28'),
+      $iterCreate = $__require('1e'),
+      setToStringTag = $__require('21'),
+      getProto = $__require('1f').getProto,
+      ITERATOR = $__require('23')('iterator'),
       BUGGY = !([].keys && 'next' in [].keys()),
       FF_ITERATOR = '@@iterator',
       KEYS = 'keys',
@@ -11358,21 +5956,20 @@ $__System.registerDynamic("13", ["1f", "20", "21", "1d", "22", "23", "19", "1c",
     }
     return methods;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("24", ["14", "15", "23", "18", "13"], true, function($__require, exports, module) {
+$__System.registerDynamic("29", ["19", "1a", "28", "1d", "18"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var addToUnscopables = $__require('14'),
-      step = $__require('15'),
-      Iterators = $__require('23'),
-      toIObject = $__require('18');
-  module.exports = $__require('13')(Array, 'Array', function(iterated, kind) {
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var addToUnscopables = $__require('19'),
+      step = $__require('1a'),
+      Iterators = $__require('28'),
+      toIObject = $__require('1d');
+  module.exports = $__require('18')(Array, 'Array', function(iterated, kind) {
     this._t = toIObject(iterated);
     this._i = 0;
     this._k = kind;
@@ -11394,40 +5991,37 @@ $__System.registerDynamic("24", ["14", "15", "23", "18", "13"], true, function($
   addToUnscopables('keys');
   addToUnscopables('values');
   addToUnscopables('entries');
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("25", ["24", "23"], true, function($__require, exports, module) {
+$__System.registerDynamic("2a", ["29", "28"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('24');
-  var Iterators = $__require('23');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  $__require('29');
+  var Iterators = $__require('28');
   Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1f", [], true, function($__require, exports, module) {
+$__System.registerDynamic("24", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = true;
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("20", ["26", "27", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("25", ["2b", "2c", "2d"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = $__require('26'),
-      core = $__require('27'),
-      ctx = $__require('28'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var global = $__require('2b'),
+      core = $__require('2c'),
+      ctx = $__require('2d'),
       PROTOTYPE = 'prototype';
   var $export = function(type, name, source) {
     var IS_FORCED = type & $export.F,
@@ -11466,30 +6060,28 @@ $__System.registerDynamic("20", ["26", "27", "28"], true, function($__require, e
   $export.B = 16;
   $export.W = 32;
   module.exports = $export;
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("29", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2e", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it, Constructor, name) {
     if (!(it instanceof Constructor))
       throw TypeError(name + ": use the 'new' operator!");
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2a", ["2b"], true, function($__require, exports, module) {
+$__System.registerDynamic("2f", ["30"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var anObject = $__require('2b');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var anObject = $__require('30');
   module.exports = function(iterator, fn, value, entries) {
     try {
       return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -11500,60 +6092,56 @@ $__System.registerDynamic("2a", ["2b"], true, function($__require, exports, modu
       throw e;
     }
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2c", ["23", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("31", ["28", "23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var Iterators = $__require('23'),
-      ITERATOR = $__require('1e')('iterator'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var Iterators = $__require('28'),
+      ITERATOR = $__require('23')('iterator'),
       ArrayProto = Array.prototype;
   module.exports = function(it) {
     return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("10", [], true, function($__require, exports, module) {
+$__System.registerDynamic("15", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var ceil = Math.ceil,
       floor = Math.floor;
   module.exports = function(it) {
     return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2d", ["10"], true, function($__require, exports, module) {
+$__System.registerDynamic("32", ["15"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var toInteger = $__require('10'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var toInteger = $__require('15'),
       min = Math.min;
   module.exports = function(it) {
     return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2e", ["17", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("33", ["1c", "23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var cof = $__require('17'),
-      TAG = $__require('1e')('toStringTag'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var cof = $__require('1c'),
+      TAG = $__require('23')('toStringTag'),
       ARG = cof(function() {
         return arguments;
       }()) == 'Arguments';
@@ -11563,47 +6151,44 @@ $__System.registerDynamic("2e", ["17", "1e"], true, function($__require, exports
         B;
     return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("23", [], true, function($__require, exports, module) {
+$__System.registerDynamic("28", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = {};
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2f", ["2e", "1e", "23", "27"], true, function($__require, exports, module) {
+$__System.registerDynamic("34", ["33", "23", "28", "2c"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var classof = $__require('2e'),
-      ITERATOR = $__require('1e')('iterator'),
-      Iterators = $__require('23');
-  module.exports = $__require('27').getIteratorMethod = function(it) {
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var classof = $__require('33'),
+      ITERATOR = $__require('23')('iterator'),
+      Iterators = $__require('28');
+  module.exports = $__require('2c').getIteratorMethod = function(it) {
     if (it != undefined)
       return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("30", ["28", "2a", "2c", "2b", "2d", "2f"], true, function($__require, exports, module) {
+$__System.registerDynamic("35", ["2d", "2f", "31", "30", "32", "34"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ctx = $__require('28'),
-      call = $__require('2a'),
-      isArrayIter = $__require('2c'),
-      anObject = $__require('2b'),
-      toLength = $__require('2d'),
-      getIterFn = $__require('2f');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var ctx = $__require('2d'),
+      call = $__require('2f'),
+      isArrayIter = $__require('31'),
+      anObject = $__require('30'),
+      toLength = $__require('32'),
+      getIterFn = $__require('34');
   module.exports = function(iterable, entries, fn, that) {
     var iterFn = getIterFn(iterable),
         f = ctx(fn, that, entries ? 2 : 1),
@@ -11622,18 +6207,17 @@ $__System.registerDynamic("30", ["28", "2a", "2c", "2b", "2d", "2f"], true, func
         call(iterator, f, step.value, entries);
       }
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("31", ["1a", "32", "2b", "28"], true, function($__require, exports, module) {
+$__System.registerDynamic("36", ["1f", "37", "30", "2d"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var getDesc = $__require('1a').getDesc,
-      isObject = $__require('32'),
-      anObject = $__require('2b');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var getDesc = $__require('1f').getDesc,
+      isObject = $__require('37'),
+      anObject = $__require('30');
   var check = function(O, proto) {
     anObject(O);
     if (!isObject(proto) && proto !== null)
@@ -11642,7 +6226,7 @@ $__System.registerDynamic("31", ["1a", "32", "2b", "28"], true, function($__requ
   module.exports = {
     set: Object.setPrototypeOf || ('__proto__' in {} ? function(test, buggy, set) {
       try {
-        set = $__require('28')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
+        set = $__require('2d')(Function.call, getDesc(Object.prototype, '__proto__').set, 2);
         set(test, []);
         buggy = !(test instanceof Array);
       } catch (e) {
@@ -11659,74 +6243,69 @@ $__System.registerDynamic("31", ["1a", "32", "2b", "28"], true, function($__requ
     }({}, false) : undefined),
     check: check
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("33", [], true, function($__require, exports, module) {
+$__System.registerDynamic("38", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = Object.is || function is(x, y) {
     return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("2b", ["32"], true, function($__require, exports, module) {
+$__System.registerDynamic("30", ["37"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = $__require('32');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var isObject = $__require('37');
   module.exports = function(it) {
     if (!isObject(it))
       throw TypeError(it + ' is not an object!');
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("34", ["2b", "35", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("39", ["30", "3a", "23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var anObject = $__require('2b'),
-      aFunction = $__require('35'),
-      SPECIES = $__require('1e')('species');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var anObject = $__require('30'),
+      aFunction = $__require('3a'),
+      SPECIES = $__require('23')('species');
   module.exports = function(O, D) {
     var C = anObject(O).constructor,
         S;
     return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("35", [], true, function($__require, exports, module) {
+$__System.registerDynamic("3a", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     if (typeof it != 'function')
       throw TypeError(it + ' is not a function!');
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("28", ["35"], true, function($__require, exports, module) {
+$__System.registerDynamic("2d", ["3a"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var aFunction = $__require('35');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var aFunction = $__require('3a');
   module.exports = function(fn, that, length) {
     aFunction(fn);
     if (that === undefined)
@@ -11749,15 +6328,14 @@ $__System.registerDynamic("28", ["35"], true, function($__require, exports, modu
       return fn.apply(that, arguments);
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("36", [], true, function($__require, exports, module) {
+$__System.registerDynamic("3b", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(fn, args, that) {
     var un = that === undefined;
     switch (args.length) {
@@ -11774,58 +6352,54 @@ $__System.registerDynamic("36", [], true, function($__require, exports, module) 
     }
     return fn.apply(that, args);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("37", ["26"], true, function($__require, exports, module) {
+$__System.registerDynamic("3c", ["2b"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('26').document && document.documentElement;
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('2b').document && document.documentElement;
   return module.exports;
 });
 
-$__System.registerDynamic("32", [], true, function($__require, exports, module) {
+$__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     return typeof it === 'object' ? it !== null : typeof it === 'function';
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("38", ["32", "26"], true, function($__require, exports, module) {
+$__System.registerDynamic("3d", ["37", "2b"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var isObject = $__require('32'),
-      document = $__require('26').document,
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var isObject = $__require('37'),
+      document = $__require('2b').document,
       is = isObject(document) && isObject(document.createElement);
   module.exports = function(it) {
     return is ? document.createElement(it) : {};
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("39", ["28", "36", "37", "38", "26", "17", "3"], true, function($__require, exports, module) {
+$__System.registerDynamic("3e", ["2d", "3b", "3c", "3d", "2b", "1c", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
-    var ctx = $__require('28'),
-        invoke = $__require('36'),
-        html = $__require('37'),
-        cel = $__require('38'),
-        global = $__require('26'),
+    var ctx = $__require('2d'),
+        invoke = $__require('3b'),
+        html = $__require('3c'),
+        cel = $__require('3d'),
+        global = $__require('2b'),
         process = global.process,
         setTask = global.setImmediate,
         clearTask = global.clearImmediate,
@@ -11862,7 +6436,7 @@ $__System.registerDynamic("39", ["28", "36", "37", "38", "26", "17", "3"], true,
       clearTask = function clearImmediate(id) {
         delete queue[id];
       };
-      if ($__require('17')(process) == 'process') {
+      if ($__require('1c')(process) == 'process') {
         defer = function(id) {
           process.nextTick(ctx(run, id, 1));
         };
@@ -11894,35 +6468,33 @@ $__System.registerDynamic("39", ["28", "36", "37", "38", "26", "17", "3"], true,
       clear: clearTask
     };
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("17", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1c", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var toString = {}.toString;
   module.exports = function(it) {
     return toString.call(it).slice(8, -1);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3a", ["26", "39", "17", "3"], true, function($__require, exports, module) {
+$__System.registerDynamic("3f", ["2b", "3e", "1c", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
-    var global = $__require('26'),
-        macrotask = $__require('39').set,
+    var global = $__require('2b'),
+        macrotask = $__require('3e').set,
         Observer = global.MutationObserver || global.WebKitMutationObserver,
         process = global.process,
         Promise = global.Promise,
-        isNode = $__require('17')(process) == 'process',
+        isNode = $__require('1c')(process) == 'process',
         head,
         last,
         notify;
@@ -11983,15 +6555,14 @@ $__System.registerDynamic("3a", ["26", "39", "17", "3"], true, function($__requi
       last = task;
     };
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1b", [], true, function($__require, exports, module) {
+$__System.registerDynamic("20", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(bitmap, value) {
     return {
       enumerable: !(bitmap & 1),
@@ -12000,73 +6571,68 @@ $__System.registerDynamic("1b", [], true, function($__require, exports, module) 
       value: value
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1d", ["1a", "1b", "3b"], true, function($__require, exports, module) {
+$__System.registerDynamic("22", ["1f", "20", "40"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var $ = $__require('1a'),
-      createDesc = $__require('1b');
-  module.exports = $__require('3b') ? function(object, key, value) {
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var $ = $__require('1f'),
+      createDesc = $__require('20');
+  module.exports = $__require('40') ? function(object, key, value) {
     return $.setDesc(object, key, createDesc(1, value));
   } : function(object, key, value) {
     object[key] = value;
     return object;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("21", ["1d"], true, function($__require, exports, module) {
+$__System.registerDynamic("26", ["22"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('1d');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('22');
   return module.exports;
 });
 
-$__System.registerDynamic("3c", ["21"], true, function($__require, exports, module) {
+$__System.registerDynamic("41", ["26"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var redefine = $__require('21');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var redefine = $__require('26');
   module.exports = function(target, src) {
     for (var key in src)
       redefine(target, key, src[key]);
     return target;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("22", [], true, function($__require, exports, module) {
+$__System.registerDynamic("27", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var hasOwnProperty = {}.hasOwnProperty;
   module.exports = function(it, key) {
     return hasOwnProperty.call(it, key);
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1c", ["1a", "22", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("21", ["1f", "27", "23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var def = $__require('1a').setDesc,
-      has = $__require('22'),
-      TAG = $__require('1e')('toStringTag');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var def = $__require('1f').setDesc,
+      has = $__require('27'),
+      TAG = $__require('23')('toStringTag');
   module.exports = function(it, tag, stat) {
     if (it && !has(it = stat ? it : it.prototype, TAG))
       def(it, TAG, {
@@ -12074,15 +6640,14 @@ $__System.registerDynamic("1c", ["1a", "22", "1e"], true, function($__require, e
         value: tag
       });
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1a", [], true, function($__require, exports, module) {
+$__System.registerDynamic("1f", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var $Object = Object;
   module.exports = {
     create: $Object.create,
@@ -12096,15 +6661,14 @@ $__System.registerDynamic("1a", [], true, function($__require, exports, module) 
     getSymbols: $Object.getOwnPropertySymbols,
     each: [].forEach
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3d", [], true, function($__require, exports, module) {
+$__System.registerDynamic("42", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(exec) {
     try {
       return !!exec();
@@ -12112,34 +6676,32 @@ $__System.registerDynamic("3d", [], true, function($__require, exports, module) 
       return true;
     }
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3b", ["3d"], true, function($__require, exports, module) {
+$__System.registerDynamic("40", ["42"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = !$__require('3d')(function() {
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = !$__require('42')(function() {
     return Object.defineProperty({}, 'a', {get: function() {
         return 7;
       }}).a != 7;
   });
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3e", ["27", "1a", "3b", "1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("43", ["2c", "1f", "40", "23"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var core = $__require('27'),
-      $ = $__require('1a'),
-      DESCRIPTORS = $__require('3b'),
-      SPECIES = $__require('1e')('species');
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var core = $__require('2c'),
+      $ = $__require('1f'),
+      DESCRIPTORS = $__require('40'),
+      SPECIES = $__require('23')('species');
   module.exports = function(KEY) {
     var C = core[KEY];
     if (DESCRIPTORS && C && !C[SPECIES])
@@ -12150,72 +6712,67 @@ $__System.registerDynamic("3e", ["27", "1a", "3b", "1e"], true, function($__requ
         }
       });
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("3f", ["26"], true, function($__require, exports, module) {
+$__System.registerDynamic("44", ["2b"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var global = $__require('26'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var global = $__require('2b'),
       SHARED = '__core-js_shared__',
       store = global[SHARED] || (global[SHARED] = {});
   module.exports = function(key) {
     return store[key] || (store[key] = {});
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("40", [], true, function($__require, exports, module) {
+$__System.registerDynamic("45", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var id = 0,
       px = Math.random();
   module.exports = function(key) {
     return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("26", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2b", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
   if (typeof __g == 'number')
     __g = global;
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("1e", ["3f", "40", "26"], true, function($__require, exports, module) {
+$__System.registerDynamic("23", ["44", "45", "2b"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var store = $__require('3f')('wks'),
-      uid = $__require('40'),
-      Symbol = $__require('26').Symbol;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var store = $__require('44')('wks'),
+      uid = $__require('45'),
+      Symbol = $__require('2b').Symbol;
   module.exports = function(name) {
     return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("41", ["1e"], true, function($__require, exports, module) {
+$__System.registerDynamic("46", ["23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ITERATOR = $__require('1e')('iterator'),
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  var ITERATOR = $__require('23')('iterator'),
       SAFE_CLOSING = false;
   try {
     var riter = [7][ITERATOR]();
@@ -12243,15 +6800,14 @@ $__System.registerDynamic("41", ["1e"], true, function($__require, exports, modu
     } catch (e) {}
     return safe;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("42", [], true, function($__require, exports, module) {
+$__System.registerDynamic("47", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var process = module.exports = {};
   var queue = [];
   var draining = false;
@@ -12335,63 +6891,59 @@ $__System.registerDynamic("42", [], true, function($__require, exports, module) 
   process.umask = function() {
     return 0;
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("43", ["42"], true, function($__require, exports, module) {
+$__System.registerDynamic("48", ["47"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('42');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('47');
   return module.exports;
 });
 
-$__System.registerDynamic("44", ["43"], true, function($__require, exports, module) {
+$__System.registerDynamic("49", ["48"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__System._nodeRequire ? process : $__require('43');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__System._nodeRequire ? process : $__require('48');
   return module.exports;
 });
 
-$__System.registerDynamic("3", ["44"], true, function($__require, exports, module) {
+$__System.registerDynamic("3", ["49"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('44');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('49');
   return module.exports;
 });
 
-$__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b", "35", "29", "30", "31", "33", "1e", "34", "3a", "3b", "3c", "1c", "3e", "27", "41", "3"], true, function($__require, exports, module) {
+$__System.registerDynamic("4a", ["1f", "24", "2b", "2d", "33", "25", "37", "30", "3a", "2e", "35", "36", "38", "23", "39", "3f", "40", "41", "21", "43", "2c", "46", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
     'use strict';
-    var $ = $__require('1a'),
-        LIBRARY = $__require('1f'),
-        global = $__require('26'),
-        ctx = $__require('28'),
-        classof = $__require('2e'),
-        $export = $__require('20'),
-        isObject = $__require('32'),
-        anObject = $__require('2b'),
-        aFunction = $__require('35'),
-        strictNew = $__require('29'),
-        forOf = $__require('30'),
-        setProto = $__require('31').set,
-        same = $__require('33'),
-        SPECIES = $__require('1e')('species'),
-        speciesConstructor = $__require('34'),
-        asap = $__require('3a'),
+    var $ = $__require('1f'),
+        LIBRARY = $__require('24'),
+        global = $__require('2b'),
+        ctx = $__require('2d'),
+        classof = $__require('33'),
+        $export = $__require('25'),
+        isObject = $__require('37'),
+        anObject = $__require('30'),
+        aFunction = $__require('3a'),
+        strictNew = $__require('2e'),
+        forOf = $__require('35'),
+        setProto = $__require('36').set,
+        same = $__require('38'),
+        SPECIES = $__require('23')('species'),
+        speciesConstructor = $__require('39'),
+        asap = $__require('3f'),
         PROMISE = 'Promise',
         process = global.process,
         isNode = classof(process) == 'process',
@@ -12417,7 +6969,7 @@ $__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b",
         if (!(P2.resolve(5).then(function() {}) instanceof P2)) {
           works = false;
         }
-        if (works && $__require('3b')) {
+        if (works && $__require('40')) {
           var thenableThenGotten = false;
           P.resolve($.setDesc({}, 'then', {get: function() {
               thenableThenGotten = true;
@@ -12595,7 +7147,7 @@ $__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b",
           $reject.call(record, err);
         }
       };
-      $__require('3c')(P.prototype, {
+      $__require('41')(P.prototype, {
         then: function then(onFulfilled, onRejected) {
           var reaction = new PromiseCapability(speciesConstructor(this, P)),
               promise = reaction.promise,
@@ -12615,9 +7167,9 @@ $__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b",
       });
     }
     $export($export.G + $export.W + $export.F * !USE_NATIVE, {Promise: P});
-    $__require('1c')(P, PROMISE);
-    $__require('3e')(PROMISE);
-    Wrapper = $__require('27')[PROMISE];
+    $__require('21')(P, PROMISE);
+    $__require('43')(PROMISE);
+    Wrapper = $__require('2c')[PROMISE];
     $export($export.S + $export.F * !USE_NATIVE, PROMISE, {reject: function reject(r) {
         var capability = new PromiseCapability(this),
             $$reject = capability.reject;
@@ -12632,7 +7184,7 @@ $__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b",
         $$resolve(x);
         return capability.promise;
       }});
-    $export($export.S + $export.F * !(USE_NATIVE && $__require('41')(function(iter) {
+    $export($export.S + $export.F * !(USE_NATIVE && $__require('46')(function(iter) {
       P.all(iter)['catch'](function() {});
     })), PROMISE, {
       all: function all(iterable) {
@@ -12678,51 +7230,548 @@ $__System.registerDynamic("45", ["1a", "1f", "26", "28", "2e", "20", "32", "2b",
       }
     });
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("27", [], true, function($__require, exports, module) {
+$__System.registerDynamic("2c", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var core = module.exports = {version: '1.2.6'};
   if (typeof __e == 'number')
     __e = core;
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("46", ["e", "12", "25", "45", "27"], true, function($__require, exports, module) {
+$__System.registerDynamic("4b", ["13", "17", "2a", "4a", "2c"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  $__require('e');
-  $__require('12');
-  $__require('25');
-  $__require('45');
-  module.exports = $__require('27').Promise;
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  $__require('13');
+  $__require('17');
+  $__require('2a');
+  $__require('4a');
+  module.exports = $__require('2c').Promise;
   return module.exports;
 });
 
-$__System.registerDynamic("47", ["46"], true, function($__require, exports, module) {
+$__System.registerDynamic("4c", ["4b"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = {
-    "default": $__require('46'),
+    "default": $__require('4b'),
     __esModule: true
   };
-  global.define = __define;
   return module.exports;
 });
 
-$__System.registerDynamic("48", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, "angular", null);
+$__System.registerDynamic("4d", [], true, function($__require, exports, module) {
+  ;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  "format cjs";
+  var isDefined = angular.isDefined,
+      isUndefined = angular.isUndefined,
+      isNumber = angular.isNumber,
+      isObject = angular.isObject,
+      isArray = angular.isArray,
+      extend = angular.extend,
+      toJson = angular.toJson;
+  angular.module('LocalStorageModule', []).provider('localStorageService', function() {
+    this.prefix = 'ls';
+    this.storageType = 'localStorage';
+    this.cookie = {
+      expiry: 30,
+      path: '/'
+    };
+    this.notify = {
+      setItem: true,
+      removeItem: false
+    };
+    this.setPrefix = function(prefix) {
+      this.prefix = prefix;
+      return this;
+    };
+    this.setStorageType = function(storageType) {
+      this.storageType = storageType;
+      return this;
+    };
+    this.setStorageCookie = function(exp, path) {
+      this.cookie.expiry = exp;
+      this.cookie.path = path;
+      return this;
+    };
+    this.setStorageCookieDomain = function(domain) {
+      this.cookie.domain = domain;
+      return this;
+    };
+    this.setNotify = function(itemSet, itemRemove) {
+      this.notify = {
+        setItem: itemSet,
+        removeItem: itemRemove
+      };
+      return this;
+    };
+    this.$get = ['$rootScope', '$window', '$document', '$parse', function($rootScope, $window, $document, $parse) {
+      var self = this;
+      var prefix = self.prefix;
+      var cookie = self.cookie;
+      var notify = self.notify;
+      var storageType = self.storageType;
+      var webStorage;
+      if (!$document) {
+        $document = document;
+      } else if ($document[0]) {
+        $document = $document[0];
+      }
+      if (prefix.substr(-1) !== '.') {
+        prefix = !!prefix ? prefix + '.' : '';
+      }
+      var deriveQualifiedKey = function(key) {
+        return prefix + key;
+      };
+      var browserSupportsLocalStorage = (function() {
+        try {
+          var supported = (storageType in $window && $window[storageType] !== null);
+          var key = deriveQualifiedKey('__' + Math.round(Math.random() * 1e7));
+          if (supported) {
+            webStorage = $window[storageType];
+            webStorage.setItem(key, '');
+            webStorage.removeItem(key);
+          }
+          return supported;
+        } catch (e) {
+          storageType = 'cookie';
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+      }());
+      var addToLocalStorage = function(key, value) {
+        if (isUndefined(value)) {
+          value = null;
+        } else {
+          value = toJson(value);
+        }
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+          if (!browserSupportsLocalStorage) {
+            $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          }
+          if (notify.setItem) {
+            $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
+              key: key,
+              newvalue: value,
+              storageType: 'cookie'
+            });
+          }
+          return addToCookies(key, value);
+        }
+        try {
+          if (webStorage) {
+            webStorage.setItem(deriveQualifiedKey(key), value);
+          }
+          if (notify.setItem) {
+            $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
+              key: key,
+              newvalue: value,
+              storageType: self.storageType
+            });
+          }
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return addToCookies(key, value);
+        }
+        return true;
+      };
+      var getFromLocalStorage = function(key) {
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+          if (!browserSupportsLocalStorage) {
+            $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          }
+          return getFromCookies(key);
+        }
+        var item = webStorage ? webStorage.getItem(deriveQualifiedKey(key)) : null;
+        if (!item || item === 'null') {
+          return null;
+        }
+        try {
+          return JSON.parse(item);
+        } catch (e) {
+          return item;
+        }
+      };
+      var removeFromLocalStorage = function() {
+        var i,
+            key;
+        for (i = 0; i < arguments.length; i++) {
+          key = arguments[i];
+          if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+            if (!browserSupportsLocalStorage) {
+              $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+            }
+            if (notify.removeItem) {
+              $rootScope.$broadcast('LocalStorageModule.notification.removeitem', {
+                key: key,
+                storageType: 'cookie'
+              });
+            }
+            removeFromCookies(key);
+          } else {
+            try {
+              webStorage.removeItem(deriveQualifiedKey(key));
+              if (notify.removeItem) {
+                $rootScope.$broadcast('LocalStorageModule.notification.removeitem', {
+                  key: key,
+                  storageType: self.storageType
+                });
+              }
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+              removeFromCookies(key);
+            }
+          }
+        }
+      };
+      var getKeysForLocalStorage = function() {
+        if (!browserSupportsLocalStorage) {
+          $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          return false;
+        }
+        var prefixLength = prefix.length;
+        var keys = [];
+        for (var key in webStorage) {
+          if (key.substr(0, prefixLength) === prefix) {
+            try {
+              keys.push(key.substr(prefixLength));
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.Description);
+              return [];
+            }
+          }
+        }
+        return keys;
+      };
+      var clearAllFromLocalStorage = function(regularExpression) {
+        var prefixRegex = !!prefix ? new RegExp('^' + prefix) : new RegExp();
+        var testRegex = !!regularExpression ? new RegExp(regularExpression) : new RegExp();
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+          if (!browserSupportsLocalStorage) {
+            $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          }
+          return clearAllFromCookies();
+        }
+        var prefixLength = prefix.length;
+        for (var key in webStorage) {
+          if (prefixRegex.test(key) && testRegex.test(key.substr(prefixLength))) {
+            try {
+              removeFromLocalStorage(key.substr(prefixLength));
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+              return clearAllFromCookies();
+            }
+          }
+        }
+        return true;
+      };
+      var browserSupportsCookies = (function() {
+        try {
+          return $window.navigator.cookieEnabled || ("cookie" in $document && ($document.cookie.length > 0 || ($document.cookie = "test").indexOf.call($document.cookie, "test") > -1));
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+      }());
+      var addToCookies = function(key, value, daysToExpiry) {
+        if (isUndefined(value)) {
+          return false;
+        } else if (isArray(value) || isObject(value)) {
+          value = toJson(value);
+        }
+        if (!browserSupportsCookies) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
+          return false;
+        }
+        try {
+          var expiry = '',
+              expiryDate = new Date(),
+              cookieDomain = '';
+          if (value === null) {
+            expiryDate.setTime(expiryDate.getTime() + (-1 * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+            value = '';
+          } else if (isNumber(daysToExpiry) && daysToExpiry !== 0) {
+            expiryDate.setTime(expiryDate.getTime() + (daysToExpiry * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+          } else if (cookie.expiry !== 0) {
+            expiryDate.setTime(expiryDate.getTime() + (cookie.expiry * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+          }
+          if (!!key) {
+            var cookiePath = "; path=" + cookie.path;
+            if (cookie.domain) {
+              cookieDomain = "; domain=" + cookie.domain;
+            }
+            $document.cookie = deriveQualifiedKey(key) + "=" + encodeURIComponent(value) + expiry + cookiePath + cookieDomain;
+          }
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+        return true;
+      };
+      var getFromCookies = function(key) {
+        if (!browserSupportsCookies) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
+          return false;
+        }
+        var cookies = $document.cookie && $document.cookie.split(';') || [];
+        for (var i = 0; i < cookies.length; i++) {
+          var thisCookie = cookies[i];
+          while (thisCookie.charAt(0) === ' ') {
+            thisCookie = thisCookie.substring(1, thisCookie.length);
+          }
+          if (thisCookie.indexOf(deriveQualifiedKey(key) + '=') === 0) {
+            var storedValues = decodeURIComponent(thisCookie.substring(prefix.length + key.length + 1, thisCookie.length));
+            try {
+              return JSON.parse(storedValues);
+            } catch (e) {
+              return storedValues;
+            }
+          }
+        }
+        return null;
+      };
+      var removeFromCookies = function(key) {
+        addToCookies(key, null);
+      };
+      var clearAllFromCookies = function() {
+        var thisCookie = null,
+            thisKey = null;
+        var prefixLength = prefix.length;
+        var cookies = $document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          thisCookie = cookies[i];
+          while (thisCookie.charAt(0) === ' ') {
+            thisCookie = thisCookie.substring(1, thisCookie.length);
+          }
+          var key = thisCookie.substring(prefixLength, thisCookie.indexOf('='));
+          removeFromCookies(key);
+        }
+      };
+      var getStorageType = function() {
+        return storageType;
+      };
+      var bindToScope = function(scope, key, def, lsKey) {
+        lsKey = lsKey || key;
+        var value = getFromLocalStorage(lsKey);
+        if (value === null && isDefined(def)) {
+          value = def;
+        } else if (isObject(value) && isObject(def)) {
+          value = extend(value, def);
+        }
+        $parse(key).assign(scope, value);
+        return scope.$watch(key, function(newVal) {
+          addToLocalStorage(lsKey, newVal);
+        }, isObject(scope[key]));
+      };
+      var lengthOfLocalStorage = function() {
+        var count = 0;
+        var storage = $window[storageType];
+        for (var i = 0; i < storage.length; i++) {
+          if (storage.key(i).indexOf(prefix) === 0) {
+            count++;
+          }
+        }
+        return count;
+      };
+      return {
+        isSupported: browserSupportsLocalStorage,
+        getStorageType: getStorageType,
+        set: addToLocalStorage,
+        add: addToLocalStorage,
+        get: getFromLocalStorage,
+        keys: getKeysForLocalStorage,
+        remove: removeFromLocalStorage,
+        clearAll: clearAllFromLocalStorage,
+        bind: bindToScope,
+        deriveKey: deriveQualifiedKey,
+        length: lengthOfLocalStorage,
+        cookie: {
+          isSupported: browserSupportsCookies,
+          set: addToCookies,
+          add: addToCookies,
+          get: getFromCookies,
+          remove: removeFromCookies,
+          clearAll: clearAllFromCookies
+        }
+      };
+    }];
+  });
+  return module.exports;
+});
+
+$__System.registerDynamic("4e", ["4d"], true, function($__require, exports, module) {
+  ;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  $__require('4d');
+  module.exports = 'LocalStorageModule';
+  return module.exports;
+});
+
+$__System.registerDynamic("4f", ["4e"], true, function($__require, exports, module) {
+  ;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('4e');
+  return module.exports;
+});
+
+$__System.register('50', ['b', '4f'], function (_export) {
+    //import LocalStorageModule from 'angular-local-storage';
+
+    'use strict';
+
+    var angular, LocalStorageModule;
+    return {
+        setters: [function (_b) {
+            angular = _b['default'];
+        }, function (_f) {
+            LocalStorageModule = _f['default'];
+        }],
+        execute: function () {
+            _export('default', angular.module('categoriesCacheModule', ['LocalStorageModule']).factory('categoriesCacheFactory', function (localStorageService) {
+                var categoriesCacheName = "categories";
+
+                return {
+                    put: function put(categories) {
+                        localStorageService.set(categoriesCacheName, categories);
+                    },
+                    get: function get() {
+                        var categories = localStorageService.get(categoriesCacheName);
+                        //console.log("getting: ", categories);
+                        return categories;
+                    },
+                    removeAll: function removeAll() {
+                        localStorageService.clearAll();
+                    }
+                };
+            }));
+        }
+    };
+});
+$__System.register('c', ['50', '4c', 'b'], function (_export) {
+  var categoriesCacheModule, _Promise, angular;
+
+  return {
+    setters: [function (_) {
+      categoriesCacheModule = _['default'];
+    }, function (_c) {
+      _Promise = _c['default'];
+    }, function (_b) {
+      angular = _b['default'];
+    }],
+    execute: function () {
+      'use strict';
+
+      _export('default', angular.module('categoryQueryModule', [categoriesCacheModule.name]).factory('GetCategoriesFactory', function ($http, categoriesCacheFactory) {
+
+        var allCats = function allCats() {
+          var categories = categoriesCacheFactory.get();
+          if (categories == null || categories.length === 0) {
+            var url = "/api/backend/category/";
+            return $http.get(url).then(function successCallback(response) {
+              categoriesCacheFactory.put(response.data.categories);
+              return categoriesCacheFactory.get();
+            });
+          }
+          return categoriesCacheFactory.get();
+        };
+
+        var byId = function byId(id) {
+          var categories = categoriesCacheFactory.get();
+          if (categories === null || categories === undefined) {
+            var url = '/api/category/' + id;
+            return $http.get(url);
+          }
+          var category = null;
+          category = categories.filter(function (cat) {
+            return cat._id === id;
+          }).pop();
+          return new _Promise(function (resolve, reject) {
+            resolve({ "status": 200, data: { category: category } });
+          });
+        };
+
+        return {
+          allCats: allCats,
+          byId: byId
+        };
+      }));
+    }
+  };
+});
+$__System.register('d', ['b'], function (_export) {
+    'use strict';
+
+    var angular;
+    return {
+        setters: [function (_b) {
+            angular = _b['default'];
+        }],
+        execute: function () {
+            _export('default', angular.module('categoryCommandModule', []).factory('GenerateCategoryTree', function () {
+
+                var generateCategoryTree = function generateCategoryTree(categories, currentCategoryId) {
+
+                    var topCats = categories.filter(function (cat) {
+                        return cat.level === 0;
+                    });
+
+                    return topCats.map(function (topCat) {
+                        var firstSubCategories = categories.filter(function (cat) {
+                            return cat.parentCategoryId === topCat._id && cat.level === 1;
+                        });
+                        var tree = firstSubCategories.map(function (firstCat) {
+                            var subCategories = categories.filter(function (cat) {
+                                return cat.parentCategoryId === firstCat._id;
+                            });
+                            var subCatsConvertedToSubTree = null;
+                            if (subCategories.length > 0) {
+                                subCatsConvertedToSubTree = subCategories.map(function (subCat) {
+                                    var linkUrl = '/category/id:' + subCat._id;
+                                    return { name: subCat.description, link: linkUrl, id: subCat._id, currentCategoryId: currentCategoryId, subtree: null };
+                                });
+                            }
+
+                            var topLinkUrl = '/category/id:' + firstCat._id;
+                            return { name: firstCat.description, link: topLinkUrl, id: firstCat._id, currentCategoryId: currentCategoryId, subtree: subCatsConvertedToSubTree };
+                        });
+
+                        return {
+                            description: topCat.description,
+                            link: '/category/id:' + topCat._id,
+                            id: topCat._id,
+                            tree: tree
+                        };
+                    });
+                };
+
+                return {
+                    generate: generateCategoryTree
+                };
+            }));
+        }
+    };
+});
+$__System.registerDynamic("51", [], false, function($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, "angular", null);
   (function() {
     "format global";
     "exports angular";
@@ -12746,7 +7795,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             }
             return match;
           });
-          message += '\nhttp://errors.angularjs.org/1.4.8/' + (module ? module + '/' : '') + code;
+          message += '\nhttp://errors.angularjs.org/1.5.0/' + (module ? module + '/' : '') + code;
           for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
             message += paramPrefix + 'p' + (i - SKIP_INDEXES) + '=' + encodeURIComponent(toDebugString(templateArgs[i]));
           }
@@ -12755,10 +7804,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       var REGEX_STRING_REGEXP = /^\/(.+)\/([a-z]*)$/;
       var VALIDITY_STATE_PROPERTY = 'validity';
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       var lowercase = function(string) {
         return isString(string) ? string.toLowerCase() : string;
       };
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       var uppercase = function(string) {
         return isString(string) ? string.toUpperCase() : string;
       };
@@ -12795,7 +7844,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         if (isArray(obj) || isString(obj) || (jqLite && obj instanceof jqLite))
           return true;
         var length = "length" in Object(obj) && obj.length;
-        return isNumber(length) && (length >= 0 && (length - 1) in obj || typeof obj.item == 'function');
+        return isNumber(length) && (length >= 0 && ((length - 1) in obj || obj instanceof Array) || typeof obj.item == 'function');
       }
       function forEach(obj, iterator, context) {
         var key,
@@ -12971,6 +8020,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       function isTypedArray(value) {
         return value && isNumber(value.length) && TYPED_ARRAY_REGEXP.test(toString.call(value));
       }
+      function isArrayBuffer(obj) {
+        return toString.call(obj) === '[object ArrayBuffer]';
+      }
       var trim = function(value) {
         return isString(value) ? value.trim() : value;
       };
@@ -12982,7 +8034,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       function makeMap(str) {
         var obj = {},
-            items = str.split(","),
+            items = str.split(','),
             i;
         for (i = 0; i < items.length; i++) {
           obj[items[i]] = true;
@@ -13006,7 +8058,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         var stackSource = [];
         var stackDest = [];
         if (destination) {
-          if (isTypedArray(destination)) {
+          if (isTypedArray(destination) || isArrayBuffer(destination)) {
             throw ngMinErr('cpta', "Can't copy! TypedArray destination cannot be mutated.");
           }
           if (source === destination) {
@@ -13067,26 +8119,47 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             throw ngMinErr('cpws', "Can't copy! Making copies of Window or Scope instances is not supported.");
           }
           var needsRecurse = false;
-          var destination;
-          if (isArray(source)) {
-            destination = [];
-            needsRecurse = true;
-          } else if (isTypedArray(source)) {
-            destination = new source.constructor(source);
-          } else if (isDate(source)) {
-            destination = new Date(source.getTime());
-          } else if (isRegExp(source)) {
-            destination = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
-            destination.lastIndex = source.lastIndex;
-          } else if (isFunction(source.cloneNode)) {
-            destination = source.cloneNode(true);
-          } else {
-            destination = Object.create(getPrototypeOf(source));
+          var destination = copyType(source);
+          if (destination === undefined) {
+            destination = isArray(source) ? [] : Object.create(getPrototypeOf(source));
             needsRecurse = true;
           }
           stackSource.push(source);
           stackDest.push(destination);
           return needsRecurse ? copyRecurse(source, destination) : destination;
+        }
+        function copyType(source) {
+          switch (toString.call(source)) {
+            case '[object Int8Array]':
+            case '[object Int16Array]':
+            case '[object Int32Array]':
+            case '[object Float32Array]':
+            case '[object Float64Array]':
+            case '[object Uint8Array]':
+            case '[object Uint8ClampedArray]':
+            case '[object Uint16Array]':
+            case '[object Uint32Array]':
+              return new source.constructor(copyElement(source.buffer));
+            case '[object ArrayBuffer]':
+              if (!source.slice) {
+                var copied = new ArrayBuffer(source.byteLength);
+                new Uint8Array(copied).set(new Uint8Array(source));
+                return copied;
+              }
+              return source.slice(0);
+            case '[object Boolean]':
+            case '[object Number]':
+            case '[object String]':
+            case '[object Date]':
+              return new source.constructor(source.valueOf());
+            case '[object RegExp]':
+              var re = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
+              re.lastIndex = source.lastIndex;
+              return re;
+          }
+          if (isFunction(source.cloneNode)) {
+            return source.cloneNode(true);
+          }
         }
       }
       function shallowCopy(src, dst) {
@@ -13118,41 +8191,41 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             length,
             key,
             keySet;
-        if (t1 == t2) {
-          if (t1 == 'object') {
-            if (isArray(o1)) {
-              if (!isArray(o2))
-                return false;
-              if ((length = o1.length) == o2.length) {
-                for (key = 0; key < length; key++) {
-                  if (!equals(o1[key], o2[key]))
-                    return false;
-                }
-                return true;
-              }
-            } else if (isDate(o1)) {
-              if (!isDate(o2))
-                return false;
-              return equals(o1.getTime(), o2.getTime());
-            } else if (isRegExp(o1)) {
-              return isRegExp(o2) ? o1.toString() == o2.toString() : false;
-            } else {
-              if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) || isArray(o2) || isDate(o2) || isRegExp(o2))
-                return false;
-              keySet = createMap();
-              for (key in o1) {
-                if (key.charAt(0) === '$' || isFunction(o1[key]))
-                  continue;
+        if (t1 == t2 && t1 == 'object') {
+          if (isArray(o1)) {
+            if (!isArray(o2))
+              return false;
+            if ((length = o1.length) == o2.length) {
+              for (key = 0; key < length; key++) {
                 if (!equals(o1[key], o2[key]))
-                  return false;
-                keySet[key] = true;
-              }
-              for (key in o2) {
-                if (!(key in keySet) && key.charAt(0) !== '$' && isDefined(o2[key]) && !isFunction(o2[key]))
                   return false;
               }
               return true;
             }
+          } else if (isDate(o1)) {
+            if (!isDate(o2))
+              return false;
+            return equals(o1.getTime(), o2.getTime());
+          } else if (isRegExp(o1)) {
+            if (!isRegExp(o2))
+              return false;
+            return o1.toString() == o2.toString();
+          } else {
+            if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) || isArray(o2) || isDate(o2) || isRegExp(o2))
+              return false;
+            keySet = createMap();
+            for (key in o1) {
+              if (key.charAt(0) === '$' || isFunction(o1[key]))
+                continue;
+              if (!equals(o1[key], o2[key]))
+                return false;
+              keySet[key] = true;
+            }
+            for (key in o2) {
+              if (!(key in keySet) && key.charAt(0) !== '$' && isDefined(o2[key]) && !isFunction(o2[key]))
+                return false;
+            }
+            return true;
           }
         }
         return false;
@@ -13232,7 +8305,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         return val;
       }
       function toJson(obj, pretty) {
-        if (typeof obj === 'undefined')
+        if (isUndefined(obj))
           return undefined;
         if (!isNumber(pretty)) {
           pretty = pretty ? 2 : null;
@@ -13242,7 +8315,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       function fromJson(json) {
         return isString(json) ? JSON.parse(json) : json;
       }
+      var ALL_COLONS = /:/g;
       function timezoneToOffset(timezone, fallback) {
+        timezone = timezone.replace(ALL_COLONS, '');
         var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
         return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
       }
@@ -13253,8 +8328,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       function convertTimezoneToLocal(date, timezone, reverse) {
         reverse = reverse ? -1 : 1;
-        var timezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
-        return addDateMinutes(date, reverse * (timezoneOffset - date.getTimezoneOffset()));
+        var dateTimezoneOffset = date.getTimezoneOffset();
+        var timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+        return addDateMinutes(date, reverse * (timezoneOffset - dateTimezoneOffset));
       }
       function startingTag(element) {
         element = jqLite(element).clone();
@@ -13428,7 +8504,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         });
       }
       var bindJQueryFired = false;
-      var skipDestroyOnNextJQueryCleanData;
       function bindJQuery() {
         var originalCleanData;
         if (bindJQueryFired) {
@@ -13448,16 +8523,12 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           originalCleanData = jQuery.cleanData;
           jQuery.cleanData = function(elems) {
             var events;
-            if (!skipDestroyOnNextJQueryCleanData) {
-              for (var i = 0,
-                  elem; (elem = elems[i]) != null; i++) {
-                events = jQuery._data(elem, "events");
-                if (events && events.$destroy) {
-                  jQuery(elem).triggerHandler('$destroy');
-                }
+            for (var i = 0,
+                elem; (elem = elems[i]) != null; i++) {
+              events = jQuery._data(elem, "events");
+              if (events && events.$destroy) {
+                jQuery(elem).triggerHandler('$destroy');
               }
-            } else {
-              skipDestroyOnNextJQueryCleanData = false;
             }
             originalCleanData(elems);
           };
@@ -13570,6 +8641,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 filter: invokeLaterAndSetModuleName('$filterProvider', 'register'),
                 controller: invokeLaterAndSetModuleName('$controllerProvider', 'register'),
                 directive: invokeLaterAndSetModuleName('$compileProvider', 'directive'),
+                component: invokeLaterAndSetModuleName('$compileProvider', 'component'),
                 config: config,
                 run: function(block) {
                   runBlocks.push(block);
@@ -13623,11 +8695,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         return obj;
       }
       var version = {
-        full: '1.4.8',
+        full: '1.5.0',
         major: 1,
-        minor: 4,
-        dot: 8,
-        codeName: 'ice-manipulation'
+        minor: 5,
+        dot: 0,
+        codeName: 'ennoblement-facilitation'
       };
       function publishExternalAPI(angular) {
         extend(angular, {
@@ -13715,8 +8787,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             $anchorScroll: $AnchorScrollProvider,
             $animate: $AnimateProvider,
             $animateCss: $CoreAnimateCssProvider,
+            $$animateJs: $$CoreAnimateJsProvider,
             $$animateQueue: $$CoreAnimateQueueProvider,
-            $$AnimateRunner: $$CoreAnimateRunnerProvider,
+            $$AnimateRunner: $$AnimateRunnerFactoryProvider,
+            $$animateAsyncRun: $$AnimateAsyncRunFactoryProvider,
             $browser: $BrowserProvider,
             $cacheFactory: $CacheFactoryProvider,
             $controller: $ControllerProvider,
@@ -13807,6 +8881,12 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         }
         return false;
       }
+      function jqLiteCleanData(nodes) {
+        for (var i = 0,
+            ii = nodes.length; i < ii; i++) {
+          jqLiteRemoveData(nodes[i]);
+        }
+      }
       function jqLiteBuildFragment(html, context) {
         var tmp,
             tag,
@@ -13846,6 +8926,13 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           return parsed.childNodes;
         }
         return [];
+      }
+      function jqLiteWrapNode(node, wrapper) {
+        var parent = node.parentNode;
+        if (parent) {
+          parent.replaceChild(wrapper, node);
+        }
+        wrapper.appendChild(node);
       }
       var jqLiteContains = Node.prototype.contains || function(arg) {
         return !!(this.compareDocumentPosition(arg) & 16);
@@ -14108,7 +9195,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       forEach({
         data: jqLiteData,
         removeData: jqLiteRemoveData,
-        hasData: jqLiteHasData
+        hasData: jqLiteHasData,
+        cleanData: jqLiteCleanData
       }, function(fn, name) {
         JQLite[name] = fn;
       });
@@ -14374,12 +9462,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
         },
         wrap: function(element, wrapNode) {
-          wrapNode = jqLite(wrapNode).eq(0).clone()[0];
-          var parent = element.parentNode;
-          if (parent) {
-            parent.replaceChild(wrapNode, element);
-          }
-          wrapNode.appendChild(element);
+          jqLiteWrapNode(element, jqLite(wrapNode).eq(0).clone()[0]);
         },
         remove: jqLiteRemove,
         detach: function(element) {
@@ -14545,14 +9628,19 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           return HashMap;
         }];
       }];
+      var ARROW_ARG = /^([^\(]+?)=>/;
       var FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m;
       var FN_ARG_SPLIT = /,/;
       var FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
       var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
       var $injectorMinErr = minErr('$injector');
-      function anonFn(fn) {
+      function extractArgs(fn) {
         var fnText = fn.toString().replace(STRIP_COMMENTS, ''),
-            args = fnText.match(FN_ARGS);
+            args = fnText.match(ARROW_ARG) || fnText.match(FN_ARGS);
+        return args;
+      }
+      function anonFn(fn) {
+        var args = extractArgs(fn);
         if (args) {
           return 'function(' + (args[1] || '').replace(/[\s\r\n]+/, ' ') + ')';
         }
@@ -14560,7 +9648,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       function annotate(fn, strictDi, name) {
         var $inject,
-            fnText,
             argDecl,
             last;
         if (typeof fn === 'function') {
@@ -14573,8 +9660,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 }
                 throw $injectorMinErr('strictdi', '{0} is not using explicit annotation and cannot be invoked in strict mode', name);
               }
-              fnText = fn.toString().replace(STRIP_COMMENTS, '');
-              argDecl = fnText.match(FN_ARGS);
+              argDecl = extractArgs(fn);
               forEach(argDecl[1].split(FN_ARG_SPLIT), function(arg) {
                 arg.replace(FN_ARG, function(all, underscore, name) {
                   $inject.push(name);
@@ -14613,11 +9699,16 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
             })),
             instanceCache = {},
-            instanceInjector = (instanceCache.$injector = createInternalInjector(instanceCache, function(serviceName, caller) {
+            protoInstanceInjector = createInternalInjector(instanceCache, function(serviceName, caller) {
               var provider = providerInjector.get(serviceName + providerSuffix, caller);
               return instanceInjector.invoke(provider.$get, provider, undefined, serviceName);
-            }));
-        forEach(loadModules(modulesToLoad), function(fn) {
+            }),
+            instanceInjector = protoInstanceInjector;
+        providerCache['$injector' + providerSuffix] = {$get: valueFn(protoInstanceInjector)};
+        var runBlocks = loadModules(modulesToLoad);
+        instanceInjector = protoInstanceInjector.get('$injector');
+        instanceInjector.strictDi = strictDi;
+        forEach(runBlocks, function(fn) {
           if (fn)
             instanceInjector.invoke(fn);
         });
@@ -14738,32 +9829,46 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               }
             }
           }
-          function invoke(fn, self, locals, serviceName) {
-            if (typeof locals === 'string') {
-              serviceName = locals;
-              locals = null;
-            }
+          function injectionArgs(fn, locals, serviceName) {
             var args = [],
-                $inject = createInjector.$$annotate(fn, strictDi, serviceName),
-                length,
-                i,
-                key;
-            for (i = 0, length = $inject.length; i < length; i++) {
-              key = $inject[i];
+                $inject = createInjector.$$annotate(fn, strictDi, serviceName);
+            for (var i = 0,
+                length = $inject.length; i < length; i++) {
+              var key = $inject[i];
               if (typeof key !== 'string') {
                 throw $injectorMinErr('itkn', 'Incorrect injection token! Expected service name as string, got {0}', key);
               }
               args.push(locals && locals.hasOwnProperty(key) ? locals[key] : getService(key, serviceName));
             }
-            if (isArray(fn)) {
-              fn = fn[length];
+            return args;
+          }
+          function isClass(func) {
+            if (msie <= 11) {
+              return false;
             }
-            return fn.apply(self, args);
+            return typeof func === 'function' && /^(?:class\s|constructor\()/.test(Function.prototype.toString.call(func));
+          }
+          function invoke(fn, self, locals, serviceName) {
+            if (typeof locals === 'string') {
+              serviceName = locals;
+              locals = null;
+            }
+            var args = injectionArgs(fn, locals, serviceName);
+            if (isArray(fn)) {
+              fn = fn[fn.length - 1];
+            }
+            if (!isClass(fn)) {
+              return fn.apply(self, args);
+            } else {
+              args.unshift(null);
+              return new (Function.prototype.bind.apply(fn, args))();
+            }
           }
           function instantiate(Type, locals, serviceName) {
-            var instance = Object.create((isArray(Type) ? Type[Type.length - 1] : Type).prototype || null);
-            var returnedValue = invoke(Type, instance, locals, serviceName);
-            return isObject(returnedValue) || isFunction(returnedValue) ? returnedValue : instance;
+            var ctor = (isArray(Type) ? Type[Type.length - 1] : Type);
+            var args = injectionArgs(Type, locals, serviceName);
+            args.unshift(null);
+            return new (Function.prototype.bind.apply(ctor, args))();
           }
           return {
             invoke: invoke,
@@ -14888,27 +9993,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       function prepareAnimateOptions(options) {
         return isObject(options) ? options : {};
       }
-      var $$CoreAnimateRunnerProvider = function() {
-        this.$get = ['$q', '$$rAF', function($q, $$rAF) {
-          function AnimateRunner() {}
-          AnimateRunner.all = noop;
-          AnimateRunner.chain = noop;
-          AnimateRunner.prototype = {
-            end: noop,
-            cancel: noop,
-            resume: noop,
-            pause: noop,
-            complete: noop,
-            then: function(pass, fail) {
-              return $q(function(resolve) {
-                $$rAF(function() {
-                  resolve();
-                });
-              }).then(pass, fail);
-            }
-          };
-          return AnimateRunner;
-        }];
+      var $$CoreAnimateJsProvider = function() {
+        this.$get = function() {};
       };
       var $$CoreAnimateQueueProvider = function() {
         var postDigestQueue = new HashMap();
@@ -14927,7 +10013,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               if (options.addClass || options.removeClass) {
                 addRemoveClassesPostDigest(element, options.addClass, options.removeClass);
               }
-              return new $$AnimateRunner();
+              var runner = new $$AnimateRunner();
+              runner.complete();
+              return runner;
             }
           };
           function updateData(data, classes, value) {
@@ -15070,36 +10158,167 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           };
         }];
       }];
-      var $CoreAnimateCssProvider = function() {
-        this.$get = ['$$rAF', '$q', function($$rAF, $q) {
-          var RAFPromise = function() {};
-          RAFPromise.prototype = {
-            done: function(cancel) {
-              this.defer && this.defer[cancel === true ? 'reject' : 'resolve']();
-            },
-            end: function() {
-              this.done();
-            },
-            cancel: function() {
-              this.done(true);
-            },
-            getPromise: function() {
-              if (!this.defer) {
-                this.defer = $q.defer();
+      var $$AnimateAsyncRunFactoryProvider = function() {
+        this.$get = ['$$rAF', function($$rAF) {
+          var waitQueue = [];
+          function waitForTick(fn) {
+            waitQueue.push(fn);
+            if (waitQueue.length > 1)
+              return;
+            $$rAF(function() {
+              for (var i = 0; i < waitQueue.length; i++) {
+                waitQueue[i]();
               }
-              return this.defer.promise;
-            },
-            then: function(f1, f2) {
-              return this.getPromise().then(f1, f2);
-            },
-            'catch': function(f1) {
-              return this.getPromise()['catch'](f1);
-            },
-            'finally': function(f1) {
-              return this.getPromise()['finally'](f1);
+              waitQueue = [];
+            });
+          }
+          return function() {
+            var passed = false;
+            waitForTick(function() {
+              passed = true;
+            });
+            return function(callback) {
+              passed ? callback() : waitForTick(callback);
+            };
+          };
+        }];
+      };
+      var $$AnimateRunnerFactoryProvider = function() {
+        this.$get = ['$q', '$sniffer', '$$animateAsyncRun', '$document', '$timeout', function($q, $sniffer, $$animateAsyncRun, $document, $timeout) {
+          var INITIAL_STATE = 0;
+          var DONE_PENDING_STATE = 1;
+          var DONE_COMPLETE_STATE = 2;
+          AnimateRunner.chain = function(chain, callback) {
+            var index = 0;
+            next();
+            function next() {
+              if (index === chain.length) {
+                callback(true);
+                return;
+              }
+              chain[index](function(response) {
+                if (response === false) {
+                  callback(false);
+                  return;
+                }
+                index++;
+                next();
+              });
             }
           };
-          return function(element, options) {
+          AnimateRunner.all = function(runners, callback) {
+            var count = 0;
+            var status = true;
+            forEach(runners, function(runner) {
+              runner.done(onProgress);
+            });
+            function onProgress(response) {
+              status = status && response;
+              if (++count === runners.length) {
+                callback(status);
+              }
+            }
+          };
+          function AnimateRunner(host) {
+            this.setHost(host);
+            var rafTick = $$animateAsyncRun();
+            var timeoutTick = function(fn) {
+              $timeout(fn, 0, false);
+            };
+            this._doneCallbacks = [];
+            this._tick = function(fn) {
+              var doc = $document[0];
+              if (doc && doc.hidden) {
+                timeoutTick(fn);
+              } else {
+                rafTick(fn);
+              }
+            };
+            this._state = 0;
+          }
+          AnimateRunner.prototype = {
+            setHost: function(host) {
+              this.host = host || {};
+            },
+            done: function(fn) {
+              if (this._state === DONE_COMPLETE_STATE) {
+                fn();
+              } else {
+                this._doneCallbacks.push(fn);
+              }
+            },
+            progress: noop,
+            getPromise: function() {
+              if (!this.promise) {
+                var self = this;
+                this.promise = $q(function(resolve, reject) {
+                  self.done(function(status) {
+                    status === false ? reject() : resolve();
+                  });
+                });
+              }
+              return this.promise;
+            },
+            then: function(resolveHandler, rejectHandler) {
+              return this.getPromise().then(resolveHandler, rejectHandler);
+            },
+            'catch': function(handler) {
+              return this.getPromise()['catch'](handler);
+            },
+            'finally': function(handler) {
+              return this.getPromise()['finally'](handler);
+            },
+            pause: function() {
+              if (this.host.pause) {
+                this.host.pause();
+              }
+            },
+            resume: function() {
+              if (this.host.resume) {
+                this.host.resume();
+              }
+            },
+            end: function() {
+              if (this.host.end) {
+                this.host.end();
+              }
+              this._resolve(true);
+            },
+            cancel: function() {
+              if (this.host.cancel) {
+                this.host.cancel();
+              }
+              this._resolve(false);
+            },
+            complete: function(response) {
+              var self = this;
+              if (self._state === INITIAL_STATE) {
+                self._state = DONE_PENDING_STATE;
+                self._tick(function() {
+                  self._resolve(response);
+                });
+              }
+            },
+            _resolve: function(response) {
+              if (this._state !== DONE_COMPLETE_STATE) {
+                forEach(this._doneCallbacks, function(fn) {
+                  fn(response);
+                });
+                this._doneCallbacks.length = 0;
+                this._state = DONE_COMPLETE_STATE;
+              }
+            }
+          };
+          return AnimateRunner;
+        }];
+      };
+      var $CoreAnimateCssProvider = function() {
+        this.$get = ['$$rAF', '$q', '$$AnimateRunner', function($$rAF, $q, $$AnimateRunner) {
+          return function(element, initialOptions) {
+            var options = initialOptions || {};
+            if (!options.$$prepared) {
+              options = copy(options);
+            }
             if (options.cleanupStyles) {
               options.from = options.to = null;
             }
@@ -15108,22 +10327,22 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               options.from = null;
             }
             var closed,
-                runner = new RAFPromise();
+                runner = new $$AnimateRunner();
             return {
               start: run,
               end: run
             };
             function run() {
               $$rAF(function() {
-                close();
+                applyAnimationContents();
                 if (!closed) {
-                  runner.done();
+                  runner.complete();
                 }
                 closed = true;
               });
               return runner;
             }
-            function close() {
+            function applyAnimationContents() {
               if (options.addClass) {
                 element.addClass(options.addClass);
                 options.addClass = null;
@@ -15429,7 +10648,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             REQUIRE_PREFIX_REGEXP = /^(?:(\^\^?)?(\?)?(\^\^?)?)?/;
         var EVENT_HANDLER_ATTR_REGEXP = /^(on[a-z]+|formaction)$/;
         function parseIsolateBindings(scope, directiveName, isController) {
-          var LOCAL_REGEXP = /^\s*([@&]|=(\*?))(\??)\s*(\w*)\s*$/;
+          var LOCAL_REGEXP = /^\s*([@&<]|=(\*?))(\??)\s*(\w*)\s*$/;
           var bindings = {};
           forEach(scope, function(definition, scopeName) {
             var match = definition.match(LOCAL_REGEXP);
@@ -15522,6 +10741,42 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
           return this;
         };
+        this.component = function registerComponent(name, options) {
+          var controller = options.controller || function() {};
+          function factory($injector) {
+            function makeInjectable(fn) {
+              if (isFunction(fn) || isArray(fn)) {
+                return function(tElement, tAttrs) {
+                  return $injector.invoke(fn, this, {
+                    $element: tElement,
+                    $attrs: tAttrs
+                  });
+                };
+              } else {
+                return fn;
+              }
+            }
+            var template = (!options.template && !options.templateUrl ? '' : options.template);
+            return {
+              controller: controller,
+              controllerAs: identifierForController(options.controller) || options.controllerAs || '$ctrl',
+              template: makeInjectable(template),
+              templateUrl: makeInjectable(options.templateUrl),
+              transclude: options.transclude,
+              scope: {},
+              bindToController: options.bindings || {},
+              restrict: 'E',
+              require: options.require
+            };
+          }
+          forEach(options, function(val, key) {
+            if (key.charAt(0) === '$') {
+              factory[key] = val;
+            }
+          });
+          factory.$inject = ['$injector'];
+          return this.directive(name, factory);
+        };
         this.aHrefSanitizationWhitelist = function(regexp) {
           if (isDefined(regexp)) {
             $$sanitizeUriProvider.aHrefSanitizationWhitelist(regexp);
@@ -15546,7 +10801,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
           return debugInfoEnabled;
         };
-        this.$get = ['$injector', '$interpolate', '$exceptionHandler', '$templateRequest', '$parse', '$controller', '$rootScope', '$document', '$sce', '$animate', '$$sanitizeUri', function($injector, $interpolate, $exceptionHandler, $templateRequest, $parse, $controller, $rootScope, $document, $sce, $animate, $$sanitizeUri) {
+        this.$get = ['$injector', '$interpolate', '$exceptionHandler', '$templateRequest', '$parse', '$controller', '$rootScope', '$sce', '$animate', '$$sanitizeUri', function($injector, $interpolate, $exceptionHandler, $templateRequest, $parse, $controller, $rootScope, $sce, $animate, $$sanitizeUri) {
+          var SIMPLE_ATTR_NAME = /^\w/;
+          var specialAttrHolder = document.createElement('div');
           var Attributes = function(element, attributesToCopy) {
             if (attributesToCopy) {
               var keys = Object.keys(attributesToCopy);
@@ -15607,7 +10864,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 }
               }
               nodeName = nodeName_(this.$$element);
-              if ((nodeName === 'a' && key === 'href') || (nodeName === 'img' && key === 'src')) {
+              if ((nodeName === 'a' && (key === 'href' || key === 'xlinkHref')) || (nodeName === 'img' && key === 'src')) {
                 this[key] = value = $$sanitizeUri(value, key === 'src');
               } else if (nodeName === 'img' && key === 'srcset') {
                 var result = "";
@@ -15632,7 +10889,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 if (value === null || isUndefined(value)) {
                   this.$$element.removeAttr(attrName);
                 } else {
-                  this.$$element.attr(attrName, value);
+                  if (SIMPLE_ATTR_NAME.test(attrName)) {
+                    this.$$element.attr(attrName, value);
+                  } else {
+                    setSpecialAttr(this.$$element[0], attrName, value);
+                  }
                 }
               }
               var $$observers = this.$$observers;
@@ -15659,6 +10920,14 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               };
             }
           };
+          function setSpecialAttr(element, attrName, value) {
+            specialAttrHolder.innerHTML = "<span " + attrName + ">";
+            var attributes = specialAttrHolder.firstChild.attributes;
+            var attribute = attributes[0];
+            attributes.removeNamedItem(attribute.name);
+            attribute.value = value;
+            element.attributes.setNamedItem(attribute);
+          }
           function safeAddClass($element, className) {
             try {
               $element.addClass(className);
@@ -15666,7 +10935,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
           var startSymbol = $interpolate.startSymbol(),
               endSymbol = $interpolate.endSymbol(),
-              denormalizeTemplate = (startSymbol == '{{' || endSymbol == '}}') ? identity : function denormalizeTemplate(template) {
+              denormalizeTemplate = (startSymbol == '{{' && endSymbol == '}}') ? identity : function denormalizeTemplate(template) {
                 return template.replace(/\{\{/g, startSymbol).replace(/}}/g, endSymbol);
               },
               NG_ATTR_BINDING = /^ngAttr[A-Z]/;
@@ -15695,11 +10964,14 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             if (!($compileNodes instanceof jqLite)) {
               $compileNodes = jqLite($compileNodes);
             }
-            forEach($compileNodes, function(node, index) {
-              if (node.nodeType == NODE_TYPE_TEXT && node.nodeValue.match(/\S+/)) {
-                $compileNodes[index] = jqLite(node).wrap('<span></span>').parent()[0];
+            var NOT_EMPTY = /\S+/;
+            for (var i = 0,
+                len = $compileNodes.length; i < len; i++) {
+              var domNode = $compileNodes[i];
+              if (domNode.nodeType === NODE_TYPE_TEXT && domNode.nodeValue.match(NOT_EMPTY)) {
+                jqLiteWrapNode(domNode, $compileNodes[i] = document.createElement('span'));
               }
-            });
+            }
             var compositeLinkFn = compileNodes($compileNodes, transcludeFn, $compileNodes, maxPriority, ignoreDirective, previousCompileContext);
             compile.$$addScopeClass($compileNodes);
             var namespace = null;
@@ -15744,7 +11016,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             if (!node) {
               return 'html';
             } else {
-              return nodeName_(node) !== 'foreignobject' && node.toString().match(/SVG/) ? 'svg' : 'html';
+              return nodeName_(node) !== 'foreignobject' && toString.call(node).match(/SVG/) ? 'svg' : 'html';
             }
           }
           function compileNodes(nodeList, transcludeFn, $rootElement, maxPriority, ignoreDirective, previousCompileContext) {
@@ -15831,6 +11103,14 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 futureParentElement: futureParentElement
               });
             };
+            var boundSlots = boundTranscludeFn.$$slots = createMap();
+            for (var slotName in transcludeFn.$$slots) {
+              if (transcludeFn.$$slots[slotName]) {
+                boundSlots[slotName] = createBoundTranscludeFn(scope, transcludeFn.$$slots[slotName], previousBoundTranscludeFn);
+              } else {
+                boundSlots[slotName] = null;
+              }
+            }
             return boundTranscludeFn;
           }
           function collectDirectives(node, directives, attrs, maxPriority, ignoreDirective) {
@@ -15944,6 +11224,19 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               return linkFn(scope, element, attrs, controllers, transcludeFn);
             };
           }
+          function compilationGenerator(eager, $compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext) {
+            if (eager) {
+              return compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
+            }
+            var compiled;
+            return function() {
+              if (!compiled) {
+                compiled = compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
+                $compileNodes = transcludeFn = previousCompileContext = null;
+              }
+              return compiled.apply(this, arguments);
+            };
+          }
           function applyDirectivesToNode(directives, compileNode, templateAttrs, transcludeFn, jqCollection, originalReplaceDirective, preLinkFns, postLinkFns, previousCompileContext) {
             previousCompileContext = previousCompileContext || {};
             var terminalPriority = -Number.MAX_VALUE,
@@ -15962,6 +11255,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 replaceDirective = originalReplaceDirective,
                 childTranscludeFn = transcludeFn,
                 linkFn,
+                didScanForMultipleTransclusion = false,
+                mightHaveMultipleTransclusionError = false,
                 directiveValue;
             for (var i = 0,
                 ii = directives.length; i < ii; i++) {
@@ -15987,6 +11282,16 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 newScopeDirective = newScopeDirective || directive;
               }
               directiveName = directive.name;
+              if (!didScanForMultipleTransclusion && ((directive.replace && (directive.templateUrl || directive.template)) || (directive.transclude && !directive.$$tlb))) {
+                var candidateDirective;
+                for (var scanningIndex = i + 1; candidateDirective = directives[scanningIndex++]; ) {
+                  if ((candidateDirective.transclude && !candidateDirective.$$tlb) || (candidateDirective.replace && (candidateDirective.templateUrl || candidateDirective.template))) {
+                    mightHaveMultipleTransclusionError = true;
+                    break;
+                  }
+                }
+                didScanForMultipleTransclusion = true;
+              }
               if (!directive.templateUrl && directive.controller) {
                 directiveValue = directive.controller;
                 controllerDirectives = controllerDirectives || createMap();
@@ -16006,11 +11311,45 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                   $compileNode = templateAttrs.$$element = jqLite(document.createComment(' ' + directiveName + ': ' + templateAttrs[directiveName] + ' '));
                   compileNode = $compileNode[0];
                   replaceWith(jqCollection, sliceArgs($template), compileNode);
-                  childTranscludeFn = compile($template, transcludeFn, terminalPriority, replaceDirective && replaceDirective.name, {nonTlbTranscludeDirective: nonTlbTranscludeDirective});
+                  childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, terminalPriority, replaceDirective && replaceDirective.name, {nonTlbTranscludeDirective: nonTlbTranscludeDirective});
                 } else {
+                  var slots = createMap();
                   $template = jqLite(jqLiteClone(compileNode)).contents();
+                  if (isObject(directiveValue)) {
+                    $template = [];
+                    var slotMap = createMap();
+                    var filledSlots = createMap();
+                    forEach(directiveValue, function(elementSelector, slotName) {
+                      var optional = (elementSelector.charAt(0) === '?');
+                      elementSelector = optional ? elementSelector.substring(1) : elementSelector;
+                      slotMap[elementSelector] = slotName;
+                      slots[slotName] = null;
+                      filledSlots[slotName] = optional;
+                    });
+                    forEach($compileNode.contents(), function(node) {
+                      var slotName = slotMap[directiveNormalize(nodeName_(node))];
+                      if (slotName) {
+                        filledSlots[slotName] = true;
+                        slots[slotName] = slots[slotName] || [];
+                        slots[slotName].push(node);
+                      } else {
+                        $template.push(node);
+                      }
+                    });
+                    forEach(filledSlots, function(filled, slotName) {
+                      if (!filled) {
+                        throw $compileMinErr('reqslot', 'Required transclusion slot `{0}` was not filled.', slotName);
+                      }
+                    });
+                    for (var slotName in slots) {
+                      if (slots[slotName]) {
+                        slots[slotName] = compilationGenerator(mightHaveMultipleTransclusionError, slots[slotName], transcludeFn);
+                      }
+                    }
+                  }
                   $compileNode.empty();
-                  childTranscludeFn = compile($template, transcludeFn, undefined, undefined, {needsNewScope: directive.$$isolateScope || directive.$$newScope});
+                  childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, undefined, undefined, {needsNewScope: directive.$$isolateScope || directive.$$newScope});
+                  childTranscludeFn.$$slots = slots;
                 }
               }
               if (directive.template) {
@@ -16130,6 +11469,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                     ii = require.length; i < ii; i++) {
                   value[i] = getControllers(directiveName, require[i], $element, elementControllers);
                 }
+              } else if (isObject(require)) {
+                value = {};
+                forEach(require, function(controller, property) {
+                  value[property] = getControllers(directiveName, controller, $element, elementControllers);
+                });
               }
               return value || null;
             }
@@ -16156,7 +11500,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               return elementControllers;
             }
             function nodeLinkFn(childLinkFn, scope, linkNode, $rootElement, boundTranscludeFn) {
-              var linkFn,
+              var i,
+                  ii,
+                  linkFn,
                   isolateScope,
                   controllerScope,
                   elementControllers,
@@ -16181,6 +11527,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               if (boundTranscludeFn) {
                 transcludeFn = controllersBoundTransclude;
                 transcludeFn.$$boundTransclude = boundTranscludeFn;
+                transcludeFn.isSlotFilled = function(slotName) {
+                  return !!boundTranscludeFn.$$slots[slotName];
+                };
               }
               if (controllerDirectives) {
                 elementControllers = setupControllers($element, attrs, transcludeFn, controllerDirectives, isolateScope, scope);
@@ -16209,6 +11558,17 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                   removeControllerBindingWatches = initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
                 }
               }
+              forEach(controllerDirectives, function(controllerDirective, name) {
+                var require = controllerDirective.require;
+                if (controllerDirective.bindToController && !isArray(require) && isObject(require)) {
+                  extend(elementControllers[name].instance, getControllers(name, require, $element, elementControllers));
+                }
+              });
+              forEach(elementControllers, function(controller) {
+                if (isFunction(controller.instance.$onInit)) {
+                  controller.instance.$onInit();
+                }
+              });
               for (i = 0, ii = preLinkFns.length; i < ii; i++) {
                 linkFn = preLinkFns[i];
                 invokeLinkFn(linkFn, linkFn.isolateScope ? isolateScope : scope, $element, attrs, linkFn.require && getControllers(linkFn.directiveName, linkFn.require, $element, elementControllers), transcludeFn);
@@ -16222,9 +11582,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 linkFn = postLinkFns[i];
                 invokeLinkFn(linkFn, linkFn.isolateScope ? isolateScope : scope, $element, attrs, linkFn.require && getControllers(linkFn.directiveName, linkFn.require, $element, elementControllers), transcludeFn);
               }
-              function controllersBoundTransclude(scope, cloneAttachFn, futureParentElement) {
+              function controllersBoundTransclude(scope, cloneAttachFn, futureParentElement, slotName) {
                 var transcludeControllers;
                 if (!isScope(scope)) {
+                  slotName = futureParentElement;
                   futureParentElement = cloneAttachFn;
                   cloneAttachFn = scope;
                   scope = undefined;
@@ -16235,7 +11596,16 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 if (!futureParentElement) {
                   futureParentElement = hasElementTranscludeDirective ? $element.parent() : $element;
                 }
-                return boundTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                if (slotName) {
+                  var slotTranscludeFn = boundTranscludeFn.$$slots[slotName];
+                  if (slotTranscludeFn) {
+                    return slotTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                  } else if (isUndefined(slotTranscludeFn)) {
+                    throw $compileMinErr('noslot', 'No parent directive that requires a transclusion with slot name "{0}". ' + 'Element: {1}', slotName, startingTag($element));
+                  }
+                } else {
+                  return boundTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                }
               }
             }
           }
@@ -16533,22 +11903,16 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               parent.replaceChild(newNode, firstElementToRemove);
             }
             var fragment = document.createDocumentFragment();
-            fragment.appendChild(firstElementToRemove);
+            for (i = 0; i < removeCount; i++) {
+              fragment.appendChild(elementsToRemove[i]);
+            }
             if (jqLite.hasData(firstElementToRemove)) {
               jqLite.data(newNode, jqLite.data(firstElementToRemove));
-              if (!jQuery) {
-                delete jqLite.cache[firstElementToRemove[jqLite.expando]];
-              } else {
-                skipDestroyOnNextJQueryCleanData = true;
-                jQuery.cleanData([firstElementToRemove]);
-              }
+              jqLite(firstElementToRemove).off('$destroy');
             }
-            for (var k = 1,
-                kk = elementsToRemove.length; k < kk; k++) {
-              var element = elementsToRemove[k];
-              jqLite(element).remove();
-              fragment.appendChild(element);
-              delete elementsToRemove[k];
+            jqLite.cleanData(fragment.querySelectorAll('*'));
+            for (i = 1; i < removeCount; i++) {
+              delete elementsToRemove[i];
             }
             elementsToRemove[0] = newNode;
             elementsToRemove.length = 1;
@@ -16574,7 +11938,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                   lastValue,
                   parentGet,
                   parentSet,
-                  compare;
+                  compare,
+                  removeWatch;
               switch (mode) {
                 case '@':
                   if (!optional && !hasOwnProperty.call(attrs, attrName)) {
@@ -16586,8 +11951,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                     }
                   });
                   attrs.$$observers[attrName].$$scope = scope;
-                  if (isString(attrs[attrName])) {
-                    destination[scopeName] = $interpolate(attrs[attrName])(scope);
+                  lastValue = attrs[attrName];
+                  if (isString(lastValue)) {
+                    destination[scopeName] = $interpolate(lastValue)(scope);
+                  } else if (isBoolean(lastValue)) {
+                    destination[scopeName] = lastValue;
                   }
                   break;
                 case '=':
@@ -16608,7 +11976,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                   }
                   parentSet = parentGet.assign || function() {
                     lastValue = destination[scopeName] = parentGet(scope);
-                    throw $compileMinErr('nonassign', "Expression '{0}' used with directive '{1}' is non-assignable!", attrs[attrName], directive.name);
+                    throw $compileMinErr('nonassign', "Expression '{0}' in attribute '{1}' used with directive '{2}' is non-assignable!", attrs[attrName], attrName, directive.name);
                   };
                   lastValue = destination[scopeName] = parentGet(scope);
                   var parentValueWatch = function parentValueWatch(parentValue) {
@@ -16622,12 +11990,26 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                     return lastValue = parentValue;
                   };
                   parentValueWatch.$stateful = true;
-                  var removeWatch;
                   if (definition.collection) {
                     removeWatch = scope.$watchCollection(attrs[attrName], parentValueWatch);
                   } else {
                     removeWatch = scope.$watch($parse(attrs[attrName], parentValueWatch), null, parentGet.literal);
                   }
+                  removeWatchCollection.push(removeWatch);
+                  break;
+                case '<':
+                  if (!hasOwnProperty.call(attrs, attrName)) {
+                    if (optional)
+                      break;
+                    attrs[attrName] = void 0;
+                  }
+                  if (optional && !attrs[attrName])
+                    break;
+                  parentGet = $parse(attrs[attrName]);
+                  destination[scopeName] = parentGet(scope);
+                  removeWatch = scope.$watch(parentGet, function parentValueWatchAction(newParentValue) {
+                    destination[scopeName] = newParentValue;
+                  }, parentGet.literal);
                   removeWatchCollection.push(removeWatch);
                   break;
                 case '&':
@@ -16684,7 +12066,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         return jqNodes;
       }
       var $controllerMinErr = minErr('$controller');
-      var CNTRL_REG = /^(\S+)(\s+as\s+(\w+))?$/;
+      var CNTRL_REG = /^(\S+)(\s+as\s+([\w$]+))?$/;
       function identifierForController(controller, ident) {
         if (ident && isString(ident))
           return ident;
@@ -16959,8 +12341,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             reversedInterceptors.unshift(isString(interceptorFactory) ? $injector.get(interceptorFactory) : $injector.invoke(interceptorFactory));
           });
           function $http(requestConfig) {
-            if (!angular.isObject(requestConfig)) {
+            if (!isObject(requestConfig)) {
               throw minErr('$http')('badreq', 'Http request configuration must be an object.  Received: {0}', requestConfig);
+            }
+            if (!isString(requestConfig.url)) {
+              throw minErr('$http')('badreq', 'Http request configuration url must be a string.  Received: {0}', requestConfig.url);
             }
             var config = extend({
               method: 'get',
@@ -17330,7 +12715,25 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             }
             return value;
           }
+          function constantWatchDelegate(scope, listener, objectEquality, constantInterp) {
+            var unwatch;
+            return unwatch = scope.$watch(function constantInterpolateWatch(scope) {
+              unwatch();
+              return constantInterp(scope);
+            }, listener, objectEquality);
+          }
           function $interpolate(text, mustHaveExpression, trustedContext, allOrNothing) {
+            if (!text.length || text.indexOf(startSymbol) === -1) {
+              var constantInterp;
+              if (!mustHaveExpression) {
+                var unescapedText = unescapeText(text);
+                constantInterp = valueFn(unescapedText);
+                constantInterp.exp = text;
+                constantInterp.expressions = [];
+                constantInterp.$$watchDelegate = constantWatchDelegate;
+              }
+              return constantInterp;
+            }
             allOrNothing = !!allOrNothing;
             var startIndex,
                 endIndex,
@@ -17421,7 +12824,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         }];
       }
       function $IntervalProvider() {
-        this.$get = ['$rootScope', '$window', '$q', '$$q', function($rootScope, $window, $q, $$q) {
+        this.$get = ['$rootScope', '$window', '$q', '$$q', '$browser', function($rootScope, $window, $q, $$q, $browser) {
           var intervals = {};
           function interval(fn, delay, count, invokeApply) {
             var hasParams = arguments.length > 4,
@@ -17433,10 +12836,12 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 deferred = (skipApply ? $$q : $q).defer(),
                 promise = deferred.promise;
             count = isDefined(count) ? count : 0;
-            promise.then(null, null, (!hasParams) ? fn : function() {
-              fn.apply(null, args);
-            });
             promise.$$intervalId = setInterval(function tick() {
+              if (skipApply) {
+                $browser.defer(callback);
+              } else {
+                $rootScope.$evalAsync(callback);
+              }
               deferred.notify(iteration++);
               if (count > 0 && iteration >= count) {
                 deferred.resolve(iteration);
@@ -17448,6 +12853,13 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             }, delay);
             intervals[promise.$$intervalId] = deferred;
             return promise;
+            function callback() {
+              if (!hasParams) {
+                fn(iteration);
+              } else {
+                fn.apply(null, args);
+              }
+            }
           }
           interval.cancel = function(promise) {
             if (promise && promise.$$intervalId in intervals) {
@@ -17948,12 +13360,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         }
         return name;
       }
-      function getStringValue(name, fullExpression) {
-        name = name + '';
-        if (!isString(name)) {
-          throw $parseMinErr('iseccst', 'Cannot convert object to primitive value! ' + 'Expression: {0}', fullExpression);
-        }
-        return name;
+      function getStringValue(name) {
+        return name + '';
       }
       function ensureSafeObject(obj, fullExpression) {
         if (obj) {
@@ -18174,6 +13582,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       AST.Property = 'Property';
       AST.ObjectExpression = 'ObjectExpression';
       AST.ThisExpression = 'ThisExpression';
+      AST.LocalsExpression = 'LocalsExpression';
       AST.NGValueParameter = 'NGValueParameter';
       AST.prototype = {
         ast: function(text) {
@@ -18523,7 +13932,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             type: AST.Literal,
             value: undefined
           },
-          'this': {type: AST.ThisExpression}
+          'this': {type: AST.ThisExpression},
+          '$locals': {type: AST.LocalsExpression}
         }
       };
       function ifDefined(v, d) {
@@ -18638,6 +14048,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             ast.toWatch = argsToWatch;
             break;
           case AST.ThisExpression:
+            ast.constant = false;
+            ast.toWatch = [];
+            break;
+          case AST.LocalsExpression:
             ast.constant = false;
             ast.toWatch = [];
             break;
@@ -18858,6 +14272,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               intoId = intoId || this.nextId();
               self.recurse(ast.object, left, undefined, function() {
                 self.if_(self.notNull(left), function() {
+                  if (create && create !== 1) {
+                    self.addEnsureSafeAssignContext(left);
+                  }
                   if (ast.computed) {
                     right = self.nextId();
                     self.recurse(ast.property, right);
@@ -18939,7 +14356,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               right = this.nextId();
               left = {};
               if (!isAssignable(ast.left)) {
-                throw $parseMinErr('lval', 'Trying to assing a value to a non l-value');
+                throw $parseMinErr('lval', 'Trying to assign a value to a non l-value');
               }
               this.recurse(ast.left, undefined, left, function() {
                 self.if_(self.notNull(left.context), function() {
@@ -18977,6 +14394,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             case AST.ThisExpression:
               this.assign(intoId, 's');
               recursionFn('s');
+              break;
+            case AST.LocalsExpression:
+              this.assign(intoId, 'l');
+              recursionFn('l');
               break;
             case AST.NGValueParameter:
               this.assign(intoId, 'v');
@@ -19067,7 +14488,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           return 'ensureSafeFunction(' + item + ',text)';
         },
         getStringValue: function(item) {
-          this.assign(item, 'getStringValue(' + item + ',text)');
+          this.assign(item, 'getStringValue(' + item + ')');
         },
         ensureSafeAssignContext: function(item) {
           return 'ensureSafeAssignContext(' + item + ',text)';
@@ -19277,6 +14698,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               return function(scope) {
                 return context ? {value: scope} : scope;
               };
+            case AST.LocalsExpression:
+              return function(scope, locals) {
+                return context ? {value: locals} : locals;
+              };
             case AST.NGValueParameter:
               return function(scope, locals, assign, inputs) {
                 return context ? {value: assign} : assign;
@@ -19450,8 +14875,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               rhs = right(scope, locals, assign, inputs);
               rhs = getStringValue(rhs);
               ensureSafeMemberName(rhs, expression);
-              if (create && create !== 1 && lhs && !(lhs[rhs])) {
-                lhs[rhs] = {};
+              if (create && create !== 1) {
+                ensureSafeAssignContext(lhs);
+                if (lhs && !(lhs[rhs])) {
+                  lhs[rhs] = {};
+                }
               }
               value = lhs[rhs];
               ensureSafeObject(value, expression);
@@ -19470,8 +14898,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         nonComputedMember: function(left, right, expensiveChecks, context, create, expression) {
           return function(scope, locals, assign, inputs) {
             var lhs = left(scope, locals, assign, inputs);
-            if (create && create !== 1 && lhs && !(lhs[right])) {
-              lhs[right] = {};
+            if (create && create !== 1) {
+              ensureSafeAssignContext(lhs);
+              if (lhs && !(lhs[right])) {
+                lhs[right] = {};
+              }
             }
             var value = lhs != null ? lhs[right] : undefined;
             if (expensiveChecks || isPossiblyDangerousMemberName(right)) {
@@ -19509,8 +14940,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           return this.astCompiler.compile(text, this.options.expensiveChecks);
         }
       };
-      var getterFnCacheDefault = createMap();
-      var getterFnCacheExpensive = createMap();
       function isPossiblyDangerousMemberName(name) {
         return name == 'constructor';
       }
@@ -19531,10 +14960,16 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 csp: noUnsafeEval,
                 expensiveChecks: true
               };
-          return function $parse(exp, interceptorFn, expensiveChecks) {
+          var runningChecksEnabled = false;
+          $parse.$$runningExpensiveChecks = function() {
+            return runningChecksEnabled;
+          };
+          return $parse;
+          function $parse(exp, interceptorFn, expensiveChecks) {
             var parsedExpression,
                 oneTime,
                 cacheKey;
+            expensiveChecks = expensiveChecks || runningChecksEnabled;
             switch (typeof exp) {
               case 'string':
                 exp = exp.trim();
@@ -19557,15 +14992,40 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                   } else if (parsedExpression.inputs) {
                     parsedExpression.$$watchDelegate = inputsWatchDelegate;
                   }
+                  if (expensiveChecks) {
+                    parsedExpression = expensiveChecksInterceptor(parsedExpression);
+                  }
                   cache[cacheKey] = parsedExpression;
                 }
                 return addInterceptor(parsedExpression, interceptorFn);
               case 'function':
                 return addInterceptor(exp, interceptorFn);
               default:
-                return noop;
+                return addInterceptor(noop, interceptorFn);
             }
-          };
+          }
+          function expensiveChecksInterceptor(fn) {
+            if (!fn)
+              return fn;
+            expensiveCheckFn.$$watchDelegate = fn.$$watchDelegate;
+            expensiveCheckFn.assign = expensiveChecksInterceptor(fn.assign);
+            expensiveCheckFn.constant = fn.constant;
+            expensiveCheckFn.literal = fn.literal;
+            for (var i = 0; fn.inputs && i < fn.inputs.length; ++i) {
+              fn.inputs[i] = expensiveChecksInterceptor(fn.inputs[i]);
+            }
+            expensiveCheckFn.inputs = fn.inputs;
+            return expensiveCheckFn;
+            function expensiveCheckFn(scope, locals, assign, inputs) {
+              var expensiveCheckOldValue = runningChecksEnabled;
+              runningChecksEnabled = true;
+              try {
+                return fn(scope, locals, assign, inputs);
+              } finally {
+                runningChecksEnabled = expensiveCheckOldValue;
+              }
+            }
+          }
           function expressionInputDirtyCheck(newValue, oldValueOfValue) {
             if (newValue == null || oldValueOfValue == null) {
               return newValue === oldValueOfValue;
@@ -19664,13 +15124,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           function constantWatchDelegate(scope, listener, objectEquality, parsedExpression) {
             var unwatch;
             return unwatch = scope.$watch(function constantWatch(scope) {
-              return parsedExpression(scope);
-            }, function constantListener(value, old, scope) {
-              if (isFunction(listener)) {
-                listener.apply(this, arguments);
-              }
               unwatch();
-            }, objectEquality);
+              return parsedExpression(scope);
+            }, listener, objectEquality);
           }
           function addInterceptor(parsedExpression, interceptorFn) {
             if (!interceptorFn)
@@ -19713,20 +15169,12 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       function qFactory(nextTick, exceptionHandler) {
         var $qMinErr = minErr('$q', TypeError);
-        function callOnce(self, resolveFn, rejectFn) {
-          var called = false;
-          function wrap(fn) {
-            return function(value) {
-              if (called)
-                return;
-              called = true;
-              fn.call(self, value);
-            };
-          }
-          return [wrap(resolveFn), wrap(rejectFn)];
-        }
         var defer = function() {
-          return new Deferred();
+          var d = new Deferred();
+          d.resolve = simpleBind(d, d.resolve);
+          d.reject = simpleBind(d, d.reject);
+          d.notify = simpleBind(d, d.notify);
+          return d;
         };
         function Promise() {
           this.$$state = {status: 0};
@@ -19794,9 +15242,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         }
         function Deferred() {
           this.promise = new Promise();
-          this.resolve = simpleBind(this, this.resolve);
-          this.reject = simpleBind(this, this.reject);
-          this.notify = simpleBind(this, this.notify);
         }
         extend(Deferred.prototype, {
           resolve: function(val) {
@@ -19809,23 +15254,35 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             }
           },
           $$resolve: function(val) {
-            var then,
-                fns;
-            fns = callOnce(this, this.$$resolve, this.$$reject);
+            var then;
+            var that = this;
+            var done = false;
             try {
               if ((isObject(val) || isFunction(val)))
                 then = val && val.then;
               if (isFunction(then)) {
                 this.promise.$$state.status = -1;
-                then.call(val, fns[0], fns[1], this.notify);
+                then.call(val, resolvePromise, rejectPromise, simpleBind(this, this.notify));
               } else {
                 this.promise.$$state.value = val;
                 this.promise.$$state.status = 1;
                 scheduleProcessQueue(this.promise.$$state);
               }
             } catch (e) {
-              fns[1](e);
+              rejectPromise(e);
               exceptionHandler(e);
+            }
+            function resolvePromise(val) {
+              if (done)
+                return;
+              done = true;
+              that.$$resolve(val);
+            }
+            function rejectPromise(val) {
+              if (done)
+                return;
+              done = true;
+              that.$$reject(val);
             }
           },
           reject: function(reason) {
@@ -19923,9 +15380,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           if (!isFunction(resolver)) {
             throw $qMinErr('norslvr', "Expected resolverFn, got '{0}'", resolver);
           }
-          if (!(this instanceof Q)) {
-            return new Q(resolver);
-          }
           var deferred = new Deferred();
           function resolveFn(value) {
             deferred.resolve(value);
@@ -19936,6 +15390,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           resolver(resolveFn, rejectFn);
           return deferred.promise;
         };
+        $Q.prototype = Promise.prototype;
         $Q.defer = defer;
         $Q.reject = reject;
         $Q.when = when;
@@ -19986,7 +15441,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           ChildScope.prototype = parent;
           return ChildScope;
         }
-        this.$get = ['$injector', '$exceptionHandler', '$parse', '$browser', function($injector, $exceptionHandler, $parse, $browser) {
+        this.$get = ['$exceptionHandler', '$parse', '$browser', function($exceptionHandler, $parse, $browser) {
           function destroyChildScope($event) {
             $event.currentScope.$$destroyed = true;
           }
@@ -20228,6 +15683,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               var watch,
                   value,
                   last,
+                  fn,
+                  get,
                   watchers,
                   length,
                   dirty,
@@ -20265,11 +15722,13 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                       try {
                         watch = watchers[length];
                         if (watch) {
-                          if ((value = watch.get(current)) !== (last = watch.last) && !(watch.eq ? equals(value, last) : (typeof value === 'number' && typeof last === 'number' && isNaN(value) && isNaN(last)))) {
+                          get = watch.get;
+                          if ((value = get(current)) !== (last = watch.last) && !(watch.eq ? equals(value, last) : (typeof value === 'number' && typeof last === 'number' && isNaN(value) && isNaN(last)))) {
                             dirty = true;
                             lastDirtyWatch = watch;
                             watch.last = watch.eq ? copy(value, null) : value;
-                            watch.fn(value, ((last === initWatchVal) ? value : last), current);
+                            fn = watch.fn;
+                            fn(value, ((last === initWatchVal) ? value : last), current);
                             if (ttl < 5) {
                               logIdx = 4 - ttl;
                               if (!watchLog[logIdx])
@@ -20352,7 +15811,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               }
               asyncQueue.push({
                 scope: this,
-                expression: expr,
+                expression: $parse(expr),
                 locals: locals
               });
             },
@@ -20381,6 +15840,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             $applyAsync: function(expr) {
               var scope = this;
               expr && applyAsyncQueue.push($applyAsyncExpression);
+              expr = $parse(expr);
               scheduleApplyAsync();
               function $applyAsyncExpression() {
                 scope.$eval(expr);
@@ -20829,6 +16289,14 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       }
       var $compileMinErr = minErr('$compile');
       function $TemplateRequestProvider() {
+        var httpOptions;
+        this.httpOptions = function(val) {
+          if (val) {
+            httpOptions = val;
+            return this;
+          }
+          return httpOptions;
+        };
         this.$get = ['$templateCache', '$http', '$q', '$sce', function($templateCache, $http, $q, $sce) {
           function handleRequestFn(tpl, ignoreRequestError) {
             handleRequestFn.totalPendingRequests++;
@@ -20843,11 +16311,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             } else if (transformResponse === defaultHttpResponseTransform) {
               transformResponse = null;
             }
-            var httpOptions = {
+            return $http.get(tpl, extend({
               cache: $templateCache,
               transformResponse: transformResponse
-            };
-            return $http.get(tpl, httpOptions)['finally'](function() {
+            }, httpOptions))['finally'](function() {
               handleRequestFn.totalPendingRequests--;
             }).then(function(response) {
               $templateCache.put(tpl, response.data);
@@ -21158,6 +16625,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       function getTypeForFilter(val) {
         return (val === null) ? 'null' : typeof val;
       }
+      var MAX_DIGITS = 22;
+      var DECIMAL_SEP = '.';
+      var ZERO_CHAR = '0';
       currencyFilter.$inject = ['$locale'];
       function currencyFilter($locale) {
         var formats = $locale.NUMBER_FORMATS;
@@ -21178,75 +16648,131 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           return (number == null) ? number : formatNumber(number, formats.PATTERNS[0], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize);
         };
       }
-      var DECIMAL_SEP = '.';
-      function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
-        if (isObject(number))
-          return '';
-        var isNegative = number < 0;
-        number = Math.abs(number);
-        var isInfinity = number === Infinity;
-        if (!isInfinity && !isFinite(number))
-          return '';
-        var numStr = number + '',
-            formatedText = '',
-            hasExponent = false,
-            parts = [];
-        if (isInfinity)
-          formatedText = '\u221e';
-        if (!isInfinity && numStr.indexOf('e') !== -1) {
-          var match = numStr.match(/([\d\.]+)e(-?)(\d+)/);
-          if (match && match[2] == '-' && match[3] > fractionSize + 1) {
-            number = 0;
-          } else {
-            formatedText = numStr;
-            hasExponent = true;
-          }
+      function parse(numStr) {
+        var exponent = 0,
+            digits,
+            numberOfIntegerDigits;
+        var i,
+            j,
+            zeros;
+        if ((numberOfIntegerDigits = numStr.indexOf(DECIMAL_SEP)) > -1) {
+          numStr = numStr.replace(DECIMAL_SEP, '');
         }
-        if (!isInfinity && !hasExponent) {
-          var fractionLen = (numStr.split(DECIMAL_SEP)[1] || '').length;
-          if (isUndefined(fractionSize)) {
-            fractionSize = Math.min(Math.max(pattern.minFrac, fractionLen), pattern.maxFrac);
-          }
-          number = +(Math.round(+(number.toString() + 'e' + fractionSize)).toString() + 'e' + -fractionSize);
-          var fraction = ('' + number).split(DECIMAL_SEP);
-          var whole = fraction[0];
-          fraction = fraction[1] || '';
-          var i,
-              pos = 0,
-              lgroup = pattern.lgSize,
-              group = pattern.gSize;
-          if (whole.length >= (lgroup + group)) {
-            pos = whole.length - lgroup;
-            for (i = 0; i < pos; i++) {
-              if ((pos - i) % group === 0 && i !== 0) {
-                formatedText += groupSep;
-              }
-              formatedText += whole.charAt(i);
-            }
-          }
-          for (i = pos; i < whole.length; i++) {
-            if ((whole.length - i) % lgroup === 0 && i !== 0) {
-              formatedText += groupSep;
-            }
-            formatedText += whole.charAt(i);
-          }
-          while (fraction.length < fractionSize) {
-            fraction += '0';
-          }
-          if (fractionSize && fractionSize !== "0")
-            formatedText += decimalSep + fraction.substr(0, fractionSize);
+        if ((i = numStr.search(/e/i)) > 0) {
+          if (numberOfIntegerDigits < 0)
+            numberOfIntegerDigits = i;
+          numberOfIntegerDigits += +numStr.slice(i + 1);
+          numStr = numStr.substring(0, i);
+        } else if (numberOfIntegerDigits < 0) {
+          numberOfIntegerDigits = numStr.length;
+        }
+        for (i = 0; numStr.charAt(i) == ZERO_CHAR; i++)
+          ;
+        if (i == (zeros = numStr.length)) {
+          digits = [0];
+          numberOfIntegerDigits = 1;
         } else {
-          if (fractionSize > 0 && number < 1) {
-            formatedText = number.toFixed(fractionSize);
-            number = parseFloat(formatedText);
-            formatedText = formatedText.replace(DECIMAL_SEP, decimalSep);
+          zeros--;
+          while (numStr.charAt(zeros) == ZERO_CHAR)
+            zeros--;
+          numberOfIntegerDigits -= i;
+          digits = [];
+          for (j = 0; i <= zeros; i++, j++) {
+            digits[j] = +numStr.charAt(i);
           }
         }
-        if (number === 0) {
-          isNegative = false;
+        if (numberOfIntegerDigits > MAX_DIGITS) {
+          digits = digits.splice(0, MAX_DIGITS - 1);
+          exponent = numberOfIntegerDigits - 1;
+          numberOfIntegerDigits = 1;
         }
-        parts.push(isNegative ? pattern.negPre : pattern.posPre, formatedText, isNegative ? pattern.negSuf : pattern.posSuf);
-        return parts.join('');
+        return {
+          d: digits,
+          e: exponent,
+          i: numberOfIntegerDigits
+        };
+      }
+      function roundNumber(parsedNumber, fractionSize, minFrac, maxFrac) {
+        var digits = parsedNumber.d;
+        var fractionLen = digits.length - parsedNumber.i;
+        fractionSize = (isUndefined(fractionSize)) ? Math.min(Math.max(minFrac, fractionLen), maxFrac) : +fractionSize;
+        var roundAt = fractionSize + parsedNumber.i;
+        var digit = digits[roundAt];
+        if (roundAt > 0) {
+          digits.splice(roundAt);
+        } else {
+          parsedNumber.i = 1;
+          digits.length = roundAt = fractionSize + 1;
+          for (var i = 0; i < roundAt; i++)
+            digits[i] = 0;
+        }
+        if (digit >= 5)
+          digits[roundAt - 1]++;
+        for (; fractionLen < fractionSize; fractionLen++)
+          digits.push(0);
+        var carry = digits.reduceRight(function(carry, d, i, digits) {
+          d = d + carry;
+          digits[i] = d % 10;
+          return Math.floor(d / 10);
+        }, 0);
+        if (carry) {
+          digits.unshift(carry);
+          parsedNumber.i++;
+        }
+      }
+      function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
+        if (!(isString(number) || isNumber(number)) || isNaN(number))
+          return '';
+        var isInfinity = !isFinite(number);
+        var isZero = false;
+        var numStr = Math.abs(number) + '',
+            formattedText = '',
+            parsedNumber;
+        if (isInfinity) {
+          formattedText = '\u221e';
+        } else {
+          parsedNumber = parse(numStr);
+          roundNumber(parsedNumber, fractionSize, pattern.minFrac, pattern.maxFrac);
+          var digits = parsedNumber.d;
+          var integerLen = parsedNumber.i;
+          var exponent = parsedNumber.e;
+          var decimals = [];
+          isZero = digits.reduce(function(isZero, d) {
+            return isZero && !d;
+          }, true);
+          while (integerLen < 0) {
+            digits.unshift(0);
+            integerLen++;
+          }
+          if (integerLen > 0) {
+            decimals = digits.splice(integerLen);
+          } else {
+            decimals = digits;
+            digits = [0];
+          }
+          var groups = [];
+          if (digits.length > pattern.lgSize) {
+            groups.unshift(digits.splice(-pattern.lgSize).join(''));
+          }
+          while (digits.length > pattern.gSize) {
+            groups.unshift(digits.splice(-pattern.gSize).join(''));
+          }
+          if (digits.length) {
+            groups.unshift(digits.join(''));
+          }
+          formattedText = groups.join(groupSep);
+          if (decimals.length) {
+            formattedText += decimalSep + decimals.join('');
+          }
+          if (exponent) {
+            formattedText += 'e+' + exponent;
+          }
+        }
+        if (number < 0 && !isZero) {
+          return pattern.negPre + formattedText + pattern.negSuf;
+        } else {
+          return pattern.posPre + formattedText + pattern.posSuf;
+        }
       }
       function padNumber(num, digits, trim) {
         var neg = '';
@@ -21256,7 +16782,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         }
         num = '' + num;
         while (num.length < digits)
-          num = '0' + num;
+          num = ZERO_CHAR + num;
         if (trim) {
           num = num.substr(num.length - digits);
         }
@@ -21397,12 +16923,12 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
           var dateTimezoneOffset = date.getTimezoneOffset();
           if (timezone) {
-            dateTimezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
+            dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
             date = convertTimezoneToLocal(date, timezone, true);
           }
           forEach(parts, function(value) {
             fn = DATE_FORMATS[value];
-            text += fn ? fn(date, $locale.DATETIME_FORMATS, dateTimezoneOffset) : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
+            text += fn ? fn(date, $locale.DATETIME_FORMATS, dateTimezoneOffset) : value === "''" ? "'" : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
           });
           return text;
         };
@@ -21446,8 +16972,11 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       orderByFilter.$inject = ['$parse'];
       function orderByFilter($parse) {
         return function(array, sortPredicate, reverseOrder) {
-          if (!(isArrayLike(array)))
+          if (array == null)
             return array;
+          if (!isArrayLike(array)) {
+            throw minErr('orderBy')('notarray', 'Expected array but received: {0}', array);
+          }
           if (!isArray(sortPredicate)) {
             sortPredicate = [sortPredicate];
           }
@@ -21844,7 +17373,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
       var formDirective = formDirectiveFactory();
       var ngFormDirective = formDirectiveFactory(true);
       var ISO_DATE_REGEXP = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
-      var URL_REGEXP = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
+      var URL_REGEXP = /^[a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+\])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
       var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
       var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/;
       var DATE_REGEXP = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -22084,7 +17613,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         if (nativeValidation) {
           ctrl.$parsers.push(function(value) {
             var validity = element.prop(VALIDITY_STATE_PROPERTY) || {};
-            return validity.badInput && !validity.typeMismatch ? undefined : value;
+            return validity.badInput || validity.typeMismatch ? undefined : value;
           });
         }
       }
@@ -22515,6 +18044,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                 var thisChangeId = ++changeCounter;
                 if (src) {
                   $templateRequest(src, true).then(function(response) {
+                    if (scope.$$destroyed)
+                      return;
                     if (thisChangeId !== changeCounter)
                       return;
                     var newScope = scope.$new();
@@ -22528,6 +18059,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
                     currentScope.$emit('$includeContentLoaded', src);
                     scope.$eval(onloadExp);
                   }, function() {
+                    if (scope.$$destroyed)
+                      return;
                     if (thisChangeId === changeCounter) {
                       cleanupLastIncludeContent();
                       scope.$emit('$includeContentError', src);
@@ -22549,7 +18082,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           priority: -400,
           require: 'ngInclude',
           link: function(scope, $element, $attr, ctrl) {
-            if (/SVG/.test($element[0].toString())) {
+            if (toString.call($element[0]).match(/SVG/)) {
               $element.empty();
               $compile(jqLiteBuildFragment(ctrl.template, document).childNodes)(scope, function namespaceAdaptedClone(clone) {
                 $element.append(clone);
@@ -22609,7 +18142,9 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           DIRTY_CLASS = 'ng-dirty',
           UNTOUCHED_CLASS = 'ng-untouched',
           TOUCHED_CLASS = 'ng-touched',
-          PENDING_CLASS = 'ng-pending';
+          PENDING_CLASS = 'ng-pending',
+          EMPTY_CLASS = 'ng-empty',
+          NOT_EMPTY_CLASS = 'ng-not-empty';
       var ngModelMinErr = minErr('ngModel');
       var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$parse', '$animate', '$timeout', '$rootScope', '$q', '$interpolate', function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
         this.$viewValue = Number.NaN;
@@ -22664,6 +18199,15 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         this.$render = noop;
         this.$isEmpty = function(value) {
           return isUndefined(value) || value === '' || value === null || value !== value;
+        };
+        this.$$updateEmptyClasses = function(value) {
+          if (ctrl.$isEmpty(value)) {
+            $animate.removeClass($element, NOT_EMPTY_CLASS);
+            $animate.addClass($element, EMPTY_CLASS);
+          } else {
+            $animate.removeClass($element, EMPTY_CLASS);
+            $animate.addClass($element, NOT_EMPTY_CLASS);
+          }
         };
         var currentValidationRunId = 0;
         addSetValidityMethod({
@@ -22774,7 +18318,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             forEach(ctrl.$asyncValidators, function(validator, name) {
               var promise = validator(modelValue, viewValue);
               if (!isPromiseLike(promise)) {
-                throw ngModelMinErr("$asyncValidators", "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
+                throw ngModelMinErr('nopromise', "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
               }
               setValidity(name, undefined);
               validatorPromises.push(promise.then(function() {
@@ -22809,6 +18353,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           if (ctrl.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !ctrl.$$hasNativeValidators)) {
             return;
           }
+          ctrl.$$updateEmptyClasses(viewValue);
           ctrl.$$lastCommittedViewValue = viewValue;
           if (ctrl.$pristine) {
             this.$setDirty();
@@ -22905,6 +18450,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               viewValue = formatters[idx](viewValue);
             }
             if (ctrl.$viewValue !== viewValue) {
+              ctrl.$$updateEmptyClasses(viewValue);
               ctrl.$viewValue = ctrl.$$lastCommittedViewValue = viewValue;
               ctrl.$render();
               ctrl.$$runValidators(modelValue, viewValue, noop);
@@ -23187,10 +18733,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         var optionTemplate = document.createElement('option'),
             optGroupTemplate = document.createElement('optgroup');
         function ngOptionsPostLink(scope, selectElement, attr, ctrls) {
-          var ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl)
-            return;
           var selectCtrl = ctrls[0];
+          var ngModelCtrl = ctrls[1];
           var multiple = attr.multiple;
           var emptyOption;
           for (var i = 0,
@@ -23348,7 +18892,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             var emptyOption_ = emptyOption && emptyOption[0];
             var unknownOption_ = unknownOption && unknownOption[0];
             if (emptyOption_ || unknownOption_) {
-              while (current && (current === emptyOption_ || current === unknownOption_ || current.nodeType === NODE_TYPE_COMMENT || current.value === '')) {
+              while (current && (current === emptyOption_ || current === unknownOption_ || current.nodeType === NODE_TYPE_COMMENT || (nodeName_(current) === 'option' && current.value === ''))) {
                 current = current.nextSibling;
               }
             }
@@ -23367,7 +18911,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               var group;
               var groupElement;
               var optionElement;
-              if (option.group) {
+              if (isDefined(option.group)) {
                 group = groupMap[option.group];
                 if (!group) {
                   groupElement = addOrReuseElement(selectElement[0], currentElement, 'optgroup', optGroupTemplate);
@@ -23394,7 +18938,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             ngModelCtrl.$render();
             if (!ngModelCtrl.$isEmpty(previousValue)) {
               var nextValue = selectCtrl.readValue();
-              if (ngOptions.trackBy ? !equals(previousValue, nextValue) : previousValue !== nextValue) {
+              var isNotPrimitive = ngOptions.trackBy || multiple;
+              if (isNotPrimitive ? !equals(previousValue, nextValue) : previousValue !== nextValue) {
                 ngModelCtrl.$setViewValue(nextValue);
                 ngModelCtrl.$render();
               }
@@ -23404,7 +18949,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
         return {
           restrict: 'A',
           terminal: true,
-          require: ['select', '?ngModel'],
+          require: ['select', 'ngModel'],
           link: {
             pre: function ngOptionsPreLink(scope, selectElement, attr, ctrls) {
               ctrls[0].registerOption = noop;
@@ -23744,16 +19289,24 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           });
         }
       });
+      var ngTranscludeMinErr = minErr('ngTransclude');
       var ngTranscludeDirective = ngDirective({
         restrict: 'EAC',
         link: function($scope, $element, $attrs, controller, $transclude) {
-          if (!$transclude) {
-            throw minErr('ngTransclude')('orphan', 'Illegal use of ngTransclude directive in the template! ' + 'No parent directive that requires a transclusion found. ' + 'Element: {0}', startingTag($element));
+          if ($attrs.ngTransclude === $attrs.$attr.ngTransclude) {
+            $attrs.ngTransclude = '';
           }
-          $transclude(function(clone) {
-            $element.empty();
-            $element.append(clone);
-          });
+          function ngTranscludeCloneAttachFn(clone) {
+            if (clone.length) {
+              $element.empty();
+              $element.append(clone);
+            }
+          }
+          if (!$transclude) {
+            throw ngTranscludeMinErr('orphan', 'Illegal use of ngTransclude directive in the template! ' + 'No parent directive that requires a transclusion found. ' + 'Element: {0}', startingTag($element));
+          }
+          var slotName = $attrs.ngTransclude || $attrs.ngTranscludeSlot;
+          $transclude(ngTranscludeCloneAttachFn, null, slotName);
         }
       });
       var scriptDirective = ['$templateCache', function($templateCache) {
@@ -23816,6 +19369,8 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           }
         };
         self.addOption = function(value, element) {
+          if (element[0].nodeType === NODE_TYPE_COMMENT)
+            return;
           assertNotHasOwnProperty(value, '"option value"');
           if (value === '') {
             self.emptyOption = element;
@@ -23874,7 +19429,10 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
           require: ['select', '?ngModel'],
           controller: SelectController,
           priority: 1,
-          link: {pre: selectPreLink}
+          link: {
+            pre: selectPreLink,
+            post: selectPostLink
+          }
         };
         function selectPreLink(scope, element, attr, ctrls) {
           var ngModelCtrl = ctrls[1];
@@ -23882,9 +19440,6 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             return;
           var selectCtrl = ctrls[0];
           selectCtrl.ngModelCtrl = ngModelCtrl;
-          ngModelCtrl.$render = function() {
-            selectCtrl.writeValue(ngModelCtrl.$viewValue);
-          };
           element.on('change', function() {
             scope.$apply(function() {
               ngModelCtrl.$setViewValue(selectCtrl.readValue());
@@ -23919,6 +19474,15 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
               return !value || value.length === 0;
             };
           }
+        }
+        function selectPostLink(scope, element, attrs, ctrls) {
+          var ngModelCtrl = ctrls[1];
+          if (!ngModelCtrl)
+            return;
+          var selectCtrl = ctrls[0];
+          ngModelCtrl.$render = function() {
+            selectCtrl.writeValue(ngModelCtrl.$viewValue);
+          };
         }
       };
       var optionDirective = ['$interpolate', function($interpolate) {
@@ -24070,6 +19634,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             "MONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             "SHORTDAY": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             "SHORTMONTH": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "STANDALONEMONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             "WEEKENDRANGE": [5, 6],
             "fullDate": "EEEE, MMMM d, y",
             "longDate": "MMMM d, y",
@@ -24107,6 +19672,7 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
             }]
           },
           "id": "en-us",
+          "localeID": "en_US",
           "pluralCat": function(n, opt_precision) {
             var i = n | 0;
             var vf = getVF(n, opt_precision);
@@ -24126,155 +19692,177 @@ $__System.registerDynamic("48", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("c", ["48"], true, function($__require, exports, module) {
+$__System.registerDynamic("b", ["51"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('48');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('51');
   return module.exports;
 });
 
-$__System.register('49', ['47', 'c'], function (_export) {
-  var _Promise, angular;
-
-  return {
-    setters: [function (_) {
-      _Promise = _['default'];
-    }, function (_c) {
-      angular = _c['default'];
-    }],
-    execute: function () {
-      // import categoriesCacheModule from 'sysadmin/app/categoriesCache';
-
-      'use strict';
-
-      _export('default', angular.module('categoryQueryModule', []).factory('GetCategoriesFactory', function ($http) {
-
-        //let categoriesCacheName = categoriesCacheFactory.info().id;
-
-        var allCats = function allCats() {
-          // if (categoriesCacheFactory.info().size === 0)
-          // {
-          var url = "/api/category/";
-          return $http.get(url).then(function successCallback(response) {
-            //categoriesCacheFactory.put(categoriesCacheName, response.data.categories);
-            return response.data.categories;
-          });
-          // }
-          // return categoriesCacheFactory.get(categoriesCacheName);
-        };
-
-        var byId = function byId(id) {
-          var categories = null;
-          //categoriesCacheFactory.get(categoriesCacheName);
-          if (categories === null || categories === undefined) {
-            var url = '/api/category/' + id;
-            return $http.get(url);
-          }
-          var category = null;
-          category = categories.filter(function (cat) {
-            return cat._id === id;
-          }).pop();
-          return new _Promise(function (resolve, reject) {
-            resolve({ "status": 200, data: { category: category } });
-          });
-        };
-
-        return {
-          allCats: allCats,
-          byId: byId
-        };
-      }));
-    }
-  };
+(function() {
+var define = $__System.amdDefine;
+define("52", [], function() {
+  return "<nav class=\"navbar navbar-default navbar-static-top\" role=\"navigation\">\r\n    <div class=\"container\">\r\n        <div class=\"navbar-header\">\r\n            <button type=\"button\" class=\"navbar-toggle\" ng-init=\"navCollapsed = true\"\r\n                    ng-click=\"navCollapsed = !navCollapsed\">\r\n                <span class=\"sr-only\">Toggle navigation</span>\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n                <span class=\"icon-bar\"></span>\r\n            </button>\r\n            <a class=\"navbar-brand\" ui-sref=\"home\" href=\"return false;\"><img alt=\"Hanoi Box\" src=\"public/images/hanoiboxLogo.png\" width=\"80\" /></a>\r\n        </div>\r\n\r\n        <!-- Collect the nav links, forms, and other content for toggling -->\r\n        \r\n        <div class=\"collapse navbar-collapse\" ng-class=\"!navCollapsed && 'in'\">\r\n            <div ng-repeat=\"topCat in topCats\">\r\n                <ul class=\"nav navbar-nav\">\r\n                    <li ng-class=\"{active: currentCategoryId === topCat.id}\" uib-dropdown>\r\n                        <a href=\"{{topCat.link}}\" uib-dropdown-toggle>\r\n                            {{topCat.description}}\r\n                            <b class='caret'></b>\r\n                        </a>\r\n                        <tree tree='topCat.tree'></tree>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div>\r\n        <!-- /.navbar-collapse -->\r\n    </div>\r\n</nav>";
 });
-$__System.register('4a', ['49', 'c', 'd'], function (_export) {
+
+})();
+(function() {
+var define = $__System.amdDefine;
+define("53", [], function() {
+  return "<ul class='dropdown-menu'>\r\n    <leaf ng-repeat='leaf in tree' leaf='leaf'></leaf>\r\n</ul>";
+});
+
+})();
+(function() {
+var define = $__System.amdDefine;
+define("54", [], function() {
+  return "<li ng-class=\"{divider: leaf.name == 'divider', active: leaf.currentCategoryId === leaf.id}\">\r\n    <a href=\"{{leaf.link}}\" ng-if=\"leaf.name !== 'divider'\">{{leaf.name}}</a>\r\n</li>";
+});
+
+})();
+$__System.register('e', ['52', '53', '54', 'b'], function (_export) {
     'use strict';
 
-    var categoryQueryModule, angular;
+    var navbarTemplate, navbarUlTemplate, navbarLiTemplate, angular;
     return {
         setters: [function (_) {
-            categoryQueryModule = _['default'];
-        }, function (_c) {
-            angular = _c['default'];
-        }, function (_d) {}],
+            navbarTemplate = _['default'];
+        }, function (_2) {
+            navbarUlTemplate = _2['default'];
+        }, function (_3) {
+            navbarLiTemplate = _3['default'];
+        }, function (_b) {
+            angular = _b['default'];
+        }],
         execute: function () {
-            _export('default', angular.module('HomeControllerModule', [categoryQueryModule.name]).controller('HomeController', function ($scope, allCategories, $location, $http) {
-                var _this = this;
-
-                $scope.categories = allCategories;
-                $scope.topCategories = $scope.categories.filter(function (cat) {
-                    return cat.level === 1;
-                });
-
-                this.selectedCategory = function (id) {
-                    console.log('selected category was:', id);
+            _export('default', angular.module('navbarAppModule', []).directive("bootstrapNavbar", function () {
+                return {
+                    restrict: "E", // Restrict to element
+                    replace: true, // replace element with markup
+                    transclude: true, // What does this transclude option do, exactly?
+                    // transclude makes the contents of a directive have access to the scope outside of the directive rather than inside.
+                    template: navbarTemplate
                 };
+            }).directive('tree', function () {
+                return {
+                    restrict: 'E',
+                    replace: true,
+                    scope: {
+                        tree: '='
+                    },
+                    template: navbarUlTemplate
+                };
+            }).directive('leaf', ['$compile', function ($compile) {
+                return {
+                    restrict: 'E',
+                    replace: true,
+                    scope: {
+                        leaf: '='
+                    },
+                    template: navbarLiTemplate,
+                    link: function link(scope, element, attrs) {
+                        if (angular.isArray(scope.leaf.subtree)) {
+                            element.append('<tree tree=\"leaf.subtree\"></tree>');
 
-                this.loadSubCategories = function (id) {
-                    var subCategories = $scope.categories.filter(function (cat) {
-                        return cat.parentCategoryId === id;
+                            // find the parent of the element
+                            var parent = element.parent();
+                            var classFound = false;
+
+                            // check if in the hierarchy of the element exists a dropdown with class navbar-right
+                            while (parent.length > 0 && !classFound) {
+                                // check if the dropdown has been push to right
+                                if (parent.hasClass('navbar-right')) {
+                                    classFound = true;
+                                }
+                                parent = parent.parent();
+                            }
+
+                            // add a different class according to the position of the dropdown
+                            if (classFound) {
+                                element.addClass('dropdown-submenu-right');
+                            } else {
+                                element.addClass('dropdown-submenu');
+                            }
+
+                            $compile(element.contents())(scope);
+                        }
+                    }
+                };
+            }]));
+
+            // angular.module("public/app/navbar/template/navbar-ul.html", []).run(["$templateCache", function($templateCache) {
+            //   $templateCache.put("public/app/navbar/template/navbar-ul.html",
+            //     "<ul class='dropdown-menu'>\n" +
+            //     "    <leaf ng-repeat='leaf in tree' leaf='leaf'></leaf>\n" +
+            //     "</ul>");
+            // }]);
+
+            // angular.module("public/app/navbar/template/navbar-li.html", []).run(["$templateCache", function($templateCache) {
+            //   $templateCache.put("public/app/navbar/template/navbar-li.html",
+            //     "<li ng-class=\"{divider: leaf.name == 'divider'}\" ng-class=\"{active: currentCategoryId === topCat.id}\" >\n" +
+            //     "    <a ng-click=\"{{leaf.link}}\" ng-if=\"leaf.name !== 'divider'\">{{leaf.name}}</a>\n" +
+            //     "</li>");
+            // }]);
+        }
+    };
+});
+$__System.register('55', ['b', 'f', 'c', 'd', 'e'], function (_export) {
+    'use strict';
+
+    var angular, categoryQueryModule, categoryCommandModule, navbarAppModule;
+    return {
+        setters: [function (_b) {
+            angular = _b['default'];
+        }, function (_f) {}, function (_c) {
+            categoryQueryModule = _c['default'];
+        }, function (_d) {
+            categoryCommandModule = _d['default'];
+        }, function (_e) {
+            navbarAppModule = _e['default'];
+        }],
+        execute: function () {
+            _export('default', angular.module("CategoryControllerModule", [categoryQueryModule.name, categoryCommandModule.name, navbarAppModule.name]).controller("CategoryController", function ($scope, allCategories, $location, $routeParams, GenerateCategoryTree) {
+                $scope.currentCategoryId = null;
+
+                if ($routeParams.id !== undefined) {
+                    $scope.currentCategoryId = $routeParams.id.replace(":", "").replace("id", "");
+                    $scope.currentCategoryId = parseInt($scope.currentCategoryId);
+                    $scope.category = allCategories.find(function (cat) {
+                        return cat._id === $scope.currentCategoryId;
                     });
-                    $scope.categoryTabs = $scope.categoryTabs.map(function (tab) {
-                        return tab.categories = subCategories;
-                    });
-                    console.log($scope.categoryTabs);
-                };
+                }
 
-                $scope.selectSubCategories = function (id) {
-                    console.log('id was:', id);
-                    _this.loadSubCategories(id);
-                };
-
-                $scope.categoryTabs = $scope.topCategories.map(function (cat) {
-                    return { id: cat._id, title: cat.description, categories: $scope.categories };
-                });
-                //  [{
-                //     title: "one",
-                //     active: true,
-                //     disabled: false,
-                //     content: "test"  
-                // }, {
-                //     title: "two",
-                //     active: true,
-                //     disabled: false,
-                //     content: "hello"  
-                // }];
+                $scope.topCats = GenerateCategoryTree.generate(allCategories, $scope.currentCategoryId);
             }));
         }
     };
 });
-(function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("4b", [], function() {
-  return "<div class=\"container\">\r\n    <uib-tabset>\r\n        <uib-tab ng-repeat=\"tab in categoryTabs\" \r\n                heading=\"{{tab.title}}\" id=\"{{tab.id}}\" categories=\"{{ctrl.categories}}\"\r\n                active=\"tab.active\" disable=\"tab.disabled\" \r\n                select=\"selectSubCategories(tab.id)\">\r\n            \r\n            <!--<div class=\"dropdown\">\r\n                <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">\r\n                    Please select\r\n                    <span class=\"caret\"></span>\r\n                </button>\r\n                <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">                 \r\n                    <li ng-repeat=\"category in tab.categories track by _id\" ng-click=\"selectedCategory(category._id)\" title=\"{{category.description}}\">\r\n                        {{category.vietDescription}}\r\n                    </li>\r\n                </ul>\r\n            </div>-->\r\n            <select ng-model=\"categoryId\">\r\n                            <option ng-repeat=\"option in tab.categories\" value=\"{{option._id}}\" title=\"{{option.description}}\">{{option.vietDescription}}</option>   \r\n                        </select>\r\n                        \r\n            \r\n        </uib-tab>\r\n    </uib-tabset>\r\n</div>";
-});
+$__System.register('56', ['7', '9', '10', '11', '55', 'b', 'f', 'a'], function (_export) {
+  // import advertTemplate from 'public/app/routes/advert/index.html!text';
 
-_removeDefine();
-})();
-$__System.register('4c', ['7', 'c', 'd', 'a', '4a', '4b'], function (_export) {
-  // import categoriesTemplate from 'sysadmin/app/routes/categories/categories.html!text';
-  // import createEditCategoryTemplate from 'sysadmin/app/routes/categories/createEdit.html!text';
-
-  // import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
-  // import createEditCategoryControllerModule from 'sysadmin/app/routes/categories/createEditCategoryController';
   'use strict';
 
-  var loadingBar, angular, homeControllerModule, homeTemplate;
+  var loadingBar, homeTemplate, categoryTemplate, categoryControllerModule, angular, homeControllerModule;
   return {
     setters: [function (_) {
       loadingBar = _['default'];
-    }, function (_c) {
-      angular = _c['default'];
-    }, function (_d) {}, function (_a) {}, function (_a2) {
-      homeControllerModule = _a2['default'];
+    }, function (_2) {}, function (_3) {
+      homeTemplate = _3['default'];
+    }, function (_4) {
+      categoryTemplate = _4['default'];
+    }, function (_5) {
+      categoryControllerModule = _5['default'];
     }, function (_b) {
-      homeTemplate = _b['default'];
+      angular = _b['default'];
+    }, function (_f) {}, function (_a) {
+      homeControllerModule = _a['default'];
     }],
     execute: function () {
-      _export('default', angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap.dropdown', 'ui.bootstrap.tabs', homeControllerModule.name]).config(function ($routeProvider) {
+      _export('default', angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', 'ui.bootstrap.dropdown', 'ui.bootstrap.tabs', 'ui.bootstrap.collapse', homeControllerModule.name, categoryControllerModule.name, 'LocalStorageModule']).config(function ($routeProvider, $locationProvider, localStorageServiceProvider) {
+
+        localStorageServiceProvider.setPrefix('public').setStorageType('sessionStorage');
 
         $routeProvider.when('/', {
           template: homeTemplate,
@@ -24285,17 +19873,40 @@ $__System.register('4c', ['7', 'c', 'd', 'a', '4a', '4b'], function (_export) {
               return GetCategoriesFactory.allCats();
             }
           }
-        }).otherwise({
+        }).when('/category/:id', {
+          template: categoryTemplate,
+          controller: 'CategoryController',
+          controllerAs: 'ctrl',
+          resolve: {
+            allCategories: function allCategories(GetCategoriesFactory) {
+              return GetCategoriesFactory.allCats();
+            }
+          }
+        })
+        //   .when('/advert/:id', {
+        //       template: advertTemplate,
+        //       controller: 'AdvertController',
+        //       controllerAs: 'ctrl',
+        //       resolve: {
+        //          allCategories: (GetCategoriesFactory) => {
+        //            return GetCategoriesFactory.allCats();
+        //          }
+        //       }
+        //   })
+        .otherwise({
           redirectTo: '/'
         });
+
+        // use the HTML5 History API
+        $locationProvider.html5Mode(true);
       }));
     }
   };
 });
-$__System.register('4d', ['4', 'c', '4c'], function (_export) {
+$__System.register('57', ['4', '56', 'b'], function (_export) {
 	'use strict';
 
-	var _, angular, routesModule;
+	var _, routesModule, angular;
 
 	_export('bootstrap', bootstrap);
 
@@ -24313,21 +19924,21 @@ $__System.register('4d', ['4', 'c', '4c'], function (_export) {
 	return {
 		setters: [function (_2) {
 			_ = _2['default'];
-		}, function (_c) {
-			angular = _c['default'];
-		}, function (_c2) {
-			routesModule = _c2['default'];
+		}, function (_3) {
+			routesModule = _3['default'];
+		}, function (_b) {
+			angular = _b['default'];
 		}],
 		execute: function () {}
 	};
 });
-$__System.register('1', ['4d'], function (_export) {
+$__System.register('1', ['57'], function (_export) {
   'use strict';
 
   var bootstrap;
   return {
-    setters: [function (_d) {
-      bootstrap = _d.bootstrap;
+    setters: [function (_) {
+      bootstrap = _.bootstrap;
     }],
     execute: function () {
       bootstrap();

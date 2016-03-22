@@ -1,0 +1,15 @@
+{{#if id}}
+    <div>
+        <div>
+            <h4>404</h4>
+        </div>
+        <span>Category with Id: {{id}} was not found</span>    
+    </div>
+{{else}}
+    <div>
+        <div>
+            <h4>500</h4>
+        </div>
+        <span>There was a serious problem: {{{info}}}</span>    
+    </div>
+{{/if}}

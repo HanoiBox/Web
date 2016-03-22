@@ -1,15 +1,15 @@
 !function(e){function r(e,r,o){return 4===arguments.length?t.apply(this,arguments):void n(e,{declarative:!0,deps:r,declare:o})}function t(e,r,t,o){n(e,{declarative:!1,deps:r,executingRequire:t,execute:o})}function n(e,r){r.name=e,e in p||(p[e]=r),r.normalizedDeps=r.deps}function o(e,r){if(r[e.groupIndex]=r[e.groupIndex]||[],-1==v.call(r[e.groupIndex],e)){r[e.groupIndex].push(e);for(var t=0,n=e.normalizedDeps.length;n>t;t++){var a=e.normalizedDeps[t],u=p[a];if(u&&!u.evaluated){var d=e.groupIndex+(u.declarative!=e.declarative);if(void 0===u.groupIndex||u.groupIndex<d){if(void 0!==u.groupIndex&&(r[u.groupIndex].splice(v.call(r[u.groupIndex],u),1),0==r[u.groupIndex].length))throw new TypeError("Mixed dependency cycle detected");u.groupIndex=d}o(u,r)}}}}function a(e){var r=p[e];r.groupIndex=0;var t=[];o(r,t);for(var n=!!r.declarative==t.length%2,a=t.length-1;a>=0;a--){for(var u=t[a],i=0;i<u.length;i++){var s=u[i];n?d(s):l(s)}n=!n}}function u(e){return x[e]||(x[e]={name:e,dependencies:[],exports:{},importers:[]})}function d(r){if(!r.module){var t=r.module=u(r.name),n=r.module.exports,o=r.declare.call(e,function(e,r){if(t.locked=!0,"object"==typeof e)for(var o in e)n[o]=e[o];else n[e]=r;for(var a=0,u=t.importers.length;u>a;a++){var d=t.importers[a];if(!d.locked)for(var i=0;i<d.dependencies.length;++i)d.dependencies[i]===t&&d.setters[i](n)}return t.locked=!1,r},r.name);t.setters=o.setters,t.execute=o.execute;for(var a=0,i=r.normalizedDeps.length;i>a;a++){var l,s=r.normalizedDeps[a],c=p[s],v=x[s];v?l=v.exports:c&&!c.declarative?l=c.esModule:c?(d(c),v=c.module,l=v.exports):l=f(s),v&&v.importers?(v.importers.push(t),t.dependencies.push(v)):t.dependencies.push(null),t.setters[a]&&t.setters[a](l)}}}function i(e){var r,t=p[e];if(t)t.declarative?c(e,[]):t.evaluated||l(t),r=t.module.exports;else if(r=f(e),!r)throw new Error("Unable to load dependency "+e+".");return(!t||t.declarative)&&r&&r.__useDefault?r["default"]:r}function l(r){if(!r.module){var t={},n=r.module={exports:t,id:r.name};if(!r.executingRequire)for(var o=0,a=r.normalizedDeps.length;a>o;o++){var u=r.normalizedDeps[o],d=p[u];d&&l(d)}r.evaluated=!0;var c=r.execute.call(e,function(e){for(var t=0,n=r.deps.length;n>t;t++)if(r.deps[t]==e)return i(r.normalizedDeps[t]);throw new TypeError("Module "+e+" not declared as a dependency.")},t,n);c&&(n.exports=c),t=n.exports,t&&t.__esModule?r.esModule=t:r.esModule=s(t)}}function s(r){if(r===e)return r;var t={};if("object"==typeof r||"function"==typeof r)if(g){var n;for(var o in r)(n=Object.getOwnPropertyDescriptor(r,o))&&h(t,o,n)}else{var a=r&&r.hasOwnProperty;for(var o in r)(!a||r.hasOwnProperty(o))&&(t[o]=r[o])}return t["default"]=r,h(t,"__useDefault",{value:!0}),t}function c(r,t){var n=p[r];if(n&&!n.evaluated&&n.declarative){t.push(r);for(var o=0,a=n.normalizedDeps.length;a>o;o++){var u=n.normalizedDeps[o];-1==v.call(t,u)&&(p[u]?c(u,t):f(u))}n.evaluated||(n.evaluated=!0,n.module.execute.call(e))}}function f(e){if(D[e])return D[e];if("@node/"==e.substr(0,6))return y(e.substr(6));var r=p[e];if(!r)throw"Module "+e+" not present.";return a(e),c(e,[]),p[e]=void 0,r.declarative&&h(r.module.exports,"__esModule",{value:!0}),D[e]=r.declarative?r.module.exports:r.esModule}var p={},v=Array.prototype.indexOf||function(e){for(var r=0,t=this.length;t>r;r++)if(this[r]===e)return r;return-1},g=!0;try{Object.getOwnPropertyDescriptor({a:0},"a")}catch(m){g=!1}var h;!function(){try{Object.defineProperty({},"a",{})&&(h=Object.defineProperty)}catch(e){h=function(e,r,t){try{e[r]=t.value||t.get.call(e)}catch(n){}}}}();var x={},y="undefined"!=typeof System&&System._nodeRequire||"undefined"!=typeof require&&require.resolve&&"undefined"!=typeof process&&require,D={"@empty":{}};return function(e,n,o){return function(a){a(function(a){for(var u={_nodeRequire:y,register:r,registerDynamic:t,get:f,set:function(e,r){D[e]=r},newModule:function(e){return e}},d=0;d<n.length;d++)(function(e,r){r&&r.__esModule?D[e]=r:D[e]=s(r)})(n[d],arguments[d]);o(u);var i=f(e[0]);if(e.length>1)for(var d=1;d<e.length;d++)f(e[d]);return i.__useDefault?i["default"]:i})}}}("undefined"!=typeof self?self:global)
 
-(["1"], [], function($__System) {
+(["1","1"], [], function($__System) {
 
-!function(e){function n(e,n){for(var t=e.split(".");t.length;)n=n[t.shift()];return n}function t(n){if(Object.keys)Object.keys(e).forEach(n);else for(var t in e)f.call(e,t)&&n(t)}function r(n){t(function(t){if(-1==a.call(l,t)){try{var r=e[t]}catch(o){l.push(t)}n(t,r)}})}var o,i=$__System,f=Object.prototype.hasOwnProperty,a=Array.prototype.indexOf||function(e){for(var n=0,t=this.length;t>n;n++)if(this[n]===e)return n;return-1},l=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(t,i,f){var a=e.define;e.define=void 0,e.exports=void 0,e.module&&e.module.exports&&(e.module=void 0);var l;if(f){l={};for(var u in f)l[u]=e[u],e[u]=f[u]}return i||(o={},r(function(e,n){o[e]=n})),function(){var t;if(i)t=n(i,e);else{var f,u,s={};r(function(e,n){o[e]!==n&&"undefined"!=typeof n&&(s[e]=n,"undefined"!=typeof f?u||f===n||(u=!0):f=n)}),t=u?s:f}if(l)for(var c in l)e[c]=l[c];return e.define=a,t}}}))}("undefined"!=typeof self?self:global);
+!function(e){function n(e,n){for(var t=e.split(".");t.length;)n=n[t.shift()];return n}function t(n){if(Object.keys)Object.keys(e).forEach(n);else for(var t in e)o.call(e,t)&&n(t)}function r(n){t(function(t){if(-1==a.call(l,t)){try{var r=e[t]}catch(f){l.push(t)}n(t,r)}})}var f,i=$__System,o=Object.prototype.hasOwnProperty,a=Array.prototype.indexOf||function(e){for(var n=0,t=this.length;t>n;n++)if(this[n]===e)return n;return-1},l=["_g","sessionStorage","localStorage","clipboardData","frames","frameElement","external","mozAnimationStartTime","webkitStorageInfo","webkitIndexedDB"];i.set("@@global-helpers",i.newModule({prepareGlobal:function(t,i,o){var a=e.define;e.define=void 0;var l;if(o){l={};for(var c in o)l[c]=e[c],e[c]=o[c]}return i||(f={},r(function(e,n){f[e]=n})),function(){var t;if(i)t=n(i,e);else{var o,c,u={};r(function(e,n){f[e]!==n&&"undefined"!=typeof n&&(u[e]=n,"undefined"!=typeof o?c||o===n||(c=!0):o=n)}),t=c?u:o}if(l)for(var s in l)e[s]=l[s];return e.define=a,t}}}))}("undefined"!=typeof self?self:global);
 !function(){var t=$__System;if("undefined"!=typeof window&&"undefined"!=typeof document&&window.location)var s=location.protocol+"//"+location.hostname+(location.port?":"+location.port:"");t.set("@@cjs-helpers",t.newModule({getPathVars:function(t){var n,o=t.lastIndexOf("!");n=-1!=o?t.substr(0,o):t;var e=n.split("/");return e.pop(),e=e.join("/"),"file:///"==n.substr(0,8)?(n=n.substr(7),e=e.substr(7),isWindows&&(n=n.substr(1),e=e.substr(1))):s&&n.substr(0,s.length)===s&&(n=n.substr(s.length),e=e.substr(s.length)),{filename:n,dirname:e}}}))}();
-!function(e){function n(e,n){e=e.replace(l,"");var r=e.match(s),i=(r[1].split(",")[n]||"require").replace(p,""),t=c[i]||(c[i]=new RegExp(u+i+a,"g"));t.lastIndex=0;for(var o,f=[];o=t.exec(e);)f.push(o[2]||o[3]);return f}function r(e,n,i,t){if("object"==typeof e&&!(e instanceof Array))return r.apply(null,Array.prototype.splice.call(arguments,1,arguments.length-1));if("string"==typeof e&&"function"==typeof n&&(e=[e]),!(e instanceof Array)){if("string"==typeof e){var f=o.get(e);return f.__useDefault?f["default"]:f}throw new TypeError("Invalid require")}for(var l=[],u=0;u<e.length;u++)l.push(o["import"](e[u],t));Promise.all(l).then(function(e){n&&n.apply(null,e)},i)}function i(i,t,l){"string"!=typeof i&&(l=t,t=i,i=null),t instanceof Array||(l=t,t=["require","exports","module"].splice(0,l.length)),"function"!=typeof l&&(l=function(e){return function(){return e}}(l)),void 0===t[t.length-1]&&t.pop();var u,a,s;-1!=(u=f.call(t,"require"))&&(t.splice(u,1),i||(t=t.concat(n(l.toString(),u)))),-1!=(a=f.call(t,"exports"))&&t.splice(a,1),-1!=(s=f.call(t,"module"))&&t.splice(s,1);var p={name:i,deps:t,execute:function(n,i,f){for(var p=[],c=0;c<t.length;c++)p.push(n(t[c]));f.uri=f.id,f.config=function(){},-1!=s&&p.splice(s,0,f),-1!=a&&p.splice(a,0,i),-1!=u&&p.splice(u,0,function(e,i,t){return"string"==typeof e&&"function"!=typeof i?n(e):r.call(o,e,i,t,f.id)});var d=l.apply(-1==a?e:i,p);return"undefined"==typeof d&&f&&(d=f.exports),"undefined"!=typeof d?d:void 0}};if(i)d.anonDefine||d.isBundle?(d.anonDefine&&d.anonDefine.name&&o.registerDynamic(d.anonDefine.name,d.anonDefine.deps,!1,d.anonDefine.execute),d.anonDefine=null):d.anonDefine=p,d.isBundle=!0,o.registerDynamic(i,p.deps,!1,p.execute);else{if(d.anonDefine)throw new TypeError("Multiple defines for anonymous module");d.anonDefine=p}}function t(n){d.anonDefine=null,d.isBundle=!1;var r=e.module,t=e.exports,o=e.define;return e.module=void 0,e.exports=void 0,e.define=i,function(){e.define=o,e.module=r,e.exports=t}}var o=$__System,f=Array.prototype.indexOf||function(e){for(var n=0,r=this.length;r>n;n++)if(this[n]===e)return n;return-1},l=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/gm,u="(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])",a="\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)",s=/\(([^\)]*)\)/,p=/^\s+|\s+$/g,c={};i.amd={};var d={isBundle:!1,anonDefine:null};o.set("@@amd-helpers",o.newModule({createDefine:t,require:r,define:i,lastModule:d})),o.amdDefine=i,o.amdRequire=r}("undefined"!=typeof self?self:global);
+!function(e){function n(e,n){e=e.replace(l,"");var r=e.match(u),t=(r[1].split(",")[n]||"require").replace(s,""),i=p[t]||(p[t]=new RegExp(a+t+f,"g"));i.lastIndex=0;for(var o,c=[];o=i.exec(e);)c.push(o[2]||o[3]);return c}function r(e,n,t,o){if("object"==typeof e&&!(e instanceof Array))return r.apply(null,Array.prototype.splice.call(arguments,1,arguments.length-1));if("string"==typeof e&&"function"==typeof n&&(e=[e]),!(e instanceof Array)){if("string"==typeof e){var l=i.get(e);return l.__useDefault?l["default"]:l}throw new TypeError("Invalid require")}for(var a=[],f=0;f<e.length;f++)a.push(i["import"](e[f],o));Promise.all(a).then(function(e){n&&n.apply(null,e)},t)}function t(t,l,a){"string"!=typeof t&&(a=l,l=t,t=null),l instanceof Array||(a=l,l=["require","exports","module"].splice(0,a.length)),"function"!=typeof a&&(a=function(e){return function(){return e}}(a)),void 0===l[l.length-1]&&l.pop();var f,u,s;-1!=(f=o.call(l,"require"))&&(l.splice(f,1),t||(l=l.concat(n(a.toString(),f)))),-1!=(u=o.call(l,"exports"))&&l.splice(u,1),-1!=(s=o.call(l,"module"))&&l.splice(s,1);var p={name:t,deps:l,execute:function(n,t,o){for(var p=[],c=0;c<l.length;c++)p.push(n(l[c]));o.uri=o.id,o.config=function(){},-1!=s&&p.splice(s,0,o),-1!=u&&p.splice(u,0,t),-1!=f&&p.splice(f,0,function(e,t,l){return"string"==typeof e&&"function"!=typeof t?n(e):r.call(i,e,t,l,o.id)});var d=a.apply(-1==u?e:t,p);return"undefined"==typeof d&&o&&(d=o.exports),"undefined"!=typeof d?d:void 0}};if(t)c.anonDefine||c.isBundle?c.anonDefine&&c.anonDefine.name&&(c.anonDefine=null):c.anonDefine=p,c.isBundle=!0,i.registerDynamic(p.name,p.deps,!1,p.execute);else{if(c.anonDefine&&!c.anonDefine.name)throw new Error("Multiple anonymous defines in module "+t);c.anonDefine=p}}var i=$__System,o=Array.prototype.indexOf||function(e){for(var n=0,r=this.length;r>n;n++)if(this[n]===e)return n;return-1},l=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/gm,a="(?:^|[^$_a-zA-Z\\xA0-\\uFFFF.])",f="\\s*\\(\\s*(\"([^\"]+)\"|'([^']+)')\\s*\\)",u=/\(([^\)]*)\)/,s=/^\s+|\s+$/g,p={};t.amd={};var c={isBundle:!1,anonDefine:null};i.amdDefine=t,i.amdRequire=r}("undefined"!=typeof self?self:global);
 $__System.registerDynamic("2", ["3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
   (function(process) {
     ;
@@ -4315,25 +4315,23 @@ $__System.registerDynamic("2", ["3"], true, function($__require, exports, module
       }
     }.call(this));
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("4", ["2"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('2');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("5", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
   (function() {
     'use strict';
@@ -4534,28 +4532,25 @@ $__System.registerDynamic("5", [], true, function($__require, exports, module) {
       }];
     });
   })();
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("6", ["5"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   $__require('5');
   module.exports = 'angular-loading-bar';
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("7", ["6"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('6');
-  global.define = __define;
   return module.exports;
 });
 
@@ -4665,8 +4660,8 @@ $__System.register('b', ['8', '9', 'd', 'c'], function (_export) {
         }
     };
 });
-$__System.registerDynamic("e", ["9"], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, null, null);
+$__System.registerDynamic("e", ["9"], false, function($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, null, null);
   (function() {
     "format global";
     "deps angular";
@@ -4730,9 +4725,17 @@ $__System.registerDynamic("e", ["9"], false, function(__require, __exports, __mo
                 routes: routes,
                 reload: function() {
                   forceReload = true;
+                  var fakeLocationEvent = {
+                    defaultPrevented: false,
+                    preventDefault: function fakePreventDefault() {
+                      this.defaultPrevented = true;
+                      forceReload = false;
+                    }
+                  };
                   $rootScope.$evalAsync(function() {
-                    prepareRoute();
-                    commitRoute();
+                    prepareRoute(fakeLocationEvent);
+                    if (!fakeLocationEvent.defaultPrevented)
+                      commitRoute();
                   });
                 },
                 updateParams: function(newParams) {
@@ -4956,6 +4959,7 @@ $__System.registerDynamic("e", ["9"], false, function(__require, __exports, __mo
               $element.data('$ngControllerController', controller);
               $element.children().data('$ngControllerController', controller);
             }
+            scope[current.resolveAs || '$resolve'] = locals;
             link(scope);
           }
         };
@@ -4967,11 +4971,10 @@ $__System.registerDynamic("e", ["9"], false, function(__require, __exports, __mo
 
 $__System.registerDynamic("d", ["e"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('e');
-  global.define = __define;
   return module.exports;
 });
 
@@ -5068,19 +5071,18 @@ $__System.register('f', ['9', 'a'], function (_export) {
 });
 $__System.registerDynamic("10", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("11", ["12", "13"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var toInteger = $__require('12'),
       defined = $__require('13');
   module.exports = function(TO_STRING) {
@@ -5096,16 +5098,15 @@ $__System.registerDynamic("11", ["12", "13"], true, function($__require, exports
       return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff ? TO_STRING ? s.charAt(i) : a : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("14", ["11", "15"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var $at = $__require('11')(true);
   $__require('15')(String, 'String', function(iterated) {
     this._t = String(iterated);
@@ -5126,82 +5127,76 @@ $__System.registerDynamic("14", ["11", "15"], true, function($__require, exports
       done: false
     };
   });
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("16", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function() {};
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("17", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(done, value) {
     return {
       value: value,
       done: !!done
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("18", ["19"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var cof = $__require('19');
   module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it) {
     return cof(it) == 'String' ? it.split('') : Object(it);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("13", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     if (it == undefined)
       throw TypeError("Can't call method on  " + it);
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1a", ["18", "13"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var IObject = $__require('18'),
       defined = $__require('13');
   module.exports = function(it) {
     return IObject(defined(it));
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1b", ["1c", "1d", "1e", "1f", "20"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var $ = $__require('1c'),
       descriptor = $__require('1d'),
       setToStringTag = $__require('1e'),
@@ -5213,16 +5208,15 @@ $__System.registerDynamic("1b", ["1c", "1d", "1e", "1f", "20"], true, function($
     Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
     setToStringTag(Constructor, NAME + ' Iterator');
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("15", ["21", "22", "23", "1f", "24", "25", "1b", "1e", "1c", "20"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var LIBRARY = $__require('21'),
       $export = $__require('22'),
       redefine = $__require('23'),
@@ -5300,16 +5294,15 @@ $__System.registerDynamic("15", ["21", "22", "23", "1f", "24", "25", "1b", "1e",
     }
     return methods;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("26", ["16", "17", "25", "1a", "15"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var addToUnscopables = $__require('16'),
       step = $__require('17'),
       Iterators = $__require('25'),
@@ -5336,37 +5329,34 @@ $__System.registerDynamic("26", ["16", "17", "25", "1a", "15"], true, function($
   addToUnscopables('keys');
   addToUnscopables('values');
   addToUnscopables('entries');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("27", ["26", "25"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   $__require('26');
   var Iterators = $__require('25');
   Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("21", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = true;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("22", ["28", "29", "2a"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var global = $__require('28'),
       core = $__require('29'),
       ctx = $__require('2a'),
@@ -5408,29 +5398,27 @@ $__System.registerDynamic("22", ["28", "29", "2a"], true, function($__require, e
   $export.B = 16;
   $export.W = 32;
   module.exports = $export;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2b", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it, Constructor, name) {
     if (!(it instanceof Constructor))
       throw TypeError(name + ": use the 'new' operator!");
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2c", ["2d"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var anObject = $__require('2d');
   module.exports = function(iterator, fn, value, entries) {
     try {
@@ -5442,58 +5430,54 @@ $__System.registerDynamic("2c", ["2d"], true, function($__require, exports, modu
       throw e;
     }
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2e", ["25", "20"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var Iterators = $__require('25'),
       ITERATOR = $__require('20')('iterator'),
       ArrayProto = Array.prototype;
   module.exports = function(it) {
     return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("12", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var ceil = Math.ceil,
       floor = Math.floor;
   module.exports = function(it) {
     return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2f", ["12"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var toInteger = $__require('12'),
       min = Math.min;
   module.exports = function(it) {
     return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("30", ["19", "20"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var cof = $__require('19'),
       TAG = $__require('20')('toStringTag'),
       ARG = cof(function() {
@@ -5505,25 +5489,23 @@ $__System.registerDynamic("30", ["19", "20"], true, function($__require, exports
         B;
     return it === undefined ? 'Undefined' : it === null ? 'Null' : typeof(T = (O = Object(it))[TAG]) == 'string' ? T : ARG ? cof(O) : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("25", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = {};
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("31", ["30", "20", "25", "29"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var classof = $__require('30'),
       ITERATOR = $__require('20')('iterator'),
       Iterators = $__require('25');
@@ -5531,15 +5513,14 @@ $__System.registerDynamic("31", ["30", "20", "25", "29"], true, function($__requ
     if (it != undefined)
       return it[ITERATOR] || it['@@iterator'] || Iterators[classof(it)];
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("32", ["2a", "2c", "2e", "2d", "2f", "31"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var ctx = $__require('2a'),
       call = $__require('2c'),
       isArrayIter = $__require('2e'),
@@ -5564,15 +5545,14 @@ $__System.registerDynamic("32", ["2a", "2c", "2e", "2d", "2f", "31"], true, func
         call(iterator, f, step.value, entries);
       }
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("33", ["1c", "34", "2d", "2a"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var getDesc = $__require('1c').getDesc,
       isObject = $__require('34'),
       anObject = $__require('2d');
@@ -5601,42 +5581,39 @@ $__System.registerDynamic("33", ["1c", "34", "2d", "2a"], true, function($__requ
     }({}, false) : undefined),
     check: check
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("35", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = Object.is || function is(x, y) {
     return x === y ? x !== 0 || 1 / x === 1 / y : x != x && y != y;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2d", ["34"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var isObject = $__require('34');
   module.exports = function(it) {
     if (!isObject(it))
       throw TypeError(it + ' is not an object!');
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("36", ["2d", "37", "20"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var anObject = $__require('2d'),
       aFunction = $__require('37'),
       SPECIES = $__require('20')('species');
@@ -5645,29 +5622,27 @@ $__System.registerDynamic("36", ["2d", "37", "20"], true, function($__require, e
         S;
     return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("37", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     if (typeof it != 'function')
       throw TypeError(it + ' is not a function!');
     return it;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("2a", ["37"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var aFunction = $__require('37');
   module.exports = function(fn, that, length) {
     aFunction(fn);
@@ -5691,15 +5666,14 @@ $__System.registerDynamic("2a", ["37"], true, function($__require, exports, modu
       return fn.apply(that, arguments);
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("38", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(fn, args, that) {
     var un = that === undefined;
     switch (args.length) {
@@ -5716,52 +5690,48 @@ $__System.registerDynamic("38", [], true, function($__require, exports, module) 
     }
     return fn.apply(that, args);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("39", ["28"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('28').document && document.documentElement;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("34", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(it) {
     return typeof it === 'object' ? it !== null : typeof it === 'function';
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3a", ["34", "28"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var isObject = $__require('34'),
       document = $__require('28').document,
       is = isObject(document) && isObject(document.createElement);
   module.exports = function(it) {
     return is ? document.createElement(it) : {};
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3b", ["2a", "38", "39", "3a", "28", "19", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
     var ctx = $__require('2a'),
         invoke = $__require('38'),
@@ -5836,28 +5806,26 @@ $__System.registerDynamic("3b", ["2a", "38", "39", "3a", "28", "19", "3"], true,
       clear: clearTask
     };
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("19", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var toString = {}.toString;
   module.exports = function(it) {
     return toString.call(it).slice(8, -1);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3c", ["28", "3b", "19", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
     var global = $__require('28'),
         macrotask = $__require('3b').set,
@@ -5925,15 +5893,14 @@ $__System.registerDynamic("3c", ["28", "3b", "19", "3"], true, function($__requi
       last = task;
     };
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1d", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(bitmap, value) {
     return {
       enumerable: !(bitmap & 1),
@@ -5942,15 +5909,14 @@ $__System.registerDynamic("1d", [], true, function($__require, exports, module) 
       value: value
     };
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1f", ["1c", "1d", "3d"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var $ = $__require('1c'),
       createDesc = $__require('1d');
   module.exports = $__require('3d') ? function(object, key, value) {
@@ -5959,53 +5925,49 @@ $__System.registerDynamic("1f", ["1c", "1d", "3d"], true, function($__require, e
     object[key] = value;
     return object;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("23", ["1f"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('1f');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3e", ["23"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var redefine = $__require('23');
   module.exports = function(target, src) {
     for (var key in src)
       redefine(target, key, src[key]);
     return target;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("24", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var hasOwnProperty = {}.hasOwnProperty;
   module.exports = function(it, key) {
     return hasOwnProperty.call(it, key);
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1e", ["1c", "24", "20"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var def = $__require('1c').setDesc,
       has = $__require('24'),
       TAG = $__require('20')('toStringTag');
@@ -6016,15 +5978,14 @@ $__System.registerDynamic("1e", ["1c", "24", "20"], true, function($__require, e
         value: tag
       });
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("1c", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var $Object = Object;
   module.exports = {
     create: $Object.create,
@@ -6038,15 +5999,14 @@ $__System.registerDynamic("1c", [], true, function($__require, exports, module) 
     getSymbols: $Object.getOwnPropertySymbols,
     each: [].forEach
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3f", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = function(exec) {
     try {
       return !!exec();
@@ -6054,30 +6014,28 @@ $__System.registerDynamic("3f", [], true, function($__require, exports, module) 
       return true;
     }
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3d", ["3f"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = !$__require('3f')(function() {
     return Object.defineProperty({}, 'a', {get: function() {
         return 7;
       }}).a != 7;
   });
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("40", ["29", "1c", "3d", "20"], true, function($__require, exports, module) {
   "use strict";
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var core = $__require('29'),
       $ = $__require('1c'),
       DESCRIPTORS = $__require('3d'),
@@ -6092,71 +6050,66 @@ $__System.registerDynamic("40", ["29", "1c", "3d", "20"], true, function($__requ
         }
       });
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("41", ["28"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var global = $__require('28'),
       SHARED = '__core-js_shared__',
       store = global[SHARED] || (global[SHARED] = {});
   module.exports = function(key) {
     return store[key] || (store[key] = {});
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("42", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var id = 0,
       px = Math.random();
   module.exports = function(key) {
     return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("28", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var global = module.exports = typeof window != 'undefined' && window.Math == Math ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
   if (typeof __g == 'number')
     __g = global;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("20", ["41", "42", "28"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var store = $__require('41')('wks'),
       uid = $__require('42'),
       Symbol = $__require('28').Symbol;
   module.exports = function(name) {
     return store[name] || (store[name] = Symbol && Symbol[name] || (Symbol || uid)('Symbol.' + name));
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("43", ["20"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var ITERATOR = $__require('20')('iterator'),
       SAFE_CLOSING = false;
   try {
@@ -6185,15 +6138,14 @@ $__System.registerDynamic("43", ["20"], true, function($__require, exports, modu
     } catch (e) {}
     return safe;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("44", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var process = module.exports = {};
   var queue = [];
   var draining = false;
@@ -6277,45 +6229,41 @@ $__System.registerDynamic("44", [], true, function($__require, exports, module) 
   process.umask = function() {
     return 0;
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("45", ["44"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('44');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("46", ["45"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__System._nodeRequire ? process : $__require('45');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("3", ["46"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = $__require('46');
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("47", ["1c", "21", "28", "2a", "30", "22", "34", "2d", "37", "2b", "32", "33", "35", "20", "36", "3c", "3d", "3e", "1e", "40", "29", "43", "3"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   (function(process) {
     'use strict';
     var $ = $__require('1c'),
@@ -6620,411 +6568,410 @@ $__System.registerDynamic("47", ["1c", "21", "28", "2a", "30", "22", "34", "2d",
       }
     });
   })($__require('3'));
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("29", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   var core = module.exports = {version: '1.2.6'};
   if (typeof __e == 'number')
     __e = core;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("48", ["10", "14", "27", "47", "29"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   $__require('10');
   $__require('14');
   $__require('27');
   $__require('47');
   module.exports = $__require('29').Promise;
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("49", ["48"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   module.exports = {
     "default": $__require('48'),
     __esModule: true
   };
-  global.define = __define;
   return module.exports;
 });
 
 $__System.registerDynamic("4a", [], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
+  var define;
+  var global = this;
+  var GLOBAL = this;
   "format cjs";
-  (function(window, angular, undefined) {
-    'use strict';
-    var isDefined = angular.isDefined,
-        isUndefined = angular.isUndefined,
-        isNumber = angular.isNumber,
-        isObject = angular.isObject,
-        isArray = angular.isArray,
-        extend = angular.extend,
-        toJson = angular.toJson;
-    var angularLocalStorage = angular.module('LocalStorageModule', []);
-    angularLocalStorage.provider('localStorageService', function() {
-      this.prefix = 'ls';
-      this.storageType = 'localStorage';
-      this.cookie = {
-        expiry: 30,
-        path: '/'
-      };
+  var isDefined = angular.isDefined,
+      isUndefined = angular.isUndefined,
+      isNumber = angular.isNumber,
+      isObject = angular.isObject,
+      isArray = angular.isArray,
+      extend = angular.extend,
+      toJson = angular.toJson;
+  angular.module('LocalStorageModule', []).provider('localStorageService', function() {
+    this.prefix = 'ls';
+    this.storageType = 'localStorage';
+    this.cookie = {
+      expiry: 30,
+      path: '/'
+    };
+    this.notify = {
+      setItem: true,
+      removeItem: false
+    };
+    this.setPrefix = function(prefix) {
+      this.prefix = prefix;
+      return this;
+    };
+    this.setStorageType = function(storageType) {
+      this.storageType = storageType;
+      return this;
+    };
+    this.setStorageCookie = function(exp, path) {
+      this.cookie.expiry = exp;
+      this.cookie.path = path;
+      return this;
+    };
+    this.setStorageCookieDomain = function(domain) {
+      this.cookie.domain = domain;
+      return this;
+    };
+    this.setNotify = function(itemSet, itemRemove) {
       this.notify = {
-        setItem: true,
-        removeItem: false
+        setItem: itemSet,
+        removeItem: itemRemove
       };
-      this.setPrefix = function(prefix) {
-        this.prefix = prefix;
-        return this;
+      return this;
+    };
+    this.$get = ['$rootScope', '$window', '$document', '$parse', function($rootScope, $window, $document, $parse) {
+      var self = this;
+      var prefix = self.prefix;
+      var cookie = self.cookie;
+      var notify = self.notify;
+      var storageType = self.storageType;
+      var webStorage;
+      if (!$document) {
+        $document = document;
+      } else if ($document[0]) {
+        $document = $document[0];
+      }
+      if (prefix.substr(-1) !== '.') {
+        prefix = !!prefix ? prefix + '.' : '';
+      }
+      var deriveQualifiedKey = function(key) {
+        return prefix + key;
       };
-      this.setStorageType = function(storageType) {
-        this.storageType = storageType;
-        return this;
-      };
-      this.setStorageCookie = function(exp, path) {
-        this.cookie.expiry = exp;
-        this.cookie.path = path;
-        return this;
-      };
-      this.setStorageCookieDomain = function(domain) {
-        this.cookie.domain = domain;
-        return this;
-      };
-      this.setNotify = function(itemSet, itemRemove) {
-        this.notify = {
-          setItem: itemSet,
-          removeItem: itemRemove
-        };
-        return this;
-      };
-      this.$get = ['$rootScope', '$window', '$document', '$parse', function($rootScope, $window, $document, $parse) {
-        var self = this;
-        var prefix = self.prefix;
-        var cookie = self.cookie;
-        var notify = self.notify;
-        var storageType = self.storageType;
-        var webStorage;
-        if (!$document) {
-          $document = document;
-        } else if ($document[0]) {
-          $document = $document[0];
-        }
-        if (prefix.substr(-1) !== '.') {
-          prefix = !!prefix ? prefix + '.' : '';
-        }
-        var deriveQualifiedKey = function(key) {
-          return prefix + key;
-        };
-        var browserSupportsLocalStorage = (function() {
-          try {
-            var supported = (storageType in $window && $window[storageType] !== null);
-            var key = deriveQualifiedKey('__' + Math.round(Math.random() * 1e7));
-            if (supported) {
-              webStorage = $window[storageType];
-              webStorage.setItem(key, '');
-              webStorage.removeItem(key);
-            }
-            return supported;
-          } catch (e) {
-            storageType = 'cookie';
-            $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-            return false;
+      var browserSupportsLocalStorage = (function() {
+        try {
+          var supported = (storageType in $window && $window[storageType] !== null);
+          var key = deriveQualifiedKey('__' + Math.round(Math.random() * 1e7));
+          if (supported) {
+            webStorage = $window[storageType];
+            webStorage.setItem(key, '');
+            webStorage.removeItem(key);
           }
-        }());
-        var addToLocalStorage = function(key, value) {
-          if (isUndefined(value)) {
-            value = null;
-          } else {
-            value = toJson(value);
+          return supported;
+        } catch (e) {
+          storageType = 'cookie';
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+      }());
+      var addToLocalStorage = function(key, value) {
+        if (isUndefined(value)) {
+          value = null;
+        } else {
+          value = toJson(value);
+        }
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+          if (!browserSupportsLocalStorage) {
+            $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
           }
+          if (notify.setItem) {
+            $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
+              key: key,
+              newvalue: value,
+              storageType: 'cookie'
+            });
+          }
+          return addToCookies(key, value);
+        }
+        try {
+          if (webStorage) {
+            webStorage.setItem(deriveQualifiedKey(key), value);
+          }
+          if (notify.setItem) {
+            $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
+              key: key,
+              newvalue: value,
+              storageType: self.storageType
+            });
+          }
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return addToCookies(key, value);
+        }
+        return true;
+      };
+      var getFromLocalStorage = function(key) {
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
+          if (!browserSupportsLocalStorage) {
+            $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          }
+          return getFromCookies(key);
+        }
+        var item = webStorage ? webStorage.getItem(deriveQualifiedKey(key)) : null;
+        if (!item || item === 'null') {
+          return null;
+        }
+        try {
+          return JSON.parse(item);
+        } catch (e) {
+          return item;
+        }
+      };
+      var removeFromLocalStorage = function() {
+        var i,
+            key;
+        for (i = 0; i < arguments.length; i++) {
+          key = arguments[i];
           if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
             if (!browserSupportsLocalStorage) {
               $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
             }
-            if (notify.setItem) {
-              $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
+            if (notify.removeItem) {
+              $rootScope.$broadcast('LocalStorageModule.notification.removeitem', {
                 key: key,
-                newvalue: value,
                 storageType: 'cookie'
               });
             }
-            return addToCookies(key, value);
-          }
-          try {
-            if (webStorage) {
-              webStorage.setItem(deriveQualifiedKey(key), value);
-            }
-            ;
-            if (notify.setItem) {
-              $rootScope.$broadcast('LocalStorageModule.notification.setitem', {
-                key: key,
-                newvalue: value,
-                storageType: self.storageType
-              });
-            }
-          } catch (e) {
-            $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-            return addToCookies(key, value);
-          }
-          return true;
-        };
-        var getFromLocalStorage = function(key) {
-          if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
-            if (!browserSupportsLocalStorage) {
-              $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
-            }
-            return getFromCookies(key);
-          }
-          var item = webStorage ? webStorage.getItem(deriveQualifiedKey(key)) : null;
-          if (!item || item === 'null') {
-            return null;
-          }
-          try {
-            return JSON.parse(item);
-          } catch (e) {
-            return item;
-          }
-        };
-        var removeFromLocalStorage = function() {
-          var i,
-              key;
-          for (i = 0; i < arguments.length; i++) {
-            key = arguments[i];
-            if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
-              if (!browserSupportsLocalStorage) {
-                $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
-              }
+            removeFromCookies(key);
+          } else {
+            try {
+              webStorage.removeItem(deriveQualifiedKey(key));
               if (notify.removeItem) {
                 $rootScope.$broadcast('LocalStorageModule.notification.removeitem', {
                   key: key,
-                  storageType: 'cookie'
+                  storageType: self.storageType
                 });
               }
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
               removeFromCookies(key);
-            } else {
-              try {
-                webStorage.removeItem(deriveQualifiedKey(key));
-                if (notify.removeItem) {
-                  $rootScope.$broadcast('LocalStorageModule.notification.removeitem', {
-                    key: key,
-                    storageType: self.storageType
-                  });
-                }
-              } catch (e) {
-                $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-                removeFromCookies(key);
-              }
             }
           }
-        };
-        var getKeysForLocalStorage = function() {
+        }
+      };
+      var getKeysForLocalStorage = function() {
+        if (!browserSupportsLocalStorage) {
+          $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+          return false;
+        }
+        var prefixLength = prefix.length;
+        var keys = [];
+        for (var key in webStorage) {
+          if (key.substr(0, prefixLength) === prefix) {
+            try {
+              keys.push(key.substr(prefixLength));
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.Description);
+              return [];
+            }
+          }
+        }
+        return keys;
+      };
+      var clearAllFromLocalStorage = function(regularExpression) {
+        var prefixRegex = !!prefix ? new RegExp('^' + prefix) : new RegExp();
+        var testRegex = !!regularExpression ? new RegExp(regularExpression) : new RegExp();
+        if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
           if (!browserSupportsLocalStorage) {
             $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
-            return false;
           }
-          var prefixLength = prefix.length;
-          var keys = [];
-          for (var key in webStorage) {
-            if (key.substr(0, prefixLength) === prefix) {
-              try {
-                keys.push(key.substr(prefixLength));
-              } catch (e) {
-                $rootScope.$broadcast('LocalStorageModule.notification.error', e.Description);
-                return [];
-              }
+          return clearAllFromCookies();
+        }
+        var prefixLength = prefix.length;
+        for (var key in webStorage) {
+          if (prefixRegex.test(key) && testRegex.test(key.substr(prefixLength))) {
+            try {
+              removeFromLocalStorage(key.substr(prefixLength));
+            } catch (e) {
+              $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+              return clearAllFromCookies();
             }
           }
-          return keys;
-        };
-        var clearAllFromLocalStorage = function(regularExpression) {
-          var prefixRegex = !!prefix ? new RegExp('^' + prefix) : new RegExp();
-          var testRegex = !!regularExpression ? new RegExp(regularExpression) : new RegExp();
-          if (!browserSupportsLocalStorage || self.storageType === 'cookie') {
-            if (!browserSupportsLocalStorage) {
-              $rootScope.$broadcast('LocalStorageModule.notification.warning', 'LOCAL_STORAGE_NOT_SUPPORTED');
+        }
+        return true;
+      };
+      var browserSupportsCookies = (function() {
+        try {
+          return $window.navigator.cookieEnabled || ("cookie" in $document && ($document.cookie.length > 0 || ($document.cookie = "test").indexOf.call($document.cookie, "test") > -1));
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+      }());
+      var addToCookies = function(key, value, daysToExpiry) {
+        if (isUndefined(value)) {
+          return false;
+        } else if (isArray(value) || isObject(value)) {
+          value = toJson(value);
+        }
+        if (!browserSupportsCookies) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
+          return false;
+        }
+        try {
+          var expiry = '',
+              expiryDate = new Date(),
+              cookieDomain = '';
+          if (value === null) {
+            expiryDate.setTime(expiryDate.getTime() + (-1 * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+            value = '';
+          } else if (isNumber(daysToExpiry) && daysToExpiry !== 0) {
+            expiryDate.setTime(expiryDate.getTime() + (daysToExpiry * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+          } else if (cookie.expiry !== 0) {
+            expiryDate.setTime(expiryDate.getTime() + (cookie.expiry * 24 * 60 * 60 * 1000));
+            expiry = "; expires=" + expiryDate.toGMTString();
+          }
+          if (!!key) {
+            var cookiePath = "; path=" + cookie.path;
+            if (cookie.domain) {
+              cookieDomain = "; domain=" + cookie.domain;
             }
-            return clearAllFromCookies();
+            $document.cookie = deriveQualifiedKey(key) + "=" + encodeURIComponent(value) + expiry + cookiePath + cookieDomain;
           }
-          var prefixLength = prefix.length;
-          for (var key in webStorage) {
-            if (prefixRegex.test(key) && testRegex.test(key.substr(prefixLength))) {
-              try {
-                removeFromLocalStorage(key.substr(prefixLength));
-              } catch (e) {
-                $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-                return clearAllFromCookies();
-              }
-            }
+        } catch (e) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
+          return false;
+        }
+        return true;
+      };
+      var getFromCookies = function(key) {
+        if (!browserSupportsCookies) {
+          $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
+          return false;
+        }
+        var cookies = $document.cookie && $document.cookie.split(';') || [];
+        for (var i = 0; i < cookies.length; i++) {
+          var thisCookie = cookies[i];
+          while (thisCookie.charAt(0) === ' ') {
+            thisCookie = thisCookie.substring(1, thisCookie.length);
           }
-          return true;
-        };
-        var browserSupportsCookies = (function() {
-          try {
-            return $window.navigator.cookieEnabled || ("cookie" in $document && ($document.cookie.length > 0 || ($document.cookie = "test").indexOf.call($document.cookie, "test") > -1));
-          } catch (e) {
-            $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-            return false;
-          }
-        }());
-        var addToCookies = function(key, value, daysToExpiry) {
-          if (isUndefined(value)) {
-            return false;
-          } else if (isArray(value) || isObject(value)) {
-            value = toJson(value);
-          }
-          if (!browserSupportsCookies) {
-            $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
-            return false;
-          }
-          try {
-            var expiry = '',
-                expiryDate = new Date(),
-                cookieDomain = '';
-            if (value === null) {
-              expiryDate.setTime(expiryDate.getTime() + (-1 * 24 * 60 * 60 * 1000));
-              expiry = "; expires=" + expiryDate.toGMTString();
-              value = '';
-            } else if (isNumber(daysToExpiry) && daysToExpiry !== 0) {
-              expiryDate.setTime(expiryDate.getTime() + (daysToExpiry * 24 * 60 * 60 * 1000));
-              expiry = "; expires=" + expiryDate.toGMTString();
-            } else if (cookie.expiry !== 0) {
-              expiryDate.setTime(expiryDate.getTime() + (cookie.expiry * 24 * 60 * 60 * 1000));
-              expiry = "; expires=" + expiryDate.toGMTString();
-            }
-            if (!!key) {
-              var cookiePath = "; path=" + cookie.path;
-              if (cookie.domain) {
-                cookieDomain = "; domain=" + cookie.domain;
-              }
-              $document.cookie = deriveQualifiedKey(key) + "=" + encodeURIComponent(value) + expiry + cookiePath + cookieDomain;
-            }
-          } catch (e) {
-            $rootScope.$broadcast('LocalStorageModule.notification.error', e.message);
-            return false;
-          }
-          return true;
-        };
-        var getFromCookies = function(key) {
-          if (!browserSupportsCookies) {
-            $rootScope.$broadcast('LocalStorageModule.notification.error', 'COOKIES_NOT_SUPPORTED');
-            return false;
-          }
-          var cookies = $document.cookie && $document.cookie.split(';') || [];
-          for (var i = 0; i < cookies.length; i++) {
-            var thisCookie = cookies[i];
-            while (thisCookie.charAt(0) === ' ') {
-              thisCookie = thisCookie.substring(1, thisCookie.length);
-            }
-            if (thisCookie.indexOf(deriveQualifiedKey(key) + '=') === 0) {
-              var storedValues = decodeURIComponent(thisCookie.substring(prefix.length + key.length + 1, thisCookie.length));
-              try {
-                return JSON.parse(storedValues);
-              } catch (e) {
-                return storedValues;
-              }
+          if (thisCookie.indexOf(deriveQualifiedKey(key) + '=') === 0) {
+            var storedValues = decodeURIComponent(thisCookie.substring(prefix.length + key.length + 1, thisCookie.length));
+            try {
+              return JSON.parse(storedValues);
+            } catch (e) {
+              return storedValues;
             }
           }
-          return null;
-        };
-        var removeFromCookies = function(key) {
-          addToCookies(key, null);
-        };
-        var clearAllFromCookies = function() {
-          var thisCookie = null,
-              thisKey = null;
-          var prefixLength = prefix.length;
-          var cookies = $document.cookie.split(';');
-          for (var i = 0; i < cookies.length; i++) {
-            thisCookie = cookies[i];
-            while (thisCookie.charAt(0) === ' ') {
-              thisCookie = thisCookie.substring(1, thisCookie.length);
-            }
-            var key = thisCookie.substring(prefixLength, thisCookie.indexOf('='));
-            removeFromCookies(key);
+        }
+        return null;
+      };
+      var removeFromCookies = function(key) {
+        addToCookies(key, null);
+      };
+      var clearAllFromCookies = function() {
+        var thisCookie = null,
+            thisKey = null;
+        var prefixLength = prefix.length;
+        var cookies = $document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+          thisCookie = cookies[i];
+          while (thisCookie.charAt(0) === ' ') {
+            thisCookie = thisCookie.substring(1, thisCookie.length);
           }
-        };
-        var getStorageType = function() {
-          return storageType;
-        };
-        var bindToScope = function(scope, key, def, lsKey) {
-          lsKey = lsKey || key;
-          var value = getFromLocalStorage(lsKey);
-          if (value === null && isDefined(def)) {
-            value = def;
-          } else if (isObject(value) && isObject(def)) {
-            value = extend(def, value);
+          var key = thisCookie.substring(prefixLength, thisCookie.indexOf('='));
+          removeFromCookies(key);
+        }
+      };
+      var getStorageType = function() {
+        return storageType;
+      };
+      var bindToScope = function(scope, key, def, lsKey) {
+        lsKey = lsKey || key;
+        var value = getFromLocalStorage(lsKey);
+        if (value === null && isDefined(def)) {
+          value = def;
+        } else if (isObject(value) && isObject(def)) {
+          value = extend(value, def);
+        }
+        $parse(key).assign(scope, value);
+        return scope.$watch(key, function(newVal) {
+          addToLocalStorage(lsKey, newVal);
+        }, isObject(scope[key]));
+      };
+      var lengthOfLocalStorage = function() {
+        var count = 0;
+        var storage = $window[storageType];
+        for (var i = 0; i < storage.length; i++) {
+          if (storage.key(i).indexOf(prefix) === 0) {
+            count++;
           }
-          $parse(key).assign(scope, value);
-          return scope.$watch(key, function(newVal) {
-            addToLocalStorage(lsKey, newVal);
-          }, isObject(scope[key]));
-        };
-        var lengthOfLocalStorage = function() {
-          var count = 0;
-          var storage = $window[storageType];
-          for (var i = 0; i < storage.length; i++) {
-            if (storage.key(i).indexOf(prefix) === 0) {
-              count++;
-            }
-          }
-          return count;
-        };
-        return {
-          isSupported: browserSupportsLocalStorage,
-          getStorageType: getStorageType,
-          set: addToLocalStorage,
-          add: addToLocalStorage,
-          get: getFromLocalStorage,
-          keys: getKeysForLocalStorage,
-          remove: removeFromLocalStorage,
-          clearAll: clearAllFromLocalStorage,
-          bind: bindToScope,
-          deriveKey: deriveQualifiedKey,
-          length: lengthOfLocalStorage,
-          cookie: {
-            isSupported: browserSupportsCookies,
-            set: addToCookies,
-            add: addToCookies,
-            get: getFromCookies,
-            remove: removeFromCookies,
-            clearAll: clearAllFromCookies
-          }
-        };
-      }];
-    });
-  })(window, window.angular);
-  global.define = __define;
+        }
+        return count;
+      };
+      return {
+        isSupported: browserSupportsLocalStorage,
+        getStorageType: getStorageType,
+        set: addToLocalStorage,
+        add: addToLocalStorage,
+        get: getFromLocalStorage,
+        keys: getKeysForLocalStorage,
+        remove: removeFromLocalStorage,
+        clearAll: clearAllFromLocalStorage,
+        bind: bindToScope,
+        deriveKey: deriveQualifiedKey,
+        length: lengthOfLocalStorage,
+        cookie: {
+          isSupported: browserSupportsCookies,
+          set: addToCookies,
+          add: addToCookies,
+          get: getFromCookies,
+          remove: removeFromCookies,
+          clearAll: clearAllFromCookies
+        }
+      };
+    }];
+  });
   return module.exports;
 });
 
 $__System.registerDynamic("4b", ["4a"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('4a');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  $__require('4a');
+  module.exports = 'LocalStorageModule';
   return module.exports;
 });
 
-$__System.register('a', ['9', '4b'], function (_export) {
+$__System.registerDynamic("4c", ["4b"], true, function($__require, exports, module) {
+  ;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('4b');
+  return module.exports;
+});
+
+$__System.register('a', ['9', '4c'], function (_export) {
     //import LocalStorageModule from 'angular-local-storage';
 
     'use strict';
@@ -7033,8 +6980,8 @@ $__System.register('a', ['9', '4b'], function (_export) {
     return {
         setters: [function (_) {
             angular = _['default'];
-        }, function (_b) {
-            LocalStorageModule = _b['default'];
+        }, function (_c) {
+            LocalStorageModule = _c['default'];
         }],
         execute: function () {
             _export('default', angular.module('categoriesCacheModule', ['LocalStorageModule']).factory('categoriesCacheFactory', function (localStorageService) {
@@ -7109,7 +7056,7 @@ $__System.register('c', ['9', '49', 'a'], function (_export) {
     }
   };
 });
-$__System.register('4c', ['9', 'd', 'f', 'c'], function (_export) {
+$__System.register('4d', ['9', 'd', 'f', 'c'], function (_export) {
     'use strict';
 
     var angular, categoryCommandModule, categoryQueryModule;
@@ -7176,8 +7123,8 @@ $__System.register('4c', ['9', 'd', 'f', 'c'], function (_export) {
         }
     };
 });
-$__System.registerDynamic("4d", [], false, function(__require, __exports, __module) {
-  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal(__module.id, "angular", null);
+$__System.registerDynamic("4e", [], false, function($__require, $__exports, $__module) {
+  var _retrieveGlobal = $__System.get("@@global-helpers").prepareGlobal($__module.id, "angular", null);
   (function() {
     "format global";
     "exports angular";
@@ -7201,7 +7148,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             }
             return match;
           });
-          message += '\nhttp://errors.angularjs.org/1.4.8/' + (module ? module + '/' : '') + code;
+          message += '\nhttp://errors.angularjs.org/1.5.0/' + (module ? module + '/' : '') + code;
           for (i = SKIP_INDEXES, paramPrefix = '?'; i < templateArgs.length; i++, paramPrefix = '&') {
             message += paramPrefix + 'p' + (i - SKIP_INDEXES) + '=' + encodeURIComponent(toDebugString(templateArgs[i]));
           }
@@ -7210,10 +7157,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       var REGEX_STRING_REGEXP = /^\/(.+)\/([a-z]*)$/;
       var VALIDITY_STATE_PROPERTY = 'validity';
+      var hasOwnProperty = Object.prototype.hasOwnProperty;
       var lowercase = function(string) {
         return isString(string) ? string.toLowerCase() : string;
       };
-      var hasOwnProperty = Object.prototype.hasOwnProperty;
       var uppercase = function(string) {
         return isString(string) ? string.toUpperCase() : string;
       };
@@ -7250,7 +7197,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         if (isArray(obj) || isString(obj) || (jqLite && obj instanceof jqLite))
           return true;
         var length = "length" in Object(obj) && obj.length;
-        return isNumber(length) && (length >= 0 && (length - 1) in obj || typeof obj.item == 'function');
+        return isNumber(length) && (length >= 0 && ((length - 1) in obj || obj instanceof Array) || typeof obj.item == 'function');
       }
       function forEach(obj, iterator, context) {
         var key,
@@ -7426,6 +7373,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       function isTypedArray(value) {
         return value && isNumber(value.length) && TYPED_ARRAY_REGEXP.test(toString.call(value));
       }
+      function isArrayBuffer(obj) {
+        return toString.call(obj) === '[object ArrayBuffer]';
+      }
       var trim = function(value) {
         return isString(value) ? value.trim() : value;
       };
@@ -7437,7 +7387,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       function makeMap(str) {
         var obj = {},
-            items = str.split(","),
+            items = str.split(','),
             i;
         for (i = 0; i < items.length; i++) {
           obj[items[i]] = true;
@@ -7461,7 +7411,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         var stackSource = [];
         var stackDest = [];
         if (destination) {
-          if (isTypedArray(destination)) {
+          if (isTypedArray(destination) || isArrayBuffer(destination)) {
             throw ngMinErr('cpta', "Can't copy! TypedArray destination cannot be mutated.");
           }
           if (source === destination) {
@@ -7522,26 +7472,47 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             throw ngMinErr('cpws', "Can't copy! Making copies of Window or Scope instances is not supported.");
           }
           var needsRecurse = false;
-          var destination;
-          if (isArray(source)) {
-            destination = [];
-            needsRecurse = true;
-          } else if (isTypedArray(source)) {
-            destination = new source.constructor(source);
-          } else if (isDate(source)) {
-            destination = new Date(source.getTime());
-          } else if (isRegExp(source)) {
-            destination = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
-            destination.lastIndex = source.lastIndex;
-          } else if (isFunction(source.cloneNode)) {
-            destination = source.cloneNode(true);
-          } else {
-            destination = Object.create(getPrototypeOf(source));
+          var destination = copyType(source);
+          if (destination === undefined) {
+            destination = isArray(source) ? [] : Object.create(getPrototypeOf(source));
             needsRecurse = true;
           }
           stackSource.push(source);
           stackDest.push(destination);
           return needsRecurse ? copyRecurse(source, destination) : destination;
+        }
+        function copyType(source) {
+          switch (toString.call(source)) {
+            case '[object Int8Array]':
+            case '[object Int16Array]':
+            case '[object Int32Array]':
+            case '[object Float32Array]':
+            case '[object Float64Array]':
+            case '[object Uint8Array]':
+            case '[object Uint8ClampedArray]':
+            case '[object Uint16Array]':
+            case '[object Uint32Array]':
+              return new source.constructor(copyElement(source.buffer));
+            case '[object ArrayBuffer]':
+              if (!source.slice) {
+                var copied = new ArrayBuffer(source.byteLength);
+                new Uint8Array(copied).set(new Uint8Array(source));
+                return copied;
+              }
+              return source.slice(0);
+            case '[object Boolean]':
+            case '[object Number]':
+            case '[object String]':
+            case '[object Date]':
+              return new source.constructor(source.valueOf());
+            case '[object RegExp]':
+              var re = new RegExp(source.source, source.toString().match(/[^\/]*$/)[0]);
+              re.lastIndex = source.lastIndex;
+              return re;
+          }
+          if (isFunction(source.cloneNode)) {
+            return source.cloneNode(true);
+          }
         }
       }
       function shallowCopy(src, dst) {
@@ -7573,41 +7544,41 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             length,
             key,
             keySet;
-        if (t1 == t2) {
-          if (t1 == 'object') {
-            if (isArray(o1)) {
-              if (!isArray(o2))
-                return false;
-              if ((length = o1.length) == o2.length) {
-                for (key = 0; key < length; key++) {
-                  if (!equals(o1[key], o2[key]))
-                    return false;
-                }
-                return true;
-              }
-            } else if (isDate(o1)) {
-              if (!isDate(o2))
-                return false;
-              return equals(o1.getTime(), o2.getTime());
-            } else if (isRegExp(o1)) {
-              return isRegExp(o2) ? o1.toString() == o2.toString() : false;
-            } else {
-              if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) || isArray(o2) || isDate(o2) || isRegExp(o2))
-                return false;
-              keySet = createMap();
-              for (key in o1) {
-                if (key.charAt(0) === '$' || isFunction(o1[key]))
-                  continue;
+        if (t1 == t2 && t1 == 'object') {
+          if (isArray(o1)) {
+            if (!isArray(o2))
+              return false;
+            if ((length = o1.length) == o2.length) {
+              for (key = 0; key < length; key++) {
                 if (!equals(o1[key], o2[key]))
-                  return false;
-                keySet[key] = true;
-              }
-              for (key in o2) {
-                if (!(key in keySet) && key.charAt(0) !== '$' && isDefined(o2[key]) && !isFunction(o2[key]))
                   return false;
               }
               return true;
             }
+          } else if (isDate(o1)) {
+            if (!isDate(o2))
+              return false;
+            return equals(o1.getTime(), o2.getTime());
+          } else if (isRegExp(o1)) {
+            if (!isRegExp(o2))
+              return false;
+            return o1.toString() == o2.toString();
+          } else {
+            if (isScope(o1) || isScope(o2) || isWindow(o1) || isWindow(o2) || isArray(o2) || isDate(o2) || isRegExp(o2))
+              return false;
+            keySet = createMap();
+            for (key in o1) {
+              if (key.charAt(0) === '$' || isFunction(o1[key]))
+                continue;
+              if (!equals(o1[key], o2[key]))
+                return false;
+              keySet[key] = true;
+            }
+            for (key in o2) {
+              if (!(key in keySet) && key.charAt(0) !== '$' && isDefined(o2[key]) && !isFunction(o2[key]))
+                return false;
+            }
+            return true;
           }
         }
         return false;
@@ -7687,7 +7658,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         return val;
       }
       function toJson(obj, pretty) {
-        if (typeof obj === 'undefined')
+        if (isUndefined(obj))
           return undefined;
         if (!isNumber(pretty)) {
           pretty = pretty ? 2 : null;
@@ -7697,7 +7668,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       function fromJson(json) {
         return isString(json) ? JSON.parse(json) : json;
       }
+      var ALL_COLONS = /:/g;
       function timezoneToOffset(timezone, fallback) {
+        timezone = timezone.replace(ALL_COLONS, '');
         var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
         return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
       }
@@ -7708,8 +7681,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       function convertTimezoneToLocal(date, timezone, reverse) {
         reverse = reverse ? -1 : 1;
-        var timezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
-        return addDateMinutes(date, reverse * (timezoneOffset - date.getTimezoneOffset()));
+        var dateTimezoneOffset = date.getTimezoneOffset();
+        var timezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
+        return addDateMinutes(date, reverse * (timezoneOffset - dateTimezoneOffset));
       }
       function startingTag(element) {
         element = jqLite(element).clone();
@@ -7883,7 +7857,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         });
       }
       var bindJQueryFired = false;
-      var skipDestroyOnNextJQueryCleanData;
       function bindJQuery() {
         var originalCleanData;
         if (bindJQueryFired) {
@@ -7903,16 +7876,12 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           originalCleanData = jQuery.cleanData;
           jQuery.cleanData = function(elems) {
             var events;
-            if (!skipDestroyOnNextJQueryCleanData) {
-              for (var i = 0,
-                  elem; (elem = elems[i]) != null; i++) {
-                events = jQuery._data(elem, "events");
-                if (events && events.$destroy) {
-                  jQuery(elem).triggerHandler('$destroy');
-                }
+            for (var i = 0,
+                elem; (elem = elems[i]) != null; i++) {
+              events = jQuery._data(elem, "events");
+              if (events && events.$destroy) {
+                jQuery(elem).triggerHandler('$destroy');
               }
-            } else {
-              skipDestroyOnNextJQueryCleanData = false;
             }
             originalCleanData(elems);
           };
@@ -8025,6 +7994,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 filter: invokeLaterAndSetModuleName('$filterProvider', 'register'),
                 controller: invokeLaterAndSetModuleName('$controllerProvider', 'register'),
                 directive: invokeLaterAndSetModuleName('$compileProvider', 'directive'),
+                component: invokeLaterAndSetModuleName('$compileProvider', 'component'),
                 config: config,
                 run: function(block) {
                   runBlocks.push(block);
@@ -8078,11 +8048,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         return obj;
       }
       var version = {
-        full: '1.4.8',
+        full: '1.5.0',
         major: 1,
-        minor: 4,
-        dot: 8,
-        codeName: 'ice-manipulation'
+        minor: 5,
+        dot: 0,
+        codeName: 'ennoblement-facilitation'
       };
       function publishExternalAPI(angular) {
         extend(angular, {
@@ -8170,8 +8140,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             $anchorScroll: $AnchorScrollProvider,
             $animate: $AnimateProvider,
             $animateCss: $CoreAnimateCssProvider,
+            $$animateJs: $$CoreAnimateJsProvider,
             $$animateQueue: $$CoreAnimateQueueProvider,
-            $$AnimateRunner: $$CoreAnimateRunnerProvider,
+            $$AnimateRunner: $$AnimateRunnerFactoryProvider,
+            $$animateAsyncRun: $$AnimateAsyncRunFactoryProvider,
             $browser: $BrowserProvider,
             $cacheFactory: $CacheFactoryProvider,
             $controller: $ControllerProvider,
@@ -8262,6 +8234,12 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         }
         return false;
       }
+      function jqLiteCleanData(nodes) {
+        for (var i = 0,
+            ii = nodes.length; i < ii; i++) {
+          jqLiteRemoveData(nodes[i]);
+        }
+      }
       function jqLiteBuildFragment(html, context) {
         var tmp,
             tag,
@@ -8301,6 +8279,13 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           return parsed.childNodes;
         }
         return [];
+      }
+      function jqLiteWrapNode(node, wrapper) {
+        var parent = node.parentNode;
+        if (parent) {
+          parent.replaceChild(wrapper, node);
+        }
+        wrapper.appendChild(node);
       }
       var jqLiteContains = Node.prototype.contains || function(arg) {
         return !!(this.compareDocumentPosition(arg) & 16);
@@ -8563,7 +8548,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       forEach({
         data: jqLiteData,
         removeData: jqLiteRemoveData,
-        hasData: jqLiteHasData
+        hasData: jqLiteHasData,
+        cleanData: jqLiteCleanData
       }, function(fn, name) {
         JQLite[name] = fn;
       });
@@ -8829,12 +8815,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
         },
         wrap: function(element, wrapNode) {
-          wrapNode = jqLite(wrapNode).eq(0).clone()[0];
-          var parent = element.parentNode;
-          if (parent) {
-            parent.replaceChild(wrapNode, element);
-          }
-          wrapNode.appendChild(element);
+          jqLiteWrapNode(element, jqLite(wrapNode).eq(0).clone()[0]);
         },
         remove: jqLiteRemove,
         detach: function(element) {
@@ -9000,14 +8981,19 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           return HashMap;
         }];
       }];
+      var ARROW_ARG = /^([^\(]+?)=>/;
       var FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m;
       var FN_ARG_SPLIT = /,/;
       var FN_ARG = /^\s*(_?)(\S+?)\1\s*$/;
       var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
       var $injectorMinErr = minErr('$injector');
-      function anonFn(fn) {
+      function extractArgs(fn) {
         var fnText = fn.toString().replace(STRIP_COMMENTS, ''),
-            args = fnText.match(FN_ARGS);
+            args = fnText.match(ARROW_ARG) || fnText.match(FN_ARGS);
+        return args;
+      }
+      function anonFn(fn) {
+        var args = extractArgs(fn);
         if (args) {
           return 'function(' + (args[1] || '').replace(/[\s\r\n]+/, ' ') + ')';
         }
@@ -9015,7 +9001,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       function annotate(fn, strictDi, name) {
         var $inject,
-            fnText,
             argDecl,
             last;
         if (typeof fn === 'function') {
@@ -9028,8 +9013,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 }
                 throw $injectorMinErr('strictdi', '{0} is not using explicit annotation and cannot be invoked in strict mode', name);
               }
-              fnText = fn.toString().replace(STRIP_COMMENTS, '');
-              argDecl = fnText.match(FN_ARGS);
+              argDecl = extractArgs(fn);
               forEach(argDecl[1].split(FN_ARG_SPLIT), function(arg) {
                 arg.replace(FN_ARG, function(all, underscore, name) {
                   $inject.push(name);
@@ -9068,11 +9052,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               throw $injectorMinErr('unpr', "Unknown provider: {0}", path.join(' <- '));
             })),
             instanceCache = {},
-            instanceInjector = (instanceCache.$injector = createInternalInjector(instanceCache, function(serviceName, caller) {
+            protoInstanceInjector = createInternalInjector(instanceCache, function(serviceName, caller) {
               var provider = providerInjector.get(serviceName + providerSuffix, caller);
               return instanceInjector.invoke(provider.$get, provider, undefined, serviceName);
-            }));
-        forEach(loadModules(modulesToLoad), function(fn) {
+            }),
+            instanceInjector = protoInstanceInjector;
+        providerCache['$injector' + providerSuffix] = {$get: valueFn(protoInstanceInjector)};
+        var runBlocks = loadModules(modulesToLoad);
+        instanceInjector = protoInstanceInjector.get('$injector');
+        instanceInjector.strictDi = strictDi;
+        forEach(runBlocks, function(fn) {
           if (fn)
             instanceInjector.invoke(fn);
         });
@@ -9193,32 +9182,46 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               }
             }
           }
-          function invoke(fn, self, locals, serviceName) {
-            if (typeof locals === 'string') {
-              serviceName = locals;
-              locals = null;
-            }
+          function injectionArgs(fn, locals, serviceName) {
             var args = [],
-                $inject = createInjector.$$annotate(fn, strictDi, serviceName),
-                length,
-                i,
-                key;
-            for (i = 0, length = $inject.length; i < length; i++) {
-              key = $inject[i];
+                $inject = createInjector.$$annotate(fn, strictDi, serviceName);
+            for (var i = 0,
+                length = $inject.length; i < length; i++) {
+              var key = $inject[i];
               if (typeof key !== 'string') {
                 throw $injectorMinErr('itkn', 'Incorrect injection token! Expected service name as string, got {0}', key);
               }
               args.push(locals && locals.hasOwnProperty(key) ? locals[key] : getService(key, serviceName));
             }
-            if (isArray(fn)) {
-              fn = fn[length];
+            return args;
+          }
+          function isClass(func) {
+            if (msie <= 11) {
+              return false;
             }
-            return fn.apply(self, args);
+            return typeof func === 'function' && /^(?:class\s|constructor\()/.test(Function.prototype.toString.call(func));
+          }
+          function invoke(fn, self, locals, serviceName) {
+            if (typeof locals === 'string') {
+              serviceName = locals;
+              locals = null;
+            }
+            var args = injectionArgs(fn, locals, serviceName);
+            if (isArray(fn)) {
+              fn = fn[fn.length - 1];
+            }
+            if (!isClass(fn)) {
+              return fn.apply(self, args);
+            } else {
+              args.unshift(null);
+              return new (Function.prototype.bind.apply(fn, args))();
+            }
           }
           function instantiate(Type, locals, serviceName) {
-            var instance = Object.create((isArray(Type) ? Type[Type.length - 1] : Type).prototype || null);
-            var returnedValue = invoke(Type, instance, locals, serviceName);
-            return isObject(returnedValue) || isFunction(returnedValue) ? returnedValue : instance;
+            var ctor = (isArray(Type) ? Type[Type.length - 1] : Type);
+            var args = injectionArgs(Type, locals, serviceName);
+            args.unshift(null);
+            return new (Function.prototype.bind.apply(ctor, args))();
           }
           return {
             invoke: invoke,
@@ -9343,27 +9346,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       function prepareAnimateOptions(options) {
         return isObject(options) ? options : {};
       }
-      var $$CoreAnimateRunnerProvider = function() {
-        this.$get = ['$q', '$$rAF', function($q, $$rAF) {
-          function AnimateRunner() {}
-          AnimateRunner.all = noop;
-          AnimateRunner.chain = noop;
-          AnimateRunner.prototype = {
-            end: noop,
-            cancel: noop,
-            resume: noop,
-            pause: noop,
-            complete: noop,
-            then: function(pass, fail) {
-              return $q(function(resolve) {
-                $$rAF(function() {
-                  resolve();
-                });
-              }).then(pass, fail);
-            }
-          };
-          return AnimateRunner;
-        }];
+      var $$CoreAnimateJsProvider = function() {
+        this.$get = function() {};
       };
       var $$CoreAnimateQueueProvider = function() {
         var postDigestQueue = new HashMap();
@@ -9382,7 +9366,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               if (options.addClass || options.removeClass) {
                 addRemoveClassesPostDigest(element, options.addClass, options.removeClass);
               }
-              return new $$AnimateRunner();
+              var runner = new $$AnimateRunner();
+              runner.complete();
+              return runner;
             }
           };
           function updateData(data, classes, value) {
@@ -9525,36 +9511,167 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           };
         }];
       }];
-      var $CoreAnimateCssProvider = function() {
-        this.$get = ['$$rAF', '$q', function($$rAF, $q) {
-          var RAFPromise = function() {};
-          RAFPromise.prototype = {
-            done: function(cancel) {
-              this.defer && this.defer[cancel === true ? 'reject' : 'resolve']();
-            },
-            end: function() {
-              this.done();
-            },
-            cancel: function() {
-              this.done(true);
-            },
-            getPromise: function() {
-              if (!this.defer) {
-                this.defer = $q.defer();
+      var $$AnimateAsyncRunFactoryProvider = function() {
+        this.$get = ['$$rAF', function($$rAF) {
+          var waitQueue = [];
+          function waitForTick(fn) {
+            waitQueue.push(fn);
+            if (waitQueue.length > 1)
+              return;
+            $$rAF(function() {
+              for (var i = 0; i < waitQueue.length; i++) {
+                waitQueue[i]();
               }
-              return this.defer.promise;
-            },
-            then: function(f1, f2) {
-              return this.getPromise().then(f1, f2);
-            },
-            'catch': function(f1) {
-              return this.getPromise()['catch'](f1);
-            },
-            'finally': function(f1) {
-              return this.getPromise()['finally'](f1);
+              waitQueue = [];
+            });
+          }
+          return function() {
+            var passed = false;
+            waitForTick(function() {
+              passed = true;
+            });
+            return function(callback) {
+              passed ? callback() : waitForTick(callback);
+            };
+          };
+        }];
+      };
+      var $$AnimateRunnerFactoryProvider = function() {
+        this.$get = ['$q', '$sniffer', '$$animateAsyncRun', '$document', '$timeout', function($q, $sniffer, $$animateAsyncRun, $document, $timeout) {
+          var INITIAL_STATE = 0;
+          var DONE_PENDING_STATE = 1;
+          var DONE_COMPLETE_STATE = 2;
+          AnimateRunner.chain = function(chain, callback) {
+            var index = 0;
+            next();
+            function next() {
+              if (index === chain.length) {
+                callback(true);
+                return;
+              }
+              chain[index](function(response) {
+                if (response === false) {
+                  callback(false);
+                  return;
+                }
+                index++;
+                next();
+              });
             }
           };
-          return function(element, options) {
+          AnimateRunner.all = function(runners, callback) {
+            var count = 0;
+            var status = true;
+            forEach(runners, function(runner) {
+              runner.done(onProgress);
+            });
+            function onProgress(response) {
+              status = status && response;
+              if (++count === runners.length) {
+                callback(status);
+              }
+            }
+          };
+          function AnimateRunner(host) {
+            this.setHost(host);
+            var rafTick = $$animateAsyncRun();
+            var timeoutTick = function(fn) {
+              $timeout(fn, 0, false);
+            };
+            this._doneCallbacks = [];
+            this._tick = function(fn) {
+              var doc = $document[0];
+              if (doc && doc.hidden) {
+                timeoutTick(fn);
+              } else {
+                rafTick(fn);
+              }
+            };
+            this._state = 0;
+          }
+          AnimateRunner.prototype = {
+            setHost: function(host) {
+              this.host = host || {};
+            },
+            done: function(fn) {
+              if (this._state === DONE_COMPLETE_STATE) {
+                fn();
+              } else {
+                this._doneCallbacks.push(fn);
+              }
+            },
+            progress: noop,
+            getPromise: function() {
+              if (!this.promise) {
+                var self = this;
+                this.promise = $q(function(resolve, reject) {
+                  self.done(function(status) {
+                    status === false ? reject() : resolve();
+                  });
+                });
+              }
+              return this.promise;
+            },
+            then: function(resolveHandler, rejectHandler) {
+              return this.getPromise().then(resolveHandler, rejectHandler);
+            },
+            'catch': function(handler) {
+              return this.getPromise()['catch'](handler);
+            },
+            'finally': function(handler) {
+              return this.getPromise()['finally'](handler);
+            },
+            pause: function() {
+              if (this.host.pause) {
+                this.host.pause();
+              }
+            },
+            resume: function() {
+              if (this.host.resume) {
+                this.host.resume();
+              }
+            },
+            end: function() {
+              if (this.host.end) {
+                this.host.end();
+              }
+              this._resolve(true);
+            },
+            cancel: function() {
+              if (this.host.cancel) {
+                this.host.cancel();
+              }
+              this._resolve(false);
+            },
+            complete: function(response) {
+              var self = this;
+              if (self._state === INITIAL_STATE) {
+                self._state = DONE_PENDING_STATE;
+                self._tick(function() {
+                  self._resolve(response);
+                });
+              }
+            },
+            _resolve: function(response) {
+              if (this._state !== DONE_COMPLETE_STATE) {
+                forEach(this._doneCallbacks, function(fn) {
+                  fn(response);
+                });
+                this._doneCallbacks.length = 0;
+                this._state = DONE_COMPLETE_STATE;
+              }
+            }
+          };
+          return AnimateRunner;
+        }];
+      };
+      var $CoreAnimateCssProvider = function() {
+        this.$get = ['$$rAF', '$q', '$$AnimateRunner', function($$rAF, $q, $$AnimateRunner) {
+          return function(element, initialOptions) {
+            var options = initialOptions || {};
+            if (!options.$$prepared) {
+              options = copy(options);
+            }
             if (options.cleanupStyles) {
               options.from = options.to = null;
             }
@@ -9563,22 +9680,22 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               options.from = null;
             }
             var closed,
-                runner = new RAFPromise();
+                runner = new $$AnimateRunner();
             return {
               start: run,
               end: run
             };
             function run() {
               $$rAF(function() {
-                close();
+                applyAnimationContents();
                 if (!closed) {
-                  runner.done();
+                  runner.complete();
                 }
                 closed = true;
               });
               return runner;
             }
-            function close() {
+            function applyAnimationContents() {
               if (options.addClass) {
                 element.addClass(options.addClass);
                 options.addClass = null;
@@ -9884,7 +10001,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             REQUIRE_PREFIX_REGEXP = /^(?:(\^\^?)?(\?)?(\^\^?)?)?/;
         var EVENT_HANDLER_ATTR_REGEXP = /^(on[a-z]+|formaction)$/;
         function parseIsolateBindings(scope, directiveName, isController) {
-          var LOCAL_REGEXP = /^\s*([@&]|=(\*?))(\??)\s*(\w*)\s*$/;
+          var LOCAL_REGEXP = /^\s*([@&<]|=(\*?))(\??)\s*(\w*)\s*$/;
           var bindings = {};
           forEach(scope, function(definition, scopeName) {
             var match = definition.match(LOCAL_REGEXP);
@@ -9977,6 +10094,42 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
           return this;
         };
+        this.component = function registerComponent(name, options) {
+          var controller = options.controller || function() {};
+          function factory($injector) {
+            function makeInjectable(fn) {
+              if (isFunction(fn) || isArray(fn)) {
+                return function(tElement, tAttrs) {
+                  return $injector.invoke(fn, this, {
+                    $element: tElement,
+                    $attrs: tAttrs
+                  });
+                };
+              } else {
+                return fn;
+              }
+            }
+            var template = (!options.template && !options.templateUrl ? '' : options.template);
+            return {
+              controller: controller,
+              controllerAs: identifierForController(options.controller) || options.controllerAs || '$ctrl',
+              template: makeInjectable(template),
+              templateUrl: makeInjectable(options.templateUrl),
+              transclude: options.transclude,
+              scope: {},
+              bindToController: options.bindings || {},
+              restrict: 'E',
+              require: options.require
+            };
+          }
+          forEach(options, function(val, key) {
+            if (key.charAt(0) === '$') {
+              factory[key] = val;
+            }
+          });
+          factory.$inject = ['$injector'];
+          return this.directive(name, factory);
+        };
         this.aHrefSanitizationWhitelist = function(regexp) {
           if (isDefined(regexp)) {
             $$sanitizeUriProvider.aHrefSanitizationWhitelist(regexp);
@@ -10001,7 +10154,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
           return debugInfoEnabled;
         };
-        this.$get = ['$injector', '$interpolate', '$exceptionHandler', '$templateRequest', '$parse', '$controller', '$rootScope', '$document', '$sce', '$animate', '$$sanitizeUri', function($injector, $interpolate, $exceptionHandler, $templateRequest, $parse, $controller, $rootScope, $document, $sce, $animate, $$sanitizeUri) {
+        this.$get = ['$injector', '$interpolate', '$exceptionHandler', '$templateRequest', '$parse', '$controller', '$rootScope', '$sce', '$animate', '$$sanitizeUri', function($injector, $interpolate, $exceptionHandler, $templateRequest, $parse, $controller, $rootScope, $sce, $animate, $$sanitizeUri) {
+          var SIMPLE_ATTR_NAME = /^\w/;
+          var specialAttrHolder = document.createElement('div');
           var Attributes = function(element, attributesToCopy) {
             if (attributesToCopy) {
               var keys = Object.keys(attributesToCopy);
@@ -10062,7 +10217,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 }
               }
               nodeName = nodeName_(this.$$element);
-              if ((nodeName === 'a' && key === 'href') || (nodeName === 'img' && key === 'src')) {
+              if ((nodeName === 'a' && (key === 'href' || key === 'xlinkHref')) || (nodeName === 'img' && key === 'src')) {
                 this[key] = value = $$sanitizeUri(value, key === 'src');
               } else if (nodeName === 'img' && key === 'srcset') {
                 var result = "";
@@ -10087,7 +10242,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 if (value === null || isUndefined(value)) {
                   this.$$element.removeAttr(attrName);
                 } else {
-                  this.$$element.attr(attrName, value);
+                  if (SIMPLE_ATTR_NAME.test(attrName)) {
+                    this.$$element.attr(attrName, value);
+                  } else {
+                    setSpecialAttr(this.$$element[0], attrName, value);
+                  }
                 }
               }
               var $$observers = this.$$observers;
@@ -10114,6 +10273,14 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               };
             }
           };
+          function setSpecialAttr(element, attrName, value) {
+            specialAttrHolder.innerHTML = "<span " + attrName + ">";
+            var attributes = specialAttrHolder.firstChild.attributes;
+            var attribute = attributes[0];
+            attributes.removeNamedItem(attribute.name);
+            attribute.value = value;
+            element.attributes.setNamedItem(attribute);
+          }
           function safeAddClass($element, className) {
             try {
               $element.addClass(className);
@@ -10121,7 +10288,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
           var startSymbol = $interpolate.startSymbol(),
               endSymbol = $interpolate.endSymbol(),
-              denormalizeTemplate = (startSymbol == '{{' || endSymbol == '}}') ? identity : function denormalizeTemplate(template) {
+              denormalizeTemplate = (startSymbol == '{{' && endSymbol == '}}') ? identity : function denormalizeTemplate(template) {
                 return template.replace(/\{\{/g, startSymbol).replace(/}}/g, endSymbol);
               },
               NG_ATTR_BINDING = /^ngAttr[A-Z]/;
@@ -10150,11 +10317,14 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             if (!($compileNodes instanceof jqLite)) {
               $compileNodes = jqLite($compileNodes);
             }
-            forEach($compileNodes, function(node, index) {
-              if (node.nodeType == NODE_TYPE_TEXT && node.nodeValue.match(/\S+/)) {
-                $compileNodes[index] = jqLite(node).wrap('<span></span>').parent()[0];
+            var NOT_EMPTY = /\S+/;
+            for (var i = 0,
+                len = $compileNodes.length; i < len; i++) {
+              var domNode = $compileNodes[i];
+              if (domNode.nodeType === NODE_TYPE_TEXT && domNode.nodeValue.match(NOT_EMPTY)) {
+                jqLiteWrapNode(domNode, $compileNodes[i] = document.createElement('span'));
               }
-            });
+            }
             var compositeLinkFn = compileNodes($compileNodes, transcludeFn, $compileNodes, maxPriority, ignoreDirective, previousCompileContext);
             compile.$$addScopeClass($compileNodes);
             var namespace = null;
@@ -10199,7 +10369,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             if (!node) {
               return 'html';
             } else {
-              return nodeName_(node) !== 'foreignobject' && node.toString().match(/SVG/) ? 'svg' : 'html';
+              return nodeName_(node) !== 'foreignobject' && toString.call(node).match(/SVG/) ? 'svg' : 'html';
             }
           }
           function compileNodes(nodeList, transcludeFn, $rootElement, maxPriority, ignoreDirective, previousCompileContext) {
@@ -10286,6 +10456,14 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 futureParentElement: futureParentElement
               });
             };
+            var boundSlots = boundTranscludeFn.$$slots = createMap();
+            for (var slotName in transcludeFn.$$slots) {
+              if (transcludeFn.$$slots[slotName]) {
+                boundSlots[slotName] = createBoundTranscludeFn(scope, transcludeFn.$$slots[slotName], previousBoundTranscludeFn);
+              } else {
+                boundSlots[slotName] = null;
+              }
+            }
             return boundTranscludeFn;
           }
           function collectDirectives(node, directives, attrs, maxPriority, ignoreDirective) {
@@ -10399,6 +10577,19 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               return linkFn(scope, element, attrs, controllers, transcludeFn);
             };
           }
+          function compilationGenerator(eager, $compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext) {
+            if (eager) {
+              return compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
+            }
+            var compiled;
+            return function() {
+              if (!compiled) {
+                compiled = compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
+                $compileNodes = transcludeFn = previousCompileContext = null;
+              }
+              return compiled.apply(this, arguments);
+            };
+          }
           function applyDirectivesToNode(directives, compileNode, templateAttrs, transcludeFn, jqCollection, originalReplaceDirective, preLinkFns, postLinkFns, previousCompileContext) {
             previousCompileContext = previousCompileContext || {};
             var terminalPriority = -Number.MAX_VALUE,
@@ -10417,6 +10608,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 replaceDirective = originalReplaceDirective,
                 childTranscludeFn = transcludeFn,
                 linkFn,
+                didScanForMultipleTransclusion = false,
+                mightHaveMultipleTransclusionError = false,
                 directiveValue;
             for (var i = 0,
                 ii = directives.length; i < ii; i++) {
@@ -10442,6 +10635,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 newScopeDirective = newScopeDirective || directive;
               }
               directiveName = directive.name;
+              if (!didScanForMultipleTransclusion && ((directive.replace && (directive.templateUrl || directive.template)) || (directive.transclude && !directive.$$tlb))) {
+                var candidateDirective;
+                for (var scanningIndex = i + 1; candidateDirective = directives[scanningIndex++]; ) {
+                  if ((candidateDirective.transclude && !candidateDirective.$$tlb) || (candidateDirective.replace && (candidateDirective.templateUrl || candidateDirective.template))) {
+                    mightHaveMultipleTransclusionError = true;
+                    break;
+                  }
+                }
+                didScanForMultipleTransclusion = true;
+              }
               if (!directive.templateUrl && directive.controller) {
                 directiveValue = directive.controller;
                 controllerDirectives = controllerDirectives || createMap();
@@ -10461,11 +10664,45 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                   $compileNode = templateAttrs.$$element = jqLite(document.createComment(' ' + directiveName + ': ' + templateAttrs[directiveName] + ' '));
                   compileNode = $compileNode[0];
                   replaceWith(jqCollection, sliceArgs($template), compileNode);
-                  childTranscludeFn = compile($template, transcludeFn, terminalPriority, replaceDirective && replaceDirective.name, {nonTlbTranscludeDirective: nonTlbTranscludeDirective});
+                  childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, terminalPriority, replaceDirective && replaceDirective.name, {nonTlbTranscludeDirective: nonTlbTranscludeDirective});
                 } else {
+                  var slots = createMap();
                   $template = jqLite(jqLiteClone(compileNode)).contents();
+                  if (isObject(directiveValue)) {
+                    $template = [];
+                    var slotMap = createMap();
+                    var filledSlots = createMap();
+                    forEach(directiveValue, function(elementSelector, slotName) {
+                      var optional = (elementSelector.charAt(0) === '?');
+                      elementSelector = optional ? elementSelector.substring(1) : elementSelector;
+                      slotMap[elementSelector] = slotName;
+                      slots[slotName] = null;
+                      filledSlots[slotName] = optional;
+                    });
+                    forEach($compileNode.contents(), function(node) {
+                      var slotName = slotMap[directiveNormalize(nodeName_(node))];
+                      if (slotName) {
+                        filledSlots[slotName] = true;
+                        slots[slotName] = slots[slotName] || [];
+                        slots[slotName].push(node);
+                      } else {
+                        $template.push(node);
+                      }
+                    });
+                    forEach(filledSlots, function(filled, slotName) {
+                      if (!filled) {
+                        throw $compileMinErr('reqslot', 'Required transclusion slot `{0}` was not filled.', slotName);
+                      }
+                    });
+                    for (var slotName in slots) {
+                      if (slots[slotName]) {
+                        slots[slotName] = compilationGenerator(mightHaveMultipleTransclusionError, slots[slotName], transcludeFn);
+                      }
+                    }
+                  }
                   $compileNode.empty();
-                  childTranscludeFn = compile($template, transcludeFn, undefined, undefined, {needsNewScope: directive.$$isolateScope || directive.$$newScope});
+                  childTranscludeFn = compilationGenerator(mightHaveMultipleTransclusionError, $template, transcludeFn, undefined, undefined, {needsNewScope: directive.$$isolateScope || directive.$$newScope});
+                  childTranscludeFn.$$slots = slots;
                 }
               }
               if (directive.template) {
@@ -10585,6 +10822,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                     ii = require.length; i < ii; i++) {
                   value[i] = getControllers(directiveName, require[i], $element, elementControllers);
                 }
+              } else if (isObject(require)) {
+                value = {};
+                forEach(require, function(controller, property) {
+                  value[property] = getControllers(directiveName, controller, $element, elementControllers);
+                });
               }
               return value || null;
             }
@@ -10611,7 +10853,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               return elementControllers;
             }
             function nodeLinkFn(childLinkFn, scope, linkNode, $rootElement, boundTranscludeFn) {
-              var linkFn,
+              var i,
+                  ii,
+                  linkFn,
                   isolateScope,
                   controllerScope,
                   elementControllers,
@@ -10636,6 +10880,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               if (boundTranscludeFn) {
                 transcludeFn = controllersBoundTransclude;
                 transcludeFn.$$boundTransclude = boundTranscludeFn;
+                transcludeFn.isSlotFilled = function(slotName) {
+                  return !!boundTranscludeFn.$$slots[slotName];
+                };
               }
               if (controllerDirectives) {
                 elementControllers = setupControllers($element, attrs, transcludeFn, controllerDirectives, isolateScope, scope);
@@ -10664,6 +10911,17 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                   removeControllerBindingWatches = initializeDirectiveBindings(controllerScope, attrs, controller.instance, bindings, controllerDirective);
                 }
               }
+              forEach(controllerDirectives, function(controllerDirective, name) {
+                var require = controllerDirective.require;
+                if (controllerDirective.bindToController && !isArray(require) && isObject(require)) {
+                  extend(elementControllers[name].instance, getControllers(name, require, $element, elementControllers));
+                }
+              });
+              forEach(elementControllers, function(controller) {
+                if (isFunction(controller.instance.$onInit)) {
+                  controller.instance.$onInit();
+                }
+              });
               for (i = 0, ii = preLinkFns.length; i < ii; i++) {
                 linkFn = preLinkFns[i];
                 invokeLinkFn(linkFn, linkFn.isolateScope ? isolateScope : scope, $element, attrs, linkFn.require && getControllers(linkFn.directiveName, linkFn.require, $element, elementControllers), transcludeFn);
@@ -10677,9 +10935,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 linkFn = postLinkFns[i];
                 invokeLinkFn(linkFn, linkFn.isolateScope ? isolateScope : scope, $element, attrs, linkFn.require && getControllers(linkFn.directiveName, linkFn.require, $element, elementControllers), transcludeFn);
               }
-              function controllersBoundTransclude(scope, cloneAttachFn, futureParentElement) {
+              function controllersBoundTransclude(scope, cloneAttachFn, futureParentElement, slotName) {
                 var transcludeControllers;
                 if (!isScope(scope)) {
+                  slotName = futureParentElement;
                   futureParentElement = cloneAttachFn;
                   cloneAttachFn = scope;
                   scope = undefined;
@@ -10690,7 +10949,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 if (!futureParentElement) {
                   futureParentElement = hasElementTranscludeDirective ? $element.parent() : $element;
                 }
-                return boundTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                if (slotName) {
+                  var slotTranscludeFn = boundTranscludeFn.$$slots[slotName];
+                  if (slotTranscludeFn) {
+                    return slotTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                  } else if (isUndefined(slotTranscludeFn)) {
+                    throw $compileMinErr('noslot', 'No parent directive that requires a transclusion with slot name "{0}". ' + 'Element: {1}', slotName, startingTag($element));
+                  }
+                } else {
+                  return boundTranscludeFn(scope, cloneAttachFn, transcludeControllers, futureParentElement, scopeToChild);
+                }
               }
             }
           }
@@ -10988,22 +11256,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               parent.replaceChild(newNode, firstElementToRemove);
             }
             var fragment = document.createDocumentFragment();
-            fragment.appendChild(firstElementToRemove);
+            for (i = 0; i < removeCount; i++) {
+              fragment.appendChild(elementsToRemove[i]);
+            }
             if (jqLite.hasData(firstElementToRemove)) {
               jqLite.data(newNode, jqLite.data(firstElementToRemove));
-              if (!jQuery) {
-                delete jqLite.cache[firstElementToRemove[jqLite.expando]];
-              } else {
-                skipDestroyOnNextJQueryCleanData = true;
-                jQuery.cleanData([firstElementToRemove]);
-              }
+              jqLite(firstElementToRemove).off('$destroy');
             }
-            for (var k = 1,
-                kk = elementsToRemove.length; k < kk; k++) {
-              var element = elementsToRemove[k];
-              jqLite(element).remove();
-              fragment.appendChild(element);
-              delete elementsToRemove[k];
+            jqLite.cleanData(fragment.querySelectorAll('*'));
+            for (i = 1; i < removeCount; i++) {
+              delete elementsToRemove[i];
             }
             elementsToRemove[0] = newNode;
             elementsToRemove.length = 1;
@@ -11029,7 +11291,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                   lastValue,
                   parentGet,
                   parentSet,
-                  compare;
+                  compare,
+                  removeWatch;
               switch (mode) {
                 case '@':
                   if (!optional && !hasOwnProperty.call(attrs, attrName)) {
@@ -11041,8 +11304,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                     }
                   });
                   attrs.$$observers[attrName].$$scope = scope;
-                  if (isString(attrs[attrName])) {
-                    destination[scopeName] = $interpolate(attrs[attrName])(scope);
+                  lastValue = attrs[attrName];
+                  if (isString(lastValue)) {
+                    destination[scopeName] = $interpolate(lastValue)(scope);
+                  } else if (isBoolean(lastValue)) {
+                    destination[scopeName] = lastValue;
                   }
                   break;
                 case '=':
@@ -11063,7 +11329,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                   }
                   parentSet = parentGet.assign || function() {
                     lastValue = destination[scopeName] = parentGet(scope);
-                    throw $compileMinErr('nonassign', "Expression '{0}' used with directive '{1}' is non-assignable!", attrs[attrName], directive.name);
+                    throw $compileMinErr('nonassign', "Expression '{0}' in attribute '{1}' used with directive '{2}' is non-assignable!", attrs[attrName], attrName, directive.name);
                   };
                   lastValue = destination[scopeName] = parentGet(scope);
                   var parentValueWatch = function parentValueWatch(parentValue) {
@@ -11077,12 +11343,26 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                     return lastValue = parentValue;
                   };
                   parentValueWatch.$stateful = true;
-                  var removeWatch;
                   if (definition.collection) {
                     removeWatch = scope.$watchCollection(attrs[attrName], parentValueWatch);
                   } else {
                     removeWatch = scope.$watch($parse(attrs[attrName], parentValueWatch), null, parentGet.literal);
                   }
+                  removeWatchCollection.push(removeWatch);
+                  break;
+                case '<':
+                  if (!hasOwnProperty.call(attrs, attrName)) {
+                    if (optional)
+                      break;
+                    attrs[attrName] = void 0;
+                  }
+                  if (optional && !attrs[attrName])
+                    break;
+                  parentGet = $parse(attrs[attrName]);
+                  destination[scopeName] = parentGet(scope);
+                  removeWatch = scope.$watch(parentGet, function parentValueWatchAction(newParentValue) {
+                    destination[scopeName] = newParentValue;
+                  }, parentGet.literal);
                   removeWatchCollection.push(removeWatch);
                   break;
                 case '&':
@@ -11139,7 +11419,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         return jqNodes;
       }
       var $controllerMinErr = minErr('$controller');
-      var CNTRL_REG = /^(\S+)(\s+as\s+(\w+))?$/;
+      var CNTRL_REG = /^(\S+)(\s+as\s+([\w$]+))?$/;
       function identifierForController(controller, ident) {
         if (ident && isString(ident))
           return ident;
@@ -11414,8 +11694,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             reversedInterceptors.unshift(isString(interceptorFactory) ? $injector.get(interceptorFactory) : $injector.invoke(interceptorFactory));
           });
           function $http(requestConfig) {
-            if (!angular.isObject(requestConfig)) {
+            if (!isObject(requestConfig)) {
               throw minErr('$http')('badreq', 'Http request configuration must be an object.  Received: {0}', requestConfig);
+            }
+            if (!isString(requestConfig.url)) {
+              throw minErr('$http')('badreq', 'Http request configuration url must be a string.  Received: {0}', requestConfig.url);
             }
             var config = extend({
               method: 'get',
@@ -11785,7 +12068,25 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             }
             return value;
           }
+          function constantWatchDelegate(scope, listener, objectEquality, constantInterp) {
+            var unwatch;
+            return unwatch = scope.$watch(function constantInterpolateWatch(scope) {
+              unwatch();
+              return constantInterp(scope);
+            }, listener, objectEquality);
+          }
           function $interpolate(text, mustHaveExpression, trustedContext, allOrNothing) {
+            if (!text.length || text.indexOf(startSymbol) === -1) {
+              var constantInterp;
+              if (!mustHaveExpression) {
+                var unescapedText = unescapeText(text);
+                constantInterp = valueFn(unescapedText);
+                constantInterp.exp = text;
+                constantInterp.expressions = [];
+                constantInterp.$$watchDelegate = constantWatchDelegate;
+              }
+              return constantInterp;
+            }
             allOrNothing = !!allOrNothing;
             var startIndex,
                 endIndex,
@@ -11876,7 +12177,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         }];
       }
       function $IntervalProvider() {
-        this.$get = ['$rootScope', '$window', '$q', '$$q', function($rootScope, $window, $q, $$q) {
+        this.$get = ['$rootScope', '$window', '$q', '$$q', '$browser', function($rootScope, $window, $q, $$q, $browser) {
           var intervals = {};
           function interval(fn, delay, count, invokeApply) {
             var hasParams = arguments.length > 4,
@@ -11888,10 +12189,12 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 deferred = (skipApply ? $$q : $q).defer(),
                 promise = deferred.promise;
             count = isDefined(count) ? count : 0;
-            promise.then(null, null, (!hasParams) ? fn : function() {
-              fn.apply(null, args);
-            });
             promise.$$intervalId = setInterval(function tick() {
+              if (skipApply) {
+                $browser.defer(callback);
+              } else {
+                $rootScope.$evalAsync(callback);
+              }
               deferred.notify(iteration++);
               if (count > 0 && iteration >= count) {
                 deferred.resolve(iteration);
@@ -11903,6 +12206,13 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             }, delay);
             intervals[promise.$$intervalId] = deferred;
             return promise;
+            function callback() {
+              if (!hasParams) {
+                fn(iteration);
+              } else {
+                fn.apply(null, args);
+              }
+            }
           }
           interval.cancel = function(promise) {
             if (promise && promise.$$intervalId in intervals) {
@@ -12403,12 +12713,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         }
         return name;
       }
-      function getStringValue(name, fullExpression) {
-        name = name + '';
-        if (!isString(name)) {
-          throw $parseMinErr('iseccst', 'Cannot convert object to primitive value! ' + 'Expression: {0}', fullExpression);
-        }
-        return name;
+      function getStringValue(name) {
+        return name + '';
       }
       function ensureSafeObject(obj, fullExpression) {
         if (obj) {
@@ -12629,6 +12935,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       AST.Property = 'Property';
       AST.ObjectExpression = 'ObjectExpression';
       AST.ThisExpression = 'ThisExpression';
+      AST.LocalsExpression = 'LocalsExpression';
       AST.NGValueParameter = 'NGValueParameter';
       AST.prototype = {
         ast: function(text) {
@@ -12978,7 +13285,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             type: AST.Literal,
             value: undefined
           },
-          'this': {type: AST.ThisExpression}
+          'this': {type: AST.ThisExpression},
+          '$locals': {type: AST.LocalsExpression}
         }
       };
       function ifDefined(v, d) {
@@ -13093,6 +13401,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             ast.toWatch = argsToWatch;
             break;
           case AST.ThisExpression:
+            ast.constant = false;
+            ast.toWatch = [];
+            break;
+          case AST.LocalsExpression:
             ast.constant = false;
             ast.toWatch = [];
             break;
@@ -13313,6 +13625,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               intoId = intoId || this.nextId();
               self.recurse(ast.object, left, undefined, function() {
                 self.if_(self.notNull(left), function() {
+                  if (create && create !== 1) {
+                    self.addEnsureSafeAssignContext(left);
+                  }
                   if (ast.computed) {
                     right = self.nextId();
                     self.recurse(ast.property, right);
@@ -13394,7 +13709,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               right = this.nextId();
               left = {};
               if (!isAssignable(ast.left)) {
-                throw $parseMinErr('lval', 'Trying to assing a value to a non l-value');
+                throw $parseMinErr('lval', 'Trying to assign a value to a non l-value');
               }
               this.recurse(ast.left, undefined, left, function() {
                 self.if_(self.notNull(left.context), function() {
@@ -13432,6 +13747,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             case AST.ThisExpression:
               this.assign(intoId, 's');
               recursionFn('s');
+              break;
+            case AST.LocalsExpression:
+              this.assign(intoId, 'l');
+              recursionFn('l');
               break;
             case AST.NGValueParameter:
               this.assign(intoId, 'v');
@@ -13522,7 +13841,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           return 'ensureSafeFunction(' + item + ',text)';
         },
         getStringValue: function(item) {
-          this.assign(item, 'getStringValue(' + item + ',text)');
+          this.assign(item, 'getStringValue(' + item + ')');
         },
         ensureSafeAssignContext: function(item) {
           return 'ensureSafeAssignContext(' + item + ',text)';
@@ -13732,6 +14051,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               return function(scope) {
                 return context ? {value: scope} : scope;
               };
+            case AST.LocalsExpression:
+              return function(scope, locals) {
+                return context ? {value: locals} : locals;
+              };
             case AST.NGValueParameter:
               return function(scope, locals, assign, inputs) {
                 return context ? {value: assign} : assign;
@@ -13905,8 +14228,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               rhs = right(scope, locals, assign, inputs);
               rhs = getStringValue(rhs);
               ensureSafeMemberName(rhs, expression);
-              if (create && create !== 1 && lhs && !(lhs[rhs])) {
-                lhs[rhs] = {};
+              if (create && create !== 1) {
+                ensureSafeAssignContext(lhs);
+                if (lhs && !(lhs[rhs])) {
+                  lhs[rhs] = {};
+                }
               }
               value = lhs[rhs];
               ensureSafeObject(value, expression);
@@ -13925,8 +14251,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         nonComputedMember: function(left, right, expensiveChecks, context, create, expression) {
           return function(scope, locals, assign, inputs) {
             var lhs = left(scope, locals, assign, inputs);
-            if (create && create !== 1 && lhs && !(lhs[right])) {
-              lhs[right] = {};
+            if (create && create !== 1) {
+              ensureSafeAssignContext(lhs);
+              if (lhs && !(lhs[right])) {
+                lhs[right] = {};
+              }
             }
             var value = lhs != null ? lhs[right] : undefined;
             if (expensiveChecks || isPossiblyDangerousMemberName(right)) {
@@ -13964,8 +14293,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           return this.astCompiler.compile(text, this.options.expensiveChecks);
         }
       };
-      var getterFnCacheDefault = createMap();
-      var getterFnCacheExpensive = createMap();
       function isPossiblyDangerousMemberName(name) {
         return name == 'constructor';
       }
@@ -13986,10 +14313,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 csp: noUnsafeEval,
                 expensiveChecks: true
               };
-          return function $parse(exp, interceptorFn, expensiveChecks) {
+          var runningChecksEnabled = false;
+          $parse.$$runningExpensiveChecks = function() {
+            return runningChecksEnabled;
+          };
+          return $parse;
+          function $parse(exp, interceptorFn, expensiveChecks) {
             var parsedExpression,
                 oneTime,
                 cacheKey;
+            expensiveChecks = expensiveChecks || runningChecksEnabled;
             switch (typeof exp) {
               case 'string':
                 exp = exp.trim();
@@ -14012,15 +14345,40 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                   } else if (parsedExpression.inputs) {
                     parsedExpression.$$watchDelegate = inputsWatchDelegate;
                   }
+                  if (expensiveChecks) {
+                    parsedExpression = expensiveChecksInterceptor(parsedExpression);
+                  }
                   cache[cacheKey] = parsedExpression;
                 }
                 return addInterceptor(parsedExpression, interceptorFn);
               case 'function':
                 return addInterceptor(exp, interceptorFn);
               default:
-                return noop;
+                return addInterceptor(noop, interceptorFn);
             }
-          };
+          }
+          function expensiveChecksInterceptor(fn) {
+            if (!fn)
+              return fn;
+            expensiveCheckFn.$$watchDelegate = fn.$$watchDelegate;
+            expensiveCheckFn.assign = expensiveChecksInterceptor(fn.assign);
+            expensiveCheckFn.constant = fn.constant;
+            expensiveCheckFn.literal = fn.literal;
+            for (var i = 0; fn.inputs && i < fn.inputs.length; ++i) {
+              fn.inputs[i] = expensiveChecksInterceptor(fn.inputs[i]);
+            }
+            expensiveCheckFn.inputs = fn.inputs;
+            return expensiveCheckFn;
+            function expensiveCheckFn(scope, locals, assign, inputs) {
+              var expensiveCheckOldValue = runningChecksEnabled;
+              runningChecksEnabled = true;
+              try {
+                return fn(scope, locals, assign, inputs);
+              } finally {
+                runningChecksEnabled = expensiveCheckOldValue;
+              }
+            }
+          }
           function expressionInputDirtyCheck(newValue, oldValueOfValue) {
             if (newValue == null || oldValueOfValue == null) {
               return newValue === oldValueOfValue;
@@ -14119,13 +14477,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           function constantWatchDelegate(scope, listener, objectEquality, parsedExpression) {
             var unwatch;
             return unwatch = scope.$watch(function constantWatch(scope) {
-              return parsedExpression(scope);
-            }, function constantListener(value, old, scope) {
-              if (isFunction(listener)) {
-                listener.apply(this, arguments);
-              }
               unwatch();
-            }, objectEquality);
+              return parsedExpression(scope);
+            }, listener, objectEquality);
           }
           function addInterceptor(parsedExpression, interceptorFn) {
             if (!interceptorFn)
@@ -14168,20 +14522,12 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       function qFactory(nextTick, exceptionHandler) {
         var $qMinErr = minErr('$q', TypeError);
-        function callOnce(self, resolveFn, rejectFn) {
-          var called = false;
-          function wrap(fn) {
-            return function(value) {
-              if (called)
-                return;
-              called = true;
-              fn.call(self, value);
-            };
-          }
-          return [wrap(resolveFn), wrap(rejectFn)];
-        }
         var defer = function() {
-          return new Deferred();
+          var d = new Deferred();
+          d.resolve = simpleBind(d, d.resolve);
+          d.reject = simpleBind(d, d.reject);
+          d.notify = simpleBind(d, d.notify);
+          return d;
         };
         function Promise() {
           this.$$state = {status: 0};
@@ -14249,9 +14595,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         }
         function Deferred() {
           this.promise = new Promise();
-          this.resolve = simpleBind(this, this.resolve);
-          this.reject = simpleBind(this, this.reject);
-          this.notify = simpleBind(this, this.notify);
         }
         extend(Deferred.prototype, {
           resolve: function(val) {
@@ -14264,23 +14607,35 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             }
           },
           $$resolve: function(val) {
-            var then,
-                fns;
-            fns = callOnce(this, this.$$resolve, this.$$reject);
+            var then;
+            var that = this;
+            var done = false;
             try {
               if ((isObject(val) || isFunction(val)))
                 then = val && val.then;
               if (isFunction(then)) {
                 this.promise.$$state.status = -1;
-                then.call(val, fns[0], fns[1], this.notify);
+                then.call(val, resolvePromise, rejectPromise, simpleBind(this, this.notify));
               } else {
                 this.promise.$$state.value = val;
                 this.promise.$$state.status = 1;
                 scheduleProcessQueue(this.promise.$$state);
               }
             } catch (e) {
-              fns[1](e);
+              rejectPromise(e);
               exceptionHandler(e);
+            }
+            function resolvePromise(val) {
+              if (done)
+                return;
+              done = true;
+              that.$$resolve(val);
+            }
+            function rejectPromise(val) {
+              if (done)
+                return;
+              done = true;
+              that.$$reject(val);
             }
           },
           reject: function(reason) {
@@ -14378,9 +14733,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           if (!isFunction(resolver)) {
             throw $qMinErr('norslvr', "Expected resolverFn, got '{0}'", resolver);
           }
-          if (!(this instanceof Q)) {
-            return new Q(resolver);
-          }
           var deferred = new Deferred();
           function resolveFn(value) {
             deferred.resolve(value);
@@ -14391,6 +14743,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           resolver(resolveFn, rejectFn);
           return deferred.promise;
         };
+        $Q.prototype = Promise.prototype;
         $Q.defer = defer;
         $Q.reject = reject;
         $Q.when = when;
@@ -14441,7 +14794,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           ChildScope.prototype = parent;
           return ChildScope;
         }
-        this.$get = ['$injector', '$exceptionHandler', '$parse', '$browser', function($injector, $exceptionHandler, $parse, $browser) {
+        this.$get = ['$exceptionHandler', '$parse', '$browser', function($exceptionHandler, $parse, $browser) {
           function destroyChildScope($event) {
             $event.currentScope.$$destroyed = true;
           }
@@ -14683,6 +15036,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               var watch,
                   value,
                   last,
+                  fn,
+                  get,
                   watchers,
                   length,
                   dirty,
@@ -14720,11 +15075,13 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                       try {
                         watch = watchers[length];
                         if (watch) {
-                          if ((value = watch.get(current)) !== (last = watch.last) && !(watch.eq ? equals(value, last) : (typeof value === 'number' && typeof last === 'number' && isNaN(value) && isNaN(last)))) {
+                          get = watch.get;
+                          if ((value = get(current)) !== (last = watch.last) && !(watch.eq ? equals(value, last) : (typeof value === 'number' && typeof last === 'number' && isNaN(value) && isNaN(last)))) {
                             dirty = true;
                             lastDirtyWatch = watch;
                             watch.last = watch.eq ? copy(value, null) : value;
-                            watch.fn(value, ((last === initWatchVal) ? value : last), current);
+                            fn = watch.fn;
+                            fn(value, ((last === initWatchVal) ? value : last), current);
                             if (ttl < 5) {
                               logIdx = 4 - ttl;
                               if (!watchLog[logIdx])
@@ -14807,7 +15164,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               }
               asyncQueue.push({
                 scope: this,
-                expression: expr,
+                expression: $parse(expr),
                 locals: locals
               });
             },
@@ -14836,6 +15193,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             $applyAsync: function(expr) {
               var scope = this;
               expr && applyAsyncQueue.push($applyAsyncExpression);
+              expr = $parse(expr);
               scheduleApplyAsync();
               function $applyAsyncExpression() {
                 scope.$eval(expr);
@@ -15284,6 +15642,14 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       }
       var $compileMinErr = minErr('$compile');
       function $TemplateRequestProvider() {
+        var httpOptions;
+        this.httpOptions = function(val) {
+          if (val) {
+            httpOptions = val;
+            return this;
+          }
+          return httpOptions;
+        };
         this.$get = ['$templateCache', '$http', '$q', '$sce', function($templateCache, $http, $q, $sce) {
           function handleRequestFn(tpl, ignoreRequestError) {
             handleRequestFn.totalPendingRequests++;
@@ -15298,11 +15664,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             } else if (transformResponse === defaultHttpResponseTransform) {
               transformResponse = null;
             }
-            var httpOptions = {
+            return $http.get(tpl, extend({
               cache: $templateCache,
               transformResponse: transformResponse
-            };
-            return $http.get(tpl, httpOptions)['finally'](function() {
+            }, httpOptions))['finally'](function() {
               handleRequestFn.totalPendingRequests--;
             }).then(function(response) {
               $templateCache.put(tpl, response.data);
@@ -15613,6 +15978,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       function getTypeForFilter(val) {
         return (val === null) ? 'null' : typeof val;
       }
+      var MAX_DIGITS = 22;
+      var DECIMAL_SEP = '.';
+      var ZERO_CHAR = '0';
       currencyFilter.$inject = ['$locale'];
       function currencyFilter($locale) {
         var formats = $locale.NUMBER_FORMATS;
@@ -15633,75 +16001,131 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           return (number == null) ? number : formatNumber(number, formats.PATTERNS[0], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize);
         };
       }
-      var DECIMAL_SEP = '.';
-      function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
-        if (isObject(number))
-          return '';
-        var isNegative = number < 0;
-        number = Math.abs(number);
-        var isInfinity = number === Infinity;
-        if (!isInfinity && !isFinite(number))
-          return '';
-        var numStr = number + '',
-            formatedText = '',
-            hasExponent = false,
-            parts = [];
-        if (isInfinity)
-          formatedText = '\u221e';
-        if (!isInfinity && numStr.indexOf('e') !== -1) {
-          var match = numStr.match(/([\d\.]+)e(-?)(\d+)/);
-          if (match && match[2] == '-' && match[3] > fractionSize + 1) {
-            number = 0;
-          } else {
-            formatedText = numStr;
-            hasExponent = true;
-          }
+      function parse(numStr) {
+        var exponent = 0,
+            digits,
+            numberOfIntegerDigits;
+        var i,
+            j,
+            zeros;
+        if ((numberOfIntegerDigits = numStr.indexOf(DECIMAL_SEP)) > -1) {
+          numStr = numStr.replace(DECIMAL_SEP, '');
         }
-        if (!isInfinity && !hasExponent) {
-          var fractionLen = (numStr.split(DECIMAL_SEP)[1] || '').length;
-          if (isUndefined(fractionSize)) {
-            fractionSize = Math.min(Math.max(pattern.minFrac, fractionLen), pattern.maxFrac);
-          }
-          number = +(Math.round(+(number.toString() + 'e' + fractionSize)).toString() + 'e' + -fractionSize);
-          var fraction = ('' + number).split(DECIMAL_SEP);
-          var whole = fraction[0];
-          fraction = fraction[1] || '';
-          var i,
-              pos = 0,
-              lgroup = pattern.lgSize,
-              group = pattern.gSize;
-          if (whole.length >= (lgroup + group)) {
-            pos = whole.length - lgroup;
-            for (i = 0; i < pos; i++) {
-              if ((pos - i) % group === 0 && i !== 0) {
-                formatedText += groupSep;
-              }
-              formatedText += whole.charAt(i);
-            }
-          }
-          for (i = pos; i < whole.length; i++) {
-            if ((whole.length - i) % lgroup === 0 && i !== 0) {
-              formatedText += groupSep;
-            }
-            formatedText += whole.charAt(i);
-          }
-          while (fraction.length < fractionSize) {
-            fraction += '0';
-          }
-          if (fractionSize && fractionSize !== "0")
-            formatedText += decimalSep + fraction.substr(0, fractionSize);
+        if ((i = numStr.search(/e/i)) > 0) {
+          if (numberOfIntegerDigits < 0)
+            numberOfIntegerDigits = i;
+          numberOfIntegerDigits += +numStr.slice(i + 1);
+          numStr = numStr.substring(0, i);
+        } else if (numberOfIntegerDigits < 0) {
+          numberOfIntegerDigits = numStr.length;
+        }
+        for (i = 0; numStr.charAt(i) == ZERO_CHAR; i++)
+          ;
+        if (i == (zeros = numStr.length)) {
+          digits = [0];
+          numberOfIntegerDigits = 1;
         } else {
-          if (fractionSize > 0 && number < 1) {
-            formatedText = number.toFixed(fractionSize);
-            number = parseFloat(formatedText);
-            formatedText = formatedText.replace(DECIMAL_SEP, decimalSep);
+          zeros--;
+          while (numStr.charAt(zeros) == ZERO_CHAR)
+            zeros--;
+          numberOfIntegerDigits -= i;
+          digits = [];
+          for (j = 0; i <= zeros; i++, j++) {
+            digits[j] = +numStr.charAt(i);
           }
         }
-        if (number === 0) {
-          isNegative = false;
+        if (numberOfIntegerDigits > MAX_DIGITS) {
+          digits = digits.splice(0, MAX_DIGITS - 1);
+          exponent = numberOfIntegerDigits - 1;
+          numberOfIntegerDigits = 1;
         }
-        parts.push(isNegative ? pattern.negPre : pattern.posPre, formatedText, isNegative ? pattern.negSuf : pattern.posSuf);
-        return parts.join('');
+        return {
+          d: digits,
+          e: exponent,
+          i: numberOfIntegerDigits
+        };
+      }
+      function roundNumber(parsedNumber, fractionSize, minFrac, maxFrac) {
+        var digits = parsedNumber.d;
+        var fractionLen = digits.length - parsedNumber.i;
+        fractionSize = (isUndefined(fractionSize)) ? Math.min(Math.max(minFrac, fractionLen), maxFrac) : +fractionSize;
+        var roundAt = fractionSize + parsedNumber.i;
+        var digit = digits[roundAt];
+        if (roundAt > 0) {
+          digits.splice(roundAt);
+        } else {
+          parsedNumber.i = 1;
+          digits.length = roundAt = fractionSize + 1;
+          for (var i = 0; i < roundAt; i++)
+            digits[i] = 0;
+        }
+        if (digit >= 5)
+          digits[roundAt - 1]++;
+        for (; fractionLen < fractionSize; fractionLen++)
+          digits.push(0);
+        var carry = digits.reduceRight(function(carry, d, i, digits) {
+          d = d + carry;
+          digits[i] = d % 10;
+          return Math.floor(d / 10);
+        }, 0);
+        if (carry) {
+          digits.unshift(carry);
+          parsedNumber.i++;
+        }
+      }
+      function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
+        if (!(isString(number) || isNumber(number)) || isNaN(number))
+          return '';
+        var isInfinity = !isFinite(number);
+        var isZero = false;
+        var numStr = Math.abs(number) + '',
+            formattedText = '',
+            parsedNumber;
+        if (isInfinity) {
+          formattedText = '\u221e';
+        } else {
+          parsedNumber = parse(numStr);
+          roundNumber(parsedNumber, fractionSize, pattern.minFrac, pattern.maxFrac);
+          var digits = parsedNumber.d;
+          var integerLen = parsedNumber.i;
+          var exponent = parsedNumber.e;
+          var decimals = [];
+          isZero = digits.reduce(function(isZero, d) {
+            return isZero && !d;
+          }, true);
+          while (integerLen < 0) {
+            digits.unshift(0);
+            integerLen++;
+          }
+          if (integerLen > 0) {
+            decimals = digits.splice(integerLen);
+          } else {
+            decimals = digits;
+            digits = [0];
+          }
+          var groups = [];
+          if (digits.length > pattern.lgSize) {
+            groups.unshift(digits.splice(-pattern.lgSize).join(''));
+          }
+          while (digits.length > pattern.gSize) {
+            groups.unshift(digits.splice(-pattern.gSize).join(''));
+          }
+          if (digits.length) {
+            groups.unshift(digits.join(''));
+          }
+          formattedText = groups.join(groupSep);
+          if (decimals.length) {
+            formattedText += decimalSep + decimals.join('');
+          }
+          if (exponent) {
+            formattedText += 'e+' + exponent;
+          }
+        }
+        if (number < 0 && !isZero) {
+          return pattern.negPre + formattedText + pattern.negSuf;
+        } else {
+          return pattern.posPre + formattedText + pattern.posSuf;
+        }
       }
       function padNumber(num, digits, trim) {
         var neg = '';
@@ -15711,7 +16135,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         }
         num = '' + num;
         while (num.length < digits)
-          num = '0' + num;
+          num = ZERO_CHAR + num;
         if (trim) {
           num = num.substr(num.length - digits);
         }
@@ -15852,12 +16276,12 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
           var dateTimezoneOffset = date.getTimezoneOffset();
           if (timezone) {
-            dateTimezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
+            dateTimezoneOffset = timezoneToOffset(timezone, dateTimezoneOffset);
             date = convertTimezoneToLocal(date, timezone, true);
           }
           forEach(parts, function(value) {
             fn = DATE_FORMATS[value];
-            text += fn ? fn(date, $locale.DATETIME_FORMATS, dateTimezoneOffset) : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
+            text += fn ? fn(date, $locale.DATETIME_FORMATS, dateTimezoneOffset) : value === "''" ? "'" : value.replace(/(^'|'$)/g, '').replace(/''/g, "'");
           });
           return text;
         };
@@ -15901,8 +16325,11 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       orderByFilter.$inject = ['$parse'];
       function orderByFilter($parse) {
         return function(array, sortPredicate, reverseOrder) {
-          if (!(isArrayLike(array)))
+          if (array == null)
             return array;
+          if (!isArrayLike(array)) {
+            throw minErr('orderBy')('notarray', 'Expected array but received: {0}', array);
+          }
           if (!isArray(sortPredicate)) {
             sortPredicate = [sortPredicate];
           }
@@ -16299,7 +16726,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
       var formDirective = formDirectiveFactory();
       var ngFormDirective = formDirectiveFactory(true);
       var ISO_DATE_REGEXP = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+([+-][0-2]\d:[0-5]\d|Z)/;
-      var URL_REGEXP = /^[A-Za-z][A-Za-z\d.+-]*:\/*(?:\w+(?::\w+)?@)?[^\s/]+(?::\d+)?(?:\/[\w#!:.?+=&%@\-/]*)?$/;
+      var URL_REGEXP = /^[a-z][a-z\d.+-]*:\/*(?:[^:@]+(?::[^@]+)?@)?(?:[^\s:/?#]+|\[[a-f\d:]+\])(?::\d+)?(?:\/[^?#]*)?(?:\?[^#]*)?(?:#.*)?$/i;
       var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
       var NUMBER_REGEXP = /^\s*(\-|\+)?(\d+|(\d*(\.\d*)))([eE][+-]?\d+)?\s*$/;
       var DATE_REGEXP = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -16539,7 +16966,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         if (nativeValidation) {
           ctrl.$parsers.push(function(value) {
             var validity = element.prop(VALIDITY_STATE_PROPERTY) || {};
-            return validity.badInput && !validity.typeMismatch ? undefined : value;
+            return validity.badInput || validity.typeMismatch ? undefined : value;
           });
         }
       }
@@ -16970,6 +17397,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                 var thisChangeId = ++changeCounter;
                 if (src) {
                   $templateRequest(src, true).then(function(response) {
+                    if (scope.$$destroyed)
+                      return;
                     if (thisChangeId !== changeCounter)
                       return;
                     var newScope = scope.$new();
@@ -16983,6 +17412,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
                     currentScope.$emit('$includeContentLoaded', src);
                     scope.$eval(onloadExp);
                   }, function() {
+                    if (scope.$$destroyed)
+                      return;
                     if (thisChangeId === changeCounter) {
                       cleanupLastIncludeContent();
                       scope.$emit('$includeContentError', src);
@@ -17004,7 +17435,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           priority: -400,
           require: 'ngInclude',
           link: function(scope, $element, $attr, ctrl) {
-            if (/SVG/.test($element[0].toString())) {
+            if (toString.call($element[0]).match(/SVG/)) {
               $element.empty();
               $compile(jqLiteBuildFragment(ctrl.template, document).childNodes)(scope, function namespaceAdaptedClone(clone) {
                 $element.append(clone);
@@ -17064,7 +17495,9 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           DIRTY_CLASS = 'ng-dirty',
           UNTOUCHED_CLASS = 'ng-untouched',
           TOUCHED_CLASS = 'ng-touched',
-          PENDING_CLASS = 'ng-pending';
+          PENDING_CLASS = 'ng-pending',
+          EMPTY_CLASS = 'ng-empty',
+          NOT_EMPTY_CLASS = 'ng-not-empty';
       var ngModelMinErr = minErr('ngModel');
       var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$parse', '$animate', '$timeout', '$rootScope', '$q', '$interpolate', function($scope, $exceptionHandler, $attr, $element, $parse, $animate, $timeout, $rootScope, $q, $interpolate) {
         this.$viewValue = Number.NaN;
@@ -17119,6 +17552,15 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         this.$render = noop;
         this.$isEmpty = function(value) {
           return isUndefined(value) || value === '' || value === null || value !== value;
+        };
+        this.$$updateEmptyClasses = function(value) {
+          if (ctrl.$isEmpty(value)) {
+            $animate.removeClass($element, NOT_EMPTY_CLASS);
+            $animate.addClass($element, EMPTY_CLASS);
+          } else {
+            $animate.removeClass($element, EMPTY_CLASS);
+            $animate.addClass($element, NOT_EMPTY_CLASS);
+          }
         };
         var currentValidationRunId = 0;
         addSetValidityMethod({
@@ -17229,7 +17671,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             forEach(ctrl.$asyncValidators, function(validator, name) {
               var promise = validator(modelValue, viewValue);
               if (!isPromiseLike(promise)) {
-                throw ngModelMinErr("$asyncValidators", "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
+                throw ngModelMinErr('nopromise', "Expected asynchronous validator to return a promise but got '{0}' instead.", promise);
               }
               setValidity(name, undefined);
               validatorPromises.push(promise.then(function() {
@@ -17264,6 +17706,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           if (ctrl.$$lastCommittedViewValue === viewValue && (viewValue !== '' || !ctrl.$$hasNativeValidators)) {
             return;
           }
+          ctrl.$$updateEmptyClasses(viewValue);
           ctrl.$$lastCommittedViewValue = viewValue;
           if (ctrl.$pristine) {
             this.$setDirty();
@@ -17360,6 +17803,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               viewValue = formatters[idx](viewValue);
             }
             if (ctrl.$viewValue !== viewValue) {
+              ctrl.$$updateEmptyClasses(viewValue);
               ctrl.$viewValue = ctrl.$$lastCommittedViewValue = viewValue;
               ctrl.$render();
               ctrl.$$runValidators(modelValue, viewValue, noop);
@@ -17642,10 +18086,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         var optionTemplate = document.createElement('option'),
             optGroupTemplate = document.createElement('optgroup');
         function ngOptionsPostLink(scope, selectElement, attr, ctrls) {
-          var ngModelCtrl = ctrls[1];
-          if (!ngModelCtrl)
-            return;
           var selectCtrl = ctrls[0];
+          var ngModelCtrl = ctrls[1];
           var multiple = attr.multiple;
           var emptyOption;
           for (var i = 0,
@@ -17803,7 +18245,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             var emptyOption_ = emptyOption && emptyOption[0];
             var unknownOption_ = unknownOption && unknownOption[0];
             if (emptyOption_ || unknownOption_) {
-              while (current && (current === emptyOption_ || current === unknownOption_ || current.nodeType === NODE_TYPE_COMMENT || current.value === '')) {
+              while (current && (current === emptyOption_ || current === unknownOption_ || current.nodeType === NODE_TYPE_COMMENT || (nodeName_(current) === 'option' && current.value === ''))) {
                 current = current.nextSibling;
               }
             }
@@ -17822,7 +18264,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               var group;
               var groupElement;
               var optionElement;
-              if (option.group) {
+              if (isDefined(option.group)) {
                 group = groupMap[option.group];
                 if (!group) {
                   groupElement = addOrReuseElement(selectElement[0], currentElement, 'optgroup', optGroupTemplate);
@@ -17849,7 +18291,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             ngModelCtrl.$render();
             if (!ngModelCtrl.$isEmpty(previousValue)) {
               var nextValue = selectCtrl.readValue();
-              if (ngOptions.trackBy ? !equals(previousValue, nextValue) : previousValue !== nextValue) {
+              var isNotPrimitive = ngOptions.trackBy || multiple;
+              if (isNotPrimitive ? !equals(previousValue, nextValue) : previousValue !== nextValue) {
                 ngModelCtrl.$setViewValue(nextValue);
                 ngModelCtrl.$render();
               }
@@ -17859,7 +18302,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
         return {
           restrict: 'A',
           terminal: true,
-          require: ['select', '?ngModel'],
+          require: ['select', 'ngModel'],
           link: {
             pre: function ngOptionsPreLink(scope, selectElement, attr, ctrls) {
               ctrls[0].registerOption = noop;
@@ -18199,16 +18642,24 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           });
         }
       });
+      var ngTranscludeMinErr = minErr('ngTransclude');
       var ngTranscludeDirective = ngDirective({
         restrict: 'EAC',
         link: function($scope, $element, $attrs, controller, $transclude) {
-          if (!$transclude) {
-            throw minErr('ngTransclude')('orphan', 'Illegal use of ngTransclude directive in the template! ' + 'No parent directive that requires a transclusion found. ' + 'Element: {0}', startingTag($element));
+          if ($attrs.ngTransclude === $attrs.$attr.ngTransclude) {
+            $attrs.ngTransclude = '';
           }
-          $transclude(function(clone) {
-            $element.empty();
-            $element.append(clone);
-          });
+          function ngTranscludeCloneAttachFn(clone) {
+            if (clone.length) {
+              $element.empty();
+              $element.append(clone);
+            }
+          }
+          if (!$transclude) {
+            throw ngTranscludeMinErr('orphan', 'Illegal use of ngTransclude directive in the template! ' + 'No parent directive that requires a transclusion found. ' + 'Element: {0}', startingTag($element));
+          }
+          var slotName = $attrs.ngTransclude || $attrs.ngTranscludeSlot;
+          $transclude(ngTranscludeCloneAttachFn, null, slotName);
         }
       });
       var scriptDirective = ['$templateCache', function($templateCache) {
@@ -18271,6 +18722,8 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           }
         };
         self.addOption = function(value, element) {
+          if (element[0].nodeType === NODE_TYPE_COMMENT)
+            return;
           assertNotHasOwnProperty(value, '"option value"');
           if (value === '') {
             self.emptyOption = element;
@@ -18329,7 +18782,10 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
           require: ['select', '?ngModel'],
           controller: SelectController,
           priority: 1,
-          link: {pre: selectPreLink}
+          link: {
+            pre: selectPreLink,
+            post: selectPostLink
+          }
         };
         function selectPreLink(scope, element, attr, ctrls) {
           var ngModelCtrl = ctrls[1];
@@ -18337,9 +18793,6 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             return;
           var selectCtrl = ctrls[0];
           selectCtrl.ngModelCtrl = ngModelCtrl;
-          ngModelCtrl.$render = function() {
-            selectCtrl.writeValue(ngModelCtrl.$viewValue);
-          };
           element.on('change', function() {
             scope.$apply(function() {
               ngModelCtrl.$setViewValue(selectCtrl.readValue());
@@ -18374,6 +18827,15 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
               return !value || value.length === 0;
             };
           }
+        }
+        function selectPostLink(scope, element, attrs, ctrls) {
+          var ngModelCtrl = ctrls[1];
+          if (!ngModelCtrl)
+            return;
+          var selectCtrl = ctrls[0];
+          ngModelCtrl.$render = function() {
+            selectCtrl.writeValue(ngModelCtrl.$viewValue);
+          };
         }
       };
       var optionDirective = ['$interpolate', function($interpolate) {
@@ -18525,6 +18987,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             "MONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             "SHORTDAY": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             "SHORTMONTH": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            "STANDALONEMONTH": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
             "WEEKENDRANGE": [5, 6],
             "fullDate": "EEEE, MMMM d, y",
             "longDate": "MMMM d, y",
@@ -18562,6 +19025,7 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
             }]
           },
           "id": "en-us",
+          "localeID": "en_US",
           "pluralCat": function(n, opt_precision) {
             var i = n | 0;
             var vf = getVF(n, opt_precision);
@@ -18581,17 +19045,16 @@ $__System.registerDynamic("4d", [], false, function(__require, __exports, __modu
   return _retrieveGlobal();
 });
 
-$__System.registerDynamic("9", ["4d"], true, function($__require, exports, module) {
+$__System.registerDynamic("9", ["4e"], true, function($__require, exports, module) {
   ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('4d');
-  global.define = __define;
+  var define;
+  var global = this;
+  var GLOBAL = this;
+  module.exports = $__require('4e');
   return module.exports;
 });
 
-$__System.register('4e', ['9'], function (_export) {
+$__System.register('4f', ['9'], function (_export) {
   'use strict';
 
   var angular;
@@ -18611,50 +19074,47 @@ $__System.register('4e', ['9'], function (_export) {
   };
 });
 (function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("4f", [], function() {
+var define = $__System.amdDefine;
+define("50", [], function() {
   return "<div class=\"container-fluid\">\r\n\t<h4>Administration Menu</h4>\r\n\t\r\n\t<div>\r\n\t\t<input type=\"button\" ng-click=\"toCategories()\" value=\"Categories Management\" class=\"btn btn-link\">\r\n\t</div>\r\n</div>";
 });
 
-_removeDefine();
 })();
 (function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("50", [], function() {
+var define = $__System.amdDefine;
+define("51", [], function() {
   return "<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-offset-1 col-md-11 panel\">      \r\n            <button ng-click=\"create()\" type=\"button\" class=\"btn btn-success\">Create</button>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n            <label>Navigation level: </label>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-9 panel\">\r\n            <input type=\"number\" ng-model=\"level\" style=\"width: 8em;\" />\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n            <button ng-click=\"filter(level)\" type=\"button\" class=\"btn btn-primary\">Filter</button>\r\n            <button ng-click=\"reset()\" type=\"button\" class=\"btn btn-secondary\">Reset</button>\r\n          </div>\r\n          <div class=\"col-md-offset-1 col-md-11\">\r\n\t\t\t\t    <input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n          </div>\r\n        </div>\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n    <div class=\"col-md-10\">\r\n      <h4>Categories</h4>            \r\n      <table class=\"table table-striped table-hover\">\r\n        <thead>\r\n            <th>Identifier</th>\r\n            <th>Description</th>\r\n            <th>Navigation level</th>\r\n            <th>English Description</th>\r\n            <th>Parent Category</th>\r\n        </thead>\r\n        <tbody>\r\n            <tr ng-repeat=\"category in ctrl.categories | orderBy: '_id'\">\r\n            <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category._id }}\"/></td>\r\n            <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.vietDescription }}\"/></td>\r\n            <td><input type=\"button\" class=\"btn btn-default\" ng-click=\"filter(category.level)\" value=\"{{ category.level }}\"/></td>\r\n            <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"edit(category._id)\" value=\"{{ category.description }}\"/></td>\r\n            <td>\r\n                <div ng-if=\"category.parentCategory != null\">\r\n                    <input type=\"button\" title=\"{{ parentCategory.description }}\" class=\"btn btn-default\" value=\"{{ category.parentCategory.vietDescription }}\"/>\r\n                </div>\r\n            </td>\r\n            <td><input type=\"button\" class=\"btn btn-link\" ng-click=\"delete(category._id)\" value=\"Delete\"/></td>\r\n            </tr>\r\n        </tbody>\r\n      </table>\r\n    </div>\r\n</div>";
 });
 
-_removeDefine();
 })();
 (function() {
-var _removeDefine = $__System.get("@@amd-helpers").createDefine();
-define("51", [], function() {
+var define = $__System.amdDefine;
+define("52", [], function() {
   return "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n\t\t\t\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<h4>Category</h4>\r\n\t\t\t\r\n            <!--<div class=\"alert alert-info\">\r\n                <div class=\"col-sm-3\">\r\n                    <label>Include the parent categories from level:</label>\r\n                </div>\r\n                <input type=\"number\" ng-model=\"levelFilter\" ng-change=\"levelFilterUpdate(levelFilter)\" />\r\n                <span>Level 0 is all categories</span>\r\n            </div>-->\r\n\t\t\t<form novalidate class=\"form-horizontal\">\r\n\t\t\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Vietnamese Description:</label>\r\n\t\t\t\t\t</div> \r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.vietDescription\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Navigation Level: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\"> \r\n\t\t\t\t\t\t<input type=\"number\" ng-model=\"category.level\" ng-change=\"levelFilterUpdate(category.level)\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>English Description: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.description\" />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n                \r\n                <div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Parent Category: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<select ng-model=\"category.parentCategoryId\">\r\n                            <option value=undefined>--Remove--</option>\r\n                            <option ng-selected=\"category.parentCategoryId === option._id\" ng-repeat=\"option in data.categories\" value=\"{{option._id}}\" title=\"{{option.description}}\">{{option.vietDescription}}</option>\r\n                        </select>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<button type=\"submit\" ng-click=\"save(category)\" class=\"btn btn-success\">Save</button>\r\n                \r\n                <div class=\"control-group error\" ng-show=\"errors\">\r\n                    <span class=\"help-inline\" ng-bind=\"errorMessage\"></span>\r\n                </div>\r\n\t\t\t</form>\r\n\t\t\t\r\n\t\t\t<div style=\"display: none\">\r\n\t\t\t\t<pre>Category = {{category | json}}</pre>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1\"></div>\r\n\t</div>\r\n</div>";
 });
 
-_removeDefine();
 })();
-$__System.register('52', ['7', '9', '50', '51', 'b', '4c', '4e', '4f'], function (_export) {
+$__System.register('53', ['7', '9', '50', '51', '52', 'b', '4d', '4f'], function (_export) {
     'use strict';
 
-    var loadingBar, angular, categoriesTemplate, createEditCategoryTemplate, categoriesControllerModule, createEditCategoryControllerModule, indexControllerModule, indexTemplate, mystuff;
+    var loadingBar, angular, indexTemplate, categoriesTemplate, createEditCategoryTemplate, categoriesControllerModule, createEditCategoryControllerModule, indexControllerModule, mystuff;
     return {
         setters: [function (_2) {
             loadingBar = _2['default'];
         }, function (_) {
             angular = _['default'];
         }, function (_3) {
-            categoriesTemplate = _3['default'];
+            indexTemplate = _3['default'];
         }, function (_4) {
-            createEditCategoryTemplate = _4['default'];
+            categoriesTemplate = _4['default'];
+        }, function (_5) {
+            createEditCategoryTemplate = _5['default'];
         }, function (_b) {
             categoriesControllerModule = _b['default'];
-        }, function (_c) {
-            createEditCategoryControllerModule = _c['default'];
-        }, function (_e) {
-            indexControllerModule = _e['default'];
+        }, function (_d) {
+            createEditCategoryControllerModule = _d['default'];
         }, function (_f) {
-            indexTemplate = _f['default'];
+            indexControllerModule = _f['default'];
         }],
         execute: function () {
             mystuff = angular.module('appRoutesModule', ['ngRoute', 'angular-loading-bar', indexControllerModule.name, categoriesControllerModule.name, createEditCategoryControllerModule.name, 'LocalStorageModule']).config(function ($routeProvider, localStorageServiceProvider) {
@@ -18701,7 +19161,7 @@ $__System.register('52', ['7', '9', '50', '51', 'b', '4c', '4e', '4f'], function
         }
     };
 });
-$__System.register('53', ['4', '9', '52'], function (_export) {
+$__System.register('54', ['4', '9', '53'], function (_export) {
 	'use strict';
 
 	var _, angular, routesModule;
@@ -18730,7 +19190,7 @@ $__System.register('53', ['4', '9', '52'], function (_export) {
 		execute: function () {}
 	};
 });
-$__System.register('1', ['53'], function (_export) {
+$__System.register('1', ['54'], function (_export) {
   'use strict';
 
   var bootstrap;
