@@ -26,7 +26,7 @@ module.exports = function(config) {
     jspm: {
         // NB. tests or controllers which exist in both areas with the same name
         // causes serious confusion and grief for me and my Karma GF 16/01/2016 
-      loadFiles: ['sysadmin/app/**/*.js', 'public/app/**/*.js']
+      loadFiles: ['sysadmin/app/**/*.js', 'public/app/commands/*.js']
     },
 
 
