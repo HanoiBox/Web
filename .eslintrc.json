@@ -10,15 +10,15 @@
             "tab"
         ],
         "linebreak-style": [
-            "error",
+            "warn",
             "windows"
         ],
-        "quotes": [
-            "error",
-            "double"
-        ],
+        // "quotes": [
+        //     "warn",
+        //     "double"
+        // ],
         "semi": [
-            "error",
+            "warn",
             "always"
         ]
     }
