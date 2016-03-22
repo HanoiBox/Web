@@ -1,7 +1,7 @@
 {
   "name": "hanoibox",
   "main": "server.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "start": "node --harmony server.js",
     "startProd": "set NODE_ENV=production && node server.js",
@@ -53,13 +53,14 @@
   "jspm": {
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.7",
-      "angular-bootstrap": "github:angular-ui/bootstrap-bower@^0.14.3",
+      "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@^1.0.0",
       "angular-cache": "npm:angular-cache@^4.4.3",
       "angular-loading-bar": "npm:angular-loading-bar@^0.8.0",
       "angular-local-storage": "npm:angular-local-storage@^0.2.2",
       "angular-mocks": "github:angular/bower-angular-mocks@^1.4.8",
       "angular-route": "github:angular/bower-angular-route@^1.4.7",
       "bootstrap-css-only": "npm:bootstrap-css-only@^3.3.5",
+      "css": "github:systemjs/plugin-css@^0.1.20",
       "es6-module-loader": "npm:es6-module-loader@^0.17.8",
       "font-awesome": "npm:font-awesome@^4.4.0",
       "lodash": "npm:lodash@^3.10.1",

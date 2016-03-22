@@ -10,8 +10,32 @@ module.exports = function (router, devEnvironment) {
 	router.get('/', (req, res) => {
 		home(res);
 	});
+    
+    router.get('/category', (req, res) => {
+		home(res);
+	});
 
 	router.get('/home', (req, res) => {
+		home(res);
+	});
+    
+    let getIdInRequest = (req, res) => {
+        if (req.params === undefined || req.params.id === null || req.params.id === "")
+        {
+            res.render("public/categoryNotFound", { title: 'No params', info: "no params data" });
+        }
+        
+        var id = req.params.id.replace("id:", "");
+        
+        if (parseInt(id, 10) === NaN) {
+            res.render("public/categoryNotFound", { title: 'Not found', id: id });
+        }
+        
+		return id;
+	}
+    
+    router.get('/category/:id', (req, res) => {
+        var categoryId = getIdInRequest(req, res);
 		home(res);
 	});
 

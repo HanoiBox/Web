@@ -1,22 +1,28 @@
 import angular from 'angular';
 import loadingBar from 'angular-loading-bar';
 import 'angular-route';
-import 'angular-bootstrap';
+import 'angular-bootstrap-dropdownandtab';
 
-// import categoriesControllerModule from 'sysadmin/app/routes/categories/categoriesController';
-// import createEditCategoryControllerModule from 'sysadmin/app/routes/categories/createEditCategoryController';
 import homeControllerModule from 'public/app/routes/home/homeController';
-import homeTemplate from 'public/app/routes/home/home.html!text';
-// import categoriesTemplate from 'sysadmin/app/routes/categories/categories.html!text';
-// import createEditCategoryTemplate from 'sysadmin/app/routes/categories/createEdit.html!text';
+import homeTemplate from 'public/app/routes/home/index.html!text';
+import categoryTemplate from 'public/app/routes/category/index.html!text';
+import categoryControllerModule from 'public/app/routes/category/categoryController';
+// import advertTemplate from 'public/app/routes/advert/index.html!text';
 
 export default angular.module('appRoutesModule', [
   'ngRoute',
   'angular-loading-bar',
   'ui.bootstrap.dropdown',
   'ui.bootstrap.tabs',
-  homeControllerModule.name
-]).config(function($routeProvider) {
+  'ui.bootstrap.collapse',
+  homeControllerModule.name,
+  categoryControllerModule.name,
+  'LocalStorageModule'
+]).config(function($routeProvider, $locationProvider, localStorageServiceProvider) {
+  
+  localStorageServiceProvider
+        .setPrefix('public')
+        .setStorageType('sessionStorage');
   
   $routeProvider.when('/', {
       template: homeTemplate,
@@ -27,8 +33,32 @@ export default angular.module('appRoutesModule', [
            return GetCategoriesFactory.allCats();
          }
       }
-  }).otherwise({
+  })
+  .when('/category/:id', {
+      template: categoryTemplate,
+      controller: 'CategoryController',
+      controllerAs: 'ctrl',
+      resolve: {
+         allCategories: (GetCategoriesFactory) => {
+           return GetCategoriesFactory.allCats();
+         }
+      }
+  })
+//   .when('/advert/:id', {
+//       template: advertTemplate,
+//       controller: 'AdvertController',
+//       controllerAs: 'ctrl',
+//       resolve: {
+//          allCategories: (GetCategoriesFactory) => {
+//            return GetCategoriesFactory.allCats();
+//          }
+//       }
+//   })
+  .otherwise({
       redirectTo: '/'
   });
+  
+  // use the HTML5 History API
+  $locationProvider.html5Mode(true);
   
 });
