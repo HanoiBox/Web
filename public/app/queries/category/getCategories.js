@@ -1,5 +1,5 @@
 import angular from 'angular';
-import categoriesCacheModule from 'public/app/categoriesCache';
+import categoriesCacheModule from 'sysadmin/app/categoriesCache';
 
 export default angular.module('categoryQueryModule', [
    categoriesCacheModule.name

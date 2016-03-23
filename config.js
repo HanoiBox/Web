@@ -17,7 +17,7 @@ System.config({
     "angular": "github:angular/bower-angular@1.5.0",
     "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@1.0.6",
     "angular-cache": "npm:angular-cache@4.5.0",
-    "angular-loading-bar": "npm:angular-loading-bar@0.8.0",
+    "angular-loading-bar": "npm:angular-loading-bar@0.9.0",
     "angular-local-storage": "npm:angular-local-storage@0.2.6",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
     "angular-route": "github:angular/bower-angular-route@1.5.0",
