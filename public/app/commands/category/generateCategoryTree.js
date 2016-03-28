@@ -1,9 +1,13 @@
 import angular from 'angular';
 
-export default angular.module('categoryCommandModule', [])
+export default angular.module('categoryTreeCommandModule', [])
 .factory('GenerateCategoryTree', function() {
     
-    var generateCategoryTree = (categories, currentCategoryId) => {
+    let createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, subtree) => {
+        return { id: id, currentCategoryId: currentCategoryId, title: englishDescription, name: vietnameseDescription, link: `/category/id:${id}`, subtree: subtree };
+    };
+    
+    let generateCategoryTree = (categories, currentCategoryId) => {
         
         var topCats = categories.filter(cat => cat.level === 0);
         
@@ -15,17 +19,16 @@ export default angular.module('categoryCommandModule', [])
                     if (subCategories.length > 0)
                     {
                         subCatsConvertedToSubTree = subCategories.map(subCat => {
-                            let linkUrl = `/category/id:${subCat._id}`;
-                            return { name: subCat.description, link: linkUrl, id: subCat._id, currentCategoryId: currentCategoryId, subtree: null };
-                        });     
+                            return createLeafCategory(subCat._id, currentCategoryId, subCat.description, subCat.vietDescription, null);
+                        });
                     }
                     
-                    let topLinkUrl = `/category/id:${firstCat._id}`;
-                    return { name: firstCat.description, link: topLinkUrl, id: firstCat._id, currentCategoryId: currentCategoryId, subtree: subCatsConvertedToSubTree };
+                    return createLeafCategory(firstCat._id, currentCategoryId, firstCat.description, firstCat.vietDescription, subCatsConvertedToSubTree);
                 });
             
             return {
-                description: topCat.description,
+                name: topCat.vietDescription,
+                title: topCat.description,
                 link: `/category/id:${topCat._id}`,
                 id: topCat._id,
                 tree

@@ -156,7 +156,7 @@ describe('When adding a parent category to an existing category', function() {
     
     it("Should add updated Category to cache", () => {
         var theCachedCategories = theCategoriesCacheFactory.get();
-            testCachedCategory = theCachedCategories.find(cat => cat._id === 1);
+        testCachedCategory = theCachedCategories[1];
         expect(theCategoriesCacheFactory.get().length).toEqual(2);
         expect(testCachedCategory.description).toEqual('My sub Category');
         expect(testCachedCategory.parentCategoryId).toBe(parentCategory._id);

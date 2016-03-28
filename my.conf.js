@@ -6,11 +6,22 @@ module.exports = function(config) {
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
-
+    
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    //Chrome
+    browsers: ['PhantomJS'],
+    
+    plugins: [
+            'karma-jspm',
+            'karma-jasmine',
+            'karma-chrome-launcher',
+            'karma-phantomjs-launcher'
+        ],
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jspm', 'jasmine', 'requirejs'],
+    frameworks: ['jspm', 'jasmine'],
 
     //list of files / patterns to load in the browser
     files: [
@@ -23,10 +34,17 @@ module.exports = function(config) {
       // {pattern: '**/*Spec.js', included: false}
     ],
     
+    proxies: {
+        '/base/': '/base/public/app/commands/category/'
+    },
+    
     jspm: {
         // NB. tests or controllers which exist in both areas with the same name
-        // causes serious confusion and grief for me and my Karma GF 16/01/2016 
-      loadFiles: ['sysadmin/app/**/*.js', 'public/app/commands/*.js']
+        // causes serious confusion and grief for me and my Karma GF 16/01/2016
+        // The only way I can get the public area tests to work is by using more verbose paths and proxying them
+        // such a pain. Hope this works on the build server.
+        // 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js'
+      loadFiles: [ 'public/app/commands/category/*.js', 'sysadmin/app/**/*.js']
     },
 
 
@@ -63,18 +81,17 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
 
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
-
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultanous
-    concurrency: Infinity
+    concurrency: Infinity,
+    
+    phantomjsLauncher: {
+      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom) 
+      exitOnResourceError: true
+    }
   })
 }

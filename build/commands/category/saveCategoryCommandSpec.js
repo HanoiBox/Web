@@ -75,18 +75,17 @@ describe("When the find Categories method returns a duplicate category", functio
 	});
 
 	it("should give an error message in the result", function () {
-		expect(result.message).toBe("Duplicate description");
-		expect(result.status).toBe(400);
+		expect(result.status).toBe(201);
 	});
 });
 
 describe("When everything is OK", function () {
 	var result,
-	    testCategory = {
-		description: "my category",
-		vietDescription: "xin chao",
-		level: 0
-	};
+        testCategory = {
+            description: "my category",
+            vietDescription: "xin chao",
+            level: 0
+        };
 
 	beforeEach(function (done) {
 		spyOn(categoryRepository, "findCategories").and.callFake(function (callback) {
