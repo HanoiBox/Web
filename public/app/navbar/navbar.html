@@ -14,7 +14,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         
         <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
-            <div ng-repeat="topCat in topCats">
+            <div ng-repeat="topCat in topCats track by id">
                 <ul class="nav navbar-nav">
                     <li ng-class="{active: currentCategoryId === topCat.id}" uib-dropdown>
                         <a href="{{topCat.link}}" title="{{topCat.title}}" uib-dropdown-toggle>

@@ -6,76 +6,88 @@ import categoryTreeCommandModule from './generateCategoryTree';
 beforeEach(() => {
     angular.mock.module(categoryTreeCommandModule.name);
 });
-    
 
-
-describe('when test tab 1 is chosen', function() {
-    let result, generateCategoryTreeFactory;
+describe('when there are two top level categories only', function() {
+    let theResult, generateCategoryTreeFactory;
     
     beforeEach(inject((GenerateCategoryTree) => {
-        
         generateCategoryTreeFactory = GenerateCategoryTree;
     }));
     
     beforeEach((done) => {
-        let categories = [ { _id: 1 }, { _id: 1 } ];
-        console.log('GenerateCategoryTree: ', generateCategoryTreeFactory.generate);
-        result = generateCategoryTreeFactory.generate(categories, 1);
-        done();
-    })
+        let categories = [ { _id: 1, level: 0 }, { _id: 2, level: 0 } ];
+        generateCategoryTreeFactory.generate(categories, 1, (result) => {
+            theResult = result;
+            done();
+        });
+    });
     
-    it("Should hold only top category in category tab", () => {
-        console.log('result', result);
-        expect(result.length).toBe(2);
-        // expect(scope[0]).not.toBeNull();
+    it("Should return the two categories with no branches", () => {
+        expect(theResult.length).toBe(2);
+        expect(theResult[0]).not.toBeNull();
+        expect(theResult[0].tree).toBeNull();
+        expect(theResult[1]).not.toBeNull();
+        expect(theResult[1].tree).toBeNull();
     });
 });
 
-describe('test this works at all', function() {
-    it("Should say it passed", function() {
-        expect(0).toBe(0);
+describe('when there is one top level category with one subcategory', function() {
+    let theResult, generateCategoryTreeFactory;
+    
+    beforeEach(inject((GenerateCategoryTree) => {
+        generateCategoryTreeFactory = GenerateCategoryTree;
+    }));
+    
+    beforeEach((done) => {
+        let categories = [ 
+            { _id: 1, level: 0 }, 
+            { _id: 2, level: 1, parentCategoryId: 1 }
+        ];
+        
+        generateCategoryTreeFactory.generate(categories, 1, (result) =>
+        {
+           theResult = result;
+           done(); 
+        });
+    });
+    
+    it("Should return the top item with the corresponding tree", () => {
+        console.log("result", theResult);
+        expect(theResult[0].tree).not.toBeUndefined();
+        expect(theResult[0].tree).not.toBeNull();
+        expect(theResult[0].tree[0].id).toBe(2);
     });
 });
 
-// describe('when test tab 2 is chosen', function() {
-//     var scope, $httpBackend, $location, $controller, createController, allCategoriesMock,
-//         testCategory = { 
-//             _id: 2,
-//             description: 'test category 2',
-//             parentCategoryId: 1 
-//     };
-// 
-//     beforeEach(angular.mock.module(homeControllerModule.name));
-// 
-//     beforeEach(function() {
-//         allCategoriesMock = [{
-//                 _id: 1,
-//                 description: 'test category 1',
-//                 level: 1
-//             }, testCategory ];
-//     });
-// 
-//     beforeEach(inject(function($injector) {
-//         scope = $injector.get('$rootScope').$new;
-//         $httpBackend = $injector.get('$httpBackend');
-//         $location = $injector.get('$location');
-//         $controller = $injector.get('$controller');
-//         
-//         createController = () => {
-//             return $controller('HomeController', {
-//                 $scope: scope,
-//                 allCategories: allCategoriesMock,
-//                 $location: $location,
-//                 $http: $httpBackend
-//             });
-//         }
+// describe('when there is one top level category with two subcategories', function() {
+//     let theResult, generateCategoryTreeFactory;
+    
+//     beforeEach(inject((GenerateCategoryTree) => {
+//         generateCategoryTreeFactory = GenerateCategoryTree;
 //     }));
-//     
-//     it("Should filter the category list for the tab", () => {
-//         let homeController = createController();
-//         homeController.loadSubCategories(1);
-//         console.log("scope: ", scope.categoryTabs.categories);
-//         expect(scope.categoryTabs.categories).toContain(testCategory);
+    
+//     beforeEach((done) => {
+//         let categories = [ 
+//             { _id: 1, level: 0 }, 
+//             { _id: 2, level: 1, parentCategoryId: 1 }, 
+//             { _id: 3, level: 1, parentCategoryId: 1 } 
+//         ];
+        
+//         generateCategoryTreeFactory.generate(categories, 1, (result) =>
+//         {
+//            theResult = result;
+//            done(); 
+//         });
+//     })
+    
+//     it("Should return the top item with the corresponding tree", () => {
+//         expect(theResult[0]).not.toBeUndefined();
+//         console.log("tree", theResult[0]);
 //     });
-//     
+    
+//     it("Should return the two subcategories", () => {
+//         // let subCats = theResult.filter(res => res.level === 1);
+//         // expect(subCats.length).toBe(2);
+//         // expect(subCats[0].id).toBe(2);
+//     });
 // });

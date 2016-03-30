@@ -10,5 +10,8 @@ export default angular.module('HomeControllerModule', [
     categoryTreeCommandModule.name,
     navbarAppModule.name
 ]).controller('HomeController', function($scope, allCategories, $location, $http, GenerateCategoryTree) {
-    $scope.topCats = GenerateCategoryTree.generate(allCategories, null);
+    GenerateCategoryTree.generate(allCategories, null, (categories) => {
+        $scope.topCats = categories;
+        console.log(categories);
+    });
 });
