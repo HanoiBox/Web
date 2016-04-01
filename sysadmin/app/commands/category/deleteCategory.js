@@ -8,14 +8,10 @@ export default angular.module('deleteCategoryCommandModule', [
   
     let execute = (id, callback) => {
         let deleteUrl = url + id;
-        //test
-        let categories = categoriesCacheFactory.get();
-        let random = categories.find(cat => cat._id === id);
         
         $http.delete(deleteUrl).then(() => {
             let categories = categoriesCacheFactory.get();
             categories.filter(cat => cat._id !== id);
-            
             categoriesCacheFactory.put(categories);
             callback({ success : true });
         }, (response) => {
