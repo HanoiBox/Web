@@ -3,19 +3,21 @@ import angular from 'angular';
 export default angular.module('categoryTreeCommandModule', [])
 .factory('GenerateCategoryTree', function() {
     
-    this.createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, subtree) => {
-        return { id: id, currentCategoryId: currentCategoryId, title: englishDescription, name: vietnameseDescription, link: `/category/id:${id}`, subtree: subtree };
+    this.createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, subTree, subTreePromise, parentCategoryId) => {
+        return { id: id, currentCategoryId: currentCategoryId, title: englishDescription, name: vietnameseDescription, link: `/category/id:${id}`, subTree, subTreePromise, parentCategoryId };
     };
     
     let recursionCount = 0;
     
     this.createSubTree = (allCategories, currentCategoryId, parentCategoryId, callback) => {
-        recursionCount++;
-        console.log("recursionCount: ", recursionCount);
+        //recursionCount++;
+        //console.log("recursionCount: ", recursionCount);
+        
         let subCategories = allCategories.filter(cat => cat.parentCategoryId === parentCategoryId);
+        //console.info("subCategories", subCategories);
         if (subCategories === null || subCategories.length === 0)
         {
-           return callback(null); 
+           return callback({ subTree: null, parentCategoryId }); 
         }
         
         let theSubCategories = subCategories.map(subCat => {
@@ -25,57 +27,64 @@ export default angular.module('categoryTreeCommandModule', [])
                 });
             }); 
             
-            return {
-                    name: subCat.vietDescription,
-                    title: subCat.description,
-                    link: `/category/id:${subCat._id}`,
-                    id: subCat._id,
-                    tree: null,
-                    subTreePromise
-                };
+            return this.createLeafCategory(
+                    subCat._id,
+                    currentCategoryId,
+                    subCat.description,
+                    subCat.vietDescription,
+                    null,
+                    subTreePromise,
+                    parentCategoryId
+            );
         });
         
-        let temporaryTreeStructures = [], temporaryTreeStructure = null;
-        for(let i = 0, l = theSubCategories.length; i < l; i++)
-        {
-            let topCat = theSubCategories[i];
-            topCat.subTreePromise.then((subTree) => {
-                console.log("does this subcat exist?:", subTree);
-                temporaryTreeStructure = theSubCategories[i];
-                delete temporaryTreeStructure.subTreePromise;
-                if (subTree !== null)
+        let temporaryTreeStructures = [];
+        for (let i = 0, l = theSubCategories.length; i < l; i++)
+        {            
+            theSubCategories[i].subTreePromise.then((subTree) => {
+                temporaryTreeStructures.push(this.processSubBranch(subTree, theSubCategories));
+                if (temporaryTreeStructures.length === theSubCategories.length)
                 {
-                    temporaryTreeStructure.tree = subTree;
-                    temporaryTreeStructures.push(temporaryTreeStructure); 
-                } else {
-                    temporaryTreeStructures.push(temporaryTreeStructure); 
+                    console.info("All was well, result: ", temporaryTreeStructures);
+                    return callback({ subTree: temporaryTreeStructures, parentCategoryId });
                 }
-                
-                console.log("What is the subcat now?:", topCat.tree);
-                if (finishedGatheringSubtrees(i, l))
-                {
-                    return callback(temporaryTreeStructures); 
-                }
-            }).catch((rejectionReason) => {
-                console.error(rejectionReason);
-                if (finishedGatheringSubtrees(i, l))
-                {
-                    return callback(temporaryTreeStructures); 
-                }
+            })
+            .catch((rejectionReason) => {
+                return callback({ subTree: null, parentCategoryId });
             }); 
         }
     };
     
-    let finishedGatheringSubtrees = (i, l) => {
-        let iterator = i + 1;
-        return iterator === l;
+    this.processSubBranch = (createSubTreeResult, subCategories) => {
+         // I am expecting the subtree for the parentCategoryId
+        // so get the parent
+        let parentCategoryTreeStructure = subCategories.find(catTree => catTree.id === createSubTreeResult.parentCategoryId);
+        // and append the subtree
+        if (parentCategoryTreeStructure.subTree !== undefined && parentCategoryTreeStructure.subTree === null)
+        {
+            var temp = parentCategoryTreeStructure;
+            temp.subTree = createSubTreeResult.subTree;
+            delete temp.subTreePromise;
+            return temp;
+        }
+        
+        return null;
+    }
+    
+    this.processBranch = (createSubTreeResult, topLevelCategoryTrees) => {
+        let topLevelTreeStructure = topLevelCategoryTrees.find(catTree => catTree.id === createSubTreeResult.parentCategoryId);
+        // this is a top level category
+        var temp = topLevelTreeStructure;
+        temp.tree = createSubTreeResult.subTree;
+        delete temp.subTreePromise;
+        return temp;
     }
     
     let generateCategoryTree = (categories, currentCategoryId, callback) => {
         
-        let categoryTreeStructure = categories.filter(cat => cat.level === 0).map(topCat => {
+        let topLevelCategoryTrees = categories.filter(cat => cat.level === 0).map(topCat => {
+            
             let subTreePromise = new Promise((resolve, reject) => {
-                
                this.createSubTree(categories, currentCategoryId, topCat._id, (subTree) => {
                    resolve(subTree);
                });
@@ -91,36 +100,21 @@ export default angular.module('categoryTreeCommandModule', [])
                 };
         });
         
-        console.log("continuing.. length: ", categoryTreeStructure.length);
-        let temporaryTreeStructures = [], temporaryTreeStructure = null;
-        for (let i = 0, l = categoryTreeStructure.length; i < l; i++)
-        {
-            temporaryTreeStructure = categoryTreeStructure[i];
-            
-            
-            let topCat = categoryTreeStructure[i];
-            topCat.subTreePromise.then((subTree) => {
-                console.log("does this exist?:", subTree);
-                delete temporaryTreeStructure.subTreePromise;
-                if (subTree !== null && subTree !== undefined)
+        let temporaryTreeStructures = [];
+        for (let i = 0, l = topLevelCategoryTrees.length; i < l; i++)
+        {            
+            topLevelCategoryTrees[i].subTreePromise.then((result) => {
+                let branch = this.processBranch(result, topLevelCategoryTrees);
+                temporaryTreeStructures.push(branch);
+                if (temporaryTreeStructures.length === topLevelCategoryTrees.length)
                 {
-                    temporaryTreeStructure.tree = subTree;
-                    temporaryTreeStructures.push(temporaryTreeStructure);
-                } else {
-                    temporaryTreeStructures.push(temporaryTreeStructure);
-                }
-                console.log("What is it now?:", temporaryTreeStructure.tree);
-                if (finishedGatheringSubtrees(i, l))
-                {
+                    console.info("All was well, result: ", temporaryTreeStructures);
                     return callback(temporaryTreeStructures); 
                 }
             })
             .catch((rejectionReason) => {
                 console.error(rejectionReason);
-                if (finishedGatheringSubtrees(i, l))
-                {
-                    return callback(temporaryTreeStructures); 
-                }
+                return callback(temporaryTreeStructures); 
             }); 
         }
     };

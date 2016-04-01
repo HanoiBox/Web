@@ -25,33 +25,30 @@ module.exports = function(config) {
 
     //list of files / patterns to load in the browser
     files: [
-      // 'sysadmin/app/routes/index/indexControllerSpec.js',
-      // 'sysadmin/app/routes/index/indexController.js'
-      
-      // {pattern: '*Spec.js', included: false}
+      'node_modules/babel-polyfill/dist/polyfill.js'
+      //{pattern: '*Spec.js', included: false},
       // {pattern: 'sysadmin/*Spec.js', included: false},
       // {pattern: 'sysadmin/**/*Spec.js', included: false},
-      // {pattern: '**/*Spec.js', included: false}
+      //{pattern: '**/*Spec.js', included: false}
     ],
     
-    proxies: {
-        '/base/': '/base/public/app/commands/category/'
-    },
+    // proxies: {
+    //     '/base/': '/base/public/app/commands/category/'
+    // },
     
     jspm: {
         // NB. tests or controllers which exist in both areas with the same name
         // causes serious confusion and grief for me and my Karma GF 16/01/2016
         // The only way I can get the public area tests to work is by using more verbose paths and proxying them
         // such a pain. Hope this works on the build server.
-        // 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js'
-      loadFiles: [ 'public/app/commands/category/*.js', 'sysadmin/app/**/*.js']
+        // 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js', 
+       loadFiles: [ 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js']
     },
 
 
     // list of files to exclude
     exclude: [
     ],
-
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
