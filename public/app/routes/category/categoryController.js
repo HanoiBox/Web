@@ -19,7 +19,7 @@ export default angular.module("CategoryControllerModule", [
         $scope.category = allCategories.find(cat => cat._id === $scope.currentCategoryId);
     }
     
-    GenerateCategoryTree.generate(allCategories, null, (categories) => {
+    GenerateCategoryTree.generate(allCategories, $scope.currentCategoryId, (categories) => {
         $scope.topCats = categories;
     });
 });
