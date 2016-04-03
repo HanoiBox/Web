@@ -23,7 +23,6 @@ describe('when there are two top level categories only', function() {
     });
     
     it("Should return the two categories with no branches", () => {
-        console.log(theResult.length);
         expect(theResult.length).toBe(2);
         expect(theResult[0]).not.toBeNull();
         expect(theResult[0].title).toBe("top 1");
@@ -55,7 +54,6 @@ describe('when there is one top level category with one subcategory', function()
     });
     
     it("Should return the top item with the corresponding tree", () => {
-        console.log("result", theResult);
         expect(theResult[0].tree).not.toBeUndefined();
         expect(theResult[0].tree).not.toBeNull();
         expect(theResult[0].tree[0].id).toBe(2);
@@ -104,8 +102,8 @@ describe('when there is a top level category with a subcategory which has a furt
     
     beforeEach((done) => {
         let categories = [ 
-            { _id: 1, level: 0 }, 
-            { _id: 2, level: 1, parentCategoryId: 1 }, 
+            { _id: 1, level: 0, description: "Top level category" }, 
+            { _id: 2, level: 1, parentCategoryId: 1, description: "SubCategory" }, 
             { _id: 3, level: 2, parentCategoryId: 2, description: "SubSubCategory" } 
         ];
         
@@ -114,70 +112,75 @@ describe('when there is a top level category with a subcategory which has a furt
            theResult = result;
            done(); 
         });
-    })
+    });
     
     it("Should return the top item with the corresponding tree", () => {
         expect(theResult[0]).not.toBeUndefined();
         expect(theResult.length).toBe(1);
+        expect(theResult[0].id).toBe(1);
+        expect(theResult[0].title).toBe("Top level category");
     });
     
     it("Should return the sub, subcategory", () => {
-        expect(theResult[0].tree[0].tree).not.toBeUndefined();
-        expect(theResult[0].tree[0].tree).not.toBeNull();
-        expect(theResult[0].tree[0].tree[0].id).toBe(3);
+        expect(theResult[0].tree[0].subTree).not.toBeUndefined();
+        expect(theResult[0].tree[0].subTree).not.toBeNull();
+        expect(theResult[0].tree[0].subTree[0].id).toBe(3);
+        expect(theResult[0].tree[0].subTree[0].title).toBe("SubSubCategory");
     });
 });
 
-// describe('when there are two top level category one of which has two subcategories, one of which has a further subcategory belonging to it', function() {
-//     let theResult, generateCategoryTreeFactory;
+describe('when there are two top level category one of which has two subcategories, one of which has a further subcategory belonging to it', function() {
+    let theResult, generateCategoryTreeFactory;
     
-//     beforeEach(inject((GenerateCategoryTree) => {
-//         generateCategoryTreeFactory = GenerateCategoryTree;
-//     }));
+    beforeEach(inject((GenerateCategoryTree) => {
+        generateCategoryTreeFactory = GenerateCategoryTree;
+    }));
     
-//     beforeEach((done) => {
-//         let categories = [ 
-//             { _id: 1, level: 0 },
-//             { _id: 2, level: 0 },
-//             { _id: 3, level: 1, parentCategoryId: 1 },
-//             { _id: 4, level: 1, parentCategoryId: 1 },
-//             { _id: 5, level: 2, parentCategoryId: 3, description: "SubSubCategory" } 
-//         ];
+    beforeEach((done) => {
+        let categories = [ 
+            { _id: 1, level: 0 },
+            { _id: 2, level: 0 },
+            { _id: 3, level: 1, parentCategoryId: 1 },
+            { _id: 4, level: 1, parentCategoryId: 1 },
+            { _id: 5, level: 2, parentCategoryId: 3, description: "SubSubCategory" } 
+        ];
         
-//         generateCategoryTreeFactory.generate(categories, 1, (result) =>
-//         {
-//            theResult = result;
-//            done(); 
-//         });
-//     })
+        generateCategoryTreeFactory.generate(categories, 1, (result) =>
+        {
+           theResult = result;
+           done(); 
+        });
+    });
     
-    // it("Should return the top items", () => {
-    //     console.log(theResult);
-    //     expect(theResult.length).toBe(2);
-    //     expect(theResult[0]).not.toBeUndefined();
-    //     expect(theResult[0]).not.toBeNull();
-    //     expect(theResult[1]).not.toBeUndefined();
-    //     expect(theResult[1]).not.toBeNull();
-    // });
+    it("Should return the top items", () => {
+        expect(theResult.length).toBe(2);
+        expect(theResult[0]).not.toBeUndefined();
+        expect(theResult[0]).not.toBeNull();
+        expect(theResult[1]).not.toBeUndefined();
+        expect(theResult[1]).not.toBeNull();
+    });
     
-    // it("Should return an empty tree for the second top item", () => {
-    //     expect(theResult[0].tree).not.toBeNull();
-    //     expect(theResult[1].tree).toBeNull();
-    // });
+    it("Should return an empty tree for the second top item", () => {
+        expect(theResult[0].tree).toBeNull();
+        expect(theResult[0].id).toBe(2);
+        expect(theResult[1].tree).not.toBeNull();
+        expect(theResult[1].id).toBe(1);
+    });
     
-    // it("Should return the subcategories", () => {
-    //     expect(theResult[0].tree[0]).not.toBeUndefined();
-    //     expect(theResult[0].tree[0]).not.toBeNull();
-    //     expect(theResult[0].tree[0].id).toBe(3);
+    it("Should return the subcategories", () => {
+        expect(theResult[1].tree[0]).not.toBeUndefined();
+        expect(theResult[1].tree[0]).not.toBeNull();
+        expect(theResult[1].tree[0].id).toBe(4);
         
-    //     expect(theResult[0].tree[1].tree).not.toBeUndefined();
-    //     expect(theResult[0].tree[1].tree).not.toBeNull();
-    //     expect(theResult[0].tree[1].id).toBe(4);
-    // });
+        expect(theResult[1].tree[1].subTree).not.toBeUndefined();
+        expect(theResult[1].tree[1].subTree).not.toBeNull();
+        expect(theResult[1].tree[1].id).toBe(3);
+    });
     
-    // it("Should return the sub, subcategory", () => {
-    //     expect(theResult[0].tree[0].tree).not.toBeUndefined();
-    //     expect(theResult[0].tree[0].tree).not.toBeNull();
-    //     expect(theResult[0].tree[0].tree[0].id).toBe(5);
-    // });
-// });
+    it("Should return the sub, subcategory", () => {
+        expect(theResult[1].tree[1].subTree).not.toBeUndefined();
+        expect(theResult[1].tree[1].subTree).not.toBeNull();
+        expect(theResult[1].tree[1].subTree[0].id).toBe(5);
+        expect(theResult[1].tree[1].subTree[0].title).toBe("SubSubCategory");
+    });
+});

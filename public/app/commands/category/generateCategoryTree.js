@@ -45,7 +45,7 @@ export default angular.module('categoryTreeCommandModule', [])
                 temporaryTreeStructures.push(this.processSubBranch(subTree, theSubCategories));
                 if (temporaryTreeStructures.length === theSubCategories.length)
                 {
-                    console.info("All was well, result: ", temporaryTreeStructures);
+                    //console.info("All was well, result: ", temporaryTreeStructures);
                     return callback({ subTree: temporaryTreeStructures, parentCategoryId });
                 }
             })
@@ -108,7 +108,7 @@ export default angular.module('categoryTreeCommandModule', [])
                 temporaryTreeStructures.push(branch);
                 if (temporaryTreeStructures.length === topLevelCategoryTrees.length)
                 {
-                    console.info("All was well, result: ", temporaryTreeStructures);
+                    //console.info("All was well, result: ", temporaryTreeStructures);
                     return callback(temporaryTreeStructures); 
                 }
             })
