@@ -5168,7 +5168,6 @@ $__System.register('7', ['8', '9', 'c', 'a', 'b'], function (_export) {
             _export('default', angular.module('HomeControllerModule', [categoryQueryModule.name, categoryTreeCommandModule.name, navbarAppModule.name]).controller('HomeController', function ($scope, allCategories, $location, $http, GenerateCategoryTree) {
                 GenerateCategoryTree.generate(allCategories, null, function (categories) {
                     $scope.topCats = categories;
-                    console.log(categories);
                 });
             }));
         }
@@ -25313,7 +25312,9 @@ $__System.register('11d', ['8', '9', 'c', 'a', 'b'], function (_export) {
                     });
                 }
 
-                $scope.topCats = GenerateCategoryTree.generate(allCategories, $scope.currentCategoryId);
+                GenerateCategoryTree.generate(allCategories, null, function (categories) {
+                    $scope.topCats = categories;
+                });
             }));
         }
     };

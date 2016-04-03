@@ -12,6 +12,5 @@ export default angular.module('HomeControllerModule', [
 ]).controller('HomeController', function($scope, allCategories, $location, $http, GenerateCategoryTree) {
     GenerateCategoryTree.generate(allCategories, null, (categories) => {
         $scope.topCats = categories;
-        console.log(categories);
     });
 });
