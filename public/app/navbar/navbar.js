@@ -31,8 +31,8 @@ export default angular.module('navbarAppModule', [
         },
         template: navbarLiTemplate,
         link: function (scope, element, attrs) {
-            if (angular.isArray(scope.leaf.subtree)) {
-                element.append('<tree tree=\"leaf.subtree\"></tree>');
+            if (angular.isArray(scope.leaf.subTree)) {
+                element.append('<tree tree=\"leaf.subTree\"></tree>');
 
                 // find the parent of the element
                 var parent = element.parent();
