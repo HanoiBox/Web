@@ -6,13 +6,14 @@ var bodyParser = require('body-parser');
 var appDirectory = "./build";
 var app = express();
 var dev = process.env.Node_env === undefined || process.env.Node_env === null;
+var db = require('./build/db');
 if (dev)
 {
 	appDirectory = "./app";
 	require("babel-core/register");
 	require("babel-polyfill");
+    db = require('./app/db');
 }
-var db = require('./app/db');	
 db.connect(dev, process.env);
 
 app.use(bodyParser.urlencoded({ extended: true }));

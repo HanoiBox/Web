@@ -36,9 +36,9 @@ var categoryCommand = function () {
                     categoryExists = true;
                     categoryData.parentCategoryId = parentCategoryId;
                 }
-                if (category.description === categoryData.description) {
-					return callback({ status: 400, message: "Duplicate description" });
-				}
+                // if (category.description === categoryData.description) {
+				// 	return callback({ status: 400, message: "Duplicate description" });
+				// }
 			});
             
             if (parentCategoryId !== null && !categoryExists) {

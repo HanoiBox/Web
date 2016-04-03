@@ -4,7 +4,7 @@
   "version": "0.0.3",
   "scripts": {
     "start": "node --harmony server.js",
-    "startProd": "set NODE_ENV=production && node server.js",
+    "startProd": "set hanoiboxuser=hbsa&& set hanoiboxpassword=3cyWCfIr&& set hanoiboxport=54118&& set hanoiboxdbname=hanoiboxtest&& set NODE_ENV=production&& node server.js",
     "build": "babel -d build app",
     "test": "test.ps1"
   },
@@ -44,10 +44,11 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-ie-launcher": "^0.2.0",
     "karma-jasmine": "^0.3.6",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-phantomjs-launcher": "^1.0.0",
     "karma-requirejs": "^0.2.2",
     "mock-require": "latest",
     "phantomjs": "^1.9.19",
+    "phantomjs-prebuilt": "^2.1.7",
     "requirejs": "^2.1.22"
   },
   "jspm": {

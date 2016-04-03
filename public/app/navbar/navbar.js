@@ -31,8 +31,8 @@ export default angular.module('navbarAppModule', [
         },
         template: navbarLiTemplate,
         link: function (scope, element, attrs) {
-            if (angular.isArray(scope.leaf.subtree)) {
-                element.append('<tree tree=\"leaf.subtree\"></tree>');
+            if (angular.isArray(scope.leaf.subTree)) {
+                element.append('<tree tree=\"leaf.subTree\"></tree>');
 
                 // find the parent of the element
                 var parent = element.parent();
@@ -60,16 +60,16 @@ export default angular.module('navbarAppModule', [
     };
 }]);
 
-// angular.module("public/app/navbar/template/navbar-ul.html", []).run(["$templateCache", function($templateCache) {
-//   $templateCache.put("public/app/navbar/template/navbar-ul.html",
-//     "<ul class='dropdown-menu'>\n" +
-//     "    <leaf ng-repeat='leaf in tree' leaf='leaf'></leaf>\n" +
-//     "</ul>");
-// }]);
+angular.module("public/app/navbar/template/navbar-ul.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("public/app/navbar/template/navbar-ul.html",
+    "<ul class='dropdown-menu'>\n" +
+    "    <leaf ng-repeat='leaf in tree' leaf='leaf'></leaf>\n" +
+    "</ul>");
+}]);
 
-// angular.module("public/app/navbar/template/navbar-li.html", []).run(["$templateCache", function($templateCache) {
-//   $templateCache.put("public/app/navbar/template/navbar-li.html",
-//     "<li ng-class=\"{divider: leaf.name == 'divider'}\" ng-class=\"{active: currentCategoryId === topCat.id}\" >\n" +
-//     "    <a ng-click=\"{{leaf.link}}\" ng-if=\"leaf.name !== 'divider'\">{{leaf.name}}</a>\n" +
-//     "</li>");
-// }]);
+angular.module("public/app/navbar/template/navbar-li.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("public/app/navbar/template/navbar-li.html",
+    "<li ng-class=\"{divider: leaf.name == 'divider'}\" ng-class=\"{active: currentCategoryId === topCat.id}\" >\n" +
+    "    <a ng-click=\"{{leaf.link}}\" ng-if=\"leaf.name !== 'divider'\">{{leaf.name}}</a>\n" +
+    "</li>");
+}]);

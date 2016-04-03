@@ -2,12 +2,12 @@ import angular from "angular";
 import 'angular-route';
 
 import categoryQueryModule from '../../queries/category/getCategories';
-import categoryCommandModule from '../../commands/category/generateCategoryTree';
+import categoryTreeCommandModule from '../../commands/category/generateCategoryTree';
 import navbarAppModule from '../../navbar/navbar';
 
 export default angular.module("CategoryControllerModule", [
     categoryQueryModule.name,
-    categoryCommandModule.name,
+    categoryTreeCommandModule.name,
     navbarAppModule.name
 ]).controller("CategoryController", function($scope, allCategories, $location, $routeParams, GenerateCategoryTree) {
     $scope.currentCategoryId = null;

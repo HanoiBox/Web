@@ -10,7 +10,7 @@ module.exports = {
             autoIncrement.initialize(connection); 
         } else {
             var connectionString = "mongodb://" + envVariables.hanoiboxuser + ":" + envVariables.hanoiboxpassword 
-                + "@ds" + envVariables.hanoiboxport + ".mongolab.com:" + envVariables.hanoiboxport + "/hanoibox";
+                + "@ds0" + envVariables.hanoiboxport + ".mongolab.com:" + envVariables.hanoiboxport + "/" + envVariables.hanoiboxdbname;
             connection = mongoose.connect(connectionString); // live db
             autoIncrement.initialize(connection); 
         }

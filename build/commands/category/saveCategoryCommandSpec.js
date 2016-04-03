@@ -4,11 +4,9 @@ var mockRequire = require("../../../node_modules/mock-require/index.js");
 mockRequire.stopAll();
 mockRequire('../../repositories/categoryRepository', {
 	findCategories: function findCategories(callback) {
-		console.log('categoryRepository.find called');
 		return callback(null);
 	},
 	saveCategory: function saveCategory(callback) {
-		console.log('categoryRepository.save called');
 		return callback(null);
 	}
 });
@@ -74,9 +72,9 @@ describe("When the find Categories method returns a duplicate category", functio
 		});
 	});
 
-	it("should give an error message in the result", function () {
-		expect(result.message).toBe("Duplicate description");
-		expect(result.status).toBe(400);
+	it("should give a not found as we have not mocked a save method", function () {
+		expect(result.status).toBe(404);
+		// but the point is that the duplicate no longer stops the save functionality
 	});
 });
 

@@ -4576,6 +4576,7 @@ $__System.register('8', ['9', 'a'], function (_export) {
 
                 var execute = function execute(id, callback) {
                     var deleteUrl = url + id;
+
                     $http['delete'](deleteUrl).then(function () {
                         var categories = categoriesCacheFactory.get();
                         categories.filter(function (cat) {
