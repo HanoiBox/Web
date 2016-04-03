@@ -25312,7 +25312,7 @@ $__System.register('11d', ['8', '9', 'c', 'a', 'b'], function (_export) {
                     });
                 }
 
-                GenerateCategoryTree.generate(allCategories, null, function (categories) {
+                GenerateCategoryTree.generate(allCategories, $scope.currentCategoryId, function (categories) {
                     $scope.topCats = categories;
                 });
             }));
