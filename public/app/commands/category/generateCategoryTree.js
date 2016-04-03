@@ -1,4 +1,5 @@
 import angular from 'angular';
+import 'babel/polyfill';
 
 export default angular.module('categoryTreeCommandModule', [])
 .factory('GenerateCategoryTree', function() {
