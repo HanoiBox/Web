@@ -7,7 +7,7 @@ module.exports = (router) => {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
-	router.route('/api/advert/').get((req, res) => {
+	router.route('/api/listing/').get((req, res) => {
 		advertService.findAdverts((result) => {
 			res.json(result);
 		});
@@ -20,7 +20,7 @@ module.exports = (router) => {
 	});
 
 	 let getIdInRequest = (req, res) => {
-		req.assert('advertId', 'Id param must be an integer').isInt();
+		req.assert('listingId', 'Id param must be an integer').isInt();
 
 		let errors = req.validationErrors();
 		if (errors) {
@@ -28,10 +28,10 @@ module.exports = (router) => {
         }
 
 		// sanitize input
-		return req.sanitize('advertId').toInt();
+		return req.sanitize('listingId').toInt();
 	}
 
-	router.route('/api/advert/:advertId').get((req, res) => {
+	router.route('/api/listing/:listingId').get((req, res) => {
 		let id = getIdInRequest(req, res);
 		advertService.getAdvert(id, (result) => {
 			res.json(result);

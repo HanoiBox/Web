@@ -4,8 +4,9 @@ import 'angular-bootstrap-dropdownandtab';
 
 import homeControllerModule from 'public/app/routes/home/homeController';
 import homeTemplate from 'public/app/routes/home/index.html!text';
-import categoryTemplate from 'public/app/routes/category/index.html!text';
+
 import categoryControllerModule from 'public/app/routes/category/categoryController';
+import categoryTemplate from 'public/app/routes/category/index.html!text';
 // import advertTemplate from 'public/app/routes/advert/index.html!text';
 
 export default angular.module('appRoutesModule', [
