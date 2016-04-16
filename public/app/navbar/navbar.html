@@ -14,18 +14,30 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         
         <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
-            <div ng-repeat="topCat in topCats">
+            <div>
                 <ul class="nav navbar-nav">
-                    <li ng-class="{active: currentCategoryId === topCat.id}" uib-dropdown>
+                    <li ng-repeat="topCat in topCats" ng-class="{active: currentCategoryId === topCat.id}" uib-dropdown>
                         <a href="{{topCat.link}}" title="{{topCat.title}}" uib-dropdown-toggle>
                             {{topCat.name}}
                             <b class='caret'></b>
                         </a>
                         <tree tree='topCat.tree'></tree>
                     </li>
+                    <li ng-show="!doNotShowCreateListingButton">
+                            <a role="button" href="/listing/createlisting" class="btn btn-default btn-navheader">
+                                <span class="glyphicon glyphicon-plus"></span>
+                                <span>Create</span>
+                            </a>
+                    </li>
                 </ul>
             </div>
         </div>
+        
+        <!--<div class="row">
+            <div class="col-xs-3 col-md-3 col-xs-offset-9 col-md-offset-9">-->
+                
+            <!--</div>
+        </div>-->
         <!-- /.navbar-collapse -->
     </div>
 </nav>
