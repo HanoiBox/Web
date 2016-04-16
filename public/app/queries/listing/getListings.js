@@ -19,6 +19,14 @@ export default angular.module('advertQueryModule', [
     }
   };
   
+  let advertsByCategoryId = (categoryId, callback) => {
+    let url = `/api/listing/category/${categoryId}`;
+    $http.get(url).then(function successCallback(response) { 
+        advertCacheFactory.put(response.data);
+        return callback(advertCacheFactory.get());
+    });
+  };
+  
   let byId = (id) => {
     let adverts = advertCacheFactory.get();
     if (adverts === null || adverts === undefined)
@@ -35,6 +43,7 @@ export default angular.module('advertQueryModule', [
 
   return {
     allAdverts,
+    advertsByCategoryId,
     byId
   };
 });
