@@ -1,13 +1,14 @@
 'use strict';
-
 let advertService = require("../services/advertService");
+let getAdvertsByCategoryQuery = require("../queries/advert/getAdvertsByCategoryQuery");
+
 module.exports = (router) => {
 
 	router.get('/api', (req, res) => {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
-	router.route('/api/advert/').get((req, res) => {
+	router.route('/api/listing/').get((req, res) => {
 		advertService.findAdverts((result) => {
 			res.json(result);
 		});
@@ -19,8 +20,8 @@ module.exports = (router) => {
 		});
 	});
 
-	 let getIdInRequest = (req, res) => {
-		req.assert('advertId', 'Id param must be an integer').isInt();
+	 let getIdInRequest = (name, req, res) => {
+		req.assert(name, 'Id param must be an integer').isInt();
 
 		let errors = req.validationErrors();
 		if (errors) {
@@ -28,22 +29,29 @@ module.exports = (router) => {
         }
 
 		// sanitize input
-		return req.sanitize('advertId').toInt();
+		return req.sanitize(name).toInt();
 	}
 
-	router.route('/api/advert/:advertId').get((req, res) => {
-		let id = getIdInRequest(req, res);
+	router.route('/api/listing/:listingId').get((req, res) => {
+		let id = getIdInRequest("listingId", req, res);
 		advertService.getAdvert(id, (result) => {
 			res.json(result);
 		});
 	}).put((req, res) => {
 		let id = getIdInRequest(req, res);
-		advertService.updateAdvert(id, (result) => {
+		advertService.updateAdvert("listingId", id, (result) => {
 			res.json(result);
 		});
 	}).delete((req, res) => {
 		let id = getIdInRequest(req, res);
-		advertService.deleteAdvert(id, (result) => {
+		advertService.deleteAdvert("listingId", id, (result) => {
+			res.json(result);
+		});
+	});
+	
+	router.route('/api/listing/category/:categoryId').get((req, res) => {
+		let id = getIdInRequest("categoryId", req, res);
+		getAdvertsByCategoryQuery.get(id, (result) => {
 			res.json(result);
 		});
 	});

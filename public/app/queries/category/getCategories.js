@@ -17,7 +17,7 @@ export default angular.module('categoryQueryModule', [
         });
     }
     return categoriesCacheFactory.get();
-  }
+  };
   
   let byId = (id) => {
     let categories = categoriesCacheFactory.get();
@@ -31,10 +31,10 @@ export default angular.module('categoryQueryModule', [
     return new Promise(function(resolve, reject) {
         resolve({ "status": 200, data: { category } });
     });
-  }
+  };
 
   return {
     allCats,
     byId
-  }
+  };
 });

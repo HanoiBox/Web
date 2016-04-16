@@ -1,7 +1,34 @@
 <bootstrap-navbar></bootstrap-navbar>
 
 <div class="container">
-Here we could have a favourites bar
+    <div class="row">
+        <!--<div class="col-xs-3 col-md-3">
+            sdfh
+            </div>-->
+        <div class="col-xs-3 col-md-3 col-xs-offset-9 col-md-offset-9">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>
+                <span>Create</span>
+            </button>
+        </div>
+        <div class="col-xs-3 col-md-3">
+            sdgh
+            </div>
+    </div>
+    <div class="row" >
+        <div ng-repeat="advert in allAdverts">
+            <div class="col-xs-6 col-md-3">
+                <!--<a href="#" class="thumbnail">
+                    <img src="..." alt="...">
+                </a>-->
+                <span>{{advert._id}}</span>
+                <span>{{advert.information}}</span>
+                <div ng-repeat="category in advert.categories">
+                    <span>{{category}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!--<div class="container">
     <uib-tabset>
