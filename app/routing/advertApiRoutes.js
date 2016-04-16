@@ -1,6 +1,7 @@
 'use strict';
-
 let advertService = require("../services/advertService");
+let getAdvertsByCategoryQuery = require("../queries/getAdvertsByCategoryQuery");
+
 module.exports = (router) => {
 
 	router.get('/api', (req, res) => {
@@ -44,6 +45,13 @@ module.exports = (router) => {
 	}).delete((req, res) => {
 		let id = getIdInRequest(req, res);
 		advertService.deleteAdvert(id, (result) => {
+			res.json(result);
+		});
+	});
+	
+	router.route('/api/listing/:categoryId').get((req, res) => {
+		let id = getIdInRequest(req, res);
+		getAdvertsByCategoryQuery.get(id, (result) => {
 			res.json(result);
 		});
 	});

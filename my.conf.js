@@ -25,7 +25,7 @@ module.exports = function(config) {
 
     //list of files / patterns to load in the browser
     files: [
-      'node_modules/babel-polyfill/dist/polyfill.js'
+      //'node_modules/babel-polyfill/dist/polyfill.js'
       //{pattern: '*Spec.js', included: false},
       // {pattern: 'sysadmin/*Spec.js', included: false},
       // {pattern: 'sysadmin/**/*Spec.js', included: false},
@@ -36,13 +36,19 @@ module.exports = function(config) {
     //     '/base/': '/base/public/app/commands/category/'
     // },
     
+    // paths: {
+    //     '/base': 'public/*.js'
+    // },
+    
     jspm: {
         // NB. tests or controllers which exist in both areas with the same name
         // causes serious confusion and grief for me and my Karma GF 16/01/2016
         // The only way I can get the public area tests to work is by using more verbose paths and proxying them
         // such a pain. Hope this works on the build server.
-        // 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js', 
-       loadFiles: [ 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js']
+        // 'sysadmin/app/**/*.js', 'public/app/commands/category/*.js', 'public/app/**/*.js'
+       loadFiles: ['public/app/**/*Spec.js', 'sysadmin/app/**/*Spec.js'],
+       serveFiles: ['public/app/**/*.js', 'sysadmin/app/**/*.js']
+       //loadFiles: [ 'sysadmin/app/**/*.js', 'public/app/**/*.js']
     },
 
 

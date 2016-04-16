@@ -21,10 +21,10 @@ var advertRepository = (function () {
 
 	var findAdverts = function findAdverts(callback) {
 		Advert.find(function (err, adverts) {
-			if (err) {
-				return callback(err);
-			}
-			return callback(adverts);
+			if (error) {
+                callback({ status: httpStatus.NOT_FOUND, message: error });
+            }
+			return callback({ status: httpStatus.OK, adverts: adverts });
 		});
 	};
 
