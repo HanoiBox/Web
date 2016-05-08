@@ -4,15 +4,11 @@ import 'angular-route';
 import categoryQueryModule from '../../queries/category/getCategories';
 import categoryTreeCommandModule from '../../commands/category/generateCategoryTree';
 import navbarAppModule from '../../navbar/navbar';
-import 'angular/bower-angular-sanitize';
-import 'allenhwkim/angularjs-autocomplete';
-//angularjsAutocomplete from 
 
 export default angular.module('CreateListingControllerModule', [
     categoryQueryModule.name,
     categoryTreeCommandModule.name,
-    navbarAppModule.name,
-    'angularjs-autocomplete'
+    navbarAppModule.name
 ]).controller('CreateListingController', function($scope, allCategories, $location, $http, GenerateCategoryTree) {
     $scope.categoriesSelection = allCategories.map(cat => {
         // return { id: cat._id, value: cat.vietDescription, title: cat.description }
@@ -24,15 +20,6 @@ export default angular.module('CreateListingControllerModule', [
     
     $scope.doNotShowCreateListingButton = true;
     $scope.advert;
-    
-    $scope.listFormatter = (el, scope) => {
-        return `<li value=\"${el.id}\">${el.value}</li>`;
-    };
-    
-    $scope.setCategory = (value) => {
-        console.log(value);
-        //$scope.categorySelected = "";
-    };
     
     $scope.save = (advert) => {
         if (!$scope.createListingForm.$valid)
