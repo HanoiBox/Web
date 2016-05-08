@@ -4,47 +4,74 @@
     <div>
         <br />
     </div>
-    <form id="quote-Form" method="POST" action="/quote" class="form-horizontal form-width">
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clientFullName">Basic information</label>
-            <div class="col-sm-6">
-                <input type="text" required class="form-control" id="clientFullName" name="clientFullName" placeholder="Please compose a short description of your event or item">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Create a new listing on HanoiBox</h4></div>
+        <div class="panel-body">
+            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="information">Basic information</label>
+                    <div class="col-sm-6">
+                        <textarea rows="3" required class="form-control" id="information" ng-model="advert.information" placeholder="Please compose a short description for your HanoiBox listing"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="emailAddress">Email address</label>
+                    <div class="col-sm-6">
+                        <input type="email" required class="form-control" id="emailAddress" ng-model="advert.emailAddress" placeholder="Please enter your email address **">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="col-sm-2 control-label" for="categorySelected">Category</label>
+
+                    <div class="col-sm-6">
+                        <!-- value-Changed="cleanHtml(categorySelected)" -->
+                        <div auto-complete source="categoriesSelection" min-Chars="2" list-Formatter="listFormatter" value-Changed="setCategory(advert.categorySelected)">
+                            <!--<span class="glyphicon glyphicon-search" aria-hidden="true"> </span>-->
+                            <input id="categorySelected" name="categorySelected" ng-model="advert.categorySelected" placeholder="Start typing...">
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">
+                    <label class="col-sm-2 control-label" for="clientAddress">Address</label>
+                    <div class="col-sm-6">
+                        <input type="text" required class="form-control" id="clientAddress" name="clientAddress" placeholder="Please enter the first line of your address">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="clientPostcode">Postcode</label>
+                    <div class="col-sm-6">
+                        <input type="text" required class="form-control" id="clientPostcode" name="clientPostcode" placeholder="Please enter your postcode">
+                    </div>
+                </div> -->
+
+                <div class="form-group">
+                    <div class="col-xs-3 col-md-3 col-xs-offset-2 col-md-offset-2">
+                        <button type="submit" ng-click="save(advert)" class="btn btn-success" validate>Create</button>
+                    </div>
+                </div>
+                
+                <div class="control-group error" ng-show="errors">
+                    <span class="help-inline" ng-bind="errorMessage"></span>
+                </div>
+            </form>
+            
+            <div ng-show="formSubmitted">
+                <span class="glyphicon glyphicon-ok"></span>
+                <span>Thank you for submitting your listing to HanoiBox</span>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clientEmailAddress">Email address</label>
-            <div class="col-sm-6">
-                <input type="email" class="form-control" id="clientEmailAddress" name="clientEmailAddress" placeholder="Please enter your email address (all corresponence is hashed)">
-            </div>
+    </div>
+    
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div><span>** Email addresses are NOT disclosed to any member of the public.</span></div>
+            <div><span>Any correspondence with interested parties goes through the HanoiBox website directly.</span></div>
         </div>
-
-        <!--<div class="form-group">
-            <label class="col-sm-2 control-label" for="clientContactNumber">Contact number</label>
-            <div class="col-sm-6">
-                <input type="tel" required class="form-control" id="clientContactNumber" name="clientContactNumber" placeholder="Please enter the best number to contact you on">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clientAddress">Address</label>
-            <div class="col-sm-6">
-                <input type="text" required class="form-control" id="clientAddress" name="clientAddress" placeholder="Please enter the first line of your address">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="clientPostcode">Postcode</label>
-            <div class="col-sm-6">
-                <input type="text" required class="form-control" id="clientPostcode" name="clientPostcode" placeholder="Please enter your postcode">
-            </div>
-        </div> -->
-
-        <div class="form-group">
-            <div class="col-xs-3 col-md-3 col-xs-offset-9 col-md-offset-9">
-                <button type="submit" class="btn btn-default" validate>Create</button>
-            </div>
-        </div>
-        
-    </form>
+    </div>
 </div>
