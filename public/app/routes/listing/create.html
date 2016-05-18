@@ -27,28 +27,13 @@
                     <label class="col-sm-2 control-label" for="categorySelected">Category</label>
 
                     <div class="col-sm-6">
-                        <!-- value-Changed="cleanHtml(categorySelected)" -->
-                        <div auto-complete source="categoriesSelection" min-Chars="2" list-Formatter="listFormatter" value-Changed="setCategory(advert.categorySelected)">
+                        <autocomplete ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
+                        data="categoriesSelection" autocomplete-required on-type="updateCategories">
                             <!--<span class="glyphicon glyphicon-search" aria-hidden="true"> </span>-->
-                            
-                            <input id="categorySelected" name="categorySelected" ng-model="advert.categorySelected" placeholder="Start typing...">
-                        </div>
+                            <!--<input id="categorySelected" name="categorySelected" ng-model="advert.categorySelected" placeholder="Start typing...">-->
+                        </autocompletediv>
                     </div>
                 </div>
-
-                <!--<div class="form-group">
-                    <label class="col-sm-2 control-label" for="clientAddress">Address</label>
-                    <div class="col-sm-6">
-                        <input type="text" required class="form-control" id="clientAddress" name="clientAddress" placeholder="Please enter the first line of your address">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="clientPostcode">Postcode</label>
-                    <div class="col-sm-6">
-                        <input type="text" required class="form-control" id="clientPostcode" name="clientPostcode" placeholder="Please enter your postcode">
-                    </div>
-                </div> -->
 
                 <div class="form-group">
                     <div class="col-xs-3 col-md-3 col-xs-offset-2 col-md-offset-2">

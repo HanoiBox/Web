@@ -15,7 +15,7 @@ gulp.task("css", function() {
         .pipe(rename({suffix: ".min"}))
         .pipe(gulp.dest("sysadmin/dist/styles"));
         
-    return gulp.src(["jspm_packages/npm/bootstrap-css-only@3.3.6/css/bootstrap.css", "public/app/navbar/navbar.css"])
+    return gulp.src(["jspm_packages/github/JustGoscha/allmighty-autocomplete@master/style/*.css", "jspm_packages/npm/bootstrap-css-only@3.3.6/css/bootstrap.css", "public/app/navbar/navbar.css"])
         .pipe(concat("public.css"))
         .pipe(minifyCSS())
         .pipe(rename({suffix: ".min"}))

@@ -6,16 +6,11 @@ export default angular.module('categoryTreeCommandModule', [])
     
     this.createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, subTree, subTreePromise, parentCategoryId) => {
         return { id: id, currentCategoryId: currentCategoryId, title: englishDescription, name: vietnameseDescription, link: `/category/id:${id}`, subTree, subTreePromise, parentCategoryId };
-    };
-    
-    let recursionCount = 0;
+    }
     
     this.createSubTree = (allCategories, currentCategoryId, parentCategoryId, callback) => {
-        //recursionCount++;
-        //console.log("recursionCount: ", recursionCount);
         
         let subCategories = allCategories.filter(cat => cat.parentCategoryId === parentCategoryId);
-        //console.info("subCategories", subCategories);
         if (subCategories === null || subCategories.length === 0)
         {
            return callback({ subTree: null, parentCategoryId }); 
@@ -46,7 +41,6 @@ export default angular.module('categoryTreeCommandModule', [])
                 temporaryTreeStructures.push(this.processSubBranch(subTree, theSubCategories));
                 if (temporaryTreeStructures.length === theSubCategories.length)
                 {
-                    //console.info("All was well, result: ", temporaryTreeStructures);
                     return callback({ subTree: temporaryTreeStructures, parentCategoryId });
                 }
             })
@@ -54,7 +48,7 @@ export default angular.module('categoryTreeCommandModule', [])
                 return callback({ subTree: null, parentCategoryId });
             }); 
         }
-    };
+    }
     
     this.processSubBranch = (createSubTreeResult, subCategories) => {
          // I am expecting the subtree for the parentCategoryId
@@ -118,7 +112,7 @@ export default angular.module('categoryTreeCommandModule', [])
                 return callback(temporaryTreeStructures); 
             }); 
         }
-    };
+    }
     
     return {
         generate: generateCategoryTree

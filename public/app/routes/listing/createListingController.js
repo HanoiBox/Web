@@ -4,15 +4,18 @@ import 'angular-route';
 import categoryQueryModule from '../../queries/category/getCategories';
 import categoryTreeCommandModule from '../../commands/category/generateCategoryTree';
 import navbarAppModule from '../../navbar/navbar';
+import autocomplete from 'JustGoscha/allmighty-autocomplete';
 
 export default angular.module('CreateListingControllerModule', [
     categoryQueryModule.name,
     categoryTreeCommandModule.name,
-    navbarAppModule.name
+    navbarAppModule.name,
+    autocomplete.name
 ]).controller('CreateListingController', function($scope, allCategories, $location, $http, GenerateCategoryTree) {
-    $scope.categoriesSelection = allCategories.map(cat => {
-        // return { id: cat._id, value: cat.vietDescription, title: cat.description }
-        return { id: cat._id, value: cat.description };
+    
+    
+    $scope.categoriesSelection = allCategories.filter(c => c.level !== 1).map(cat => {
+        return cat.description;
     });
     GenerateCategoryTree.generate(allCategories, null, (categories) => {
         $scope.topCats = categories;
