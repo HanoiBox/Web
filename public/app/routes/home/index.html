@@ -1,19 +1,20 @@
 <bootstrap-navbar></bootstrap-navbar>
 
 <div class="container">
-    <div class="row" >
-        <div ng-repeat="advert in allAdverts">
-            <div class="col-xs-6 col-md-3">
-                <!--<a href="#" class="thumbnail">
+    <div ng-repeat="listing in allListings">
+        <!--<div class="row" >
+            <div class="col-xs-3 col-md-3">-->
+                <a href="#" class="thumbnail">
                     <img src="..." alt="...">
-                </a>-->
-                <span>{{advert._id}}</span>
-                <span>{{advert.information}}</span>
-                <div ng-repeat="category in advert.categories">
-                    <span>{{category}}</span>
+                </a>
+                <span>{{listing.created}}</span>
+                <br/>
+                <span>{{listing.information}}</span>
+                <div ng-repeat="category in listing.categories">
+                    <span>Category: {{category}}</span>
                 </div>
-            </div>
-        </div>
+            <!--</div>
+        </div>-->
     </div>
 </div>
 <!--<div class="container">
@@ -43,3 +44,6 @@
         </uib-tab>
     </uib-tabset>
 </div>-->
+
+<button ng-click="clearAdvertCache()" class="btn btn-default">Clear advert cache
+</button>

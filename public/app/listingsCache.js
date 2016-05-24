@@ -1,9 +1,9 @@
 import angular from 'angular';
 import LocalStorageModule from 'angular-local-storage';
 
-export default angular.module('advertsCacheModule', [
+export default angular.module('listingCacheModule', [
    'LocalStorageModule'
-]).factory('advertCacheFactory', function(localStorageService) {
+]).factory('listingCacheFactory', function(localStorageService) {
     let categoriesCacheName = "adverts";
         
     return {

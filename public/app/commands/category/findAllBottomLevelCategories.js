@@ -1,7 +1,7 @@
 import angular from 'angular';
 import 'babel/polyfill';
 
-export default angular.module('categoryUtilitiesCommandModule', [])
+export default angular.module('lowestCategoriesCommandModule', [])
 .factory('BottomLevelCategories', function() {
     
     let getLowestCategories = function* (candidateCategory, allCategories) {

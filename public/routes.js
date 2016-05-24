@@ -33,7 +33,10 @@ export default angular.module('appRoutesModule', [
       controllerAs: 'ctrl',
       resolve: {
          allCategories: (GetCategoriesFactory) => {
-           return GetCategoriesFactory.allCats();
+            return GetCategoriesFactory.allCats();
+         },
+         allListings: (GetListingsFactory) => {
+            return GetListingsFactory.allListings();
          }
       }
   })

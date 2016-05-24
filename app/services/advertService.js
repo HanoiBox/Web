@@ -1,7 +1,8 @@
 "use strict";
-
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
+require('babel-polyfill');
+
 var advertService = (function () {
 
 	var saveAdvert = function saveAdvert(advertData, callback) {
@@ -84,13 +85,12 @@ var advertService = (function () {
 		if (advertData.information === undefined || advertData.information === "") {
 			return callback({ message: "This advert did not have any information to save" });
 		}
-		if (advertData.categories === undefined || advertData.categories === "" || advertData.categories === null || advertData.categories === "null") {
+		if (advertData.category === undefined || advertData.category === "" || advertData.category === null || advertData.category === "null") {
 			return callback({ message: "This advert did not have any categories, there must be at least one category given" });
 		}
-		advertData.categories = advertData.categories.split(",");
-		for (var i = 0; i < advertData.categories.length; i++) {
-			advertData.categories[i] = parseInt(advertData.categories[i], 10);
-		}
+		advertData.categories = [
+			advertData.category
+		];
 		if (!Array.isArray(advertData.categories) || advertData.categories.length === 0) {
 			return callback({ message: "This advert did not have any categories, there must be at least one category given" });
 		}
@@ -119,20 +119,24 @@ var advertService = (function () {
 
 		// check category numbers are ok
 		getAllCategoriesPromise.then(function (categories) {
-			var existingCategories = categories.map(function (category) {
-				return category._id;
-			});
-			function isValid(advertCategoryId, index, array) {
-				function exists(existingCategoryId, index, array) {
-					return existingCategoryId === advertCategoryId;
-				}
-				return existingCategories.some(exists);
-			}
+			var existingCategoryIds = categories.map((category) => {
+				return { id: category._id };
+			}),
+			isOk = true;
 
-			if (advertData.categories.every(isValid)) {
+			// for(var category of advertData.categories) {
+			// 	if (existingCategoryIds.filter(id => id === category._id).length === 0)
+			// 	{
+			// 		isOk = false;
+			// 	}
+			// };
+				
+			if (isOk)
+			{
 				return callback({ "valid": true });
+			} else {
+				return callback({ "valid": false });
 			}
-			return callback({ "valid": false });
 		}).catch(function (reason) {
 			var errorMsg = 'getAllCategoriesPromise handle rejected promise (' + reason + ') here.';
 			console.error(errorMsg);

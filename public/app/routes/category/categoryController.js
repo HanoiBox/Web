@@ -11,7 +11,7 @@ export default angular.module("CategoryControllerModule", [
     advertQueryModule.name,
     categoryTreeCommandModule.name,
     navbarAppModule.name
-]).controller("CategoryController", function($scope, allCategories, $location, $routeParams, GenerateCategoryTree, GetAdvertsFactory) {
+]).controller("CategoryController", function($scope, allCategories, $location, $routeParams, GenerateCategoryTree, GetListingsFactory) {
     $scope.currentCategoryId = null;
     
     if ($routeParams.id !== undefined)
@@ -25,7 +25,7 @@ export default angular.module("CategoryControllerModule", [
         $scope.topCats = categories;
     });
     
-    GetAdvertsFactory.advertsByCategoryId($scope.currentCategoryId, (adverts) => {
-        $scope.allAdverts = adverts;
+    GetListingsFactory.listingsByCategoryId($scope.currentCategoryId).then((listings) => {
+        $scope.allListings = listings.adverts;
     });
 });

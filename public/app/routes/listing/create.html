@@ -27,10 +27,8 @@
                     <label class="col-sm-2 control-label" for="categorySelected">Category</label>
 
                     <div class="col-sm-6">
-                        <autocomplete ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
-                        data="categoriesSelection" autocomplete-required on-type="updateCategories">
-                            <!--<span class="glyphicon glyphicon-search" aria-hidden="true"> </span>-->
-                            <!--<input id="categorySelected" name="categorySelected" ng-model="advert.categorySelected" placeholder="Start typing...">-->
+                        <autocomplete name="categorySelected" id="categorySelected" ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
+                            data="categoriesSelection" required autocomplete-required on-type="updateCategories">
                         </autocompletediv>
                     </div>
                 </div>
@@ -42,7 +40,9 @@
                 </div>
                 
                 <div class="control-group error" ng-show="errors">
-                    <span class="help-inline" ng-bind="errorMessage"></span>
+                    <div class="controls">
+                        <span class="help-inline" ng-bind="errorMessage"></span>
+                    </div>
                 </div>
             </form>
             

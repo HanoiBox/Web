@@ -1,9 +1,9 @@
 import angular from 'angular';
 import 'angular-mocks';
-import categoryUtilitiesCommandModule from './findAllBottomLevelCategories';
+import lowestCategoriesCommandModule from './findAllBottomLevelCategories';
 
 beforeEach(() => {
-    angular.mock.module(categoryUtilitiesCommandModule.name);
+    angular.mock.module(lowestCategoriesCommandModule.name);
 });
 
 describe('when there are two top level categories only', () => {
