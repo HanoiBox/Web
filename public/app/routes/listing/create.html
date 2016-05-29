@@ -1,0 +1,63 @@
+<bootstrap-navbar></bootstrap-navbar>
+
+<div class="container">
+    <div>
+        <br />
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Create a new listing on HanoiBox</h4></div>
+        <div class="panel-body">
+            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="information">Basic information</label>
+                    <div class="col-sm-6">
+                        <textarea rows="3" required class="form-control" id="information" ng-model="advert.information" placeholder="Please compose a short description for your HanoiBox listing"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="emailAddress">Email address</label>
+                    <div class="col-sm-6">
+                        <input type="email" required class="form-control" id="emailAddress" ng-model="advert.emailAddress" placeholder="Please enter your email address **">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    
+                    <label class="col-sm-2 control-label" for="categorySelected">Category</label>
+
+                    <div class="col-sm-6">
+                        <autocomplete name="categorySelected" id="categorySelected" ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
+                            data="categoriesSelection" required autocomplete-required on-type="updateCategories">
+                        </autocompletediv>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-3 col-md-3 col-xs-offset-2 col-md-offset-2">
+                        <button type="submit" ng-click="save(advert)" class="btn btn-success" validate>Create</button>
+                    </div>
+                </div>
+                
+                <div class="control-group error" ng-show="errors">
+                    <div class="controls">
+                        <span class="help-inline" ng-bind="errorMessage"></span>
+                    </div>
+                </div>
+            </form>
+            
+            <div ng-show="formSubmitted">
+                <span class="glyphicon glyphicon-ok"></span>
+                <span>Thank you for submitting your listing to HanoiBox</span>
+            </div>
+        </div>
+    </div>
+    
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div><span>** Email addresses are NOT disclosed to any member of the public.</span></div>
+            <div><span>Any correspondence with interested parties goes through the HanoiBox website directly.</span></div>
+        </div>
+    </div>
+</div>

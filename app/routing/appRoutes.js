@@ -38,6 +38,10 @@ module.exports = function (router, devEnvironment) {
         var categoryId = getIdInRequest(req, res);
 		home(res);
 	});
+	
+	router.get('/listing/createlisting', (req, res) => {
+		home(res);
+	});
 
 	router.get('/sysadmin/', (req, res) => {
 		let data = { title: 'Hanoi Box Admin', dev: devEnvironment };

@@ -1,34 +1,33 @@
 import angular from 'angular';
-import advertsCacheModule from 'public/app/listingsCache';
+import listingsCacheModule from 'public/app/listingsCache';
 
-export default angular.module('advertQueryModule', [
-   advertsCacheModule.name
-]).factory('GetAdvertsFactory', function($http, advertCacheFactory) {
+export default angular.module('ListingQueryModule', [
+   listingsCacheModule.name
+]).factory('GetListingsFactory', function($http, listingCacheFactory) {
   
-  let allAdverts = (callback) => {
-    let adverts = advertCacheFactory.get();
+  let allListings = () => {
+    let adverts = listingCacheFactory.get();
     if (adverts == null || adverts.length === 0)
     {
       let url = "/api/listing/";
-      $http.get(url).then(function successCallback(response) { 
-          advertCacheFactory.put(response.data);
-          return callback(advertCacheFactory.get());
+      return $http.get(url).then(function successCallback(response) { 
+          listingCacheFactory.put(response.data.adverts);
+          return listingCacheFactory.get();
       });
-    } else {
-      return callback(advertCacheFactory.get());
     }
+    return listingCacheFactory.get();
   };
   
-  let advertsByCategoryId = (categoryId, callback) => {
+  let listingsByCategoryId = (categoryId) => {
     let url = `/api/listing/category/${categoryId}`;
-    $http.get(url).then(function successCallback(response) { 
-        advertCacheFactory.put(response.data);
-        return callback(advertCacheFactory.get());
+    return $http.get(url).then(function successCallback(response) { 
+        listingCacheFactory.put(response.data);
+        return listingCacheFactory.get();
     });
   };
   
   let byId = (id) => {
-    let adverts = advertCacheFactory.get();
+    let adverts = listingCacheFactory.get();
     if (adverts === null || adverts === undefined)
     {
         let url = `/api/listing/${id}`;
@@ -42,8 +41,8 @@ export default angular.module('advertQueryModule', [
   };
 
   return {
-    allAdverts,
-    advertsByCategoryId,
+    allListings,
+    listingsByCategoryId,
     byId
   };
 });

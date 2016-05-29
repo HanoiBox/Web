@@ -13,10 +13,13 @@ module.exports = (router) => {
 			res.json(result);
 		});
 	}).post((req, res) => {
-		advertService.saveAdvert(req.body, (error) => {
-			if (error) res.json({ status: 500, message: error });
-
-			res.json({ status: 200, message: 'Advert created!' });
+		console.log(req.body);
+		advertService.saveAdvert(req.body.data, (error) => {
+			if (error === "") {
+				res.status(200).json({ message: 'Advert created!' });
+			} else {
+				res.status(500).json({ message: error });
+			}
 		});
 	});
 

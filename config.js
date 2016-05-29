@@ -14,6 +14,7 @@ System.config({
   },
 
   map: {
+    "JustGoscha/allmighty-autocomplete": "github:JustGoscha/allmighty-autocomplete@master",
     "angular": "github:angular/bower-angular@1.5.0",
     "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@1.0.6",
     "angular-cache": "npm:angular-cache@4.5.0",
