@@ -38,6 +38,10 @@ module.exports = function (router, devEnvironment) {
 		home(res);
 	});
 
+	router.get('/listing/createlisting', function (req, res) {
+		home(res);
+	});
+
 	router.get('/sysadmin/', function (req, res) {
 		var data = { title: 'Hanoi Box Admin', dev: devEnvironment };
 		res.render('sysadmin/adminhome', data);
