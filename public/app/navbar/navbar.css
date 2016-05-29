@@ -98,3 +98,8 @@
 .btn-group:hover>.navbar-nav {
   display: block;
 }
+
+.btn-navheader {
+    margin: 2px;
+    width: 8em;
+}

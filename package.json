@@ -53,6 +53,7 @@
   },
   "jspm": {
     "dependencies": {
+      "JustGoscha/allmighty-autocomplete": "github:JustGoscha/allmighty-autocomplete@master",
       "angular": "github:angular/bower-angular@^1.4.7",
       "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@^1.0.0",
       "angular-cache": "npm:angular-cache@^4.4.3",

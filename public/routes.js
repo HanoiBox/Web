@@ -4,9 +4,13 @@ import 'angular-bootstrap-dropdownandtab';
 
 import homeControllerModule from 'public/app/routes/home/homeController';
 import homeTemplate from 'public/app/routes/home/index.html!text';
-import categoryTemplate from 'public/app/routes/category/index.html!text';
+
 import categoryControllerModule from 'public/app/routes/category/categoryController';
+import categoryTemplate from 'public/app/routes/category/index.html!text';
 // import advertTemplate from 'public/app/routes/advert/index.html!text';
+
+import createListingControllerModule from 'public/app/routes/listing/createListingController';
+import listingTemplate from 'public/app/routes/listing/create.html!text';
 
 export default angular.module('appRoutesModule', [
   'ngRoute',
@@ -15,6 +19,7 @@ export default angular.module('appRoutesModule', [
   'ui.bootstrap.collapse',
   homeControllerModule.name,
   categoryControllerModule.name,
+  createListingControllerModule.name,
   'LocalStorageModule'
 ]).config(function($routeProvider, $locationProvider, localStorageServiceProvider) {
   
@@ -28,7 +33,10 @@ export default angular.module('appRoutesModule', [
       controllerAs: 'ctrl',
       resolve: {
          allCategories: (GetCategoriesFactory) => {
-           return GetCategoriesFactory.allCats();
+            return GetCategoriesFactory.allCats();
+         },
+         allListings: (GetListingsFactory) => {
+            return GetListingsFactory.allListings();
          }
       }
   })
@@ -42,16 +50,26 @@ export default angular.module('appRoutesModule', [
          }
       }
   })
-//   .when('/advert/:id', {
-//       template: advertTemplate,
-//       controller: 'AdvertController',
-//       controllerAs: 'ctrl',
-//       resolve: {
-//          allCategories: (GetCategoriesFactory) => {
-//            return GetCategoriesFactory.allCats();
-//          }
-//       }
-//   })
+  // .when('/listing/:id', {
+  //     template: advertTemplate,
+  //     controller: 'AdvertController',
+  //     controllerAs: 'ctrl',
+  //     resolve: {
+  //        allCategories: (GetCategoriesFactory) => {
+  //          return GetCategoriesFactory.allCats();
+  //        }
+  //     }
+  // })
+  .when('/listing/createlisting', {
+      template: listingTemplate,
+      controller: 'CreateListingController',
+      controllerAs: 'ctrl',
+      resolve: {
+         allCategories: (GetCategoriesFactory) => {
+           return GetCategoriesFactory.allCats();
+         }
+      }
+  })
   .otherwise({
       redirectTo: '/'
   });

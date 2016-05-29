@@ -8,16 +8,16 @@ export default angular.module('categoryQueryModule', [
   
   let allCats = () => {
       var categories = categoriesCacheFactory.get();
-    if (categories == null || categories.length === 0)
-    {
-        let url = "/api/backend/category/";
-        return $http.get(url).then(function successCallback(response) { 
-           categoriesCacheFactory.put(response.data.categories);
-           return categoriesCacheFactory.get();
-        });
-    }
-    return categoriesCacheFactory.get();
-  }
+      if (categories == null || categories.length === 0)
+      {
+          let url = "/api/backend/category/";
+          return $http.get(url).then(function successCallback(response) { 
+              categoriesCacheFactory.put(response.data.categories);
+              return categoriesCacheFactory.get();
+          });
+      }
+      return categoriesCacheFactory.get();
+  };
   
   let byId = (id) => {
     let categories = categoriesCacheFactory.get();
@@ -31,10 +31,10 @@ export default angular.module('categoryQueryModule', [
     return new Promise(function(resolve, reject) {
         resolve({ "status": 200, data: { category } });
     });
-  }
+  };
 
   return {
     allCats,
     byId
-  }
+  };
 });

@@ -2,6 +2,7 @@
 
 var Advert = require("../models/advert").advert;
 var Category = require("../models/advert").category;
+var httpStatus = require("../httpStatus");
 
 var advertRepository = (function () {
 
@@ -20,11 +21,11 @@ var advertRepository = (function () {
 	};
 
 	var findAdverts = function findAdverts(callback) {
-		Advert.find(function (err, adverts) {
-			if (err) {
-				return callback(err);
+		Advert.find(function (error, adverts) {
+			if (error) {
+				callback({ status: httpStatus.NOT_FOUND, message: error });
 			}
-			return callback(adverts);
+			return callback({ status: httpStatus.OK, adverts: adverts });
 		});
 	};
 

@@ -4,4 +4,22 @@
     <!--This is where the adverts go
     may wnat to do a directive eventually-->
     CATEGORY specific adverts for {{category.vietDescription}} or {{category.description}}
+    
+    <div class="container">
+    <div ng-repeat="listing in allListings">
+        <!--<div class="row" >
+            <div class="col-xs-3 col-md-3">-->
+                <a href="#" class="thumbnail">
+                    <img src="..." alt="...">
+                </a>
+                <span>{{listing.created}}</span>
+                <br/>
+                <span>{{listing.information}}</span>
+                <div ng-repeat="category in listing.categories">
+                    <span>Category: {{category}}</span>
+                </div>
+            <!--</div>
+        </div>-->
+    </div>
+</div>
 </div>

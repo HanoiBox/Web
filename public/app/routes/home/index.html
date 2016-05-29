@@ -1,7 +1,21 @@
 <bootstrap-navbar></bootstrap-navbar>
 
 <div class="container">
-Here we could have a favourites bar
+    <div ng-repeat="listing in allListings">
+        <!--<div class="row" >
+            <div class="col-xs-3 col-md-3">-->
+                <a href="#" class="thumbnail">
+                    <img src="..." alt="...">
+                </a>
+                <span>{{listing.created}}</span>
+                <br/>
+                <span>{{listing.information}}</span>
+                <div ng-repeat="category in listing.categories">
+                    <span>Category: {{category}}</span>
+                </div>
+            <!--</div>
+        </div>-->
+    </div>
 </div>
 <!--<div class="container">
     <uib-tabset>
@@ -30,3 +44,6 @@ Here we could have a favourites bar
         </uib-tab>
     </uib-tabset>
 </div>-->
+
+<button ng-click="clearAdvertCache()" class="btn btn-default">Clear advert cache
+</button>

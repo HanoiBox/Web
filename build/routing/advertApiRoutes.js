@@ -1,26 +1,31 @@
 'use strict';
 
 var advertService = require("../services/advertService");
+var getAdvertsByCategoryQuery = require("../queries/advert/getAdvertsByCategoryQuery");
+
 module.exports = function (router) {
 
 	router.get('/api', function (req, res) {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
-	router.route('/api/advert/').get(function (req, res) {
+	router.route('/api/listing/').get(function (req, res) {
 		advertService.findAdverts(function (result) {
 			res.json(result);
 		});
 	}).post(function (req, res) {
-		advertService.saveAdvert(req.body, function (error) {
-			if (error) res.json({ status: 500, message: error });
-
-			res.json({ status: 200, message: 'Advert created!' });
+		console.log(req.body);
+		advertService.saveAdvert(req.body.data, function (error) {
+			if (error === "") {
+				res.status(200).json({ message: 'Advert created!' });
+			} else {
+				res.status(500).json({ message: error });
+			}
 		});
 	});
 
-	var getIdInRequest = function getIdInRequest(req, res) {
-		req.assert('advertId', 'Id param must be an integer').isInt();
+	var getIdInRequest = function getIdInRequest(name, req, res) {
+		req.assert(name, 'Id param must be an integer').isInt();
 
 		var errors = req.validationErrors();
 		if (errors) {
@@ -28,22 +33,29 @@ module.exports = function (router) {
 		}
 
 		// sanitize input
-		return req.sanitize('advertId').toInt();
+		return req.sanitize(name).toInt();
 	};
 
-	router.route('/api/advert/:advertId').get(function (req, res) {
-		var id = getIdInRequest(req, res);
+	router.route('/api/listing/:listingId').get(function (req, res) {
+		var id = getIdInRequest("listingId", req, res);
 		advertService.getAdvert(id, function (result) {
 			res.json(result);
 		});
 	}).put(function (req, res) {
 		var id = getIdInRequest(req, res);
-		advertService.updateAdvert(id, function (result) {
+		advertService.updateAdvert("listingId", id, function (result) {
 			res.json(result);
 		});
 	}).delete(function (req, res) {
 		var id = getIdInRequest(req, res);
-		advertService.deleteAdvert(id, function (result) {
+		advertService.deleteAdvert("listingId", id, function (result) {
+			res.json(result);
+		});
+	});
+
+	router.route('/api/listing/category/:categoryId').get(function (req, res) {
+		var id = getIdInRequest("categoryId", req, res);
+		getAdvertsByCategoryQuery.get(id, function (result) {
 			res.json(result);
 		});
 	});

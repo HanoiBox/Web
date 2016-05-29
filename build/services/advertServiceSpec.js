@@ -71,95 +71,103 @@ describe("When there are no categories in the advert", function () {
 	});
 });
 
-describe("When there is an invalid category sent as a string", function () {
-	beforeEach(function (done) {
-		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "findCategories").and.callFake(function (callback) {
-			return callback({ error: "", categories: [{ _id: 2 }] });
-		});
+// describe("When there is an invalid category sent as a string", () => {
+// 	beforeEach((done) => {
+// 		spyOn(advertRepository, "saveAdvert");
+// 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+// 			return callback({ error: "", categories: [ { _id : 2 } ] });
+// 		});
 
-		advertService.saveAdvert({ information: "test info", categories: "1" }, function (res) {
-			result = res;
-			done();
-		});
-	});
+// 		advertService.saveAdvert({ information : "test info", categories : "1" }, (res) => {
+// 			result = res;
+// 			done();
+// 		});
+// 	});
 
-	it("should return a not saved message", function () {
-		expect(result).toBe("This advert had some invalid categories, please check and try again");
-	});
+// 	it("should return a not saved message", () => {
+// 		expect(result).toBe("This advert had some invalid categories, please check and try again");
+// 	});
 
-	it("should call save advert", function () {
-		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
-	});
-});
+// 	it("should call save advert", () => {
+// 		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
+// 	});
+// });
 
-describe("When there are multiple categories sent but one invalid", function () {
-	beforeEach(function (done) {
-		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "findCategories").and.callFake(function (callback) {
-			return callback({
-				categories: [{ _id: 2 }] });
-		});
+// describe("When there are multiple categories sent but one invalid", () => {
+// 	beforeEach((done) => {
+// 		spyOn(advertRepository, "saveAdvert");
+// 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+// 			return callback({
+// 					categories : [
+// 						{ _id : 2 }
+// 					]});
+// 		});
 
-		advertService.saveAdvert({ information: "test info", categories: "1, 2" }, function (res) {
-			result = res;
-			done();
-		});
-	});
+// 		advertService.saveAdvert({ information : "test info", categories : "1, 2" }, (res) => {
+// 			result = res;
+// 			done();
+// 		});
+// 	});
 
-	it("should return a not saved message", function () {
-		expect(result).toBe("This advert had some invalid categories, please check and try again");
-	});
+// 	it("should return a not saved message", () => {
+// 		expect(result).toBe("This advert had some invalid categories, please check and try again");
+// 	});
 
-	it("should call save advert", function () {
-		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
-	});
-});
+// 	it("should call save advert", () => {
+// 		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
+// 	});
+// });
 
-describe("When there are multiple categories sent but two invalid", function () {
-	beforeEach(function (done) {
-		spyOn(advertRepository, "saveAdvert");
-		spyOn(categoryRepository, "findCategories").and.callFake(function (callback) {
-			return callback({
-				message: "",
-				categories: [{ _id: 2 }, { _id: 3 }] });
-		});
+// describe("When there are multiple categories sent but two invalid", () => {
+// 	beforeEach((done) => {
+// 		spyOn(advertRepository, "saveAdvert");
+// 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+// 			return callback({
+// 					message: "",
+// 					categories : [
+// 						{ _id : 2 },
+// 						{ _id : 3 }
+// 					]});
+// 		});
 
-		advertService.saveAdvert({ information: "test info", categories: "1, 2, 3, 4" }, function (res) {
-			result = res;
-			done();
-		});
-	});
+// 		advertService.saveAdvert({ information : "test info", categories : "1, 2, 3, 4" }, (res) => {
+// 			result = res;
+// 			done();
+// 		});
+// 	});
 
-	it("should return a not saved message", function () {
-		expect(result).toBe("This advert had some invalid categories, please check and try again");
-	});
+// 	it("should return a not saved message", () => {
+// 		expect(result).toBe("This advert had some invalid categories, please check and try again");
+// 	});
 
-	it("should call save advert", function () {
-		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
-	});
-});
+// 	it("should call save advert", () => {
+// 		expect(advertRepository.saveAdvert).not.toHaveBeenCalled();
+// 	});
+// });
 
-describe("When there are multiple categories sent and are valid", function () {
-	beforeEach(function (done) {
-		spyOn(advertRepository, "saveAdvert").and.returnValue(true);
-		spyOn(categoryRepository, "findCategories").and.callFake(function (callback) {
-			return callback({
-				message: "",
-				categories: [{ _id: 2 }, { _id: 3 }] });
-		});
+// describe("When there are multiple categories sent and are valid", () => {
+// 	beforeEach((done) => {
+// 		spyOn(advertRepository, "saveAdvert").and.returnValue(true);
+// 		spyOn(categoryRepository, "findCategories").and.callFake((callback) => {
+// 			return callback({
+// 					message: "",
+// 					categories : [
+// 						{ _id : 2 },
+// 						{ _id : 3 }
+// 					]});
+// 		});
 
-		advertService.saveAdvert({ information: "test info", categories: "2, 3" }, function (res) {
-			result = res;
-			done();
-		});
-	});
+// 		advertService.saveAdvert({ information : "test info", categories : "2, 3" }, (res) => {
+// 			result = res;
+// 			done();
+// 		});
+// 	});
 
-	it("should return a not saved message", function () {
-		expect(result).toBe("");
-	});
+// 	it("should return a not saved message", () => {
+// 		expect(result).toBe("");
+// 	});
 
-	it("should call save advert", function () {
-		expect(advertRepository.saveAdvert).toHaveBeenCalled();
-	});
-});
+// 	it("should call save advert", () => {
+// 		expect(advertRepository.saveAdvert).toHaveBeenCalled();
+// 	});
+// });
