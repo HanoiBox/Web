@@ -7,7 +7,7 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h4>Create a new listing on HanoiBox</h4></div>
         <div class="panel-body">
-            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted">
+            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="information">Basic information</label>
                     <div class="col-sm-6">
@@ -30,6 +30,17 @@
                         <autocomplete name="categorySelected" id="categorySelected" ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
                             data="categoriesSelection" required autocomplete-required on-type="updateCategories">
                         </autocompletediv>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <!--<input type="file" id="listingImages" name="listingImages" multiple>-->
+                        <div class="btn btn-primary btn-upload" upload-button
+                            url="/listing/upload"
+                            on-success="onSuccess(response)",
+                            on-error="onError(response)"
+                            >Upload</div>
                     </div>
                 </div>
 

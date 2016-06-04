@@ -1,4 +1,6 @@
 'use strict';
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 module.exports = function (router, devEnvironment) {
 
@@ -7,6 +9,11 @@ module.exports = function (router, devEnvironment) {
 		res.render('public/home', data);
 	};
 
+	router.post('/listing/upload', upload.any(), (req, res) => {
+		console.log(req.files);
+		
+	});
+	
 	router.get('/', (req, res) => {
 		home(res);
 	});

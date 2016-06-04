@@ -6,13 +6,15 @@ import categoryTreeCommandModule from '../../commands/category/generateCategoryT
 import lowestCategoriesCommandModule from '../../commands/category/findAllBottomLevelCategories';
 import navbarAppModule from '../../navbar/navbar';
 import autocomplete from 'JustGoscha/allmighty-autocomplete';
+import 'leon/angular-upload';
 
 export default angular.module('CreateListingControllerModule', [
     categoryQueryModule.name,
     categoryTreeCommandModule.name,
     navbarAppModule.name,
     autocomplete.name,
-    lowestCategoriesCommandModule.name
+    lowestCategoriesCommandModule.name,
+    'lr.upload'
 ]).controller('CreateListingController', function($scope, allCategories, $location, $http, GenerateCategoryTree, BottomLevelCategories) {
     
     $scope.lowestLevelCategories = BottomLevelCategories.findAll(allCategories);
@@ -25,6 +27,10 @@ export default angular.module('CreateListingControllerModule', [
     $scope.advert;
     $scope.errors = false;
     $scope.formSubmitted = false;
+    
+    $scope.onError = (res) => {
+        
+    };
     
     $scope.save = (advert) => {
         if (!$scope.createListingForm.$valid)
