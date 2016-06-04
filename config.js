@@ -32,6 +32,7 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "restangular": "github:mgonto/restangular@1.5.2",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "tinymce": "github:tinymce/tinymce-dist@4.3.12",
     "github:angular/bower-angular-mocks@1.5.0": {
       "angular": "github:angular/bower-angular@1.5.0"
     },

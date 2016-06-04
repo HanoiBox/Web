@@ -67,7 +67,8 @@
       "font-awesome": "npm:font-awesome@^4.4.0",
       "lodash": "npm:lodash@^3.10.1",
       "restangular": "github:mgonto/restangular@^1.5.1",
-      "text": "github:systemjs/plugin-text@^0.0.3"
+      "text": "github:systemjs/plugin-text@^0.0.3",
+      "tinymce": "github:tinymce/tinymce-dist@^4.3.12"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
