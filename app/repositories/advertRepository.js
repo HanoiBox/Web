@@ -3,18 +3,10 @@
 var Advert = require("../models/advert").advert;
 var Category = require("../models/advert").category;
 var httpStatus = require("../httpStatus");
-var cloudinary = require('cloudinary');
 
 var advertRepository = (function () {
 
 	var saveAdvert = function saveAdvert(advert) {
-		
-		cloudinary.config({ 
-			cloud_name: 'HNB_ListingImages', 
-			api_key: '934938854166124', 
-			api_secret: 'hVsnN3N1xjplFYNKds-3NBWILSk' 
-		});
-		
 		try {
 			var newAdvert = new Advert();
 			newAdvert.categories = advert.categories;

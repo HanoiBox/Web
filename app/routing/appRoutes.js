@@ -1,6 +1,7 @@
 'use strict';
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var listingService = require('../services/advertService');
 
 module.exports = function (router, devEnvironment) {
 
@@ -9,9 +10,16 @@ module.exports = function (router, devEnvironment) {
 		res.render('public/home', data);
 	};
 
-	router.post('/listing/upload', upload.any(), (req, res) => {
-		console.log(req.files);
-		
+	router.post('/listing/upload', upload.single("file"), (req, res) => {
+		console.log(req.file);
+		res.setHeader('Content-Type', 'application/json');
+		listingService.uploadAdvert(req.file).then((result) => {
+			console.log("uploaded ok");
+			res.send(JSON.stringify(result));
+		}).catch((reason) => {
+			console.log("no cigar", reason);
+			res.send(JSON.stringify({ error: { message: reason } }));
+		});
 	});
 	
 	router.get('/', (req, res) => {

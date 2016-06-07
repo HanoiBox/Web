@@ -13,21 +13,19 @@ module.exports = (router) => {
 			res.json(result);
 		});
 	}).post((req, res) => {
-		console.log(req);
-		console.log(req.files);
-		// advertService.saveAdvert(req.body.data, (error) => {
-		// 	if (error === "") {
-		// 		res.status(200).json({ message: 'Advert created!' });
-		// 	} else {
-		// 		res.status(500).json({ message: error });
-		// 	}
-		// });
+		advertService.saveAdvert(req.body.data, (error) => {
+			if (error === "") {
+				res.status(200).json({ message: 'Advert created!' });
+			} else {
+				res.status(500).json({ message: error });
+			}
+		});
 	});
 	
-	router.route('api/listing/upload/').post((req, res) => {
-		console.log(req.files);
+	// router.route('api/listing/upload/').post((req, res) => {
+	// 	console.log(req.files);
 		
-	});
+	// });
 
 	let getIdInRequest = (name, req, res) => {
 		req.assert(name, 'Id param must be an integer').isInt();
