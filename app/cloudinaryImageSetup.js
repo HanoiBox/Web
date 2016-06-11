@@ -5,7 +5,7 @@ module.exports = {
         
         //TODO: setup env variables e.g. envVariables.imagecloudname imageapikey imageapisecret
         cloudinary.config({ 
-                cloud_name: 'HNB_ListingImages', 
+                cloud_name: 'dl3aaixqa', 
                 api_key: '934938854166124', 
                 api_secret: 'hVsnN3N1xjplFYNKds-3NBWILSk' 
             });

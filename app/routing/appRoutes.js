@@ -2,6 +2,7 @@
 var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
 var listingService = require('../services/advertService');
+var deleteImageOnFileCommand = require('../commands/listing/deleteImageOnFileCommand');
 
 module.exports = function (router, devEnvironment) {
 
@@ -15,7 +16,18 @@ module.exports = function (router, devEnvironment) {
 		res.setHeader('Content-Type', 'application/json');
 		listingService.uploadAdvert(req.file).then((result) => {
 			console.log("uploaded ok");
-			res.send(JSON.stringify(result));
+
+			deleteImageOnFileCommand.deleteImage(result.originalPath).then((deletionResult) => {
+				if (deletionResult.success){
+					console.log(`deleted ${result.originalPath} ok`);
+					res.send(JSON.stringify(result));
+				} else {
+					res.send(JSON.stringify(deletionResult.error));
+				}
+			}).catch((deleteFailReason) => {
+				res.send(JSON.stringify(deleteFailReason));
+			});
+			
 		}).catch((reason) => {
 			console.log("no cigar", reason);
 			res.send(JSON.stringify({ error: { message: reason } }));

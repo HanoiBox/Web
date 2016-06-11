@@ -27,9 +27,33 @@ export default angular.module('CreateListingControllerModule', [
     $scope.advert;
     $scope.errors = false;
     $scope.formSubmitted = false;
-    
-    $scope.onError = (res) => {
-        
+    $scope.image1IsAvailable = false;
+
+    $scope.onUploadSuccess = (response) => {
+        let res = response.data;
+        if (res.success)
+        {
+            $scope.image1Name = res.name;
+            $scope.image1Url = res.url.replace('upload', 'upload/w_100');
+            $scope.image1IsAvailable = true;
+        } else {
+            $scope.image1IsAvailable = false;
+            alert("Unable to upload, please try again or if it persists, report this problem to support.");
+        }
+    };
+
+    $scope.onUploadSuccessImage2 = (response) => {
+        let res = response.data;
+        if (res.success)
+        {
+            $scope.image2Name = res.name;
+            $scope.image2Url = res.url.replace('upload', 'upload/w_100');
+            $scope.image2IsAvailable = true;
+            //this.CheckAndDisableUploads();
+        } else {
+            $scope.image2IsAvailable = false;
+            alert("Unable to upload, please try again or if it persists, report this problem to support.");
+        }
     };
     
     $scope.save = (advert) => {

@@ -5,12 +5,12 @@ let uploadImageCommand = function () {
 
     let cloudinaryPromise = (imageData) => {
         return new Promise((resolve, reject) => {
-            cloudinary.uploader.upload(imageData.filename, function(result) {
+            cloudinary.uploader.upload(imageData.path, function(result) {
                 if (result.error !== undefined)
                 {
                     reject({ success: false, error: result.error });
                 }
-                resolve({ success: true, url: result.secure_url });
+                resolve({ success: true, url: result.secure_url, originalPath: imageData.path, name: `${result.original_filename}.${result.format}` });
             });
         });
     }

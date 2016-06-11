@@ -52,7 +52,8 @@ describe("When the file is uploaded", () => {
             originalname: 'Me1.jpg',
             mimetype: 'image/jpeg',
             destination: 'uploads/',
-            filename: '761676199e4fd75ebcf0ada7b7cf75ac'
+            filename: '761676199e4fd75ebcf0ada7b7cf75ac',
+            path: 'uploads\\6e0bfe1d8753add579a563e723c0ad96'
         }
 
         spyOn(cloudinary.uploader, "upload").and.callFake(function(id, callback) {
