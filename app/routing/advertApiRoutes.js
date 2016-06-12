@@ -22,11 +22,6 @@ module.exports = (router) => {
 		});
 	});
 	
-	// router.route('api/listing/upload/').post((req, res) => {
-	// 	console.log(req.files);
-		
-	// });
-
 	let getIdInRequest = (name, req, res) => {
 		req.assert(name, 'Id param must be an integer').isInt();
 

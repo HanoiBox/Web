@@ -4,15 +4,16 @@ import LocalStorageModule from 'angular-local-storage';
 export default angular.module('listingCacheModule', [
    'LocalStorageModule'
 ]).factory('listingCacheFactory', function(localStorageService) {
-    let categoriesCacheName = "adverts";
+    let listingsCacheName = "adverts";
         
     return {
-        put: (categories) => {
-            localStorageService.set(categoriesCacheName, categories);
+        put: (listings) => {
+            localStorageService.set(listingsCacheName, listings);
         },
         get: () => {
-            let categories = localStorageService.get(categoriesCacheName);
-            return categories;
+            let listings = localStorageService.get(listingsCacheName);
+
+            return listings;
         },
         removeAll: () => {
             localStorageService.clearAll();

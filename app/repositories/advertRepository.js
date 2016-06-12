@@ -11,6 +11,8 @@ var advertRepository = (function () {
 			var newAdvert = new Advert();
 			newAdvert.categories = advert.categories;
 			newAdvert.information = advert.information;
+			newAdvert.image1 = advert.image1;
+			newAdvert.image2 = advert.image2;
             newAdvert.parentCategoryId = advert.parentCategoryId;
 			newAdvert.save();
 			return true;

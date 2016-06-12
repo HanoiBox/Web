@@ -7,7 +7,9 @@ var autoIncrement = require('mongoose-auto-increment');
 var advertSchema = new Schema({
 	information: String,
 	categories: [{ type: Number, ref: 'Category' }],
-	created: { type: Date, default: Date.now }
+	created: { type: Date, default: Date.now },
+	image1: String,
+	image2: String
 });
 
 advertSchema.plugin(autoIncrement.plugin, 'Advert');

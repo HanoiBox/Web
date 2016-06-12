@@ -6,12 +6,11 @@ module.exports = {
         return new Promise((resolve, reject) => {
             fs.unlink(path, (err) => {
                 if (err) {
-                reject({ 
-                    success: false, 
-                    error: err 
+                    reject({ 
+                        success: false, 
+                        error: err 
                     });  
-                } 
-                console.log('successfully deleted ' + path);
+                }
                 resolve({ 
                     success: true 
                 });

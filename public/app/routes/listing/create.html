@@ -50,10 +50,10 @@
                             >Upload Second Image</div>
                     </div>
                     <div class="col-sm-2" ng-show="image1IsAvailable">
-                        <img ng-if="image1IsAvailable" alt="{{image1Name}}" title="primary Image" ng-src="{{image1Url}}" />
+                        <img ng-if="image1IsAvailable" alt="{{image1Name}}" title="primary Image" ng-src="{{image1Url}}" ng-model="advert.image1" />
                     </div>
                     <div class="col-sm-2" ng-show="image2IsAvailable">
-                        <img ng-if="image2IsAvailable" alt="{{image2Name}}" title="secondary Image" ng-src="{{image2Url}}" />
+                        <img ng-if="image2IsAvailable" alt="{{image2Name}}" title="secondary Image" ng-src="{{image2Url}}" ng-model="advert.image2" />
                     </div>
                 </div>
 

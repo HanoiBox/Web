@@ -1,5 +1,5 @@
 import angular from 'angular';
-import listingsCacheModule from 'public/app/listingsCache';
+import listingsCacheModule from '../../listingsCache';
 
 export default angular.module('clearCacheCommandModule', [
     listingsCacheModule.name

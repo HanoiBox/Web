@@ -12,14 +12,11 @@ module.exports = function (router, devEnvironment) {
 	};
 
 	router.post('/listing/upload', upload.single("file"), (req, res) => {
-		console.log(req.file);
 		res.setHeader('Content-Type', 'application/json');
 		listingService.uploadAdvert(req.file).then((result) => {
-			console.log("uploaded ok");
-
 			deleteImageOnFileCommand.deleteImage(result.originalPath).then((deletionResult) => {
 				if (deletionResult.success){
-					console.log(`deleted ${result.originalPath} ok`);
+					//console.log(`deleted ${result.originalPath} ok`);
 					res.send(JSON.stringify(result));
 				} else {
 					res.send(JSON.stringify(deletionResult.error));
@@ -29,7 +26,7 @@ module.exports = function (router, devEnvironment) {
 			});
 			
 		}).catch((reason) => {
-			console.log("no cigar", reason);
+			//console.log("no cigar", reason);
 			res.send(JSON.stringify({ error: { message: reason } }));
 		});
 	});
