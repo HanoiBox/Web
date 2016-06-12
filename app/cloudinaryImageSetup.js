@@ -1,13 +1,21 @@
 var cloudinary = require('cloudinary');
 
 module.exports = { 
-    setup: function(envVariables) {
+    setup: function(envVariables, dev) {
         
-        //TODO: setup env variables e.g. envVariables.imagecloudname imageapikey imageapisecret
-        cloudinary.config({ 
-                cloud_name: 'dl3aaixqa', 
-                api_key: '934938854166124', 
-                api_secret: 'hVsnN3N1xjplFYNKds-3NBWILSk' 
+        if (dev) {
+            // use test account
+            cloudinary.config({ 
+                cloud_name: 'dfq0ukg7d',
+                api_key: '714147532926127', 
+                api_secret: 'C4zBSWC9fwQqMik91no3LZEJMiY' 
             });
+        } else {
+            cloudinary.config({ 
+                cloud_name: envVariables.cloudinaryname, 
+                api_key: envVariables.cloudinaryapikey, 
+                api_secret: envVariables.cloudinaryapisecret 
+            });
+        }
     }    
 }
