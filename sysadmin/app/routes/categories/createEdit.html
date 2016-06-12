@@ -54,6 +54,18 @@
                         </select>
 					</div>
 				</div>
+
+				<div class="">
+					<div class="col-sm-2">
+						<label>Introduction: </label>
+					</div>
+					<div class="col-sm-2">
+						<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+						<button ng-click="getContent()">Get content</button>
+						<button ng-click="setContent()">Set content</button>
+					</div>
+				</div>
+
 				<button type="submit" ng-click="save(category)" class="btn btn-success">Save</button>
                 
                 <div class="control-group error" ng-show="errors">

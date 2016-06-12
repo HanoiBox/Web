@@ -22,6 +22,7 @@ System.config({
     "angular-local-storage": "npm:angular-local-storage@0.2.6",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.0",
     "angular-route": "github:angular/bower-angular-route@1.5.0",
+    "angular-ui/ui-tinymce": "github:angular-ui/ui-tinymce@0.0.16",
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "bootstrap-css-only": "npm:bootstrap-css-only@3.3.6",

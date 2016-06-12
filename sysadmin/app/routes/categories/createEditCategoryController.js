@@ -3,16 +3,33 @@ import 'angular-route';
 
 import categoryCommandModule from 'sysadmin/app/commands/category/saveCategory';
 import categoryQueryModule from 'sysadmin/app/queries/category/getCategories';
+import 'angular-ui/ui-tinymce';
+import 'tinymce';
 
 export default angular.module('createEditCategoryControllerModule', [
   'ngRoute',
   categoryCommandModule.name,
-  categoryQueryModule.name
+  categoryQueryModule.name,
+  'ui.tinymce'
 ]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
     this.id = null;
     $scope.errors = false;
     $scope.data = { categories: allCategories };
     
+    $scope.tinymceModel = 'Initial content';
+    $scope.getContent = function() {
+        console.log('Editor content:', $scope.tinymceModel);
+    };
+
+    $scope.setContent = function() {
+        $scope.tinymceModel = 'Time: ' + (new Date());
+    };
+
+    $scope.tinymceOptions = {
+        plugins: 'link image code',
+        toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+    };
+
     if ($routeParams.id !== undefined)
     {
         this.id = $routeParams.id.replace(':', '');
