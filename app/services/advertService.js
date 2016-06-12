@@ -1,6 +1,7 @@
 "use strict";
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
+var uploadImageCommand = require("../commands/listing/uploadImageToCloudinaryCommand");
 require('babel-polyfill');
 
 var advertService = (function () {
@@ -63,12 +64,17 @@ var advertService = (function () {
 		});
 	};
 
+	let uploadAdvert = (fileData) => {
+		return uploadImageCommand.upload(fileData);
+	};
+
 	return {
 		saveAdvert: saveAdvert,
 		findAdverts: findAdverts,
 		getAdvert: getAdvert,
 		deleteAdvert: deleteAdvert,
-		updateAdvert: updateAdvert
+		updateAdvert: updateAdvert,
+		uploadAdvert: uploadAdvert
 	};
 
 	function isEmpty(obj) {

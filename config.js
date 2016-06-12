@@ -29,6 +29,7 @@ System.config({
     "css": "github:systemjs/plugin-css@0.1.20",
     "es6-module-loader": "npm:es6-module-loader@0.17.11",
     "font-awesome": "npm:font-awesome@4.5.0",
+    "leon/angular-upload": "github:leon/angular-upload@1.0.12",
     "lodash": "npm:lodash@3.10.1",
     "restangular": "github:mgonto/restangular@1.5.2",
     "text": "github:systemjs/plugin-text@0.0.3",

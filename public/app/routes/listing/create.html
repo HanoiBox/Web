@@ -7,7 +7,7 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h4>Create a new listing on HanoiBox</h4></div>
         <div class="panel-body">
-            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted">
+            <form name="createListingForm" class="form-horizontal form-width" ng-hide="formSubmitted" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="information">Basic information</label>
                     <div class="col-sm-6">
@@ -30,6 +30,30 @@
                         <autocomplete name="categorySelected" id="categorySelected" ng-model="advert.categorySelected" attr-placeholder="Start typing..." 
                             data="categoriesSelection" required autocomplete-required on-type="updateCategories">
                         </autocompletediv>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="upload">Images</label>
+                    <div class="col-sm-2" ng-show="!image1IsAvailable">
+                        <div id="upload" class="btn btn-primary btn-upload" upload-button
+                            url="/listing/upload"
+                            on-success="onUploadSuccess(response)",
+                            on-error="onError(response)"
+                            >Upload Primary Image</div>
+                    </div>
+                    <div class="col-sm-2" ng-show="image1IsAvailable && !image2IsAvailable">
+                        <div id="upload2" class="btn btn-primary btn-upload" upload-button
+                            url="/listing/upload"
+                            on-success="onUploadSuccessImage2(response)",
+                            on-error="onError(response)"
+                            >Upload Second Image</div>
+                    </div>
+                    <div class="col-sm-2" ng-show="image1IsAvailable">
+                        <img ng-if="image1IsAvailable" alt="{{image1Name}}" title="primary Image" ng-src="{{image1Url}}" ng-model="advert.image1" />
+                    </div>
+                    <div class="col-sm-2" ng-show="image2IsAvailable">
+                        <img ng-if="image2IsAvailable" alt="{{image2Name}}" title="secondary Image" ng-src="{{image2Url}}" ng-model="advert.image2" />
                     </div>
                 </div>
 
