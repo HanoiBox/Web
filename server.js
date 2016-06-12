@@ -16,6 +16,9 @@ if (dev)
 }
 db.connect(dev, process.env);
 
+var cloudinaryImageSetup = require('./app/cloudinaryImageSetup');
+cloudinaryImageSetup.setup(process.env);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(validator());
@@ -51,6 +54,8 @@ app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
 app.use('/uib/template', express.static(__dirname + '/public/template'));
 app.use('/public/images', express.static(__dirname + '/public/images'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 var favicon = require('serve-favicon');
 app.use(favicon(__dirname + '/public/images/favicon.ico'));
 
