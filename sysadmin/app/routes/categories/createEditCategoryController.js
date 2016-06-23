@@ -11,7 +11,10 @@ export default angular.module('createEditCategoryControllerModule', [
   categoryCommandModule.name,
   categoryQueryModule.name,
   'ui.tinymce'
-]).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
+]).config(function() {
+    tinyMCE.baseURL = '/jspm_packages/github/tinymce/tinymce-dist@4.3.12';
+    tinyMCE.suffix = '.min';
+}).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
     this.id = null;
     $scope.errors = false;
     $scope.data = { categories: allCategories };
