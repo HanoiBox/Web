@@ -13,11 +13,12 @@ let categoryCommand = function () {
     
     let updateCategory = (id, categoryData, callback) => {
         let validationResult = categoryValidation.validate(categoryData);
+        
 		if (validationResult !== null) {
 			return callback(validationResult);
 		}
         categoryData = dataCleaner.cleanseCategory(categoryData);
-
+        
 		let getCategoryPromise = new Promise((resolve, reject) => {
 			categoryRepository.getCategory(id, (result) => {
 				if (result.status !== httpStatus.OK) {
@@ -28,8 +29,9 @@ let categoryCommand = function () {
 		});
 
 		getCategoryPromise.then((category) => {
+            
             if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
-                
+                console.log("doing parent cat stuff ");
                 let getParentCategoryPromise = new Promise((resolve, reject) => {
                     categoryRepository.getCategory(categoryData.parentCategoryId, (result) => {
                         if (result.status !== httpStatus.OK) {
@@ -55,6 +57,7 @@ let categoryCommand = function () {
                 });
             }
 		}).catch((failureReasonObject) => {
+            console.debug("soemthing went wrong" + failureReasonObject);
 			return callback(failureReasonObject);
 		});
     }

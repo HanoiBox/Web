@@ -17,19 +17,18 @@ export default angular.module('createEditCategoryControllerModule', [
   'ui.tinymce'
 ]).config(function() {
     tinyMCE.baseURL = '/sysadmin/app/tinymce';
-    //tinyMCE.suffix = '.min';
 }).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
     this.id = null;
     $scope.errors = false;
     $scope.data = { categories: allCategories };
     
-    $scope.tinymceModel = 'Initial content';
+    $scope.tinymceModel = '<div style="display: none;">Introduction invidible div tag - delete me!</div>';
     $scope.getContent = function() {
         console.log('Editor content:', $scope.tinymceModel);
     };
 
-    $scope.setContent = function() {
-        $scope.tinymceModel = 'Time: ' + (new Date());
+    this.setContent = function(introductionText) {
+        $scope.category.introduction = introductionText;
     };
 
     $scope.tinymceOptions = {
@@ -49,6 +48,9 @@ export default angular.module('createEditCategoryControllerModule', [
             if (response.status === 200) {
                 let category = response.data.category;
                 $scope.category = category;
+                if (category.introduction !== undefined) {
+                    this.setContent(category.introduction);
+                } 
             } else {
                 // failure msg
             }
