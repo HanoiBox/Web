@@ -5,6 +5,10 @@ import categoryCommandModule from 'sysadmin/app/commands/category/saveCategory';
 import categoryQueryModule from 'sysadmin/app/queries/category/getCategories';
 import 'angular-ui/ui-tinymce';
 import 'tinymce';
+import '../../tinymce/themes/modern/theme';
+import '../../tinymce/plugins/code/plugin';
+import '../../tinymce/plugins/image/plugin';
+import '../../tinymce/plugins/link/plugin';
 
 export default angular.module('createEditCategoryControllerModule', [
   'ngRoute',
@@ -12,8 +16,8 @@ export default angular.module('createEditCategoryControllerModule', [
   categoryQueryModule.name,
   'ui.tinymce'
 ]).config(function() {
-    tinyMCE.baseURL = '/jspm_packages/github/tinymce/tinymce-dist@4.3.12';
-    tinyMCE.suffix = '.min';
+    tinyMCE.baseURL = '/sysadmin/app/tinymce';
+    //tinyMCE.suffix = '.min';
 }).controller('CreateEditCategoryController', function($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
     this.id = null;
     $scope.errors = false;

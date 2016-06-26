@@ -14,7 +14,6 @@
   },
   "description": "HanoiBox Project",
   "dependencies": {
-    "array.prototype.find": "^1.0.0",
     "babel": "^6.1.18",
     "babel-core": "^6.1.4",
     "babel-polyfill": "^6.2.0",
@@ -39,6 +38,8 @@
     "babel-preset-es2015": "^6.1.18",
     "gulp-autoprefixer": "^2.2.0",
     "gulp-eslint": "^1.0.0",
+    "gulp-jspm": "^0.5.10",
+    "gulp-replace": "^0.5.4",
     "jasmine-core": "^2.3.4",
     "jspm": "^0.16.13",
     "karma-chrome-launcher": "^0.2.1",
@@ -50,14 +51,15 @@
     "mock-require": "latest",
     "phantomjs": "^1.9.19",
     "phantomjs-prebuilt": "^2.1.7",
-    "requirejs": "^2.1.22"
+    "requirejs": "^2.1.22",
+    "tinymce": "^4.3.13"
   },
   "jspm": {
     "dependencies": {
       "JustGoscha/allmighty-autocomplete": "github:JustGoscha/allmighty-autocomplete@master",
-      "angular": "github:angular/bower-angular@^1.4.7",
+      "angular": "github:angular/bower-angular@^1.5.7",
       "angular-bootstrap-dropdownandtab": "npm:angular-bootstrap-dropdownandtab@^1.0.0",
-      "angular-cache": "npm:angular-cache@^4.4.3",
+      "angular-cache": "npm:angular-cache@^4.6.0",
       "angular-loading-bar": "npm:angular-loading-bar@^0.9.0",
       "angular-local-storage": "npm:angular-local-storage@^0.2.2",
       "angular-mocks": "github:angular/bower-angular-mocks@^1.4.8",
@@ -69,7 +71,6 @@
       "font-awesome": "npm:font-awesome@^4.4.0",
       "leon/angular-upload": "github:leon/angular-upload@^1.0.12",
       "lodash": "npm:lodash@^3.10.1",
-      "restangular": "github:mgonto/restangular@^1.5.1",
       "text": "github:systemjs/plugin-text@^0.0.3",
       "tinymce": "github:tinymce/tinymce-dist@^4.3.12"
     },

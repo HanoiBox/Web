@@ -1,5 +1,5 @@
 'use strict';
-require('array.prototype.find');
+require('babel-polyfill');
 let categoryRepository = require("../../repositories/categoryRepository");
 
 var categoriesQuery = function () {
