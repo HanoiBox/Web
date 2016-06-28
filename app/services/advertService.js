@@ -2,7 +2,6 @@
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
 var uploadImageCommand = require("../commands/listing/uploadImageToCloudinaryCommand");
-require('babel-polyfill');
 
 var advertService = (function () {
 

@@ -22,8 +22,10 @@ System.config({
     "angular-local-storage": "npm:angular-local-storage@0.2.7",
     "angular-mocks": "github:angular/bower-angular-mocks@1.5.7",
     "angular-route": "github:angular/bower-angular-route@1.5.7",
+    "angular-sanitize": "npm:angular-sanitize@1.5.7",
     "angular-ui/ui-tinymce": "github:angular-ui/ui-tinymce@0.0.16",
     "babel": "npm:babel-core@5.8.38",
+    "babel-polyfill": "npm:babel-polyfill@6.9.1",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "bootstrap-css-only": "npm:bootstrap-css-only@3.3.6",
     "core-js": "npm:core-js@1.2.6",
@@ -67,8 +69,18 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "util": "npm:util@0.10.3"
     },
+    "npm:babel-polyfill@6.9.1": {
+      "babel-runtime": "npm:babel-runtime@6.9.2",
+      "core-js": "npm:core-js@2.4.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "regenerator-runtime": "npm:regenerator-runtime@0.9.5"
+    },
     "npm:babel-runtime@5.8.38": {
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:babel-runtime@6.9.2": {
+      "core-js": "npm:core-js@2.4.0",
+      "regenerator-runtime": "npm:regenerator-runtime@0.9.5"
     },
     "npm:buffer@3.6.0": {
       "base64-js": "npm:base64-js@0.0.8",
@@ -79,6 +91,12 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:core-js@1.2.6": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
+    },
+    "npm:core-js@2.4.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -107,6 +125,10 @@ System.config({
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
+    },
+    "npm:regenerator-runtime@0.9.5": {
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
