@@ -31,7 +31,6 @@ let categoryCommand = function () {
 		getCategoryPromise.then((category) => {
             
             if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
-                console.log("doing parent cat stuff ");
                 let getParentCategoryPromise = new Promise((resolve, reject) => {
                     categoryRepository.getCategory(categoryData.parentCategoryId, (result) => {
                         if (result.status !== httpStatus.OK) {
@@ -57,7 +56,6 @@ let categoryCommand = function () {
                 });
             }
 		}).catch((failureReasonObject) => {
-            console.debug("soemthing went wrong" + failureReasonObject);
 			return callback(failureReasonObject);
 		});
     }

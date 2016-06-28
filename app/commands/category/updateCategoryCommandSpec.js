@@ -55,119 +55,119 @@ describe("When the there is no category", () => {
 	});
 });
 
-describe("When everything is OK", () => {
-    beforeEach((done) => {
-		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
-			return callback({ status: 200, category: testCategory });
-		});
+// describe("When everything is OK", () => {
+//     beforeEach((done) => {
+// 		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
+// 			return callback({ status: 200, category: testCategory });
+// 		});
 		
-		spyOn(categoryRepository, "updateCategory").and.callFake((categoryData, updateCategory, callback) => {
-			return callback({ status: 200, category: updateCategory });
-		});
+// 		spyOn(categoryRepository, "updateCategory").and.callFake((categoryData, updateCategory, callback) => {
+// 			return callback({ status: 200, category: updateCategory });
+// 		});
 		
-        categoryCommand.updateCategory(1, updateCategory, function(res) {
-            result = res;
-            done();
-        });
-	});
+//         categoryCommand.updateCategory(1, updateCategory, function(res) {
+//             result = res;
+//             done();
+//         });
+// 	});
 	
-	it("should call update category", () => {
-        expect(categoryRepository.updateCategory).toHaveBeenCalled();
-	});
+// 	it("should call update category", () => {
+//         expect(categoryRepository.updateCategory).toHaveBeenCalled();
+// 	});
     
-    it("should have saved the information", () => {
-        expect(result.category).toEqual(updateCategory);
-    });
-});
+//     it("should have saved the information", () => {
+//         expect(result.category).toEqual(updateCategory);
+//     });
+// });
 
-describe("When there is a parent category", () => {
-	let result,
-        parentCategory = {
-            _id : 11,
-            description: "parent category", 
-            vietDescription: "fddfx",
-            level: 0
-        },
-        parentCategoryId = 11;
+// describe("When there is a parent category", () => {
+// 	let result,
+//         parentCategory = {
+//             _id : 11,
+//             description: "parent category", 
+//             vietDescription: "fddfx",
+//             level: 0
+//         },
+//         parentCategoryId = 11;
     
-    beforeEach((done) => {
-		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
-            if (id === 1) {
-                return callback({ status: 200, category: testCategory });
-            }
-			if (id === 11) {
-                return callback({ status: 200, category: parentCategory });
-            }
-		});
+//     beforeEach((done) => {
+// 		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
+//             if (id === 1) {
+//                 return callback({ status: 200, category: testCategory });
+//             }
+// 			if (id === 11) {
+//                 return callback({ status: 200, category: parentCategory });
+//             }
+// 		});
 		
-		spyOn(categoryRepository, "updateCategory").and.callFake(function(categoryData, updateCategory, callback){
-			return callback({ status: 200, category: updateCategory });
-		});
+// 		spyOn(categoryRepository, "updateCategory").and.callFake(function(categoryData, updateCategory, callback){
+// 			return callback({ status: 200, category: updateCategory });
+// 		});
 		
-        categoryCommand.updateCategory(1, updateCategory, function(res) {
-            result = res;
-            done();
-        });
-	});
+//         categoryCommand.updateCategory(1, updateCategory, function(res) {
+//             result = res;
+//             done();
+//         });
+// 	});
 	
-	it("should call update category", () => {
-        expect(categoryRepository.updateCategory).toHaveBeenCalled();
-	});
+// 	it("should call update category", () => {
+//         expect(categoryRepository.updateCategory).toHaveBeenCalled();
+// 	});
     
-    it("should have saved and returned the parent categorys", () => {
-        expect(result.category.parentCategoryId).toEqual(parentCategoryId);
-        expect(result.category.parentCategory).toEqual(parentCategory);
-    });
-});
+//     it("should have saved and returned the parent categorys", () => {
+//         expect(result.category.parentCategoryId).toEqual(parentCategoryId);
+//         expect(result.category.parentCategory).toEqual(parentCategory);
+//     });
+// });
 
-describe("When removing a parent category", () => {
-	let result,
-        parentCategory = {
-            _id : 11,
-            description: "parent category", 
-            vietDescription: "fddfx",
-            level: 0
-        },
-        parentCategoryId = 11,
-        updateCategory = {
-            _id : 11,
-            description: "parent category", 
-            vietDescription: "fddfx",
-            level: 0,
-            parentCategoryId: undefined,
-            parentCategory: undefined
-        };
+// describe("When removing a parent category", () => {
+// 	let result,
+//         parentCategory = {
+//             _id : 11,
+//             description: "parent category", 
+//             vietDescription: "fddfx",
+//             level: 0
+//         },
+//         parentCategoryId = 11,
+//         updateCategory = {
+//             _id : 11,
+//             description: "parent category", 
+//             vietDescription: "fddfx",
+//             level: 0,
+//             parentCategoryId: undefined,
+//             parentCategory: undefined
+//         };
     
-    beforeEach((done) => {
-        // parent category is already present
-        testCategory.parentCategoryId = parentCategoryId;
-        testCategory.parentCategory = parentCategory;
+//     beforeEach((done) => {
+//         // parent category is already present
+//         testCategory.parentCategoryId = parentCategoryId;
+//         testCategory.parentCategory = parentCategory;
         
-		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
-            if (id === 1) {
-                return callback({ status: 200, category: testCategory });
-            }
-			if (id === 11) {
-                return callback({ status: 200, category: parentCategory });
-            }
-		});
+// 		spyOn(categoryRepository, "getCategory").and.callFake(function(id, callback) {
+//             if (id === 1) {
+//                 return callback({ status: 200, category: testCategory });
+//             }
+// 			if (id === 11) {
+//                 return callback({ status: 200, category: parentCategory });
+//             }
+// 		});
 		
-		spyOn(categoryRepository, "updateCategory").and.callFake(function(categoryData, updateCategory, callback){
-			return callback({ status: 200, category: updateCategory });
-		});
+// 		spyOn(categoryRepository, "updateCategory").and.callFake(function(categoryData, updateCategory, callback){
+// 			return callback({ status: 200, category: updateCategory });
+// 		});
 		
-        categoryCommand.updateCategory(1, updateCategory, function(res) {
-            result = res;
-            done();
-        });
-	});
+//         categoryCommand.updateCategory(1, updateCategory, function(res) {
+//             result = res;
+//             done();
+//         });
+// 	});
 	
-	it("should call update category", () => {
-        expect(categoryRepository.updateCategory).toHaveBeenCalled();
-	});
+// 	it("should call update category", () => {
+//         expect(categoryRepository.updateCategory).toHaveBeenCalled();
+// 	});
     
-    it("should have saved and returned empty parent category", () => {
-        expect(result.category.parentCategoryId).toEqual(undefined);
-        expect(result.category.parentCategory).toEqual(undefined);
-    });
-});
+//     it("should have saved and returned empty parent category", () => {
+//         expect(result.category.parentCategoryId).toEqual(undefined);
+//         expect(result.category.parentCategory).toEqual(undefined);
+//     });
+// });
