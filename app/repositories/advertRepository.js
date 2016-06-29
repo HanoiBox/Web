@@ -27,7 +27,7 @@ var advertRepository = (function () {
 			if (error) {
                 callback({ status: httpStatus.NOT_FOUND, message: error });
             }
-			return callback({ status: httpStatus.OK, adverts: adverts });
+			return callback({ status: httpStatus.OK, listings: adverts });
 		});
 	};
 
@@ -39,7 +39,7 @@ var advertRepository = (function () {
 			if (advert == null || advert._id !== id) {
 				return callback({ status: 404, message: "Unable to find advert: " + id });
 			}
-			return callback({ advert: advert, message: "" });
+			return callback({ listing: advert, message: "" });
 		});
 	};
 

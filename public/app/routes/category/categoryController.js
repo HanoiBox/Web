@@ -31,7 +31,7 @@ export default angular.module("CategoryControllerModule", [
     });
     
     GetListingsFactory.listingsByCategoryId($scope.currentCategoryId).then((listings) => {
-        $scope.allListings = listings.adverts;
+        $scope.allListings = listings;
     });
 
     $scope.clearCache = () => {
