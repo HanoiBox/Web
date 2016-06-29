@@ -3,8 +3,15 @@
 <div class="container">
     <!--This is where the adverts go
     may wnat to do a directive eventually-->
+
+    <div ng-bind-html="category.introduction"></div>
+
     CATEGORY specific adverts for {{category.vietDescription}} or {{category.description}}
-    
+
+    <div>
+        <input type="button" class="btn btn-default " ng-click="clearCache()" value="Clear Category Cache" />
+    </div>
+
     <div class="container">
     <div ng-repeat="listing in allListings">
         <!--<div class="row" >

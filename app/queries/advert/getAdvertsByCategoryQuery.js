@@ -8,7 +8,7 @@ var getAdvertsByCategoryQuery = (function () {
         get: (categoryId, callback) => {
             advertRepository.findAdverts((result) => {
                 if (categoryId !== undefined && categoryId !== null) {
-                    result.adverts = result.adverts.filter(advert => 
+                    result.listings = result.listings.filter(advert => 
                         advert.categories !== null &&
                         advert.categories !== undefined && 
                         advert.categories.includes(categoryId));

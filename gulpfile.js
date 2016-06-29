@@ -3,9 +3,16 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
     eslint = require("gulp-eslint"),
-    minifyCSS = require("gulp-minify-css");
+    minifyCSS = require("gulp-minify-css"),
+    gulp_jspm = require('gulp-jspm')
+    replace = require('gulp-jspm');
     
-
+gulp.task("sysadmin", function() {
+    gulp.src("sysadmin/main.js")
+        .pipe(gulp_jspm({verbose: false, selfExecutingBundle: true}))
+        .pipe(rename("build.js"))
+        .pipe(gulp.dest("sysadmin/dist"));
+});
     
 gulp.task("css", function() {
     gulp.src(["jspm_packages/npm/bootstrap-css-only@3.3.6/css/bootstrap.css",

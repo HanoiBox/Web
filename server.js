@@ -45,11 +45,13 @@ if (dev) {
 	app.use('/sysadmin', express.static(__dirname + '/sysadmin'));
     app.use('/public', express.static(__dirname + '/public'));
 	app.use('/jspm_packages', express.static(__dirname + '/jspm_packages'));
+	app.use('/node_modules', express.static(__dirname + '/node_modules'));
 } else {
 	app.use('/sysadmin/dist', express.static(__dirname + '/sysadmin/dist'));
     app.use('/public/dist', express.static(__dirname + '/public/dist'));
 }
 
+app.use('/sysadmin/app/tinymce/skins', express.static(__dirname + '/sysadmin/app/tinymce/skins'));
 app.use('/config.js', express.static(__dirname + '/config.js'));
 app.use('/views/public', express.static(__dirname + '/views/public'));
 app.use('/uib/template', express.static(__dirname + '/public/template'));

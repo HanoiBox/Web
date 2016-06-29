@@ -2,7 +2,7 @@
 
 function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
 
-require('array.prototype.find');
+require('babel-polyfill');
 var categoryRepository = require("../../repositories/categoryRepository");
 
 var categoriesQuery = (function () {

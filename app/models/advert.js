@@ -19,7 +19,8 @@ var categorySchema = new Schema({
 	vietDescription: String,
 	level: Number,
 	parentCategoryId: Number,
-    parentCategory: {}
+    parentCategory: {},
+	introduction: String
 });
 
 categorySchema.plugin(autoIncrement.plugin, 'Category');
