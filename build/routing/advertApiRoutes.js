@@ -14,7 +14,6 @@ module.exports = function (router) {
 			res.json(result);
 		});
 	}).post(function (req, res) {
-		console.log(req.body);
 		advertService.saveAdvert(req.body.data, function (error) {
 			if (error === "") {
 				res.status(200).json({ message: 'Advert created!' });

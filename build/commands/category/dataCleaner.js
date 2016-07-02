@@ -1,6 +1,6 @@
 'use strict';
 
-var dataCleaner = (function () {
+var dataCleaner = function () {
     var guaranteeNumber = function guaranteeNumber(value) {
         if (Number.isNaN(value) || typeof value === 'string') {
             return parseInt(value, 10);
@@ -16,6 +16,6 @@ var dataCleaner = (function () {
             return data;
         }
     };
-})();
+}();
 
 module.exports = dataCleaner;

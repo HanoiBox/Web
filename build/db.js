@@ -5,14 +5,13 @@ var autoIncrement = require('mongoose-auto-increment');
 
 module.exports = {
     connect: function connect(devEnvironment, envVariables) {
-        var connection = "";
         if (devEnvironment) {
-            connection = mongoose.connect("mongodb://hbsa:3cyWCfIr@ds054118.mongolab.com:54118/hanoiboxtest"); // test db
-            autoIncrement.initialize(connection);
+            var testConnection = mongoose.connect("mongodb://hbsa:3cyWCfIr@ds054118.mongolab.com:54118/hanoiboxtest"); // test db
+            autoIncrement.initialize(testConnection);
         } else {
             var connectionString = "mongodb://" + envVariables.hanoiboxuser + ":" + envVariables.hanoiboxpassword + "@ds0" + envVariables.hanoiboxport + ".mongolab.com:" + envVariables.hanoiboxport + "/" + envVariables.hanoiboxdbname;
-            connection = mongoose.connect(connectionString); // live db
-            autoIncrement.initialize(connection);
+            var liveConnection = mongoose.connect(connectionString); // live db
+            autoIncrement.initialize(liveConnection);
         }
     }
 };

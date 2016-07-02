@@ -82,7 +82,7 @@ describe("When everything is OK", function () {
 });
 
 describe("When there is a parent category", function () {
-    var result = undefined,
+    var result = void 0,
         parentCategory = {
         _id: 11,
         description: "parent category",
@@ -122,7 +122,7 @@ describe("When there is a parent category", function () {
 });
 
 describe("When removing a parent category", function () {
-    var result = undefined,
+    var result = void 0,
         parentCategory = {
         _id: 11,
         description: "parent category",

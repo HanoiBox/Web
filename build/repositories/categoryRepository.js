@@ -3,7 +3,7 @@
 var Category = require("../models/advert").category;
 var httpStatus = require("../httpStatus");
 
-var categoryRepository = (function () {
+var categoryRepository = function () {
 
   var getCategory = function getCategory(id, callback) {
     Category.findById(id, function (err, category) {
@@ -23,6 +23,9 @@ var categoryRepository = (function () {
     newCategory.description = categoryData.description;
     newCategory.vietDescription = categoryData.vietDescription;
     newCategory.level = categoryData.level;
+    if (categoryData.introduction !== undefined) {
+      newCategory.introduction = categoryData.introduction;
+    }
     if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
       newCategory.parentCategoryId = categoryData.parentCategoryId;
     }
@@ -76,6 +79,9 @@ var categoryRepository = (function () {
     currentcategory.vietDescription = newcategoryData.vietDescription;
     currentcategory.level = newcategoryData.level;
     currentcategory.parentCategoryId = newcategoryData.parentCategoryId;
+    if (newcategoryData.introduction !== undefined && newcategoryData.introduction !== "") {
+      currentcategory.introduction = newcategoryData.introduction;
+    }
     currentcategory.save(function (error) {
       if (error) {
         return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });
@@ -91,6 +97,6 @@ var categoryRepository = (function () {
     deleteCategory: deleteCategory,
     updateCategory: updatecategory
   };
-})();
+}();
 
 module.exports = categoryRepository;

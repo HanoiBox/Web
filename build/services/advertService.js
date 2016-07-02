@@ -2,9 +2,9 @@
 
 var categoryRepository = require("../repositories/categoryRepository");
 var advertRepository = require("../repositories/advertRepository");
-require('babel-polyfill');
+var uploadImageCommand = require("../commands/listing/uploadImageToCloudinaryCommand");
 
-var advertService = (function () {
+var advertService = function () {
 
 	var saveAdvert = function saveAdvert(advertData, callback) {
 		validateAdvertData(advertData, function (advertResult) {
@@ -64,12 +64,17 @@ var advertService = (function () {
 		});
 	};
 
+	var uploadAdvert = function uploadAdvert(fileData) {
+		return uploadImageCommand.upload(fileData);
+	};
+
 	return {
 		saveAdvert: saveAdvert,
 		findAdverts: findAdverts,
 		getAdvert: getAdvert,
 		deleteAdvert: deleteAdvert,
-		updateAdvert: updateAdvert
+		updateAdvert: updateAdvert,
+		uploadAdvert: uploadAdvert
 	};
 
 	function isEmpty(obj) {
@@ -141,6 +146,6 @@ var advertService = (function () {
 			return callback({ "valid": false, "message": errorMsg });
 		});
 	}
-})();
+}();
 
 module.exports = advertService;

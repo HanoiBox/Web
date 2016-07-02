@@ -2,7 +2,7 @@
 
 var categoryRepository = require("../../repositories/categoryRepository");
 
-var categoryQuery = (function () {
+var categoryQuery = function () {
 
     var getCategory = function getCategory(id, callback) {
         categoryRepository.getCategory(id, function (result) {
@@ -21,6 +21,6 @@ var categoryQuery = (function () {
     return {
         getCategory: getCategory
     };
-})();
+}();
 
 module.exports = categoryQuery;
