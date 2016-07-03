@@ -28,7 +28,8 @@ export default angular.module('categoryQueryModule', [
     }
     let category = null;
     category = categories.filter(cat => cat._id === id).pop();
-    console.log("from cache", category);
+    
+    //console.log("from cache", category);
     return new Promise(function(resolve, reject) {
         resolve({ "status": 200, data: { category } });
     });
