@@ -7048,7 +7048,7 @@ $__System.register('a', ['9', '4c'], function (_export) {
                         var categories = localStorageService.get(categoriesCacheName);
                         return categories;
                     },
-                    removeAll: function removeAll() {
+                    clearAll: function clearAll() {
                         localStorageService.clearAll();
                     }
                 };
@@ -37100,7 +37100,6 @@ $__System.register('55', ['9', '50', '51', '52', '53', '54', 'd', 'f', 'c', '4e'
         execute: function () {
             _export('default', angular.module('createEditCategoryControllerModule', ['ngRoute', categoryCommandModule.name, categoryQueryModule.name, 'ui.tinymce']).config(function () {
                 tinyMCE.baseURL = '/sysadmin/app/tinymce';
-                //tinyMCE.suffix = '.min';
             }).controller('CreateEditCategoryController', function ($location, $scope, GetCategoriesFactory, SaveCategoriesFactory, $routeParams, allCategories) {
                 var _this = this;
 
@@ -37108,13 +37107,13 @@ $__System.register('55', ['9', '50', '51', '52', '53', '54', 'd', 'f', 'c', '4e'
                 $scope.errors = false;
                 $scope.data = { categories: allCategories };
 
-                $scope.tinymceModel = 'Initial content';
+                $scope.tinymceModel = '<div style="display: none;">Introduction invidible div tag - delete me!</div>';
                 $scope.getContent = function () {
                     console.log('Editor content:', $scope.tinymceModel);
                 };
 
-                $scope.setContent = function () {
-                    $scope.tinymceModel = 'Time: ' + new Date();
+                this.setContent = function (introductionText) {
+                    $scope.category.introduction = introductionText;
                 };
 
                 $scope.tinymceOptions = {
@@ -37132,6 +37131,9 @@ $__System.register('55', ['9', '50', '51', '52', '53', '54', 'd', 'f', 'c', '4e'
                         if (response.status === 200) {
                             var category = response.data.category;
                             $scope.category = category;
+                            if (category.introduction !== undefined) {
+                                _this.setContent(category.introduction);
+                            }
                         } else {
                             // failure msg
                         }
@@ -49451,7 +49453,7 @@ define("59", [], function() {
 (function() {
 var define = $__System.amdDefine;
 define("5a", [], function() {
-  return "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n\t\t\t\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<h4>Category</h4>\r\n\t\t\t\r\n            <!--<div class=\"alert alert-info\">\r\n                <div class=\"col-sm-3\">\r\n                    <label>Include the parent categories from level:</label>\r\n                </div>\r\n                <input type=\"number\" ng-model=\"levelFilter\" ng-change=\"levelFilterUpdate(levelFilter)\" />\r\n                <span>Level 0 is all categories</span>\r\n            </div>-->\r\n\t\t\t<form novalidate class=\"form-horizontal\">\r\n\t\t\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Vietnamese Description:</label>\r\n\t\t\t\t\t</div> \r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.vietDescription\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Navigation Level: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\"> \r\n\t\t\t\t\t\t<input type=\"number\" ng-model=\"category.level\" ng-change=\"levelFilterUpdate(category.level)\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>English Description: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.description\" />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n                \r\n                <div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Parent Category: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<select ng-model=\"category.parentCategoryId\">\r\n                            <option value=undefined>--Remove--</option>\r\n                            <option ng-selected=\"category.parentCategoryId === option._id\" ng-repeat=\"option in data.categories\" value=\"{{option._id}}\" title=\"{{option.description}}\">{{option.vietDescription}}</option>\r\n                        </select>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Introduction: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<textarea ui-tinymce=\"tinymceOptions\" ng-model=\"tinymceModel\"></textarea>\r\n\t\t\t\t\t\t<button ng-click=\"getContent()\">Get content</button>\r\n\t\t\t\t\t\t<button ng-click=\"setContent()\">Set content</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<button type=\"submit\" ng-click=\"save(category)\" class=\"btn btn-success\">Save</button>\r\n                \r\n                <div class=\"control-group error\" ng-show=\"errors\">\r\n                    <span class=\"help-inline\" ng-bind=\"errorMessage\"></span>\r\n                </div>\r\n\t\t\t</form>\r\n\t\t\t\r\n\t\t\t<div style=\"display: none\">\r\n\t\t\t\t<pre>Category = {{category | json}}</pre>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1\"></div>\r\n\t</div>\r\n</div>";
+  return "<div class=\"container-fluid\">\r\n\t<div class=\"row\">\r\n\t\t<div class=\"col-md-2\">\r\n\t\t\t<fieldset>\r\n\t\t\t\t<legend>menu</legend>\r\n\t\t\t\t<input type=\"button\" ng-click=\"back()\" class=\"btn btn-link\" value=\"back\" />\r\n\t\t\t</fieldset>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-10\">\r\n\t\t\t<h4>Category</h4>\r\n\t\t\t\r\n            <!--<div class=\"alert alert-info\">\r\n                <div class=\"col-sm-3\">\r\n                    <label>Include the parent categories from level:</label>\r\n                </div>\r\n                <input type=\"number\" ng-model=\"levelFilter\" ng-change=\"levelFilterUpdate(levelFilter)\" />\r\n                <span>Level 0 is all categories</span>\r\n            </div>-->\r\n\t\t\t<form novalidate class=\"form-horizontal\">\r\n\t\t\t\t<input type=\"hidden\" ng-model=\"category._id\" />\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Vietnamese Description:</label>\r\n\t\t\t\t\t</div> \r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.vietDescription\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Navigation Level: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\"> \r\n\t\t\t\t\t\t<input type=\"number\" ng-model=\"category.level\" ng-change=\"levelFilterUpdate(category.level)\"/>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>English Description: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<input type=\"text\" ng-model=\"category.description\" />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n                \r\n                <div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Parent Category: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<select ng-model=\"category.parentCategoryId\">\r\n                            <option value=undefined>--Remove--</option>\r\n                            <option ng-selected=\"category.parentCategoryId === option._id\" ng-repeat=\"option in data.categories\" value=\"{{option._id}}\" title=\"{{option.description}}\">{{option.vietDescription}}</option>\r\n                        </select>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<div class=\"form-group\">\r\n\t\t\t\t\t<div class=\"col-sm-2\">\r\n\t\t\t\t\t\t<label>Introduction: </label>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"col-sm-8\">\r\n\t\t\t\t\t\t<textarea ui-tinymce=\"tinymceOptions\" ng-model=\"category.introduction\" rows=\"8\"></textarea>\r\n\t\t\t\t\t\t<!--<button ng-click=\"getContent()\">Get content</button>\r\n\t\t\t\t\t\t<button ng-click=\"setContent()\">Set content</button>-->\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\r\n\t\t\t\t<button type=\"submit\" ng-click=\"save(category)\" class=\"btn btn-success\">Save</button>\r\n                \r\n                <div class=\"control-group error\" ng-show=\"errors\">\r\n                    <span class=\"help-inline\" ng-bind=\"errorMessage\"></span>\r\n                </div>\r\n\t\t\t</form>\r\n\t\t\t\r\n\t\t\t<div style=\"display: none\">\r\n\t\t\t\t<pre>Category = {{category | json}}</pre>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<div class=\"col-md-1\"></div>\r\n\t</div>\r\n</div>";
 });
 
 })();
