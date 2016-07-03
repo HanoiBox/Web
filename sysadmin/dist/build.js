@@ -5035,7 +5035,7 @@ $__System.register('f', ['9', 'a'], function (_export) {
 
                 var removeCategoryFromCache = function removeCategoryFromCache(id) {
                     var categories = categoriesCacheFactory.get();
-                    categoriesCacheFactory.removeAll();
+                    categoriesCacheFactory.clearAll();
                     categoriesCacheFactory.put(categories.filter(function (cat) {
                         return cat._id !== id;
                     }));
