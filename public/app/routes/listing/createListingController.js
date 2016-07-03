@@ -106,7 +106,7 @@ export default angular.module('CreateListingControllerModule', [
         let imageName = url.split('/')[7];
         let publicId = imageName.split('.')[0];
         $http.delete('/api/listing/image/' + publicId).then((response) => {
-            console.log(response.message);
+            console.log(response);
         }, (response) => {
             console.log(response);
         });
