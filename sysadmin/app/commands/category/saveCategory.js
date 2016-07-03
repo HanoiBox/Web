@@ -14,7 +14,7 @@ export default angular.module('categoryCommandModule', [
     
     let removeCategoryFromCache = (id) => {
         let categories = categoriesCacheFactory.get();
-        categoriesCacheFactory.removeAll();
+        categoriesCacheFactory.clearAll();
         categoriesCacheFactory.put(categories.filter(cat => cat._id !== id));
     }
   
