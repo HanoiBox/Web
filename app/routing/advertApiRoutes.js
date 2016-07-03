@@ -1,11 +1,22 @@
 'use strict';
 let advertService = require("../services/advertService");
 let getAdvertsByCategoryQuery = require("../queries/advert/getAdvertsByCategoryQuery");
+let destroyCloudinaryFileCommand = require("../commands/listing/destroyCloudinaryFileCommand");
 
 module.exports = (router) => {
 
 	router.get('/api', (req, res) => {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
+	});
+
+	router.route('/api/listing/image:publicId').delete((req, res) => {
+		console.log(req.params('publicId'));
+		var publicId = req.params.publicId;
+		console.log(publicId);
+		destroyCloudinaryFileCommand.destory(publicId).then((result) => {
+			console.log(result);
+			res.json(result);
+		});
 	});
 
 	router.route('/api/listing/').get((req, res) => {

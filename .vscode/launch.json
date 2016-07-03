@@ -1,5 +1,5 @@
 {
-	"version": "0.1.0",
+	"version": "0.2.0",
 	// List of configurations. Add new configurations or edit existing ones.
 	"configurations": [
 		{
@@ -23,6 +23,7 @@
 			"env": {
 				"NODE_ENV": "dev"
 			},
+			"externalConsole": false,
 			// Use JavaScript source maps (if they exist).
 			"sourceMaps": false,
 			// If JavaScript source maps are enabled, the generated code is expected in this directory.
@@ -61,7 +62,8 @@
 			"address": "localhost",
 			// Port to attach to.
 			"port": 5858,
-			"sourceMaps": false
+			"sourceMaps": false,
+			"localRoot": "${workspaceRoot}"
 		}
 	]
 }

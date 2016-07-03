@@ -3,7 +3,7 @@
 var cloudinary = require('cloudinary');
 
 module.exports = {
-    setup: function setup(envVariables, dev) {
+    setup: function setup(dev, envVariables) {
 
         if (dev) {
             // use test account

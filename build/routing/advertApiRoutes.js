@@ -2,11 +2,22 @@
 
 var advertService = require("../services/advertService");
 var getAdvertsByCategoryQuery = require("../queries/advert/getAdvertsByCategoryQuery");
+var destroyCloudinaryFileCommand = require("../commands/listing/destroyCloudinaryFileCommand");
 
 module.exports = function (router) {
 
 	router.get('/api', function (req, res) {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
+	});
+
+	router.route('/api/listing/image:publicId').delete(function (req, res) {
+		console.log(req.params('publicId'));
+		var publicId = req.params.publicId;
+		console.log(publicId);
+		destroyCloudinaryFileCommand.destory(publicId).then(function (result) {
+			console.log(result);
+			res.json(result);
+		});
 	});
 
 	router.route('/api/listing/').get(function (req, res) {

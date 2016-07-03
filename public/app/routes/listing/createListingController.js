@@ -24,10 +24,11 @@ export default angular.module('CreateListingControllerModule', [
     });
     
     $scope.doNotShowCreateListingButton = true;
-    $scope.advert;
+    $scope.advert = {};
     $scope.errors = false;
     $scope.formSubmitted = false;
     $scope.image1IsAvailable = false;
+    $scope.destroy = true;
 
     $scope.onUploadSuccess = (response) => {
         let res = response.data;
@@ -75,13 +76,39 @@ export default angular.module('CreateListingControllerModule', [
         let config = {
             data: advert
         };
+
         $http.post(url, config).then((response) => {
             console.log(response.message); 
             $scope.formSubmitted = true;
+            $scope.destroy = false;
         }, (response) => {
             $scope.formSubmitted = false;
             $scope.errors = true;
             $scope.errorMessage = "Unfortunately something went wrong submitting your listing";   
         });
     };
+
+    $scope.$on("$destroy", function(){
+        if($scope.destroy)
+        {
+            if ($scope.advert.image1 !== undefined && $scope.advert.image1 !== "")
+            {
+                $scope.deleteImage($scope.advert.image1);
+            }
+            if ($scope.advert.image2 !== undefined && $scope.advert.image2 !== "")
+            {
+                $scope.deleteImage($scope.advert.image2);
+            }
+        } 
+    });
+
+    $scope.deleteImage = (url) => {
+        let imageName = url.split('/')[7];
+        let publicId = imageName.split('.')[0];
+        $http.delete('/api/listing/image/' + publicId).then((response) => {
+            console.log(response.message);
+        }, (response) => {
+            console.log(response);
+        });
+    }
 });

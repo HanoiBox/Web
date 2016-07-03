@@ -17,7 +17,7 @@ if (dev)
 db.connect(dev, process.env);
 
 var cloudinaryImageSetup = require('./app/cloudinaryImageSetup');
-cloudinaryImageSetup.setup(process.env);
+cloudinaryImageSetup.setup(dev, process.env);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
