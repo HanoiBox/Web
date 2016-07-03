@@ -9,13 +9,12 @@ module.exports = (router) => {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
-	router.route('/api/listing/image:publicId').delete((req, res) => {
-		console.log(req.params('publicId'));
+	router.route('/api/listing/image/:publicId').delete((req, res) => {
 		var publicId = req.params.publicId;
-		console.log(publicId);
-		destroyCloudinaryFileCommand.destory(publicId).then((result) => {
-			console.log(result);
-			res.json(result);
+		destroyCloudinaryFileCommand.destroy(publicId).then((result) => {
+			res.status(200).json(result);
+		}).catch((failureMsg) => {
+			res.status(500).json(failureMsg);
 		});
 	});
 

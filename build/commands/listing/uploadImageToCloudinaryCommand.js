@@ -10,7 +10,7 @@ var uploadImageCommand = function () {
                 if (result.error !== undefined) {
                     reject({ success: false, error: result.error });
                 }
-                resolve({ success: true, url: result.secure_url, originalPath: imageData.path, name: result.original_filename + '.' + result.format });
+                resolve({ success: true, publicId: result.public_id, url: result.secure_url, originalPath: imageData.path, name: result.original_filename + '.' + result.format });
             });
         });
     };

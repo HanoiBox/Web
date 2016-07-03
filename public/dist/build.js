@@ -27387,7 +27387,6 @@ $__System.register('12f', ['8', '10', '11', '126', 'd', 'f', '12c', '12e'], func
                     };
 
                     $http.post(url, config).then(function (response) {
-                        console.log(response.message);
                         $scope.formSubmitted = true;
                         $scope.destroy = false;
                     }, function (response) {
@@ -27412,7 +27411,7 @@ $__System.register('12f', ['8', '10', '11', '126', 'd', 'f', '12c', '12e'], func
                     var imageName = url.split('/')[7];
                     var publicId = imageName.split('.')[0];
                     $http['delete']('/api/listing/image/' + publicId).then(function (response) {
-                        console.log(response.message);
+                        //console.log(response);
                     }, function (response) {
                         console.log(response);
                     });
