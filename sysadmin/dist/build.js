@@ -7095,7 +7095,8 @@ $__System.register('c', ['9', '49', 'a'], function (_export) {
           category = categories.filter(function (cat) {
             return cat._id === id;
           }).pop();
-          console.log("from cache", category);
+
+          //console.log("from cache", category);
           return new _Promise(function (resolve, reject) {
             resolve({ "status": 200, data: { category: category } });
           });
