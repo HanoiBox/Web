@@ -1,11 +1,35 @@
 'use strict';
 
+var multer = require('multer');
+var upload = multer({ dest: 'uploads/' });
+var listingService = require('../services/advertService');
+var deleteImageOnFileCommand = require('../commands/listing/deleteImageOnFileCommand');
+
 module.exports = function (router, devEnvironment) {
 
 	var home = function home(res) {
 		var data = { title: 'Hanoi Box', dev: devEnvironment };
 		res.render('public/home', data);
 	};
+
+	router.post('/listing/upload', upload.single("file"), function (req, res) {
+		res.setHeader('Content-Type', 'application/json');
+		listingService.uploadAdvert(req.file).then(function (result) {
+			deleteImageOnFileCommand.deleteImage(result.originalPath).then(function (deletionResult) {
+				if (deletionResult.success) {
+					//console.log(`deleted ${result.originalPath} ok`);
+					res.send(JSON.stringify(result));
+				} else {
+					res.send(JSON.stringify(deletionResult.error));
+				}
+			}).catch(function (deleteFailReason) {
+				res.send(JSON.stringify(deleteFailReason));
+			});
+		}).catch(function (reason) {
+			//console.log("no cigar", reason);
+			res.send(JSON.stringify({ error: { message: reason } }));
+		});
+	});
 
 	router.get('/', function (req, res) {
 		home(res);

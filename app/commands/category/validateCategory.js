@@ -4,7 +4,7 @@ var httpStatus = require('../../httpStatus');
 let validateCategoryCommand = function () {
     
     let validate = (categoryData) => {
-        if (categoryData === null) {
+		if (categoryData === null) {
 			return { status: httpStatus.EXPECTATION_FAILED, message: "Expected a category object" };
 		}
 		if (categoryData.description === undefined || categoryData.description === "") {

@@ -4,8 +4,11 @@ import 'babel/polyfill';
 export default angular.module('categoryTreeCommandModule', [])
 .factory('GenerateCategoryTree', function() {
     
-    this.createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, subTree, subTreePromise, parentCategoryId) => {
-        return { id: id, currentCategoryId: currentCategoryId, title: englishDescription, name: vietnameseDescription, link: `/category/id:${id}`, subTree, subTreePromise, parentCategoryId };
+    this.createLeafCategory = (id, currentCategoryId, englishDescription, vietnameseDescription, introduction, subTree, subTreePromise, parentCategoryId) => {
+        return { id: id, currentCategoryId: currentCategoryId, 
+            title: englishDescription, name: vietnameseDescription, 
+            introductionHTML: introduction,
+            link: `/category/id:${id}`, subTree, subTreePromise, parentCategoryId };
     }
     
     this.createSubTree = (allCategories, currentCategoryId, parentCategoryId, callback) => {
@@ -28,6 +31,7 @@ export default angular.module('categoryTreeCommandModule', [])
                     currentCategoryId,
                     subCat.description,
                     subCat.vietDescription,
+                    subCat.introduction,
                     null,
                     subTreePromise,
                     parentCategoryId
@@ -90,6 +94,7 @@ export default angular.module('categoryTreeCommandModule', [])
                     title: topCat.description,
                     link: `/category/id:${topCat._id}`,
                     id: topCat._id,
+                    introductionHTML: topCat.introduction,
                     tree: null,
                     subTreePromise
                 };

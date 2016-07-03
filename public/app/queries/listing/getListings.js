@@ -11,7 +11,7 @@ export default angular.module('ListingQueryModule', [
     {
       let url = "/api/listing/";
       return $http.get(url).then(function successCallback(response) { 
-          listingCacheFactory.put(response.data.adverts);
+          listingCacheFactory.put(response.data.listings);
           return listingCacheFactory.get();
       });
     }
@@ -21,7 +21,7 @@ export default angular.module('ListingQueryModule', [
   let listingsByCategoryId = (categoryId) => {
     let url = `/api/listing/category/${categoryId}`;
     return $http.get(url).then(function successCallback(response) { 
-        listingCacheFactory.put(response.data);
+        listingCacheFactory.put(response.data.listings);
         return listingCacheFactory.get();
     });
   };

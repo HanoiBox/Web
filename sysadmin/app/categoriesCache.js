@@ -12,7 +12,7 @@ export default angular.module('categoriesCacheModule', ['LocalStorageModule']).f
                 let categories = localStorageService.get(categoriesCacheName);
                 return categories;
             },
-            removeAll: () => {
+            clearAll: () => {
                 localStorageService.clearAll();
             }
         };

@@ -24,4 +24,4 @@
 
 ## Must run: npm install --global babel-cli
 #cd..
-babel -d build app
+node_modules/.bin/babel -d build app

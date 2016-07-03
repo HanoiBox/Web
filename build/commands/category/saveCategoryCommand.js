@@ -5,7 +5,7 @@ var categoryValidation = require("./validateCategory");
 var httpStatus = require('../../httpStatus');
 var dataCleaner = require('./dataCleaner');
 
-var categoryCommand = (function () {
+var categoryCommand = function () {
 
     var saveCategory = function saveCategory(categoryData, callback) {
         var validationResult = categoryValidation.validate(categoryData);
@@ -57,6 +57,6 @@ var categoryCommand = (function () {
     return {
         saveCategory: saveCategory
     };
-})();
+}();
 
 module.exports = categoryCommand;

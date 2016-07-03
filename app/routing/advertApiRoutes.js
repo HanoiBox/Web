@@ -1,6 +1,7 @@
 'use strict';
 let advertService = require("../services/advertService");
 let getAdvertsByCategoryQuery = require("../queries/advert/getAdvertsByCategoryQuery");
+let destroyCloudinaryFileCommand = require("../commands/listing/destroyCloudinaryFileCommand");
 
 module.exports = (router) => {
 
@@ -8,12 +9,21 @@ module.exports = (router) => {
 		res.json({ message: 'Welcome to the hanoibox.com api' });
 	});
 
+	router.route('/api/listing/image:publicId').delete((req, res) => {
+		console.log(req.params('publicId'));
+		var publicId = req.params.publicId;
+		console.log(publicId);
+		destroyCloudinaryFileCommand.destory(publicId).then((result) => {
+			console.log(result);
+			res.json(result);
+		});
+	});
+
 	router.route('/api/listing/').get((req, res) => {
 		advertService.findAdverts((result) => {
 			res.json(result);
 		});
 	}).post((req, res) => {
-		console.log(req.body);
 		advertService.saveAdvert(req.body.data, (error) => {
 			if (error === "") {
 				res.status(200).json({ message: 'Advert created!' });
@@ -22,14 +32,14 @@ module.exports = (router) => {
 			}
 		});
 	});
-
-	 let getIdInRequest = (name, req, res) => {
+	
+	let getIdInRequest = (name, req, res) => {
 		req.assert(name, 'Id param must be an integer').isInt();
 
 		let errors = req.validationErrors();
 		if (errors) {
-            res.json({ status: 500, message: errors });
-        }
+			res.json({ status: 500, message: errors });
+		}
 
 		// sanitize input
 		return req.sanitize(name).toInt();

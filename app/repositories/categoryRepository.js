@@ -23,6 +23,9 @@ var categoryRepository = (function () {
         newCategory.description = categoryData.description;
         newCategory.vietDescription = categoryData.vietDescription;
         newCategory.level = categoryData.level;
+        if (categoryData.introduction !== undefined) {
+            newCategory.introduction = categoryData.introduction;
+        }
         if (categoryData.parentCategoryId !== undefined && categoryData.parentCategoryId !== null) {
             newCategory.parentCategoryId = categoryData.parentCategoryId; 
         }
@@ -76,6 +79,9 @@ var categoryRepository = (function () {
         currentcategory.vietDescription = newcategoryData.vietDescription;
         currentcategory.level = newcategoryData.level;
         currentcategory.parentCategoryId = newcategoryData.parentCategoryId;
+        if (newcategoryData.introduction !== undefined && newcategoryData.introduction !== "") {
+            currentcategory.introduction = newcategoryData.introduction;
+        }
         currentcategory.save((error) => {
             if (error) {
                 return callback({ status: httpStatus.INTERNAL_SERVER_ERROR, message: error });

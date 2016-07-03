@@ -3,13 +3,13 @@
 require('babel-polyfill');
 var advertRepository = require("../../repositories/advertRepository");
 
-var getAdvertsByCategoryQuery = (function () {
+var getAdvertsByCategoryQuery = function () {
 
     return {
         get: function get(categoryId, callback) {
             advertRepository.findAdverts(function (result) {
                 if (categoryId !== undefined && categoryId !== null) {
-                    result.adverts = result.adverts.filter(function (advert) {
+                    result.listings = result.listings.filter(function (advert) {
                         return advert.categories !== null && advert.categories !== undefined && advert.categories.includes(categoryId);
                     });
                     return callback(result);
@@ -19,6 +19,6 @@ var getAdvertsByCategoryQuery = (function () {
             });
         }
     };
-})();
+}();
 
 module.exports = getAdvertsByCategoryQuery;

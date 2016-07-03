@@ -2,7 +2,7 @@
 
 var categoryRepository = require("../repositories/categoryRepository");
 
-var categoryService = (function () {
+var categoryService = function () {
 
 	var findCategories = function findCategories(callback) {
 		categoryRepository.findCategories(function (result) {
@@ -24,6 +24,6 @@ var categoryService = (function () {
 		findCategories: findCategories,
 		deleteCategory: deleteCategory
 	};
-})();
+}();
 
 module.exports = categoryService;
