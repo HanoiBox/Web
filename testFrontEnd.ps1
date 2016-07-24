@@ -1,2 +1,2 @@
-karma start my.conf.js --single-run
+node_modules/.bin/karma start --single-run
 #--log-level debug
