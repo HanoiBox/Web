@@ -28,7 +28,7 @@ beforeEach(() => {
                 // console.log("getting", cache);
                 return cache;
             },
-            removeAll: () => {
+            clearAll: () => {
                 cache = [];
             }
         };
